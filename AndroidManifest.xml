@@ -22,6 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity android:name = ".SelectGame"/>
+         <activity android:name = ".Settings"/>
+         <activity android:name = ".Quit"/>
+            
     </application>
 
 </manifest>
