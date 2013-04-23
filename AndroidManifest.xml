@@ -23,10 +23,19 @@
             </intent-filter>
         </activity>
         
-        <activity android:name = ".SelectGame"/>
-         <activity android:name = ".Settings"/>
-         <activity android:name = ".Quit"/>
-            
+        <activity android:name=".SelectGame" />
+        <activity android:name=".Settings" />
+        <activity android:name=".Quit" />
+        <activity android:name=".CreatePet" />
+        <activity
+            android:name=".PetActivity" 
+            android:label="@string/pet_name"
+            android:parentActivityName="edu.chl.dat255.sofiase.readyforapet.CreatePet">
+            <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="edu.chl.dat255.sofiase.readyforapet.createpet" />
+        </activity>
+        
     </application>
 
 </manifest>

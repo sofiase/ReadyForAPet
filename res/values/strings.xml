@@ -4,5 +4,7 @@
     <string name="app_name">ReadyForAPet</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-
+    <string name="write_here">Write here</string>
+    <string name="pet_name">Petname</string>
+	
 </resources>

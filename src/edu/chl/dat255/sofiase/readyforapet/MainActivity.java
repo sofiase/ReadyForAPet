@@ -15,6 +15,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		
 		Button play = (Button) findViewById(R.id.play);
 		play.setOnClickListener(new OnClickListener() {
 
@@ -24,7 +25,7 @@ public class MainActivity extends Activity {
 		}
 				);
 
-		
+
 		Button settings = (Button) findViewById(R.id.settings);
 		settings.setOnClickListener(new OnClickListener() {
 
@@ -45,6 +46,7 @@ public class MainActivity extends Activity {
 			}
 		}
 				);
+		
 
 
 
@@ -56,8 +58,6 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
-
 
 
 }

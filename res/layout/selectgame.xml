@@ -4,21 +4,21 @@
     android:layout_height="match_parent" >
 
     <Button
-        android:id="@+id/quit"
+        android:id="@+id/continuegame"
         android:layout_width="200dp"
         android:layout_height="45dp"
-        android:layout_above="@+id/button1"
+        android:layout_above="@+id/createnewpet"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="34dp"
         android:text="Continue game" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/createnewpet"
         android:layout_width="200dp"
         android:layout_height="45dp"
-        android:layout_alignLeft="@+id/quit"
+        android:layout_alignLeft="@+id/continuegame"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="145dp"
+        android:layout_marginBottom="119dp"
         android:text="Create new pet" />
 
 </RelativeLayout>
