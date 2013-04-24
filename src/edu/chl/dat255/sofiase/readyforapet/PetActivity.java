@@ -21,11 +21,21 @@ public class PetActivity extends Activity {
 		//Create the text view
 		TextView petgreeting = new TextView(this);
 		petgreeting.setTextSize(40);
-		petgreeting.setText("Hello, my name is " + petname + "!");
+		
+		if(petname != null){
+			
+			petgreeting.setText("Hello, my name is " + petname + "!");
+	
+		}
+		
+		else{
+		
+			petgreeting.setText(" Hi budy, I've missed you!");
+			
+		}
 		
 		//Set the pet greeting as the activity layout
 		setContentView(petgreeting);
-				
 	}
 
 	@Override
