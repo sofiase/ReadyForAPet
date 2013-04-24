@@ -15,17 +15,19 @@ public class SelectGame extends Activity {
 		super.onCreate (savedInstanceState);
 		setContentView(R.layout.selectgame);
 
-		/*Det nedan antar jag att vi behšver gšra fšr att kunna fšlja knappen create pet!?
-		Button continePrevoisGame = (Button) findViewById(R.id.createnewpet);
-		createNewPet.setOnClickListener(new OnClickListener() {
+		//Knappen continue reagerar vid klick och startar PetActivity
+		Button continuePreviousGame = (Button) findViewById(R.id.continuegame);
+		continuePreviousGame.setOnClickListener(new OnClickListener() {
 
 			public void onClick (View v){
-				startActivity(new Intent(SelectGame.this, CreatePet.class));
+				startActivity(new Intent(SelectGame.this, PetActivity.class));
 			}
 
-}*/
+		}
+		);
+		
 
-		//Det nedan antar jag att vi behšver gšra fšr att kunna fšlja knappen create pet!?
+		//Detta Šr fšr att knappen Create Pet ska skickas till aktiviteten CreatePet
 		Button createNewPet = (Button) findViewById(R.id.createnewpet);
 		createNewPet.setOnClickListener(new OnClickListener() {
 
@@ -33,7 +35,6 @@ public class SelectGame extends Activity {
 				startActivity(new Intent(SelectGame.this, CreatePet.class));
 			}
 		}
-				);
+		);
 	}
-
 }
