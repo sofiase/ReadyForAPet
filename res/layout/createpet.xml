@@ -4,20 +4,20 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/petsettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:text="Puppy settings"
+        android:text="Pet settings"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
         android:id="@+id/edit_pet_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/petsettings"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="116dp"
         android:ems="10"
@@ -25,16 +25,6 @@
 
         <requestFocus />
     </EditText>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="56dp"
-        android:text="Name your puppy"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
         android:id="@+id/puppy_settings"
@@ -45,5 +35,15 @@
         android:layout_marginTop="64dp"
         android:text="Create!"
         android:onClick="saveSettings" />
+
+    <TextView
+        android:id="@+id/nameyourpet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/petsettings"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="58dp"
+        android:text="Name your pet"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
