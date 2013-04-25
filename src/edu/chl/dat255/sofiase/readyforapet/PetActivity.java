@@ -10,17 +10,53 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.view.ViewGroup;
 
-public class PetActivity extends Activity{
+public class PetActivity extends Activity {
 	
-	
+	TextView petgreeting;
+	Handler uiHandler = new Handler();
+	Runnable makeTextGone = new Runnable(){
+		@Override
+		public void run(){
+			petgreeting.setVisibility(View.GONE);
+		}
+	};
 
-	
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
-	
+		super.onCreate (savedInstanceState);
+		setContentView(R.layout.petactivity);
 		
-
+		// Get the pet name from the intent
+		Intent nameintent = getIntent();
+		String petname = nameintent.getStringExtra(CreatePet.EXTRA_MESSAGE);
+		
+		//Jag fick ta bort den här typen av textruta och göra en sån annan för att den skulle kunna försvinna
+		//Det går säkert med detta sättet också men jag hittade ingenstans hur.. 
+		
+		//Create the text view
+		//petgreeting = new TextView(this);
+		//petgreeting.setTextSize(40);
+		
+		petgreeting = (TextView) findViewById(R.id.petgreeting);
+		
+		if(petname != null){
+			petgreeting.setText("Hello, my name is " + petname + "!");	
+			
+		}
+		
+		else{
+			petgreeting.setText(" Hi buddy, I've missed you!");	
+		}
+		
+		
+		//Även detta togs bort när jag bytte textruta
+		//Set the pet greeting as the activity layout
+		//setContentView(petgreeting);
+		
+		petgreeting = (TextView) findViewById(R.id.petgreeting);
+		uiHandler.postDelayed(makeTextGone, 5000);	
 	}
 	
 

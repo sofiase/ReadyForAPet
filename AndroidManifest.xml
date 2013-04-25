@@ -26,7 +26,6 @@
         <activity android:name="edu.chl.dat255.sofiase.readyforapet.SelectGame" />
         <activity android:name="edu.chl.dat255.sofiase.readyforapet.Settings" />
         <activity android:name="edu.chl.dat255.sofiase.readyforapet.CreatePet" />
-         
         <activity
             android:name="edu.chl.dat255.sofiase.readyforapet.PetActivity" 
             android:label="@string/pet_name"
@@ -35,7 +34,7 @@
             android:name="android.support.PARENT_ACTIVITY"
             android:value="edu.chl.dat255.sofiase.readyforapet.createpet" />
         </activity>
-        
+
     </application>
 
 </manifest>
