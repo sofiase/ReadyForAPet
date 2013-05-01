@@ -14,8 +14,10 @@ import android.widget.TextView;
 public class PetActivity extends Activity {
 	
 	TextView petgreeting, respondingOnEat;
-	
+	Dog dog;
 	Handler uiHandler = new Handler();
+	
+	
 	Runnable makeTextGone = new Runnable(){
 		@Override
 		public void run(){
@@ -23,10 +25,12 @@ public class PetActivity extends Activity {
 		}
 	};
 
+
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.petactivity);
+		
 		
 		respondingOnEat = (TextView) findViewById(R.id.not_hungry);
 		respondingOnEat.setVisibility(View.GONE);
@@ -36,7 +40,7 @@ public class PetActivity extends Activity {
 		String petname = nameintent.getStringExtra(CreatePet.EXTRA_MESSAGE);
 		
 		//Jag fick ta bort den här typen av textruta och göra en sån annan för att den skulle kunna försvinna
-		//Det går säkert med detta sättet också men jag hittade ingenstans hur.. 
+		//Det går säkert med detta sättet också men jag hittade ingenstans hur..
 		
 		//Create the text view
 		//petgreeting = new TextView(this);
@@ -57,6 +61,7 @@ public class PetActivity extends Activity {
 		//Set the pet greeting as the activity layout
 		//setContentView(petgreeting);
 		
+
 		petgreeting = (TextView) findViewById(R.id.petgreeting);
 		uiHandler.postDelayed(makeTextGone, 5000);	
 	
@@ -65,11 +70,15 @@ public class PetActivity extends Activity {
 		// Making the eat button
 		Button eat = (Button) findViewById(R.id.eat);
 		eat.setOnClickListener(new OnClickListener() {
+			
+					
 					//making the dog feel less hungry if it is hungry and else give the message i'm full for 5 sek
 					@Override
 					public void onClick (View v){
+							PetMood petMoodInActivity = new PetMood();
+							dog = (Dog) CreatePet.getPet();
 							respondingOnEat = (TextView) findViewById(R.id.not_hungry);
-							respondingOnEat.setText(dog.eat());
+							respondingOnEat.setText(dog.eat(petMoodInActivity));
 							respondingOnEat.setVisibility(View.VISIBLE);
 							//uiHandler.postDelayed(makeTextGone, 5000);	
 					}

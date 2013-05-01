@@ -9,7 +9,7 @@ public class Dog implements Pet {
 	}
 	
 	@Override
-	public String eat(PerMood petMood) {
+	public String eat(PetMood petMood) {
 		int hungerCounter = petMood.getFoodMood();
 		if(hungerCounter < 5){
 			hungerCounter = hungerCounter + 1;
