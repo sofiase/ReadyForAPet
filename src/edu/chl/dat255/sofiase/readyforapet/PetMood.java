@@ -1,17 +1,11 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
+
 public class PetMood {
 	
 	private static int foodMood = 3;
-	private static int totalMood;
 	
-	public static void PetMood(){
-		
-		// I PetActivity skapas en pinne av formatet 
-		// PetMood moodpinne = new PetMood();
-		
-		
-		
+	public PetMood(){
 		
 	}
 
@@ -26,8 +20,10 @@ public class PetMood {
 	}
 	
 	// The sum of the mood of the pet that is shown in a moodbar.
+	//Later, add:
+	//return foodMood + walkMood + playMood + sleepMood
 	public int getSumMood (){
-		return totalMood = foodMood;
+		return foodMood;
 	}
 	
 }
