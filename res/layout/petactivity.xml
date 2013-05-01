@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:background="@drawable/background" >
   
-
- 
     <TextView
         android:id="@+id/petgreeting"
         android:layout_width="wrap_content"
@@ -13,14 +12,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="46dp"
         android:text="TextView" />
-    
-    	 <TextView
-        android:id="@+id/not_hungry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/eat"
-        android:layout_marginTop="131dp"
-        android:text="I am full" />
 
     	 <Button
     	     android:id="@+id/eat"
@@ -29,5 +20,13 @@
     	     android:layout_centerHorizontal="true"
     	     android:layout_centerVertical="true"
     	     android:text="Eat" />
+
+    	 <TextView
+    	     android:id="@+id/not_hungry"
+    	     android:layout_width="wrap_content"
+    	     android:layout_height="wrap_content"
+    	     android:layout_alignParentBottom="true"
+    	     android:layout_alignParentRight="true"
+    	     android:text="I am full" />
 
 </RelativeLayout>

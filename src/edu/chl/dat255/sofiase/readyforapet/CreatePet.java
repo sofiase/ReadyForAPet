@@ -28,6 +28,8 @@ public class CreatePet extends Activity {
 		Intent intent = new Intent(CreatePet.this, PetActivity.class); //fšrut stod displayname men tror det Šr petactivity!
 		EditText setName = (EditText) findViewById(R.id.edit_pet_name);
 		String name = setName.getText().toString();
+		Dog dog = new Dog(name);
+		//Šndre fšr att slippa putta name vidare
 		intent.putExtra(EXTRA_MESSAGE, name);
 		startActivity(intent);
 	}

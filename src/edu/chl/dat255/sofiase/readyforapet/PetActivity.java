@@ -10,11 +10,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.view.ViewGroup;
 
 public class PetActivity extends Activity {
 	
-	TextView petgreeting;
+	TextView petgreeting, respondingOnEat;
+	
 	Handler uiHandler = new Handler();
 	Runnable makeTextGone = new Runnable(){
 		@Override
@@ -25,8 +25,11 @@ public class PetActivity extends Activity {
 
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
-		super.onCreate (savedInstanceState);
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.petactivity);
+		
+		respondingOnEat = (TextView) findViewById(R.id.not_hungry);
+		respondingOnEat.setVisibility(View.GONE);
 		
 		// Get the pet name from the intent
 		Intent nameintent = getIntent();
@@ -42,8 +45,7 @@ public class PetActivity extends Activity {
 		petgreeting = (TextView) findViewById(R.id.petgreeting);
 		
 		if(petname != null){
-			petgreeting.setText("Hello, my name is " + petname + "!");	
-			
+			petgreeting.setText("Hello, my name is " + petname + "!");		
 		}
 		
 		else{
@@ -57,8 +59,24 @@ public class PetActivity extends Activity {
 		
 		petgreeting = (TextView) findViewById(R.id.petgreeting);
 		uiHandler.postDelayed(makeTextGone, 5000);	
-	}
 	
+		
+		//Food
+		// Making the eat button
+		Button eat = (Button) findViewById(R.id.eat);
+		eat.setOnClickListener(new OnClickListener() {
+					//making the dog feel less hungry if it is hungry and else give the message i'm full for 5 sek
+					@Override
+					public void onClick (View v){
+							respondingOnEat = (TextView) findViewById(R.id.not_hungry);
+							respondingOnEat.setText(dog.eat());
+							respondingOnEat.setVisibility(View.VISIBLE);
+							//uiHandler.postDelayed(makeTextGone, 5000);	
+					}
+		}
+		);			
+			
+	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -69,8 +87,11 @@ public class PetActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+}
+	
+
 	//"Add the title string" - 75% av scrollern
 
 
 
-}
+
