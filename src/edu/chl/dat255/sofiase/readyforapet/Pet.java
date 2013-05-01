@@ -5,6 +5,6 @@ public interface Pet {
 	//public static void setName(){
 		
 	//}
-	String eat();
+	String eat(PetMood petMood);
 	
 }

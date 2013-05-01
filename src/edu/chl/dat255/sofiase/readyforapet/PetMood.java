@@ -5,7 +5,9 @@ public class PetMood {
 	
 	private static int foodMood = 3;
 	
-	public PetMood(){
+
+	public PetMood(){	
+		
 		
 	}
 

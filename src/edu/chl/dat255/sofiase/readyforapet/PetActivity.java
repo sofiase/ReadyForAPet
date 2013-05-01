@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class PetActivity extends Activity {
 	
 	TextView petgreeting, respondingOnEat;
-	
+	Dog dog;
 	Handler uiHandler = new Handler();
 	
 	
@@ -30,6 +30,7 @@ public class PetActivity extends Activity {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.petactivity);
+		
 		
 		respondingOnEat = (TextView) findViewById(R.id.not_hungry);
 		respondingOnEat.setVisibility(View.GONE);
@@ -69,11 +70,15 @@ public class PetActivity extends Activity {
 		// Making the eat button
 		Button eat = (Button) findViewById(R.id.eat);
 		eat.setOnClickListener(new OnClickListener() {
+			
+					
 					//making the dog feel less hungry if it is hungry and else give the message i'm full for 5 sek
 					@Override
 					public void onClick (View v){
+							PetMood petMoodInActivity = new PetMood();
+							dog = (Dog) CreatePet.getPet();
 							respondingOnEat = (TextView) findViewById(R.id.not_hungry);
-							respondingOnEat.setText(dog.eat());
+							respondingOnEat.setText(dog.eat(petMoodInActivity));
 							respondingOnEat.setVisibility(View.VISIBLE);
 							//uiHandler.postDelayed(makeTextGone, 5000);	
 					}

@@ -35,8 +35,9 @@
     	     android:id="@+id/not_hungry"
     	     android:layout_width="wrap_content"
     	     android:layout_height="wrap_content"
-    	     android:layout_alignParentBottom="true"
-    	     android:layout_alignParentRight="true"
+    	     android:layout_alignLeft="@+id/moodBar"
+    	     android:layout_below="@+id/moodBar"
+    	     android:layout_marginTop="26dp"
     	     android:text="I am full" />
 
 
