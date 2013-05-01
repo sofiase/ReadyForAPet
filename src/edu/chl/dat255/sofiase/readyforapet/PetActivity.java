@@ -46,7 +46,7 @@ public class PetActivity extends Activity {
 		}
 		
 		else{
-			petgreeting.setText(" Hi buddy, I've missed you!");	
+			petgreeting.setText("Hi buddy, I've missed you!");	
 		}
 		
 		
