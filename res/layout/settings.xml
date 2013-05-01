@@ -5,7 +5,7 @@
     android:background="@drawable/background" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/petsettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

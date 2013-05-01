@@ -3,7 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/background" >
-
+  
     <TextView
         android:id="@+id/petgreeting"
         android:layout_width="wrap_content"
@@ -13,6 +13,7 @@
         android:layout_marginTop="46dp"
         android:text="TextView" />
 
+
     <ProgressBar
         android:id="@+id/moodBar"
         style="?android:attr/progressBarStyleHorizontal"
@@ -20,5 +21,22 @@
         android:layout_height="50dp"
         android:layout_below="@+id/petgreeting"
         android:layout_centerHorizontal="true" />
+
+    	 <Button
+    	     android:id="@+id/eat"
+    	     android:layout_width="wrap_content"
+    	     android:layout_height="wrap_content"
+    	     android:layout_centerHorizontal="true"
+    	     android:layout_centerVertical="true"
+    	     android:text="Eat" />
+
+    	 <TextView
+    	     android:id="@+id/not_hungry"
+    	     android:layout_width="wrap_content"
+    	     android:layout_height="wrap_content"
+    	     android:layout_alignParentBottom="true"
+    	     android:layout_alignParentRight="true"
+    	     android:text="I am full" />
+
 
 </RelativeLayout>

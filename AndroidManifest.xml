@@ -26,9 +26,8 @@
         <activity android:name="edu.chl.dat255.sofiase.readyforapet.SelectGame" />
         <activity android:name="edu.chl.dat255.sofiase.readyforapet.Settings" />
         <activity android:name="edu.chl.dat255.sofiase.readyforapet.CreatePet" />
-
         <activity
-            android:name=".PetActivity" 
+            android:name="edu.chl.dat255.sofiase.readyforapet.PetActivity" 
             android:label="@string/pet_name"
             android:parentActivityName="edu.chl.dat255.sofiase.readyforapet.CreatePet">
             <meta-data
