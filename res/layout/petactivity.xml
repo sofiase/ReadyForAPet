@@ -13,4 +13,12 @@
         android:layout_marginTop="46dp"
         android:text="TextView" />
 
+    <ProgressBar
+        android:id="@+id/moodBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/petgreeting"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

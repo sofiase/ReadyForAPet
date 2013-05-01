@@ -14,6 +14,8 @@ public class PetActivity extends Activity {
 	
 	TextView petgreeting;
 	Handler uiHandler = new Handler();
+	
+	
 	Runnable makeTextGone = new Runnable(){
 		@Override
 		public void run(){
@@ -21,7 +23,7 @@ public class PetActivity extends Activity {
 		}
 	};
 
-	
+
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
@@ -32,7 +34,7 @@ public class PetActivity extends Activity {
 		String petname = nameintent.getStringExtra(CreatePet.EXTRA_MESSAGE);
 		
 		//Jag fick ta bort den här typen av textruta och göra en sån annan för att den skulle kunna försvinna
-		//Det går säkert med detta sättet också men jag hittade ingenstans hur.. 
+		//Det går säkert med detta sättet också men jag hittade ingenstans hur..
 		
 		//Create the text view
 		//petgreeting = new TextView(this);
@@ -53,7 +55,6 @@ public class PetActivity extends Activity {
 		//Även detta togs bort när jag bytte textruta
 		//Set the pet greeting as the activity layout
 		//setContentView(petgreeting);
-		
 		
 
 		petgreeting = (TextView) findViewById(R.id.petgreeting);
