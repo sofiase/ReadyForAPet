@@ -5,11 +5,11 @@ public class Dog implements Pet {
 	String name;
 	
 	public Dog(String name){
-		this.name = name;
+		this.name = name; 
 	}
 	
 	@Override
-	public String eat() {
+	public String eat(PerMood petMood) {
 		int hungerCounter = petMood.getFoodMood();
 		if(hungerCounter < 5){
 			hungerCounter = hungerCounter + 1;
