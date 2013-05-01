@@ -5,17 +5,7 @@ public class PetMood {
 	private static int foodMood = 3;
 	private static int totalMood;
 	
-<<<<<<< HEAD
-	public PetMood(){
-=======
-	public static void PetMood(){
->>>>>>> 5280b73bd046c457bd63e084f9d7dcab2dac09ed
-		
-		// I PetActivity skapas en pinne av formatet 
-		// PetMood moodpinne = new PetMood();
-		
-		
-		
+	public PetMood(){	
 		
 	}
 
