@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class PetActivity extends Activity {
@@ -16,6 +17,9 @@ public class PetActivity extends Activity {
 	TextView petgreeting, respondingOnEat;
 	Dog dog;
 	Handler uiHandler = new Handler();
+	
+	private ProgressBar moodBar;
+	private PetMood petmood = new PetMood();
 	
 	
 	Runnable makeTextGone = new Runnable(){
@@ -81,6 +85,10 @@ public class PetActivity extends Activity {
 							respondingOnEat.setText(dog.eat(petMoodInActivity));
 							respondingOnEat.setVisibility(View.VISIBLE);
 							//uiHandler.postDelayed(makeTextGone, 5000);	
+							
+							// Updating the moodbar
+							moodBar = (ProgressBar) findViewById(R.id.moodbar);
+							moodBar.setProgress(petmood.getSumMood());
 					}
 		}
 		);			
