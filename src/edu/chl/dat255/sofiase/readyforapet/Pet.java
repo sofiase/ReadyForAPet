@@ -7,4 +7,6 @@ public interface Pet {
 	//}
 	String eat(PetMood petMood);
 	
+	String play(PetMood petMood);
+	
 }

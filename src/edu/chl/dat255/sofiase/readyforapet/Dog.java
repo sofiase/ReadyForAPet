@@ -23,5 +23,20 @@ public class Dog implements Pet {
 		
 	}
 	
+	@Override
+	public String play(PetMood petMood) {
+		int playCounter = petMood.getPlayMood();
+		if(playCounter < 5){
+			playCounter = playCounter + 1;
+			petMood.setPlayMood(playCounter);
+			return "Yeey! I want to play";
+		}	
+			else{
+				return "I'm tired! I want to rest";
+			}
+		
+		
+	}
+	
 	
 }

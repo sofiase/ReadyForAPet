@@ -23,22 +23,31 @@
         android:layout_centerHorizontal="true"
         android:max="20" />
 
+    	 <TextView
+    	     android:id="@+id/pet_response"
+    	     android:layout_width="wrap_content"
+    	     android:layout_height="wrap_content"
+    	     android:layout_below="@+id/moodbar"
+    	     android:layout_centerHorizontal="true"
+    	     android:layout_marginTop="15dp"
+    	     android:text="I am full" />
+
     	 <Button
     	     android:id="@+id/eat"
     	     android:layout_width="wrap_content"
     	     android:layout_height="wrap_content"
-    	     android:layout_centerHorizontal="true"
-    	     android:layout_centerVertical="true"
+    	     android:layout_alignParentLeft="true"
+    	     android:layout_below="@+id/pet_response"
+    	     android:layout_marginLeft="18dp"
     	     android:text="Eat" />
 
-    	 <TextView
-    	     android:id="@+id/not_hungry"
+    	 <Button
+    	     android:id="@+id/play"
     	     android:layout_width="wrap_content"
     	     android:layout_height="wrap_content"
-    	     android:layout_alignLeft="@+id/moodBar"
-    	     android:layout_below="@+id/moodBar"
-    	     android:layout_marginTop="26dp"
-    	     android:text="I am full" />
-
+    	     android:layout_alignBaseline="@+id/eat"
+    	     android:layout_alignBottom="@+id/eat"
+    	     android:layout_alignRight="@+id/moodbar"
+    	     android:text="Play" />
 
 </RelativeLayout>
