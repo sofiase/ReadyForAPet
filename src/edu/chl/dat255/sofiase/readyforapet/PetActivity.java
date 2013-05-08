@@ -20,9 +20,11 @@ public class PetActivity extends Activity {
 
 	private ProgressBar moodBar;
 	private PetMood petmood = new PetMood();
+	
 
 
 	Runnable makeTextGone = new Runnable(){
+
 		@Override
 		public void run(){
 			petgreeting.setVisibility(View.GONE);
@@ -129,6 +131,9 @@ public class PetActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	
+	
 }
 
 
