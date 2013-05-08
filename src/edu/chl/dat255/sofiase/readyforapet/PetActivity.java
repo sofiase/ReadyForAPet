@@ -1,5 +1,7 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
+import Model.Dog;
+import Model.PetMood;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,19 +31,22 @@ public class PetActivity extends Activity {
 		}
 	};
 
-
+	/**
+	 * onCreate Method
+	 *
+	 * @param savedInstanceState - Bundle
+	 */
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.petactivity);
-
 
 		respondingOnEat = (TextView) findViewById(R.id.pet_response);
 		respondingOnEat.setVisibility(View.GONE);
 
 		// Get the pet name from the intent
 		Intent nameintent = getIntent();
-		String petname = nameintent.getStringExtra(CreatePet.EXTRA_MESSAGE);
+		String petname = nameintent.getStringExtra(dog.getName());
 
 		//Jag fick ta bort den här typen av textruta och göra en sån annan för att den skulle kunna försvinna
 		//Det går säkert med detta sättet också men jag hittade ingenstans hur..
@@ -75,14 +80,13 @@ public class PetActivity extends Activity {
 		Button eat = (Button) findViewById(R.id.eat);
 		eat.setOnClickListener(new OnClickListener() {
 
-
 			//making the dog feel less hungry if it is hungry and else give the message i'm full for 5 sek
 			@Override
 			public void onClick (View v){
-				PetMood petMoodInActivity = new PetMood();
+				//PetMood petMoodInActivity = new PetMood();
 				dog = (Dog) CreatePet.getPet();
 				respondingOnEat = (TextView) findViewById(R.id.pet_response);
-				respondingOnEat.setText(dog.eat(petMoodInActivity));
+				respondingOnEat.setText(dog.eat());
 				respondingOnEat.setVisibility(View.VISIBLE);
 				//uiHandler.postDelayed(makeTextGone, 5000);	
 
@@ -97,14 +101,12 @@ public class PetActivity extends Activity {
 		Button play = (Button) findViewById(R.id.play);
 		play.setOnClickListener(new OnClickListener() {
 
-
 			//making the dog feel less hungry if it is hungry and else give the message i'm full for 5 sek
 			@Override
 			public void onClick (View v){
-				PetMood petMoodInActivity = new PetMood();
 				dog = (Dog) CreatePet.getPet();
 				respondingOnPlay = (TextView) findViewById(R.id.pet_response);
-				respondingOnPlay.setText(dog.play(petMoodInActivity));
+				respondingOnPlay.setText(dog.play());
 				respondingOnPlay.setVisibility(View.VISIBLE);
 				//uiHandler.postDelayed(makeTextGone, 5000);	
 
@@ -132,7 +134,7 @@ public class PetActivity extends Activity {
 }
 
 
-//"Add the title string" - 75% av scrollern
+
 
 
 
