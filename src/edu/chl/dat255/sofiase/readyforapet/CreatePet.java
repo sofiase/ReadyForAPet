@@ -14,6 +14,11 @@ public class CreatePet extends Activity {
 	String name; 
 	static Dog dog; 
 	
+	
+	
+	
+	//eftersom att hunden skapas här och vi inte har SPARAT spelet så fungerar inte EAT() nrä man går via Continue game
+	// vi måste lösa så att spelet sparas!
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
@@ -25,6 +30,8 @@ public class CreatePet extends Activity {
 	//HONEYCOMB - se android trainer: Starting another activity
 	//skippade onOptionsItemsSelected(MenuItem item)
 
+	
+	
 
 	public void saveSettings(View v){
 		Intent intent = new Intent(CreatePet.this, PetActivity.class); //förut stod displayname men tror det är petactivity!
