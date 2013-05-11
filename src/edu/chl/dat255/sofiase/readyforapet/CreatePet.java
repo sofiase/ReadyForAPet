@@ -11,11 +11,14 @@ import android.widget.EditText;
 
 public class CreatePet extends Activity {
 	
-	//public final static String EXTRA_MESSAGE = "edu.chl.dat255.sofiase.readyforapet.NAME";
-	//unique if the app interacts with other apps
 	String name; 
 	private static Dog dog; 
 	
+	/**
+	 * onCreate Method
+	 *
+	 * @param savedInstanceState - Bundle
+	 */
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
@@ -23,7 +26,11 @@ public class CreatePet extends Activity {
 		dog = new Dog(name);
 	}
 
-
+	/**
+	 * saveSettings Method
+	 *
+	 * @param v - View
+	 */
 	public void saveSettings(View v){
 		Intent intent = new Intent(CreatePet.this, PetActivity.class);
 		EditText setName = (EditText) findViewById(R.id.edit_pet_name);
@@ -31,7 +38,13 @@ public class CreatePet extends Activity {
 		startActivity(intent);
 	}
 	
-	
+	/**
+	 * getPet Method
+	 * 
+	 * makes the created pet avaliable to other classes
+	 *
+	 * @return dog - an instance of the class Dog
+	 */
 	public static Pet getPet(){
 		return dog;
 	}

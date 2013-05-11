@@ -48,12 +48,6 @@ public class PetActivity extends Activity {
 		Intent nameintent = getIntent();
 		String petname = nameintent.getStringExtra(dog.getName());
 
-		//Jag fick ta bort den här typen av textruta och göra en sån annan för att den skulle kunna försvinna
-		//Det går säkert med detta sättet också men jag hittade ingenstans hur..
-
-		//Create the text view
-		//petgreeting = new TextView(this);
-		//petgreeting.setTextSize(40);
 
 		petgreeting = (TextView) findViewById(R.id.petgreeting);
 
@@ -66,24 +60,22 @@ public class PetActivity extends Activity {
 		}
 
 
-		//Även detta togs bort när jag bytte textruta
-		//Set the pet greeting as the activity layout
-		//setContentView(petgreeting);
-
 
 		petgreeting = (TextView) findViewById(R.id.petgreeting);
 		uiHandler.postDelayed(makeTextGone, 5000);	
 
 
-		//Food
 		// Making the eat button
 		Button eat = (Button) findViewById(R.id.eat);
 		eat.setOnClickListener(new OnClickListener() {
 
-			//making the dog feel less hungry if it is hungry and else give the message i'm full for 5 sek
+			/**
+			 * Making the dog feel less hungry if it is hungry and else give the message i'm full
+			 *
+			 * @param v - View
+			 */
 			@Override
 			public void onClick (View v){
-				//PetMood petMoodInActivity = new PetMood();
 				dog = (Dog) CreatePet.getPet();
 				respondingOnEat = (TextView) findViewById(R.id.pet_response);
 				respondingOnEat.setText(dog.eat());
@@ -95,13 +87,19 @@ public class PetActivity extends Activity {
 				moodBar.setProgress(petmood.getSumMood());
 			}
 		}
-				);			
-		//Play
+				);
+
+
 		// Making the play button
 		Button play = (Button) findViewById(R.id.play);
 		play.setOnClickListener(new OnClickListener() {
 
-			//making the dog feel less hungry if it is hungry and else give the message i'm full for 5 sek
+
+			/**
+			 * Making the dog feel happier when it plays
+			 *
+			 * @param v - View
+			 */
 			@Override
 			public void onClick (View v){
 				dog = (Dog) CreatePet.getPet();
@@ -122,6 +120,12 @@ public class PetActivity extends Activity {
 
 	}
 
+
+	/**
+	 * Making the dog feel less hungry if it is hungry and else give the message i'm full
+	 *
+	 * @param item - MenuItem
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {

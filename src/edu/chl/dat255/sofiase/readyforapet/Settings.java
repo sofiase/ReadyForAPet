@@ -4,6 +4,12 @@ import android.app.Activity;
 import android.os.Bundle;
 
 public class Settings extends Activity {
+	
+	/**
+	 * onCreate method
+	 * 
+	 * @param savedInstanceState - Bundle
+	 */
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
