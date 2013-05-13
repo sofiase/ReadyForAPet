@@ -24,8 +24,6 @@ public class PetActivity extends Activity {
 	private PetMood petMood = new PetMood();
 	private Dog dog = (Dog) CreatePet.getPet();
 
-
-
 	Runnable makeTextGone = new Runnable(){
 
 		@Override
@@ -60,10 +58,11 @@ public class PetActivity extends Activity {
 		}
 
 
-
 		petgreeting = (TextView) findViewById(R.id.petgreeting);
 		uiHandler.postDelayed(makeTextGone, 5000);	
 
+		moodBar = (ProgressBar) findViewById(R.id.moodbar);
+		moodBar.setProgress(petMood.getSumMood());
 
 		// Making the eat button
 		Button eat = (Button) findViewById(R.id.eat);
@@ -82,7 +81,7 @@ public class PetActivity extends Activity {
 				respondingOnEat.setVisibility(View.VISIBLE);
 				//uiHandler.postDelayed(makeTextGone, 5000);	
 
-				// Updating the moodbar
+				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
 				moodBar.setProgress(petMood.getSumMood());
 			}
@@ -107,37 +106,37 @@ public class PetActivity extends Activity {
 				respondingOnPlay.setVisibility(View.VISIBLE);
 				//uiHandler.postDelayed(makeTextGone, 5000);
 
-				// Updating the moodbar
+				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
 				moodBar.setProgress(petMood.getSumMood());
 			}
 		}
 				);			
 
-		
+
 		// Making the walk button
-				Button walk = (Button) findViewById(R.id.walk);
-				walk.setOnClickListener(new OnClickListener() {
+		Button walk = (Button) findViewById(R.id.walk);
+		walk.setOnClickListener(new OnClickListener() {
 
-					/**
-					 * Making the dog feel happier when it plays
-					 *
-					 * @param v - View
-					 */
-					@Override
-					public void onClick (View v){
+			/**
+			 * Making the dog feel happier when it plays
+			 *
+			 * @param v - View
+			 */
+			@Override
+			public void onClick (View v){
 
-						respondingOnWalk = (TextView) findViewById(R.id.pet_response);
-						respondingOnWalk.setText(dog.walk());
-						respondingOnWalk.setVisibility(View.VISIBLE);
-						//uiHandler.postDelayed(makeTextGone, 5000);
+				respondingOnWalk = (TextView) findViewById(R.id.pet_response);
+				respondingOnWalk.setText(dog.walk());
+				respondingOnWalk.setVisibility(View.VISIBLE);
+				//uiHandler.postDelayed(makeTextGone, 5000);
 
-						// Updating the moodbar
-						moodBar = (ProgressBar) findViewById(R.id.moodbar);
-						moodBar.setProgress(petMood.getSumMood());
-					}
-				}
-						);
+				// Updating the moodbar
+				moodBar = (ProgressBar) findViewById(R.id.moodbar);
+				moodBar.setProgress(petMood.getSumMood());
+			}
+		}
+				);
 	}
 
 
@@ -159,10 +158,4 @@ public class PetActivity extends Activity {
 
 
 }
-
-
-
-
-
-
 

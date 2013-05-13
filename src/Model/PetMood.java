@@ -29,7 +29,7 @@ public class PetMood {
 	}
 	
 	/**
-	 * Sets the mood of the pet depending on how much it has played.
+	 * Sets the mood of the pet depending on how much it has walked.
 	 * 
 	 * @param playnumber - int
 	 */
