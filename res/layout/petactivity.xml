@@ -11,7 +11,9 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:text="TextView" />
+        android:textColor="#000000"
+        android:textStyle="bold" android:textSize="20sp"
+        />
 
 
     <ProgressBar
@@ -21,7 +23,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:max="20" />
+        android:max="15" />
 
     	 <ImageView
     	     android:id="@+id/dogpicture"
@@ -47,7 +49,9 @@
     	     android:layout_height="wrap_content"
     	     android:layout_marginTop="75dp"
     	     android:layout_centerHorizontal="true"
-    	     android:text="I am full" />
+    	    android:textColor="#000000"
+          	android:textStyle="bold" android:textSize="30sp"
+    	     />
 
     	 <Button
     	     android:id="@+id/play"
