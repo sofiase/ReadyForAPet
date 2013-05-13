@@ -50,7 +50,6 @@ public class PetActivity extends Activity {
 		Intent nameintent = getIntent();
 		String petname = nameintent.getStringExtra(dog.getName());
 
-
 		petgreeting = (TextView) findViewById(R.id.petgreeting);
 
 		if(petname != null){
@@ -108,7 +107,7 @@ public class PetActivity extends Activity {
 				respondingOnPlay = (TextView) findViewById(R.id.pet_response);
 				respondingOnPlay.setText(dog.play());
 				respondingOnPlay.setVisibility(View.VISIBLE);
-				//uiHandler.postDelayed(makeTextGone, 5000);	
+				//uiHandler.postDelayed(makeTextGone, 5000);
 
 				// Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
