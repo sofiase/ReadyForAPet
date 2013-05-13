@@ -13,19 +13,22 @@ import android.widget.EditText;
 
 public class CreatePet extends Activity {
 
-	//public final static String EXTRA_MESSAGE = "edu.chl.dat255.sofiase.readyforapet.NAME";
-	//unique if the app interacts with other apps
 	String petName; 
-	private static Dog dog; 
+	private static Dog dog;
 
 
-	//eftersom att hunden skapas här och vi inte har SPARAT spelet så fungerar inte EAT() nrä man går via Continue game
-	// vi måste lösa så att spelet sparas!
+	/**
+	 * onCreate Method
+	 * 
+	 * eftersom att hunden skapas här och vi inte har SPARAT spelet så fungerar inte eat() när man går via Continue game vi måste lösa så att spelet sparas!
+	 *
+	 * @param savedInstanceState - Bundle
+	 */
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
 		setContentView(R.layout.createpet);
-		dog = new Dog(petName);
+
 
 		Button create = (Button) findViewById(R.id.puppy_settings);
 		create.setOnClickListener(new OnClickListener() {
@@ -34,20 +37,20 @@ public class CreatePet extends Activity {
 				startActivity(new Intent(CreatePet.this, PetActivity.class));
 				EditText setName = (EditText) findViewById(R.id.edit_pet_name);
 				petName = setName.getText().toString();
-				dog.setName1(petName); // så att namnet sparas tillagt av linnet och soffan
+				dog = new Dog(petName);
 			}
 		});
 	}
 
-	//public void saveSettings(View v){
-	//Intent intent = new Intent(CreatePet.this, PetActivity.class);
-	//EditText setName = (EditText) findViewById(R.id.edit_pet_name);
-	//name = setName.getText().toString();
-	//dog.setName1(name); // så att namnet sparas tillagt av linnet och soffan
-	//	startActivity(intent);
-	//}
 
 
+	/**
+	 * getPet Method
+	 * 
+	 * makes the created pet avaliable to other classes
+	 *
+	 * @return dog - an instance of the class Dog
+	 */
 	public static Pet getPet(){
 		return dog;
 	}

@@ -9,6 +9,11 @@ public class Pet {
 	PetMood petMood = new PetMood();
 	
 
+	/**
+	 * Method that increases mood bar while eating
+	 *
+	 * @return String with the pet's reaction 
+	 */
 	public String eat() {
 		int hungerCounter = petMood.getFoodMood();
 		if (hungerCounter < 5) {
@@ -16,13 +21,19 @@ public class Pet {
 			petMood.setFoodMood(hungerCounter);
 			return "Yummie!";
 		}	
+
 		else{
 			return "I am full";
 		}
-
+		
 
 	}
 
+	/**
+	 * Method that increases mood bar while playing
+	 *
+	 * @return String with the pet's reaction 
+	 */
 	public String play() {
 		int playCounter = petMood.getPlayMood();
 		if (playCounter < 5) {
