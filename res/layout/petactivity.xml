@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="100dp"
         android:text="TextView" />
 
 
@@ -45,7 +45,7 @@
     	     android:id="@+id/pet_response"
     	     android:layout_width="wrap_content"
     	     android:layout_height="wrap_content"
-    	     android:layout_marginTop="80dp"
+    	     android:layout_marginTop="75dp"
     	     android:layout_centerHorizontal="true"
     	     android:text="I am full" />
 
@@ -58,5 +58,14 @@
     	     android:layout_marginRight="21dp"
     	     android:background="@drawable/buttonshape"
     	     android:text="Play" />
+
+    	 <Button
+    	     android:id="@+id/walk"
+    	     android:layout_width="wrap_content"
+    	     android:layout_height="wrap_content"
+    	     android:layout_alignParentBottom="true"
+    	     android:layout_centerHorizontal="true"
+    	     android:background="@drawable/buttonshape"
+    	     android:text="Walk" />
 
 </RelativeLayout>

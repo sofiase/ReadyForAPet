@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 public class PetActivity extends Activity {
 
-	TextView petgreeting, respondingOnEat, respondingOnPlay;
+	TextView petgreeting, respondingOnEat, respondingOnPlay, respondingOnWalk;
 	Handler uiHandler = new Handler();
 
 	private ProgressBar moodBar;
@@ -94,8 +94,6 @@ public class PetActivity extends Activity {
 		Button play = (Button) findViewById(R.id.play);
 		play.setOnClickListener(new OnClickListener() {
 
-
-
 			/**
 			 * Making the dog feel happier when it plays
 			 *
@@ -116,6 +114,30 @@ public class PetActivity extends Activity {
 		}
 				);			
 
+		
+		// Making the walk button
+				Button walk = (Button) findViewById(R.id.walk);
+				walk.setOnClickListener(new OnClickListener() {
+
+					/**
+					 * Making the dog feel happier when it plays
+					 *
+					 * @param v - View
+					 */
+					@Override
+					public void onClick (View v){
+
+						respondingOnWalk = (TextView) findViewById(R.id.pet_response);
+						respondingOnWalk.setText(dog.walk());
+						respondingOnWalk.setVisibility(View.VISIBLE);
+						//uiHandler.postDelayed(makeTextGone, 5000);
+
+						// Updating the moodbar
+						moodBar = (ProgressBar) findViewById(R.id.moodbar);
+						moodBar.setProgress(petMood.getSumMood());
+					}
+				}
+						);
 	}
 
 
