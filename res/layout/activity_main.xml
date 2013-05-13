@@ -27,7 +27,9 @@
         android:layout_above="@+id/quit"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
-        android:text="Settings" />
+        android:text="Settings"
+        android:background="@drawable/buttonshape"
+          />
 
     <Button
         android:id="@+id/play"
@@ -36,7 +38,9 @@
         android:layout_above="@+id/settings"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
-        android:text="Play" />
+        android:text="Play"
+        android:background="@drawable/buttonshape"
+          />
 
     <Button
         android:id="@+id/quit"
@@ -45,6 +49,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/settings"
         android:layout_marginBottom="70dp"
-        android:text="Quit game" />
+        android:text="Quit game" 
+        android:background="@drawable/buttonshape"
+         />
 
 </RelativeLayout>

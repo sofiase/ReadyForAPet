@@ -11,7 +11,9 @@
         android:layout_above="@+id/createnewpet"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="34dp"
-        android:text="Continue game" />
+        android:text="Continue game"
+        android:background="@drawable/buttonshape"
+          />
 
     <Button
         android:id="@+id/createnewpet"
@@ -20,6 +22,8 @@
         android:layout_alignLeft="@+id/continuegame"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="119dp"
-        android:text="Create new pet" />
+        android:text="Create new pet" 
+        android:background="@drawable/buttonshape"
+         />
 
 </RelativeLayout>
