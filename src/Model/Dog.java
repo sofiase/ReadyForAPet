@@ -14,6 +14,7 @@ public class Dog extends Pet {
 		this.name = name; 
 	}
 
+
 	/**
 	 * Method that makes the dog name available to all classes.
 	 * 

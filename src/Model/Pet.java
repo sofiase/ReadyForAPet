@@ -1,10 +1,14 @@
 package Model;
 
+import java.text.DateFormat.Field;
+import java.util.Calendar;
+
 
 public class Pet {
-	
+
 	PetMood petMood = new PetMood();
 	
+
 	/**
 	 * Method that increases mood bar while eating
 	 *
@@ -17,10 +21,12 @@ public class Pet {
 			petMood.setFoodMood(hungerCounter);
 			return "Yummie!";
 		}	
-			else{
-				return "I am full";
-			}
+
+		else{
+			return "I am full";
+		}
 		
+
 	}
 
 	/**
@@ -35,11 +41,11 @@ public class Pet {
 			petMood.setPlayMood(playCounter);
 			return "Yeey! I want to play";
 		}	
-			else{
-				return "I'm tired! I want to rest";
-			}
-		
-		
+		else{
+			return "I'm tired! I want to rest";
+		}
+
+
 	}
-	
 }
+
