@@ -42,10 +42,25 @@ public class Pet {
 			return "Yeey! I want to play";
 		}	
 		else{
-			return "I'm tired! I want to rest";
+			return "I'm tired! I want to rest!";
 		}
-
-
+	}
+	
+	/**
+	 * Method that increases mood bar while walking
+	 *
+	 * @return String with the pet's reaction 
+	 */
+	public String walk() {
+		int walkCounter = petMood.getWalkMood();
+		if (walkCounter < 5) {
+			walkCounter = walkCounter + 1;
+			petMood.setWalkMood(walkCounter);
+			return "Yeey! Take me for a walk";
+		}	
+		else{
+			return "I'm tired! I want to rest!";
+		}
 	}
 }
 

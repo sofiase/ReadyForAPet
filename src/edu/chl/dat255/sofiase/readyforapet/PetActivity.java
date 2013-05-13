@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 public class PetActivity extends Activity {
 
-	TextView petgreeting, respondingOnEat, respondingOnPlay;
+	TextView petgreeting, respondingOnEat, respondingOnPlay, respondingOnWalk;
 	Handler uiHandler = new Handler();
 
 	private ProgressBar moodBar;
@@ -47,8 +47,8 @@ public class PetActivity extends Activity {
 		respondingOnEat = (TextView) findViewById(R.id.pet_response);
 		respondingOnEat.setVisibility(View.GONE);
 
-
 		String petName = dog.getName();
+
 		petgreeting = (TextView) findViewById(R.id.petgreeting);
 
 		if(petName != null){
@@ -94,8 +94,6 @@ public class PetActivity extends Activity {
 		Button play = (Button) findViewById(R.id.play);
 		play.setOnClickListener(new OnClickListener() {
 
-
-
 			/**
 			 * Making the dog feel happier when it plays
 			 *
@@ -107,7 +105,7 @@ public class PetActivity extends Activity {
 				respondingOnPlay = (TextView) findViewById(R.id.pet_response);
 				respondingOnPlay.setText(dog.play());
 				respondingOnPlay.setVisibility(View.VISIBLE);
-				//uiHandler.postDelayed(makeTextGone, 5000);	
+				//uiHandler.postDelayed(makeTextGone, 5000);
 
 				// Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
@@ -116,6 +114,30 @@ public class PetActivity extends Activity {
 		}
 				);			
 
+		
+		// Making the walk button
+				Button walk = (Button) findViewById(R.id.walk);
+				walk.setOnClickListener(new OnClickListener() {
+
+					/**
+					 * Making the dog feel happier when it plays
+					 *
+					 * @param v - View
+					 */
+					@Override
+					public void onClick (View v){
+
+						respondingOnWalk = (TextView) findViewById(R.id.pet_response);
+						respondingOnWalk.setText(dog.walk());
+						respondingOnWalk.setVisibility(View.VISIBLE);
+						//uiHandler.postDelayed(makeTextGone, 5000);
+
+						// Updating the moodbar
+						moodBar = (ProgressBar) findViewById(R.id.moodbar);
+						moodBar.setProgress(petMood.getSumMood());
+					}
+				}
+						);
 	}
 
 

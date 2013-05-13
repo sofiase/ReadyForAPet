@@ -5,6 +5,7 @@ public class PetMood {
 
 	private static int foodMood = 2;
 	private static int playMood = 2;
+	private static int walkMood = 2;
 
 	public PetMood(){
 	}
@@ -26,6 +27,15 @@ public class PetMood {
 	public void setPlayMood (int playnumber){
 		playMood = playnumber;
 	}
+	
+	/**
+	 * Sets the mood of the pet depending on how much it has played.
+	 * 
+	 * @param playnumber - int
+	 */
+	public void setWalkMood(int walknumber){
+		walkMood = walknumber;
+	}
 
 	/**
 	 * Makes it possible for the pet to know how much the pet has already eaten.
@@ -44,6 +54,15 @@ public class PetMood {
 	public int getPlayMood (){
 		return playMood;
 	}
+	
+	/**
+	 * Makes it possible for the pet to know how much the pet has already walked.
+	 * 
+	 * @return foodMood - int
+	 */
+	public int getWalkMood (){
+		return walkMood;
+	}
 
 	/**
 	 * The sum of the mood of the pet that is shown in a moodbar.
@@ -54,7 +73,7 @@ public class PetMood {
 	 * @return the total mood of the pet
 	 */
 	public int getSumMood (){
-		return foodMood + playMood;
+		return foodMood + playMood + walkMood;
 	}
 
 }
