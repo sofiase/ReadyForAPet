@@ -1,9 +1,13 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
 
+import java.io.IOException;
+
 import Model.Dog;
 import Model.PetMood;
 import android.app.Activity;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NavUtils;
@@ -22,6 +26,10 @@ public class PetActivity extends Activity {
 	private ProgressBar moodBar;
 	private PetMood petMood = new PetMood();
 	private Dog dog = (Dog) CreatePet.getPet();
+
+	//Variables for playing music in the Pet Activity
+	private MediaPlayer player;
+	private AssetFileDescriptor afd;
 
 	Runnable makeTextGone = new Runnable(){
 
@@ -135,6 +143,53 @@ public class PetActivity extends Activity {
 			}
 		}
 				);
+
+		//Music
+		try {
+			afd = getAssets().openFd("readyforapetsong4.m4v");
+			player = new MediaPlayer();
+
+			player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),afd.getLength());
+
+			player.setLooping(true);
+			player.prepare();
+			player.start();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * Method onPause for the activity
+	 * 
+	 * Pauses music player when pausing activity
+	 */
+	public void onPause() {
+		super.onPause();
+		player.pause();
+	}
+	
+	/**
+	 * Method onResume for the activity
+	 * 
+	 * Starts music player when reuming activity
+	 */
+	public void onResume() {
+		super.onResume();
+		player.start();
+	}
+
+	/**
+	 * Method onStop for the activity
+	 * 
+	 * Stops music when exiting activity
+	 */
+	protected void onStop() {
+		super.onStop();
+		player.stop();
+		player = null;
 	}
 
 
