@@ -2,7 +2,6 @@ package edu.chl.dat255.sofiase.readyforapet;
 
 
 import Model.Dog;
-import Model.Pet;
 import Model.PetMood;
 import android.app.Activity;
 import android.os.Bundle;
@@ -56,7 +55,6 @@ public class PetActivity extends Activity {
 		else{
 			petgreeting.setText("Hi buddy, I've missed you!");	
 		}
-
 
 		petgreeting = (TextView) findViewById(R.id.petgreeting);
 		uiHandler.postDelayed(makeTextGone, 5000);	
@@ -155,7 +153,4 @@ public class PetActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-
-
 }
-

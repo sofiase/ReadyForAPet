@@ -25,5 +25,6 @@ public class Dog extends Pet {
 	}
 
 	// ... and additional functions that only applies to dogs
+	
 
 }
