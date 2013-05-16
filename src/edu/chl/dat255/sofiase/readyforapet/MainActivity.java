@@ -53,7 +53,7 @@ public class MainActivity extends Activity {
 			 * @param v - View
 			 */
 			@Override
-			public void onClick(View v) {
+			public void onClick(View v) {	
 				finish();
 				System.exit(0);
 			}

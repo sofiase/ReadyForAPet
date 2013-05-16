@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 public class PetActivity extends Activity {
 
-	TextView petgreeting, respondingOnEat, respondingOnPlay, respondingOnWalk;
+	TextView petResponse; //respondingOnEat, respondingOnPlay, respondingOnWalk;
 	Handler uiHandler = new Handler();
 
 	private ProgressBar moodBar;
@@ -35,7 +35,7 @@ public class PetActivity extends Activity {
 
 		@Override
 		public void run(){
-			petgreeting.setVisibility(View.GONE);
+			petResponse.setVisibility(View.GONE);
 		}
 	};
 
@@ -48,24 +48,30 @@ public class PetActivity extends Activity {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.petactivity);
+		
+		petResponse = (TextView) findViewById(R.id.petresponse);
+		petResponse.setVisibility(View.GONE);
 
-		respondingOnEat = (TextView) findViewById(R.id.pet_response);
-		respondingOnEat.setVisibility(View.GONE);
 
+		
 		String petName = dog.getName();
 
-		petgreeting = (TextView) findViewById(R.id.petgreeting);
+		petResponse = (TextView) findViewById(R.id.petresponse);
+		
 
 		if(petName != null){
-			petgreeting.setText("Hello, my name is " + petName + "!");		
+			petResponse.setText("Hello, my name is " + petName + "!");	
+			
 		}
 
 		else{
-			petgreeting.setText("Hi buddy, I've missed you!");	
+			petResponse.setText("Hi buddy, I've missed you!");	
+			
 		}
 
-		petgreeting = (TextView) findViewById(R.id.petgreeting);
-		uiHandler.postDelayed(makeTextGone, 5000);	
+		petResponse = (TextView) findViewById(R.id.petresponse);
+		petResponse.setVisibility(View.VISIBLE);//ska den sitta här?
+		uiHandler.postDelayed(makeTextGone, 2000);	
 
 		moodBar = (ProgressBar) findViewById(R.id.moodbar);
 		moodBar.setProgress(petMood.getSumMood());
@@ -81,12 +87,11 @@ public class PetActivity extends Activity {
 			 */
 			@Override
 			public void onClick (View v){
-				respondingOnEat = (TextView) findViewById(R.id.pet_response);
-
-				respondingOnEat.setText(dog.eat());
-				respondingOnEat.setVisibility(View.VISIBLE);
-				//uiHandler.postDelayed(makeTextGone, 5000);	
-
+				petResponse = (TextView) findViewById(R.id.petresponse);
+				petResponse.setText(dog.eat());
+				petResponse.setVisibility(View.VISIBLE);
+				uiHandler.postDelayed(makeTextGone, 2000);	
+				
 				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
 				moodBar.setProgress(petMood.getSumMood());
@@ -107,10 +112,10 @@ public class PetActivity extends Activity {
 			@Override
 			public void onClick (View v){
 
-				respondingOnPlay = (TextView) findViewById(R.id.pet_response);
-				respondingOnPlay.setText(dog.play());
-				respondingOnPlay.setVisibility(View.VISIBLE);
-				//uiHandler.postDelayed(makeTextGone, 5000);
+				petResponse = (TextView) findViewById(R.id.petresponse);
+				petResponse.setText(dog.play());
+				petResponse.setVisibility(View.VISIBLE);
+				uiHandler.postDelayed(makeTextGone, 2000);
 
 				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
@@ -132,10 +137,10 @@ public class PetActivity extends Activity {
 			@Override
 			public void onClick (View v){
 
-				respondingOnWalk = (TextView) findViewById(R.id.pet_response);
-				respondingOnWalk.setText(dog.walk());
-				respondingOnWalk.setVisibility(View.VISIBLE);
-				//uiHandler.postDelayed(makeTextGone, 5000);
+				petResponse = (TextView) findViewById(R.id.petresponse);
+				petResponse.setText(dog.walk());
+				petResponse.setVisibility(View.VISIBLE);
+				uiHandler.postDelayed(makeTextGone, 2000);
 
 				// Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
