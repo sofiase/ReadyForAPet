@@ -1,7 +1,14 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
 
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Serializable;
+
+import java.io.IOException;
+
 
 import Model.Dog;
 import Model.PetMood;
@@ -18,12 +25,17 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class PetActivity extends Activity {
+public class PetActivity extends Activity implements Serializable{
+
+
+	
+	//private static final long serialVersionUID = 1L;
 
 	TextView petResponse; 
 	Handler uiHandler = new Handler();
 
 	private ProgressBar moodBar;
+
 	private PetMood petMood = new PetMood();
 	private Dog dog = (Dog) CreatePet.getPet();
 
@@ -49,12 +61,16 @@ public class PetActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.petactivity);
 		
+<<<<<<< HEAD
 		petResponse = (TextView) findViewById(R.id.petresponse);
 		petResponse.setVisibility(View.GONE);
+=======
+>>>>>>> 1fe4906cfe9d45bfa577fa04d1d3725454f049f3
 
 
 		
 		String petName = dog.getName();
+		
 
 		petResponse = (TextView) findViewById(R.id.petresponse);
 		
@@ -65,8 +81,24 @@ public class PetActivity extends Activity {
 		}
 
 		else{
+<<<<<<< HEAD
 			petResponse.setText("Hi buddy, I've missed you!");	
 			
+=======
+			try{
+				BufferedReader inputReader = new BufferedReader(new InputStreamReader(openFileInput("pet_name_file")));
+				String earlierName; 
+				StringBuffer stringBuffer = new StringBuffer();
+				while((earlierName = inputReader.readLine()) != null){
+					stringBuffer.append(earlierName + "\n");
+				}
+			   petgreeting.setText("Hi" + stringBuffer.toString() + ", I have missed you!");
+			}
+			catch(IOException e){
+				e.printStackTrace();
+			}
+				
+>>>>>>> 1fe4906cfe9d45bfa577fa04d1d3725454f049f3
 		}
 
 		petResponse = (TextView) findViewById(R.id.petresponse);
@@ -196,7 +228,6 @@ public class PetActivity extends Activity {
 		player.stop();
 		player = null;
 	}
-
 
 	/**
 	 * Making the dog feel less hungry if it is hungry and else give the message i'm full
