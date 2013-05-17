@@ -1,48 +1,39 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.Serializable;
+//import java.io.FileNotFoundException;
+//import java.io.IOException;
+//import java.io.Serializable;
 
-import Model.Pet;
+//import Model.Pet;
 
-import Model.Dog;
+//import Model.Dog;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
 
-<<<<<<< HEAD
-public class SelectGame extends Activity {
+
+public class SelectGame extends Activity {//implements Serializable
 	TextView warningMessage;
 	Button yes, no;
 	
 	Runnable makeTextGone = new Runnable(){
 
 		@Override
-		public void run(){//kolla om detta fungerar nŠr vi kan spara!
+		public void run(){
 			yes.setVisibility(View.GONE);
 			no.setVisibility(View.GONE);
 			warningMessage.setVisibility(View.GONE);
 		}
 	};
-=======
-
-public class SelectGame extends Activity implements Serializable {// la till för att objektet måste vara serializible
-	//	private static final long serialVersionUID = 1L;
-	TextView failMessage;
-	//  String FILENAME = "pet_file.dat";// lgts till för nullpointerexep
 
 
-
->>>>>>> 1fe4906cfe9d45bfa577fa04d1d3725454f049f3
 
 	/**
 	 * onCreate method
@@ -89,14 +80,9 @@ public class SelectGame extends Activity implements Serializable {// la till för
 					startActivity(new Intent(SelectGame.this, PetActivity.class));		
 				}
 				else{
-<<<<<<< HEAD
 					warningMessage = (TextView) findViewById(R.id.warningmessage);
 					warningMessage.setText("Create a pet first!");
-=======
-					failMessage = (TextView) findViewById(R.id.failmessage);
-					failMessage.setText("Create a pet first!");
 
->>>>>>> 1fe4906cfe9d45bfa577fa04d1d3725454f049f3
 				}
 			}
 		}
@@ -139,12 +125,12 @@ public class SelectGame extends Activity implements Serializable {// la till för
 					);
 				}
 				else{
-					startActivity(new Intent(SelectGame.this, CreatePet.class));
+					startActivity(new Intent(SelectGame.this,CreatePet.class));
 				}
 						
 				
 			}
 		}
-				);
+		);
 	}
 }

@@ -25,7 +25,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class PetActivity extends Activity implements Serializable{
+public class PetActivity extends Activity { //implements Serializable
 
 
 	
@@ -61,14 +61,11 @@ public class PetActivity extends Activity implements Serializable{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.petactivity);
 		
-<<<<<<< HEAD
-		petResponse = (TextView) findViewById(R.id.petresponse);
-		petResponse.setVisibility(View.GONE);
-=======
->>>>>>> 1fe4906cfe9d45bfa577fa04d1d3725454f049f3
+
+		petResponse = (TextView) findViewById(R.id.petresponse);//tror att detta behšvs, minns inte testa
+		petResponse.setVisibility(View.GONE);//samma
 
 
-		
 		String petName = dog.getName();
 		
 
@@ -81,11 +78,10 @@ public class PetActivity extends Activity implements Serializable{
 		}
 
 		else{
-<<<<<<< HEAD
+
 			petResponse.setText("Hi buddy, I've missed you!");	
-			
-=======
-			try{
+			/**
+			 * try{
 				BufferedReader inputReader = new BufferedReader(new InputStreamReader(openFileInput("pet_name_file")));
 				String earlierName; 
 				StringBuffer stringBuffer = new StringBuffer();
@@ -98,7 +94,8 @@ public class PetActivity extends Activity implements Serializable{
 				e.printStackTrace();
 			}
 				
->>>>>>> 1fe4906cfe9d45bfa577fa04d1d3725454f049f3
+			 */
+
 		}
 
 		petResponse = (TextView) findViewById(R.id.petresponse);
