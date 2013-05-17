@@ -15,15 +15,12 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class CreatePet extends Activity implements OnClickListener, Serializable { //lagt till interface serializivble. kanske inte nödvändigt
+public class CreatePet extends Activity implements OnClickListener, Serializable {
 
-	/**
-	 * 
-	 */
-	// private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 1L;
 	String petName; 
 	private static Dog dog;
-	//String FILENAME = "pet_file.dat";//lagts till för nullpointerexeption
 
 	/**
 	 * onCreate Method
@@ -47,7 +44,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		petName = setName.getText().toString();
 		dog = new Dog(petName);
 
-		/*try {
+		try {
 			dog.save("pet_file.dat", this);
 		} catch (FileNotFoundException e) {
 			System.out.print("File not found kastad i CreatePet");
@@ -55,7 +52,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		} catch (IOException e) {
 			System.out.print("IOException kastad i CreatePet");
 			e.printStackTrace();
-		}*/	
+		}
 	}
 
 	/**
@@ -77,7 +74,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 	 * @return dog - an instance of the class Dog
 	 */
 	public static void setPet(Pet pet){
-		dog = (Dog) pet; 
+		dog = (Dog) pet;
 	}
 
 }

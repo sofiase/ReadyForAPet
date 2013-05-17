@@ -11,6 +11,7 @@ import java.io.IOException;
 
 
 import Model.Dog;
+import Model.Pet;
 import Model.PetMood;
 import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
@@ -29,8 +30,8 @@ public class PetActivity extends Activity implements Serializable{
 
 
 	
-	//private static final long serialVersionUID = 1L;
-
+	private static final long serialVersionUID = 1L;
+	
 	TextView petgreeting, respondingOnEat, respondingOnPlay, respondingOnWalk;
 	Handler uiHandler = new Handler();
 
@@ -50,7 +51,6 @@ public class PetActivity extends Activity implements Serializable{
 			petgreeting.setVisibility(View.GONE);
 		}
 	};
-
 	/**
 	 * onCreate Method
 	 *
@@ -65,30 +65,12 @@ public class PetActivity extends Activity implements Serializable{
 		respondingOnEat = (TextView) findViewById(R.id.pet_response);
 		respondingOnEat.setVisibility(View.GONE);
 
-		String petName = dog.getName();
-		
+		Dog pet = (Dog) CreatePet.getPet();
+		String petName = pet.getName();
 
 		petgreeting = (TextView) findViewById(R.id.petgreeting);
+		petgreeting.setText("Hello, my name is " + petName + "!");		
 
-		if(petName != null){
-			petgreeting.setText("Hello, my name is " + petName + "!");		
-		}
-
-		else{
-			try{
-				BufferedReader inputReader = new BufferedReader(new InputStreamReader(openFileInput("pet_name_file")));
-				String earlierName; 
-				StringBuffer stringBuffer = new StringBuffer();
-				while((earlierName = inputReader.readLine()) != null){
-					stringBuffer.append(earlierName + "\n");
-				}
-			   petgreeting.setText("Hi" + stringBuffer.toString() + ", I have missed you!");
-			}
-			catch(IOException e){
-				e.printStackTrace();
-			}
-				
-		}
 
 		petgreeting = (TextView) findViewById(R.id.petgreeting);
 		uiHandler.postDelayed(makeTextGone, 5000);	
@@ -107,8 +89,8 @@ public class PetActivity extends Activity implements Serializable{
 			 */
 			@Override
 			public void onClick (View v){
-				respondingOnEat = (TextView) findViewById(R.id.pet_response);
 
+				respondingOnEat = (TextView) findViewById(R.id.pet_response);
 				respondingOnEat.setText(dog.eat());
 				respondingOnEat.setVisibility(View.VISIBLE);
 				//uiHandler.postDelayed(makeTextGone, 5000);	

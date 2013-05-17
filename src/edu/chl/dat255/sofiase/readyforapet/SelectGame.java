@@ -19,11 +19,9 @@ import android.widget.TextView;
 
 
 
-public class SelectGame extends Activity implements Serializable {// la till för att objektet måste vara serializible
-	//	private static final long serialVersionUID = 1L;
+public class SelectGame extends Activity implements Serializable {
+	private static final long serialVersionUID = 1L;
 	TextView failMessage;
-	//  String FILENAME = "pet_file.dat";// lgts till för nullpointerexep
-
 
 
 
@@ -49,18 +47,18 @@ public class SelectGame extends Activity implements Serializable {// la till för
 			 */
 			public void onClick (View v){
 
-				/*	try {
-					Pet.load("pet_file.dat",SelectGame.this);
+					try {
+					Pet.load("pet_file.dat", SelectGame.this);
 					} catch (FileNotFoundException e) {
-					System.out.print("File not found kastad i SelectGame");
+					System.out.print("File not found ");
 					e.printStackTrace();
 				} catch (IOException e) {
-					System.out.print("IO Exception kastad i SelectGame");
+					System.out.print("IO Exception ");
 					e.printStackTrace();
 				} catch (ClassNotFoundException e) {
-					System.out.print("Class not found exception kastad i SelectGame");
+					System.out.print("Class not found exception ");
 					e.printStackTrace();
-				} */
+				} 
 
 				if (CreatePet.getPet() != null){
 					startActivity(new Intent(SelectGame.this, PetActivity.class));		

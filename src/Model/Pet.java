@@ -16,10 +16,7 @@ import android.content.Context;
 
 public class Pet implements Serializable{
 
-	/**
-	 * 
-	 */
-	// private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	PetMood petMood = new PetMood();
 	private int hungerCounter;
 	private int walkCounter;
@@ -99,25 +96,37 @@ public class Pet implements Serializable{
 
 	}
 
-	/*public void save(String FILENAME, Context context) throws FileNotFoundException, IOException{
+	/**
+	 * Saves an instance of the class Pet and...
+	 * 
+	 * @param FILENAME
+	 * @param context
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public void save(String FILENAME, Context context) throws FileNotFoundException, IOException{
 		FileOutputStream fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
 		ObjectOutputStream savedPet = new ObjectOutputStream(fos);
-		savedPet.writeObject(context.getApplicationContext());
+		savedPet.writeObject(this);
 		savedPet.close();
 	}
 
-	public static Pet load(String FILENAME, Context context) throws FileNotFoundException, IOException, ClassNotFoundException{
+	/**
+	 * Loads the saved instance of the class Pet and...
+	 * 
+	 * @param FILENAME
+	 * @param context
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
+	public static void load(String FILENAME, Context context) throws FileNotFoundException, IOException, ClassNotFoundException{
 		FileInputStream fis = context.openFileInput(FILENAME);
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		Pet pet = (Pet) ois.readObject();
 		ois.close();
 		CreatePet.setPet(pet);
-		return pet;
-	} */
+	}
 
 	}
-	
-	
-
-
 
