@@ -81,8 +81,10 @@ public class PetActivity extends Activity implements Serializable{
 		String petName = pet.getName();
 
 
+
 		//petResponse = (TextView) findViewById(R.id.petresponse);
 		petResponse.setText("Hello, my name is " + petName + "!");		
+
 
 
 			
@@ -115,8 +117,7 @@ public class PetActivity extends Activity implements Serializable{
 			
 			
 				
-				
-				
+
 
 				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
