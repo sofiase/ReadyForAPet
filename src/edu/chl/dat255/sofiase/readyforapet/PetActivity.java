@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 public class PetActivity extends Activity {
 
-	TextView petResponse; //respondingOnEat, respondingOnPlay, respondingOnWalk;
+	TextView petResponse; 
 	Handler uiHandler = new Handler();
 
 	private ProgressBar moodBar;
@@ -70,7 +70,7 @@ public class PetActivity extends Activity {
 		}
 
 		petResponse = (TextView) findViewById(R.id.petresponse);
-		petResponse.setVisibility(View.VISIBLE);//ska den sitta här?
+		petResponse.setVisibility(View.VISIBLE);
 		uiHandler.postDelayed(makeTextGone, 2000);	
 
 		moodBar = (ProgressBar) findViewById(R.id.moodbar);
