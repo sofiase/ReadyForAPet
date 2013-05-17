@@ -2,16 +2,20 @@ package edu.chl.dat255.sofiase.readyforapet;
 
 import java.io.Serializable;
 
+import Model.Dog;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class MainActivity extends Activity implements Serializable{
+public class MainActivity extends Activity{// implements Serializable
 
+	
 	/**
 	 * 
 	 */
@@ -26,7 +30,6 @@ public class MainActivity extends Activity implements Serializable{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
 		
 		Button play = (Button) findViewById(R.id.play);
 		play.setOnClickListener(new OnClickListener() {
@@ -35,7 +38,7 @@ public class MainActivity extends Activity implements Serializable{
 				startActivity(new Intent(MainActivity.this, SelectGame.class));
 			}
 		}
-				);
+		);
 
 
 		Button settings = (Button) findViewById(R.id.settings);
@@ -65,11 +68,12 @@ public class MainActivity extends Activity implements Serializable{
 				System.exit(0);
 			}
 		}
-				);
+		);
 		
 
 
 	}	
+
 
 	/**
 	 * Inflate the menu; this adds items to the action bar if it is present

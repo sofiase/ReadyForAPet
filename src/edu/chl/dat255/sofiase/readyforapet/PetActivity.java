@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class PetActivity extends Activity { //implements Serializable
 
 	TextView petResponse; 
 	Handler uiHandler = new Handler();
+	ImageView dogBiscuit;//kolla
 
 	private ProgressBar moodBar;
 
@@ -48,6 +50,8 @@ public class PetActivity extends Activity { //implements Serializable
 		@Override
 		public void run(){
 			petResponse.setVisibility(View.GONE);
+			dogBiscuit.setVisibility(View.GONE);
+			
 		}
 	};
 
@@ -65,6 +69,8 @@ public class PetActivity extends Activity { //implements Serializable
 		petResponse = (TextView) findViewById(R.id.petresponse);//tror att detta behšvs, minns inte testa
 		petResponse.setVisibility(View.GONE);//samma
 
+		dogBiscuit = (ImageView) findViewById(R.id.dogbiscuit);//tror att detta behšvs, minns inte testa
+		dogBiscuit.setVisibility(View.GONE);//samma
 
 		String petName = dog.getName();
 		
@@ -119,7 +125,13 @@ public class PetActivity extends Activity { //implements Serializable
 				petResponse = (TextView) findViewById(R.id.petresponse);
 				petResponse.setText(dog.eat());
 				petResponse.setVisibility(View.VISIBLE);
-				uiHandler.postDelayed(makeTextGone, 2000);	
+				uiHandler.postDelayed(makeTextGone, 2000);
+				dogBiscuit.setVisibility(View.VISIBLE);//temporary solution must make picture dissapear when dog is full
+				uiHandler.postDelayed(makeTextGone, 2000);
+			
+			
+				
+				
 				
 				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
