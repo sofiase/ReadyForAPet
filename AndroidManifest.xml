@@ -9,7 +9,6 @@
         android:minSdkVersion="10"
         android:targetSdkVersion="17" />
 
-    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -24,19 +23,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity android:name="edu.chl.dat255.sofiase.readyforapet.SelectGame" />
         <activity android:name="edu.chl.dat255.sofiase.readyforapet.Settings" />
         <activity android:name="edu.chl.dat255.sofiase.readyforapet.CreatePet" />
         <activity
-            android:name="edu.chl.dat255.sofiase.readyforapet.PetActivity" 
+            android:name="edu.chl.dat255.sofiase.readyforapet.PetActivity"
             android:label="@string/pet_name"
-            android:parentActivityName="edu.chl.dat255.sofiase.readyforapet.CreatePet">
+            android:parentActivityName="edu.chl.dat255.sofiase.readyforapet.CreatePet" >
             <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="edu.chl.dat255.sofiase.readyforapet.createpet" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.chl.dat255.sofiase.readyforapet.createpet" />
         </activity>
-
+        <activity
+            android:name="edu.chl.dat255.sofiase.readyforapet.Quit"
+            android:label="@string/title_activity_quit" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,14 +1,19 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
 
+//import java.io.FileNotFoundException;
+//import java.io.IOException;
+//import java.io.Serializable;
+
+//import Model.Pet;
+
+//import Model.Dog;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 
 import Model.Pet;
-
-import Model.Dog;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,9 +24,24 @@ import android.widget.TextView;
 
 
 
+
 public class SelectGame extends Activity implements Serializable {
 	private static final long serialVersionUID = 1L;
-	TextView failMessage;
+	
+
+	TextView warningMessage;
+	Button yes, no;
+	
+	Runnable makeTextGone = new Runnable(){
+
+		@Override
+		public void run(){
+			yes.setVisibility(View.GONE);
+			no.setVisibility(View.GONE);
+			warningMessage.setVisibility(View.GONE);
+		}
+	};
+
 
 
 
@@ -34,6 +54,12 @@ public class SelectGame extends Activity implements Serializable {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
 		setContentView(R.layout.selectgame);
+		
+		Button yes = (Button) findViewById(R.id.yes);
+		yes.setVisibility(View.GONE);
+		
+		Button no = (Button) findViewById(R.id.no);
+		no.setVisibility(View.GONE);
 
 
 		//The continue button reacts to a click and starts PetActivity
@@ -64,8 +90,8 @@ public class SelectGame extends Activity implements Serializable {
 					startActivity(new Intent(SelectGame.this, PetActivity.class));		
 				}
 				else{
-					failMessage = (TextView) findViewById(R.id.failmessage);
-					failMessage.setText("Create a pet first!");
+					warningMessage = (TextView) findViewById(R.id.warningmessage);
+					warningMessage.setText("Create a pet first!");
 
 				}
 			}
@@ -74,7 +100,7 @@ public class SelectGame extends Activity implements Serializable {
 				);
 
 
-		//To send the button CreateNewPet to the activity CreatePet
+		//What happens when you button create new pet is pushed
 		Button createNewPet = (Button) findViewById(R.id.createnewpet);
 		createNewPet.setOnClickListener(new OnClickListener() {	
 			/**
@@ -83,9 +109,38 @@ public class SelectGame extends Activity implements Serializable {
 			 * @param v - View
 			 */
 			public void onClick (View v){
-				startActivity(new Intent(SelectGame.this, CreatePet.class));
+				if (CreatePet.getPet() != null){
+					
+					warningMessage = (TextView) findViewById(R.id.warningmessage);
+					warningMessage.setText("Are you sure you want to create a new pet and delete your old one?");
+					
+					Button yes = (Button) findViewById(R.id.yes);
+					yes.setVisibility(View.VISIBLE);
+					yes.setOnClickListener(new OnClickListener() {
+				
+						public void onClick (View v){
+							startActivity(new Intent(SelectGame.this, CreatePet.class));
+							//delete old pet from file here later
+							}
+						}
+					);
+					Button no = (Button) findViewById(R.id.no);
+					no.setVisibility(View.VISIBLE);
+					no.setOnClickListener(new OnClickListener() {
+						
+						public void onClick (View v){
+							startActivity(new Intent(SelectGame.this, SelectGame.class));//kan man g�ra s�? man kan inte no yes och no annars utan att def knapparna igen?
+						}
+					}
+					);
+				}
+				else{
+					startActivity(new Intent(SelectGame.this,CreatePet.class));
+				}
+						
+				
 			}
 		}
-				);
+		);
 	}
 }

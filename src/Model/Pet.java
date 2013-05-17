@@ -7,9 +7,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-
+import java.text.DateFormat.Field;
+import java.util.Calendar;
 
 import edu.chl.dat255.sofiase.readyforapet.CreatePet;
+
 import android.content.Context;
 
 
@@ -21,7 +23,6 @@ public class Pet implements Serializable{
 	private int hungerCounter;
 	private int walkCounter;
 	private int playCounter;
-
 
 
 	/**
@@ -42,7 +43,6 @@ public class Pet implements Serializable{
 		else{
 			return "I am full";
 		}
-
 	}
 
 	/**
@@ -67,7 +67,6 @@ public class Pet implements Serializable{
 		else{
 			return "I'm tired! I want to rest!";
 		}
-
 	}
 
 	/**
@@ -93,6 +92,7 @@ public class Pet implements Serializable{
 		else{
 			return "I'm tired! I want to rest!";
 		}
+
 
 	}
 
@@ -129,4 +129,11 @@ public class Pet implements Serializable{
 	}
 
 	}
+
+	
+	
+	
+	
+
+
 

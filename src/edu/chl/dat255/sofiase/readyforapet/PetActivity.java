@@ -26,13 +26,18 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class PetActivity extends Activity implements Serializable{
+public class PetActivity extends Activity implements Serializable{ 
 
 
 	
+
 	private static final long serialVersionUID = 1L;
 	
 	TextView petgreeting, respondingOnEat, respondingOnPlay, respondingOnWalk;
+
+
+	TextView petResponse; 
+
 	Handler uiHandler = new Handler();
 
 	private ProgressBar moodBar;
@@ -48,7 +53,7 @@ public class PetActivity extends Activity implements Serializable{
 
 		@Override
 		public void run(){
-			petgreeting.setVisibility(View.GONE);
+			petResponse.setVisibility(View.GONE);
 		}
 	};
 	/**
@@ -62,18 +67,23 @@ public class PetActivity extends Activity implements Serializable{
 		setContentView(R.layout.petactivity);
 		
 
-		respondingOnEat = (TextView) findViewById(R.id.pet_response);
-		respondingOnEat.setVisibility(View.GONE);
+		petResponse = (TextView) findViewById(R.id.petresponse);//tror att detta beh�vs, minns inte testa
+		petResponse.setVisibility(View.GONE);//samma
+
 
 		Dog pet = (Dog) CreatePet.getPet();
 		String petName = pet.getName();
 
-		petgreeting = (TextView) findViewById(R.id.petgreeting);
-		petgreeting.setText("Hello, my name is " + petName + "!");		
+
+		//petResponse = (TextView) findViewById(R.id.petresponse);
+		petResponse.setText("Hello, my name is " + petName + "!");		
 
 
-		petgreeting = (TextView) findViewById(R.id.petgreeting);
-		uiHandler.postDelayed(makeTextGone, 5000);	
+			
+
+		//petResponse = (TextView) findViewById(R.id.petresponse);
+		petResponse.setVisibility(View.VISIBLE);
+		uiHandler.postDelayed(makeTextGone, 2000);	
 
 		moodBar = (ProgressBar) findViewById(R.id.moodbar);
 		moodBar.setProgress(petMood.getSumMood());
@@ -90,10 +100,11 @@ public class PetActivity extends Activity implements Serializable{
 			@Override
 			public void onClick (View v){
 
-				respondingOnEat = (TextView) findViewById(R.id.pet_response);
-				respondingOnEat.setText(dog.eat());
-				respondingOnEat.setVisibility(View.VISIBLE);
-				//uiHandler.postDelayed(makeTextGone, 5000);	
+				petResponse = (TextView) findViewById(R.id.petresponse);
+				petResponse.setText(dog.eat());
+				petResponse.setVisibility(View.VISIBLE);
+				uiHandler.postDelayed(makeTextGone, 2000);	
+				
 
 				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
@@ -115,10 +126,10 @@ public class PetActivity extends Activity implements Serializable{
 			@Override
 			public void onClick (View v){
 
-				respondingOnPlay = (TextView) findViewById(R.id.pet_response);
-				respondingOnPlay.setText(dog.play());
-				respondingOnPlay.setVisibility(View.VISIBLE);
-				//uiHandler.postDelayed(makeTextGone, 5000);
+				petResponse = (TextView) findViewById(R.id.petresponse);
+				petResponse.setText(dog.play());
+				petResponse.setVisibility(View.VISIBLE);
+				uiHandler.postDelayed(makeTextGone, 2000);
 
 				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
@@ -140,10 +151,10 @@ public class PetActivity extends Activity implements Serializable{
 			@Override
 			public void onClick (View v){
 
-				respondingOnWalk = (TextView) findViewById(R.id.pet_response);
-				respondingOnWalk.setText(dog.walk());
-				respondingOnWalk.setVisibility(View.VISIBLE);
-				//uiHandler.postDelayed(makeTextGone, 5000);
+				petResponse = (TextView) findViewById(R.id.petresponse);
+				petResponse.setText(dog.walk());
+				petResponse.setVisibility(View.VISIBLE);
+				uiHandler.postDelayed(makeTextGone, 2000);
 
 				// Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
