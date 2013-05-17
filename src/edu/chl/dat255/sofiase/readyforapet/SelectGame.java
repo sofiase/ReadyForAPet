@@ -9,6 +9,11 @@ package edu.chl.dat255.sofiase.readyforapet;
 
 //import Model.Dog;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.Serializable;
+
+import Model.Pet;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +24,11 @@ import android.widget.TextView;
 
 
 
-public class SelectGame extends Activity {//implements Serializable
+
+public class SelectGame extends Activity implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+
 	TextView warningMessage;
 	Button yes, no;
 	
@@ -32,6 +41,7 @@ public class SelectGame extends Activity {//implements Serializable
 			warningMessage.setVisibility(View.GONE);
 		}
 	};
+
 
 
 
@@ -63,18 +73,18 @@ public class SelectGame extends Activity {//implements Serializable
 			 */
 			public void onClick (View v){
 
-				/*	try {
-					Pet.load("pet_file.dat",SelectGame.this);
+					try {
+					Pet.load("pet_file.dat", SelectGame.this);
 					} catch (FileNotFoundException e) {
-					System.out.print("File not found kastad i SelectGame");
+					System.out.print("File not found ");
 					e.printStackTrace();
 				} catch (IOException e) {
-					System.out.print("IO Exception kastad i SelectGame");
+					System.out.print("IO Exception ");
 					e.printStackTrace();
 				} catch (ClassNotFoundException e) {
-					System.out.print("Class not found exception kastad i SelectGame");
+					System.out.print("Class not found exception ");
 					e.printStackTrace();
-				} */
+				} 
 
 				if (CreatePet.getPet() != null){
 					startActivity(new Intent(SelectGame.this, PetActivity.class));		
@@ -119,7 +129,7 @@ public class SelectGame extends Activity {//implements Serializable
 					no.setOnClickListener(new OnClickListener() {
 						
 						public void onClick (View v){
-							startActivity(new Intent(SelectGame.this, SelectGame.class));//kan man gšra sŒ? man kan inte no yes och no annars utan att def knapparna igen?
+							startActivity(new Intent(SelectGame.this, SelectGame.class));//kan man gï¿½ra sï¿½? man kan inte no yes och no annars utan att def knapparna igen?
 						}
 					}
 					);

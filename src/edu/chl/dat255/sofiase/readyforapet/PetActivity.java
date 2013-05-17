@@ -11,6 +11,7 @@ import java.io.IOException;
 
 
 import Model.Dog;
+import Model.Pet;
 import Model.PetMood;
 import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
@@ -26,13 +27,18 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class PetActivity extends Activity { //implements Serializable
+public class PetActivity extends Activity implements Serializable{ 
 
 
 	
-	//private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 1L;
+	
+	TextView petgreeting, respondingOnEat, respondingOnPlay, respondingOnWalk;
+
 
 	TextView petResponse; 
+
 	Handler uiHandler = new Handler();
 	ImageView dogBiscuit;//kolla
 
@@ -54,7 +60,6 @@ public class PetActivity extends Activity { //implements Serializable
 			
 		}
 	};
-
 	/**
 	 * onCreate Method
 	 *
@@ -66,45 +71,23 @@ public class PetActivity extends Activity { //implements Serializable
 		setContentView(R.layout.petactivity);
 		
 
-		petResponse = (TextView) findViewById(R.id.petresponse);//tror att detta behšvs, minns inte testa
+		petResponse = (TextView) findViewById(R.id.petresponse);//tror att detta behï¿½vs, minns inte testa
 		petResponse.setVisibility(View.GONE);//samma
 
 		dogBiscuit = (ImageView) findViewById(R.id.dogbiscuit);//tror att detta behšvs, minns inte testa
 		dogBiscuit.setVisibility(View.GONE);//samma
 
-		String petName = dog.getName();
-		
+		Dog pet = (Dog) CreatePet.getPet();
+		String petName = pet.getName();
 
-		petResponse = (TextView) findViewById(R.id.petresponse);
-		
 
-		if(petName != null){
-			petResponse.setText("Hello, my name is " + petName + "!");	
+		//petResponse = (TextView) findViewById(R.id.petresponse);
+		petResponse.setText("Hello, my name is " + petName + "!");		
+
+
 			
-		}
 
-		else{
-
-			petResponse.setText("Hi buddy, I've missed you!");	
-			/**
-			 * try{
-				BufferedReader inputReader = new BufferedReader(new InputStreamReader(openFileInput("pet_name_file")));
-				String earlierName; 
-				StringBuffer stringBuffer = new StringBuffer();
-				while((earlierName = inputReader.readLine()) != null){
-					stringBuffer.append(earlierName + "\n");
-				}
-			   petgreeting.setText("Hi" + stringBuffer.toString() + ", I have missed you!");
-			}
-			catch(IOException e){
-				e.printStackTrace();
-			}
-				
-			 */
-
-		}
-
-		petResponse = (TextView) findViewById(R.id.petresponse);
+		//petResponse = (TextView) findViewById(R.id.petresponse);
 		petResponse.setVisibility(View.VISIBLE);
 		uiHandler.postDelayed(makeTextGone, 2000);	
 
@@ -122,6 +105,7 @@ public class PetActivity extends Activity { //implements Serializable
 			 */
 			@Override
 			public void onClick (View v){
+
 				petResponse = (TextView) findViewById(R.id.petresponse);
 				petResponse.setText(dog.eat());
 				petResponse.setVisibility(View.VISIBLE);
@@ -133,6 +117,7 @@ public class PetActivity extends Activity { //implements Serializable
 				
 				
 				
+
 				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
 				moodBar.setProgress(petMood.getSumMood());

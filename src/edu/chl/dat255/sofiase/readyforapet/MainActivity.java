@@ -19,7 +19,7 @@ public class MainActivity extends Activity{// implements Serializable
 	/**
 	 * 
 	 */
-	//private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Method onCreate for the MainActivity class

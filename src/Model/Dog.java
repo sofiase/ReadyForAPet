@@ -3,12 +3,11 @@ package Model;
 import java.io.Serializable;
 
 
+
+
 public class Dog extends Pet implements Serializable {
 
-	/**
-	 * 
-	 */
-	//private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	private String name;
 
 	/**
@@ -28,6 +27,15 @@ public class Dog extends Pet implements Serializable {
 	 */
 	public String getName() {
 		return name;
+	}
+	
+	/**
+	 * Method that makes the dog name available to all classes.
+	 * 
+	 * @return name - String
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	// ... and additional functions that only applies to dogs
