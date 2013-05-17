@@ -1,8 +1,14 @@
 package Model;
 
+import java.io.Serializable;
 
-public class PetMood {
 
+public class PetMood implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static int foodMood = 2;
 	private static int playMood = 2;
 
