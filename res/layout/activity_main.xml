@@ -9,17 +9,6 @@
     android:background="@drawable/background"
     tools:context=".MainActivity" >
 
-   <TextView
-        android:id="@+id/welcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:text="WELCOME!"
-        android:textAppearance="?android:attr/textAppearanceLarge" 
-        />
-
     <Button
         android:id="@+id/settings"
         android:layout_width="200dp"
@@ -52,5 +41,14 @@
         android:text="Quit game" 
         android:background="@drawable/buttonshape"
          />
+
+    <ImageView
+        android:id="@+id/dogpicture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/play"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="36dp"
+        android:src="@drawable/dogpicture" />
 
 </RelativeLayout>

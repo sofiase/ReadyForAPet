@@ -28,7 +28,6 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 	/**
 	 * onCreate Method
 	 * 
-	 * eftersom att hunden skapas här och vi inte har SPARAT spelet så fungerar inte eat() när man går via Continue game vi måste lösa så att spelet sparas!
 	 *
 	 * @param savedInstanceState - Bundle
 	 */

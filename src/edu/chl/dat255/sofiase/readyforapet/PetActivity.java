@@ -1,14 +1,20 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 
+import java.io.IOException;
+
+
 import Model.Dog;
 import Model.PetMood;
 import android.app.Activity;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NavUtils;
@@ -21,11 +27,11 @@ import android.widget.TextView;
 
 public class PetActivity extends Activity implements Serializable{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	TextView petgreeting, respondingOnEat, respondingOnPlay;
+
+	
+	//private static final long serialVersionUID = 1L;
+
+	TextView petgreeting, respondingOnEat, respondingOnPlay, respondingOnWalk;
 	Handler uiHandler = new Handler();
 
 	private ProgressBar moodBar;
@@ -33,7 +39,9 @@ public class PetActivity extends Activity implements Serializable{
 	private PetMood petMood = new PetMood();
 	private Dog dog = (Dog) CreatePet.getPet();
 
-
+	//Variables for playing music in the Pet Activity
+	private MediaPlayer player;
+	private AssetFileDescriptor afd;
 
 	Runnable makeTextGone = new Runnable(){
 
@@ -85,6 +93,8 @@ public class PetActivity extends Activity implements Serializable{
 		petgreeting = (TextView) findViewById(R.id.petgreeting);
 		uiHandler.postDelayed(makeTextGone, 5000);	
 
+		moodBar = (ProgressBar) findViewById(R.id.moodbar);
+		moodBar.setProgress(petMood.getSumMood());
 
 		// Making the eat button
 		Button eat = (Button) findViewById(R.id.eat);
@@ -103,7 +113,7 @@ public class PetActivity extends Activity implements Serializable{
 				respondingOnEat.setVisibility(View.VISIBLE);
 				//uiHandler.postDelayed(makeTextGone, 5000);	
 
-				// Updating the moodbar
+				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
 				moodBar.setProgress(petMood.getSumMood());
 			}
@@ -114,8 +124,6 @@ public class PetActivity extends Activity implements Serializable{
 		// Making the play button
 		Button play = (Button) findViewById(R.id.play);
 		play.setOnClickListener(new OnClickListener() {
-
-
 
 			/**
 			 * Making the dog feel happier when it plays
@@ -130,13 +138,84 @@ public class PetActivity extends Activity implements Serializable{
 				respondingOnPlay.setVisibility(View.VISIBLE);
 				//uiHandler.postDelayed(makeTextGone, 5000);
 
-				// Updating the moodbar
+				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
 				moodBar.setProgress(petMood.getSumMood());
 			}
 		}
 				);			
 
+
+		// Making the walk button
+		Button walk = (Button) findViewById(R.id.walk);
+		walk.setOnClickListener(new OnClickListener() {
+
+			/**
+			 * Making the dog feel happier when it plays
+			 *
+			 * @param v - View
+			 */
+			@Override
+			public void onClick (View v){
+
+				respondingOnWalk = (TextView) findViewById(R.id.pet_response);
+				respondingOnWalk.setText(dog.walk());
+				respondingOnWalk.setVisibility(View.VISIBLE);
+				//uiHandler.postDelayed(makeTextGone, 5000);
+
+				// Updating the moodbar
+				moodBar = (ProgressBar) findViewById(R.id.moodbar);
+				moodBar.setProgress(petMood.getSumMood());
+			}
+		}
+				);
+
+		//Music
+		try {
+			afd = getAssets().openFd("readyforapetsong4.m4v");
+			player = new MediaPlayer();
+
+			player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),afd.getLength());
+
+			player.setLooping(true);
+			player.prepare();
+			player.start();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * Method onPause for the activity
+	 * 
+	 * Pauses music player when pausing activity
+	 */
+	public void onPause() {
+		super.onPause();
+		player.pause();
+	}
+	
+	/**
+	 * Method onResume for the activity
+	 * 
+	 * Starts music player when reuming activity
+	 */
+	public void onResume() {
+		super.onResume();
+		player.start();
+	}
+
+	/**
+	 * Method onStop for the activity
+	 * 
+	 * Stops music when exiting activity
+	 */
+	protected void onStop() {
+		super.onStop();
+		player.stop();
+		player = null;
 	}
 
 	/**
@@ -155,10 +234,3 @@ public class PetActivity extends Activity implements Serializable{
 	}
 
 }
-
-
-
-
-
-
-

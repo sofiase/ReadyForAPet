@@ -31,5 +31,6 @@ public class Dog extends Pet implements Serializable {
 	}
 
 	// ... and additional functions that only applies to dogs
+	
 
 }
