@@ -95,7 +95,7 @@ public class SelectGame extends Activity {
 					no.setOnClickListener(new OnClickListener() {
 						
 						public void onClick (View v){
-							startActivity(new Intent(SelectGame.this, CreatePet.class));
+							startActivity(new Intent(SelectGame.this, SelectGame.class));//kan man göra så? man kan inte no yes och no annars utan att def knapparna igen?
 						}
 					}
 					);
