@@ -21,9 +21,9 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 
 
 	private static final long serialVersionUID = 1L;
-	String petName; 
+	private String petName; 
 	private static Dog dog;
-	TextView chooseAnotherName;
+	private TextView chooseAnotherName;
 
 	Runnable makeTextGone = new Runnable(){
 

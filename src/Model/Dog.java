@@ -36,9 +36,6 @@ public class Dog extends Pet implements Serializable {
 	 */
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	// ... and additional functions that only applies to dogs
-	
+	}	
 
 }

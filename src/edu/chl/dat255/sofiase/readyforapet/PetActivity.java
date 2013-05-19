@@ -2,16 +2,10 @@ package edu.chl.dat255.sofiase.readyforapet;
 
 
 
-import java.io.BufferedReader;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Serializable;
-
-import java.io.IOException;
-
-
 import Model.Dog;
-import Model.Pet;
 import Model.PetMood;
 import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
@@ -31,24 +25,19 @@ public class PetActivity extends Activity implements Serializable{
 
 
 	private static final long serialVersionUID = 1L;
-	
-	TextView petgreeting, respondingOnEat, respondingOnPlay, respondingOnWalk;
-	TextView petResponse; 
-
-	Handler uiHandler = new Handler();
-	ImageView dogBiscuit;//kolla
-
+	private TextView petResponse; 
+	private Handler uiHandler = new Handler();
+	private ImageView dogBiscuit;//kolla  TODO
 	private ProgressBar moodBar;
-
 	private PetMood petMood = new PetMood();
 	private Dog dog = (Dog) CreatePet.getPet();
 
-	//Variables for playing music in the Pet Activity
+	//Variables for playing music in Pet Activity
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;
 
 	Runnable makeTextGone = new Runnable(){
-		
+
 		/**
 		 * run method
 		 * 
@@ -57,7 +46,7 @@ public class PetActivity extends Activity implements Serializable{
 		public void run(){
 			petResponse.setVisibility(View.GONE);
 			dogBiscuit.setVisibility(View.GONE);
-			
+
 		}
 	};
 	/**
@@ -69,7 +58,7 @@ public class PetActivity extends Activity implements Serializable{
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.petactivity);
-		
+
 
 		petResponse = (TextView) findViewById(R.id.petresponse);//tror att detta beh�vs, minns inte testa
 		petResponse.setVisibility(View.GONE);//samma
@@ -107,8 +96,8 @@ public class PetActivity extends Activity implements Serializable{
 				uiHandler.postDelayed(makeTextGone, 2000);
 				dogBiscuit.setVisibility(View.VISIBLE);//temporary solution must make picture dissapear when dog is full
 				uiHandler.postDelayed(makeTextGone, 2000);
-			
-			
+
+
 
 				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
@@ -193,7 +182,7 @@ public class PetActivity extends Activity implements Serializable{
 		super.onPause();
 		player.pause();
 	}
-	
+
 	/**
 	 * Method onResume for the activity
 	 * 

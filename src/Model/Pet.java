@@ -7,8 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.text.DateFormat.Field;
-import java.util.Calendar;
+
 
 import edu.chl.dat255.sofiase.readyforapet.CreatePet;
 
@@ -19,7 +18,7 @@ import android.content.Context;
 public class Pet implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	PetMood petMood = new PetMood();
+	private PetMood petMood = new PetMood();
 	private int hungerCounter;
 	private int walkCounter;
 	private int playCounter;
@@ -31,9 +30,7 @@ public class Pet implements Serializable{
 	 * @return String with the pet's reaction 
 	 */
 	public String eat() {
-		//walkCounter = petMood.getWalkMood();
 		hungerCounter = petMood.getFoodMood();
-		//playCounter = petMood.getPlayMood();
 		if (hungerCounter < 5) {
 			hungerCounter = hungerCounter + 1;
 			petMood.setFoodMood(hungerCounter);
