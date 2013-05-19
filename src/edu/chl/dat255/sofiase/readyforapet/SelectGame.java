@@ -1,13 +1,6 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
 
-//import java.io.FileNotFoundException;
-//import java.io.IOException;
-//import java.io.Serializable;
-
-//import Model.Pet;
-
-//import Model.Dog;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -34,6 +27,12 @@ public class SelectGame extends Activity implements Serializable {
 	
 	Runnable makeTextGone = new Runnable(){
 
+		
+		/**
+		 * run Method
+		 * 
+		 * TODO:add what the method does
+		 */
 		@Override
 		public void run(){
 			yes.setVisibility(View.GONE);

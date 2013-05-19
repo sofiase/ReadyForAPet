@@ -30,13 +30,9 @@ import android.widget.TextView;
 public class PetActivity extends Activity implements Serializable{ 
 
 
-	
-
 	private static final long serialVersionUID = 1L;
 	
 	TextView petgreeting, respondingOnEat, respondingOnPlay, respondingOnWalk;
-
-
 	TextView petResponse; 
 
 	Handler uiHandler = new Handler();
@@ -52,7 +48,11 @@ public class PetActivity extends Activity implements Serializable{
 	private AssetFileDescriptor afd;
 
 	Runnable makeTextGone = new Runnable(){
-
+		
+		/**
+		 * run method
+		 * 
+		 */
 		@Override
 		public void run(){
 			petResponse.setVisibility(View.GONE);
@@ -74,22 +74,13 @@ public class PetActivity extends Activity implements Serializable{
 		petResponse = (TextView) findViewById(R.id.petresponse);//tror att detta behï¿½vs, minns inte testa
 		petResponse.setVisibility(View.GONE);//samma
 
-		dogBiscuit = (ImageView) findViewById(R.id.dogbiscuit);//tror att detta behšvs, minns inte testa
+		dogBiscuit = (ImageView) findViewById(R.id.dogbiscuit);//tror att detta behï¿½vs, minns inte testa
 		dogBiscuit.setVisibility(View.GONE);//samma
 
 		Dog pet = (Dog) CreatePet.getPet();
 		String petName = pet.getName();
 
-
-
-		//petResponse = (TextView) findViewById(R.id.petresponse);
 		petResponse.setText("Hello, my name is " + petName + "!");		
-
-
-
-			
-
-		//petResponse = (TextView) findViewById(R.id.petresponse);
 		petResponse.setVisibility(View.VISIBLE);
 		uiHandler.postDelayed(makeTextGone, 2000);	
 
@@ -101,7 +92,9 @@ public class PetActivity extends Activity implements Serializable{
 		eat.setOnClickListener(new OnClickListener() {
 
 			/**
-			 * Making the dog feel less hungry if it is hungry and else give the message i'm full
+			 * Making the dog feel less hungry if it is hungry and 
+			 * else give the message i'm full
+			 * Also shows a picture of a bone when eating
 			 *
 			 * @param v - View
 			 */
@@ -116,8 +109,6 @@ public class PetActivity extends Activity implements Serializable{
 				uiHandler.postDelayed(makeTextGone, 2000);
 			
 			
-				
-
 
 				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
@@ -157,7 +148,7 @@ public class PetActivity extends Activity implements Serializable{
 		walk.setOnClickListener(new OnClickListener() {
 
 			/**
-			 * Making the dog feel happier when it plays
+			 * Making the dog feel happier when it walks
 			 *
 			 * @param v - View
 			 */
@@ -224,10 +215,11 @@ public class PetActivity extends Activity implements Serializable{
 		player = null;
 	}
 
+	//TODO Add better comments for this method
 	/**
-	 * Making the dog feel less hungry if it is hungry and else give the message i'm full
-	 *
-	 * @param item - MenuItem
+	 * Method onOptionsItemSelected 
+	 * 
+	 * How the app navigates when clicking the backward button (OBS Vet ej om helt korrekt)
 	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
