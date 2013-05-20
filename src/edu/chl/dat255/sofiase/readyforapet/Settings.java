@@ -1,5 +1,6 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -7,6 +8,7 @@ import android.view.MenuItem;
 
 public class Settings extends Activity {
 	
+
 	/**
 	 * onCreate method
 	 * 

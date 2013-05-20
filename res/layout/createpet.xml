@@ -48,4 +48,15 @@
         android:text="Name your pet"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+    <TextView
+        android:id="@+id/chooseanothername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_pet_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:text = "Choose another name"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor ="#000000" />
+
 </RelativeLayout>

@@ -1,8 +1,9 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
 
-import java.io.IOException;
 
+import java.io.IOException;
+import java.io.Serializable;
 import Model.Dog;
 import Model.PetMood;
 import android.app.Activity;
@@ -16,29 +17,39 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class PetActivity extends Activity {
+public class PetActivity extends Activity implements Serializable{ 
 
-	TextView petgreeting, respondingOnEat, respondingOnPlay, respondingOnWalk;
-	Handler uiHandler = new Handler();
 
+	private static final long serialVersionUID = 1L;
+	private TextView petResponse; 
+	private Handler uiHandler = new Handler();
+	private ImageView dogBiscuit;//kolla  TODO
 	private ProgressBar moodBar;
 	private PetMood petMood = new PetMood();
 	private Dog dog = (Dog) CreatePet.getPet();
 
+
+	//Variables for playing music in Pet Activity
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;
 
 	Runnable makeTextGone = new Runnable(){
 
+		/**
+		 * run method
+		 * 
+		 */
 		@Override
 		public void run(){
-			petgreeting.setVisibility(View.GONE);
+			petResponse.setVisibility(View.GONE);
+			dogBiscuit.setVisibility(View.GONE);
+
 		}
 	};
-
 	/**
 	 * onCreate Method
 	 *
@@ -49,23 +60,19 @@ public class PetActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.petactivity);
 
-		respondingOnEat = (TextView) findViewById(R.id.pet_response);
-		respondingOnEat.setVisibility(View.GONE);
 
-		String petName = dog.getName();
+		petResponse = (TextView) findViewById(R.id.petresponse);//tror att detta beh�vs, minns inte testa
+		petResponse.setVisibility(View.GONE);//samma
 
-		petgreeting = (TextView) findViewById(R.id.petgreeting);
+		dogBiscuit = (ImageView) findViewById(R.id.dogbiscuit);//tror att detta beh�vs, minns inte testa
+		dogBiscuit.setVisibility(View.GONE);//samma
 
-		if(petName != null){
-			petgreeting.setText("Hello, my name is " + petName + "!");		
-		}
+		Dog pet = (Dog) CreatePet.getPet();
+		String petName = pet.getName();
 
-		else{
-			petgreeting.setText("Hi buddy, I've missed you!");	
-		}
-
-		petgreeting = (TextView) findViewById(R.id.petgreeting);
-		uiHandler.postDelayed(makeTextGone, 5000);	
+		petResponse.setText("Hello, my name is " + petName + "!");		
+		petResponse.setVisibility(View.VISIBLE);
+		uiHandler.postDelayed(makeTextGone, 2000);	
 
 		moodBar = (ProgressBar) findViewById(R.id.moodbar);
 		moodBar.setProgress(petMood.getSumMood());
@@ -75,17 +82,23 @@ public class PetActivity extends Activity {
 		eat.setOnClickListener(new OnClickListener() {
 
 			/**
-			 * Making the dog feel less hungry if it is hungry and else give the message i'm full
+			 * Making the dog feel less hungry if it is hungry and 
+			 * else give the message i'm full
+			 * Also shows a picture of a bone when eating
 			 *
 			 * @param v - View
 			 */
 			@Override
 			public void onClick (View v){
-				respondingOnEat = (TextView) findViewById(R.id.pet_response);
 
-				respondingOnEat.setText(dog.eat());
-				respondingOnEat.setVisibility(View.VISIBLE);
-				//uiHandler.postDelayed(makeTextGone, 5000);	
+				petResponse = (TextView) findViewById(R.id.petresponse);
+				petResponse.setText(dog.eat());
+				petResponse.setVisibility(View.VISIBLE);
+				uiHandler.postDelayed(makeTextGone, 2000);
+				dogBiscuit.setVisibility(View.VISIBLE);//temporary solution must make picture dissapear when dog is full
+				uiHandler.postDelayed(makeTextGone, 2000);
+
+
 
 				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
@@ -107,10 +120,10 @@ public class PetActivity extends Activity {
 			@Override
 			public void onClick (View v){
 
-				respondingOnPlay = (TextView) findViewById(R.id.pet_response);
-				respondingOnPlay.setText(dog.play());
-				respondingOnPlay.setVisibility(View.VISIBLE);
-				//uiHandler.postDelayed(makeTextGone, 5000);
+				petResponse = (TextView) findViewById(R.id.petresponse);
+				petResponse.setText(dog.play());
+				petResponse.setVisibility(View.VISIBLE);
+				uiHandler.postDelayed(makeTextGone, 2000);
 
 				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
@@ -131,12 +144,13 @@ public class PetActivity extends Activity {
 			 */
 			@Override
 			public void onClick (View v){
+
 				int startMood = petMood.getSumMood();
-				
-				respondingOnWalk = (TextView) findViewById(R.id.pet_response);
-				respondingOnWalk.setText(dog.walk());
-				respondingOnWalk.setVisibility(View.VISIBLE);
-				//uiHandler.postDelayed(makeTextGone, 5000);
+
+				petResponse = (TextView) findViewById(R.id.petresponse);
+				petResponse.setText(dog.walk());
+				petResponse.setVisibility(View.VISIBLE);
+				uiHandler.postDelayed(makeTextGone, 2000);
 
 				// Moving to the WalkActivity class if foodmood is high enough
 				if(startMood < petMood.getSumMood()){
@@ -176,7 +190,7 @@ public class PetActivity extends Activity {
 		super.onPause();
 		player.pause();
 	}
-	
+
 	/**
 	 * Method onResume for the activity
 	 * 
@@ -198,10 +212,11 @@ public class PetActivity extends Activity {
 		player = null;
 	}
 
-
+	//TODO Add better comments for this method
 	/**
+	 * Method onOptionsItemSelected 
 	 * 
-	 *
+	 * How the app navigates when clicking the backward button (OBS Vet ej om helt korrekt)
 	 * @param item - MenuItem
 	 */
 	@Override

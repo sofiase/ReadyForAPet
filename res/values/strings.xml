@@ -8,5 +8,6 @@
     <string name="pet_name">Petname</string>
     <string name="start_walking">Start walking!</string>
     <string name="stop_walking">Stop walking!</string>
-	
+    <string name="title_activity_quit">Quit</string>
+
 </resources>

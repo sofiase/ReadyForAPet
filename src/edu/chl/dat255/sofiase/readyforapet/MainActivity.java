@@ -1,5 +1,8 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
+
+
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +13,9 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 
+	
+	
+
 	/**
 	 * Method onCreate for the MainActivity class
 	 * 
@@ -19,7 +25,6 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
 		
 		Button play = (Button) findViewById(R.id.play);
 		play.setOnClickListener(new OnClickListener() {
@@ -28,7 +33,7 @@ public class MainActivity extends Activity {
 				startActivity(new Intent(MainActivity.this, SelectGame.class));
 			}
 		}
-				);
+		);
 
 
 		Button settings = (Button) findViewById(R.id.settings);
@@ -53,16 +58,17 @@ public class MainActivity extends Activity {
 			 * @param v - View
 			 */
 			@Override
-			public void onClick(View v) {
+			public void onClick(View v) {	
 				finish();
 				System.exit(0);
 			}
 		}
-				);
+		);
 		
 
 
 	}	
+
 
 	/**
 	 * Inflate the menu; this adds items to the action bar if it is present

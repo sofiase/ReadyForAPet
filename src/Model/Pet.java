@@ -1,8 +1,22 @@
 package Model;
 
-public class Pet {
 
-	PetMood petMood = new PetMood();
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import edu.chl.dat255.sofiase.readyforapet.CreatePet;
+import android.content.Context;
+
+
+
+public class Pet implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	private PetMood petMood = new PetMood();
 	private int hungerCounter;
 	private int walkCounter;
 	private int playCounter;
@@ -14,9 +28,7 @@ public class Pet {
 	 * @return String with the pet's reaction 
 	 */
 	public String eat() {
-		//walkCounter = petMood.getWalkMood();
 		hungerCounter = petMood.getFoodMood();
-		//playCounter = petMood.getPlayMood();
 		if (hungerCounter < 5) {
 			hungerCounter = hungerCounter + 1;
 			petMood.setFoodMood(hungerCounter);
@@ -75,8 +87,48 @@ public class Pet {
 		else{
 			return "I'm tired! I want to rest!";
 		}
+
+
 	}
+
+	/**
+	 * Saves an instance of the class Pet and...
+	 * 
+	 * @param FILENAME
+	 * @param context
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public void save(String FILENAME, Context context) throws FileNotFoundException, IOException{
+		FileOutputStream fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
+		ObjectOutputStream savedPet = new ObjectOutputStream(fos);
+		savedPet.writeObject(this);
+		savedPet.close();
+	}
+
+	/**
+	 * Loads the saved instance of the class Pet and...
+	 * 
+	 * @param FILENAME
+	 * @param context
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
+	public static void load(String FILENAME, Context context) throws FileNotFoundException, IOException, ClassNotFoundException{
+		FileInputStream fis = context.openFileInput(FILENAME);
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		Pet pet = (Pet) ois.readObject();
+		ois.close();
+		CreatePet.setPet(pet);
+	}
+
+	}
+
 	
 	
-}
+	
+	
+
+
 

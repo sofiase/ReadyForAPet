@@ -5,7 +5,7 @@
     android:background="@drawable/background" >
   
     <TextView
-        android:id="@+id/petgreeting"
+        android:id="@+id/petresponse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -34,42 +34,39 @@
     	     android:src="@drawable/dogpicture" />
 
     	 <Button
+    	     android:id="@+id/walk"
+    	     android:layout_width="wrap_content"
+    	     android:layout_height="wrap_content"
+    	     android:layout_alignParentBottom="true"
+    	     android:layout_alignParentLeft="true"
+    	     android:background="@drawable/buttonshape"
+    	     android:text="Walk" />
+
+    	 <ImageView
+    	     android:id="@+id/dogbiscuit"
+    	     android:layout_width="100dp"
+    	     android:layout_height="100dp"
+    	     android:layout_alignParentBottom="true"
+    	     android:layout_alignParentRight="true"
+    	     android:src="@drawable/dogbiscuit" />
+
+    	 <Button
     	     android:id="@+id/eat"
     	     android:layout_width="wrap_content"
     	     android:layout_height="wrap_content"
-    	     android:layout_marginTop="125dp"
     	     android:layout_alignParentLeft="true"
-    	     android:text="Eat"
+    	     android:layout_marginTop="36dp"
     	     android:background="@drawable/buttonshape"
-    	      />
-
-    	 <TextView
-    	     android:id="@+id/pet_response"
-    	     android:layout_width="wrap_content"
-    	     android:layout_height="wrap_content"
-    	     android:layout_marginTop="75dp"
-    	     android:layout_centerHorizontal="true"
-    	    android:textColor="#000000"
-          	android:textStyle="bold" android:textSize="30sp"
-    	     />
+    	     android:text="Eat" />
 
     	 <Button
     	     android:id="@+id/play"
     	     android:layout_width="wrap_content"
     	     android:layout_height="wrap_content"
-    	     android:layout_marginTop="125dp"
+    	     android:layout_alignBaseline="@+id/eat"
+    	     android:layout_alignBottom="@+id/eat"
     	     android:layout_alignParentRight="true"
-    	     android:layout_marginRight="21dp"
     	     android:background="@drawable/buttonshape"
     	     android:text="Play" />
-
-    	 <Button
-    	     android:id="@+id/walk"
-    	     android:layout_width="wrap_content"
-    	     android:layout_height="wrap_content"
-    	     android:layout_alignParentBottom="true"
-    	     android:layout_centerHorizontal="true"
-    	     android:background="@drawable/buttonshape"
-    	     android:text="Walk" />
 
 </RelativeLayout>
