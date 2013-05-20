@@ -4,6 +4,8 @@ import Model.Dog;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -11,7 +13,7 @@ import android.widget.TextView;
 
 
 public class SelectGame extends Activity {
-	TextView failmessage;
+	private TextView failmessage;
 
 	/**
 	 * onCreate method
@@ -62,4 +64,20 @@ public class SelectGame extends Activity {
 		}
 		);
 	}
-}
+
+		/**
+		 * Configurates the navigate Up button in this activity
+		 *
+		 * @param item - MenuItem
+		 */
+		@Override
+		public boolean onOptionsItemSelected(MenuItem item) {
+			switch (item.getItemId()) {
+			case android.R.id.home:
+				NavUtils.navigateUpFromSameTask(this);
+				return true;
+			}
+			return super.onOptionsItemSelected(item);
+		}
+		
+	}

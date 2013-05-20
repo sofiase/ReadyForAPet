@@ -1,8 +1,5 @@
 package Model;
 
-import java.text.DateFormat.Field;
-import java.util.Calendar;
-
 public class Pet {
 
 	PetMood petMood = new PetMood();

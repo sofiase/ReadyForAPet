@@ -6,6 +6,7 @@ import java.io.IOException;
 import Model.Dog;
 import Model.PetMood;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -27,7 +28,6 @@ public class PetActivity extends Activity {
 	private PetMood petMood = new PetMood();
 	private Dog dog = (Dog) CreatePet.getPet();
 
-	//Variables for playing music in the Pet Activity
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;
 
@@ -125,18 +125,24 @@ public class PetActivity extends Activity {
 		walk.setOnClickListener(new OnClickListener() {
 
 			/**
-			 * Making the dog feel happier when it plays
+			 * Making the dog feel happier when it walks
 			 *
 			 * @param v - View
 			 */
 			@Override
 			public void onClick (View v){
-
+				int startMood = petMood.getSumMood();
+				
 				respondingOnWalk = (TextView) findViewById(R.id.pet_response);
 				respondingOnWalk.setText(dog.walk());
 				respondingOnWalk.setVisibility(View.VISIBLE);
 				//uiHandler.postDelayed(makeTextGone, 5000);
 
+				// Moving to the WalkActivity class if foodmood is high enough
+				if(startMood < petMood.getSumMood()){
+				startActivity(new Intent(PetActivity.this, WalkActivity.class));
+				}
+				
 				// Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
 				moodBar.setProgress(petMood.getSumMood());
@@ -174,7 +180,7 @@ public class PetActivity extends Activity {
 	/**
 	 * Method onResume for the activity
 	 * 
-	 * Starts music player when reuming activity
+	 * Starts music player when resuming activity
 	 */
 	public void onResume() {
 		super.onResume();
@@ -194,7 +200,7 @@ public class PetActivity extends Activity {
 
 
 	/**
-	 * Making the dog feel less hungry if it is hungry and else give the message i'm full
+	 * 
 	 *
 	 * @param item - MenuItem
 	 */

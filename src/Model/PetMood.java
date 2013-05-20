@@ -6,7 +6,7 @@ public class PetMood {
 	private static int playMood = 2;
 	private static int walkMood = 2;
 
-	private long timeInterval = 30;
+	private long timeInterval = 2;
 
 	public PetMood(){
 	}
