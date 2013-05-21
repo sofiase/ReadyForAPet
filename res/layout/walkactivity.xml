@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+        android:background="@drawable/background" >
+
+
+
+    <Button
+        android:id="@+id/stopwalking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="31dp"
+        android:layout_marginRight="21dp"
+        android:background="@drawable/buttonshape"
+        android:text="@string/stop_walking" />
+
+    <Button
+        android:id="@+id/startwalking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/stopwalking"
+        android:layout_alignBottom="@+id/stopwalking"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="18dp"
+        android:background="@drawable/buttonshape"
+        android:text="@string/start_walking" />
+    
+    <TextView
+	android:id="@+id/distance"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:layout_alignParentTop="true"
+	android:layout_centerHorizontal="true"
+	android:layout_marginTop="162dp" />
+
+    <ImageView
+        android:id="@+id/dogprints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/stopwalking"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/footprint7" />
+
+</RelativeLayout>

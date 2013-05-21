@@ -2,18 +2,12 @@ package edu.chl.dat255.sofiase.readyforapet;
 
 
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Serializable;
-
-import java.io.IOException;
-
-
 import Model.Dog;
-import Model.Pet;
 import Model.PetMood;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
@@ -33,29 +27,25 @@ import android.widget.TextView;
 public class PetActivity extends Activity implements Serializable{ 
 
 
-
-
 	private static final long serialVersionUID = 1L;
-
-	TextView petgreeting, respondingOnEat, respondingOnPlay, respondingOnWalk;
-
-
-	TextView petResponse; 
-
-	Handler uiHandler = new Handler();
-	ImageView dogBiscuit, dogPicture;//kolla om dogpic funnkar?
-
+	private TextView petResponse; 
+	private Handler uiHandler = new Handler();
+	private ImageView dogBiscuit, dogPicture;
 	private ProgressBar moodBar;
-
 	private PetMood petMood = new PetMood();
 	private Dog dog = (Dog) CreatePet.getPet();
 
-	//Variables for playing music in the Pet Activity
+
+	//Variables for playing music in Pet Activity
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;
 
 	Runnable makeTextGone = new Runnable(){
 
+		/**
+		 * run method
+		 * 
+		 */
 		@Override
 		public void run(){
 			petResponse.setVisibility(View.GONE);
@@ -76,15 +66,17 @@ public class PetActivity extends Activity implements Serializable{
 		dogBiscuit = (ImageView) findViewById(R.id.dogbiscuit);
 		dogBiscuit.setVisibility(View.GONE);
 
+
 		dogPicture = (ImageView) findViewById(R.id.dogpicture);//kolla om detta behšvs
-		dogBiscuit.setVisibility(View.VISIBLE);
+		dogPicture.setVisibility(View.VISIBLE);
+
 
 		Dog pet = (Dog) CreatePet.getPet();
 		String petName = pet.getName();
 
-
 		//Making welcome message
 		petResponse = (TextView) findViewById(R.id.petresponse);
+
 		petResponse.setText("Hello, my name is " + petName + "!");		
 		petResponse.setVisibility(View.VISIBLE);
 		uiHandler.postDelayed(makeTextGone, 2000);	
@@ -97,7 +89,9 @@ public class PetActivity extends Activity implements Serializable{
 		eat.setOnClickListener(new OnClickListener() {
 
 			/**
-			 * Making the dog feel less hungry if it is hungry and else give the message i'm full
+			 * Making the dog feel less hungry if it is hungry and 
+			 * else give the message i'm full
+			 * Also shows a picture of a bone when eating
 			 *
 			 * @param v - View
 			 */
@@ -105,6 +99,7 @@ public class PetActivity extends Activity implements Serializable{
 			public void onClick (View v){
 
 				petResponse = (TextView) findViewById(R.id.petresponse);
+				
 				if(dog.eat()=="eat"){
 					petResponse.setText("Yummie!");
 					petResponse.setVisibility(View.VISIBLE);
@@ -121,6 +116,7 @@ public class PetActivity extends Activity implements Serializable{
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 5000);
 				}
+
 
 
 				//Updating the moodbar
@@ -171,18 +167,25 @@ public class PetActivity extends Activity implements Serializable{
 		walk.setOnClickListener(new OnClickListener() {
 
 			/**
-			 * Making the dog feel happier when it plays
+			 * Making the dog feel happier when it walks
 			 *
 			 * @param v - View
 			 */
 			@Override
 			public void onClick (View v){
 
+				int startMood = petMood.getSumMood();
+
 				petResponse = (TextView) findViewById(R.id.petresponse);
 				petResponse.setText(dog.walk());
 				petResponse.setVisibility(View.VISIBLE);
 				uiHandler.postDelayed(makeTextGone, 2000);
 
+				// Moving to the WalkActivity class if foodmood is high enough
+				if(startMood < petMood.getSumMood()){
+				startActivity(new Intent(PetActivity.this, WalkActivity.class));
+				}
+				
 				// Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
 				moodBar.setProgress(petMood.getSumMood());
@@ -220,7 +223,7 @@ public class PetActivity extends Activity implements Serializable{
 	/**
 	 * Method onResume for the activity
 	 * 
-	 * Starts music player when reuming activity
+	 * Starts music player when resuming activity
 	 */
 	public void onResume() {
 		super.onResume();
@@ -238,11 +241,13 @@ public class PetActivity extends Activity implements Serializable{
 		player = null;
 	}
 
+	//TODO Add better comments for this method
 	/**
-	 * Making the dog feel less hungry if it is hungry and else give the message i'm full
-	 *
+	 * Method onOptionsItemSelected 
+	 * 
+	 * How the app navigates when clicking the backward button (OBS Vet ej om helt korrekt)
 	 * @param item - MenuItem
-	 */
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -252,5 +257,5 @@ public class PetActivity extends Activity implements Serializable{
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+ */
 }

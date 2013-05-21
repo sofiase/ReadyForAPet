@@ -1,13 +1,6 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
 
-//import java.io.FileNotFoundException;
-//import java.io.IOException;
-//import java.io.Serializable;
-
-//import Model.Pet;
-
-//import Model.Dog;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,6 +10,8 @@ import Model.Pet;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -24,16 +19,20 @@ import android.widget.TextView;
 
 
 
-
 public class SelectGame extends Activity implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
 
-	TextView warningMessage;
-	Button yes, no;
-	
+	private static final long serialVersionUID = 1L;
+	private TextView warningMessage;
+	private Button yes, no;
+
 	Runnable makeTextGone = new Runnable(){
 
+
+		/**
+		 * run Method
+		 * 
+		 * TODO:add what the method does
+		 */
 		@Override
 		public void run(){
 			yes.setVisibility(View.GONE);
@@ -41,6 +40,7 @@ public class SelectGame extends Activity implements Serializable {
 			warningMessage.setVisibility(View.GONE);
 		}
 	};
+
 
 
 
@@ -54,10 +54,10 @@ public class SelectGame extends Activity implements Serializable {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
 		setContentView(R.layout.selectgame);
-		
+
 		Button yes = (Button) findViewById(R.id.yes);
 		yes.setVisibility(View.GONE);
-		
+
 		Button no = (Button) findViewById(R.id.no);
 		no.setVisibility(View.GONE);
 
@@ -73,9 +73,9 @@ public class SelectGame extends Activity implements Serializable {
 			 */
 			public void onClick (View v){
 
-					try {
+				try {
 					Pet.load("pet_file.dat", SelectGame.this);
-					} catch (FileNotFoundException e) {
+				} catch (FileNotFoundException e) {
 					System.out.print("File not found ");
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -110,37 +110,53 @@ public class SelectGame extends Activity implements Serializable {
 			 */
 			public void onClick (View v){
 				if (CreatePet.getPet() != null){
-					
+
 					warningMessage = (TextView) findViewById(R.id.warningmessage);
 					warningMessage.setText("Are you sure you want to create a new pet and delete your old one?");
-					
+
 					Button yes = (Button) findViewById(R.id.yes);
 					yes.setVisibility(View.VISIBLE);
 					yes.setOnClickListener(new OnClickListener() {
-				
+
 						public void onClick (View v){
 							startActivity(new Intent(SelectGame.this, CreatePet.class));
 							//delete old pet from file here later
-							}
 						}
-					);
+					}
+							);
 					Button no = (Button) findViewById(R.id.no);
 					no.setVisibility(View.VISIBLE);
 					no.setOnClickListener(new OnClickListener() {
-						
+
 						public void onClick (View v){
 							startActivity(new Intent(SelectGame.this, SelectGame.class));//kan man g�ra s�? man kan inte no yes och no annars utan att def knapparna igen?
 						}
 					}
-					);
+							);
 				}
 				else{
 					startActivity(new Intent(SelectGame.this,CreatePet.class));
 				}
-						
-				
+
+
 			}
 		}
-		);
+				);
 	}
-}
+
+		/**
+		 * Configurates the navigate Up button in this activity
+		 *
+		 * @param item - MenuItem
+		 
+		@Override
+		public boolean onOptionsItemSelected(MenuItem item) {
+			switch (item.getItemId()) {
+			case android.R.id.home:
+				NavUtils.navigateUpFromSameTask(this);
+				return true;
+			}
+			return super.onOptionsItemSelected(item);
+		}
+		*/
+	}
