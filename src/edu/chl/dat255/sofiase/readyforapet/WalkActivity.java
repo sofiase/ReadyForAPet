@@ -28,7 +28,11 @@ public class WalkActivity extends Activity{
 	private int delay = 0;
 	private int period = 5000;
 	private Timer timer;
-	Handler handler = new Handler();
+
+	private Handler handler = new Handler();
+	private static int distance = 0;
+
+
 	private LocationHelper location;
 	
 	Runnable makeViewGone = new Runnable(){
@@ -105,9 +109,16 @@ public class WalkActivity extends Activity{
 			 * @param v - View
 			 */
 			public void onClick (View v){
+				distance = (int) Math.round(location.getDistance());
 				timer.cancel();
 				location.killLocationServices();
-				startActivity(new Intent(WalkActivity.this, PetActivity.class));
+
+				//setting a resultCode with the distance walked that is sent to PetActivity
+				WalkActivity.this.setResult(distance);
+				WalkActivity.this.finish();
+
+				//startActivity(new Intent(WalkActivity.this, PetActivity.class));
+				
 			}
 		}
 				);
@@ -116,7 +127,6 @@ public class WalkActivity extends Activity{
 
 
 	TimerTask myTimerTask = new TimerTask() {
-
 		@Override
 		public void run() {
 			handler.post(new Runnable() {
@@ -130,6 +140,7 @@ public class WalkActivity extends Activity{
 		}
 
 	};
+
 
 	/**
 	 * If GPS is turned off, lets the user either choose to enable GPS or cancel.
@@ -157,6 +168,18 @@ public class WalkActivity extends Activity{
 		alert.show();
 	}
 	
+
+	/**
+	 * Fungerar denna?
+	 * 
+	 */
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		this.finish();
+	}
+
+
 	/**
 	 * Configurates the navigate Up button in this activity
 	 *

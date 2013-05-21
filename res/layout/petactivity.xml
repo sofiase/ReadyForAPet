@@ -15,7 +15,6 @@
         android:textStyle="bold" android:textSize="20sp"
         />
 
-
     <ProgressBar
         android:id="@+id/moodbar"
         style="?android:attr/progressBarStyleHorizontal"
@@ -25,7 +24,6 @@
         android:layout_centerHorizontal="true"
         android:max="15" />
 
-    	 
     	 <Button
     	     android:id="@+id/walk"
     	     android:layout_width="wrap_content"
@@ -34,14 +32,6 @@
     	     android:layout_alignParentLeft="true"
     	     android:background="@drawable/buttonshape"
     	     android:text="Walk" />
-
-    	 <ImageView
-    	     android:id="@+id/dogbiscuit"
-    	     android:layout_width="100dp"
-    	     android:layout_height="100dp"
-    	     android:layout_alignParentBottom="true"
-    	     android:layout_alignParentRight="true"
-    	     />
 
     	 <Button
     	     android:id="@+id/eat"
@@ -69,5 +59,15 @@
     	     android:layout_alignParentBottom="true"
     	     android:layout_alignParentLeft="true"
     	     android:src="@drawable/doghappy" />
+
+
+    	 <ImageView
+    	     android:id="@+id/dogbiscuit"
+    	     android:layout_width="100dp"
+    	     android:layout_height="100dp"
+    	     android:layout_above="@+id/walk"
+    	     android:layout_centerHorizontal="true"
+    	     android:src="@drawable/dogbiscuit" />
+
 
 </RelativeLayout>

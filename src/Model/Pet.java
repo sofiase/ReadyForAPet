@@ -1,6 +1,5 @@
 package Model;
 
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -12,7 +11,6 @@ import edu.chl.dat255.sofiase.readyforapet.CreatePet;
 import android.content.Context;
 
 
-
 public class Pet implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -20,7 +18,6 @@ public class Pet implements Serializable{
 	private int hungerCounter;
 	private int walkCounter;
 	private int playCounter;
-	
 
 
 	/**
@@ -33,13 +30,13 @@ public class Pet implements Serializable{
 		if (hungerCounter < 5) {
 			hungerCounter = hungerCounter + 1;
 			petMood.setFoodMood(hungerCounter);
-			return "eat";
-		}	
-
+			return "Yummie!";
+		}
 		else{
-			return "full";
+			return "I am full";
 		}
 	}
+	
 
 	/**
 	 * Method that increases mood bar while walking
@@ -47,18 +44,38 @@ public class Pet implements Serializable{
 	 *
 	 * @return String with the pet's reaction 
 	 */
-	public String walk() {
+	public String walk(int distance) {
+
 		walkCounter = petMood.getWalkMood();
 		hungerCounter = petMood.getFoodMood();
 		playCounter = petMood.getPlayMood();
+
 		if (hungerCounter < 3 && walkCounter < 5)
 			return "I'm too hungry!";
-		else if (playCounter + walkCounter > 6)
-			return "I'm tired! I want to rest!";
 		else if (walkCounter < 5) {
-			walkCounter = walkCounter + 1;
-			petMood.setWalkMood(walkCounter);
-			return "Yeey! Great exercise!";
+			if(distance < 50){
+				return "I want to walk more!";
+			}
+			if(distance > 50 && distance < 100){
+				walkCounter = walkCounter + 1;
+				petMood.setWalkMood(walkCounter);
+				return "Yeey! Great exercise!";
+			}
+			else if (distance < 200){
+				walkCounter = walkCounter + 2; //Om den var 4 frŒn bšrjan blir det fšr mycket nu...
+				petMood.setWalkMood(walkCounter);
+				return "Yeey! Great exercise!";
+			}
+			else if (distance < 300){
+				walkCounter = walkCounter + 3;
+				petMood.setWalkMood(walkCounter);
+				return "Yeey! Great exercise!";
+			}
+			else{
+				walkCounter = walkCounter + 4;
+				petMood.setWalkMood(walkCounter);
+				return "Yeey! Great exercise!";
+			}
 		}	
 		else{
 			return "I'm tired! I want to rest!";
@@ -76,22 +93,21 @@ public class Pet implements Serializable{
 		hungerCounter = petMood.getFoodMood();
 		playCounter = petMood.getPlayMood();
 		if (playCounter + walkCounter > 6) {
-			return "tired";
+			return "I'm tired! I want to rest!";
 		}
 		else if (hungerCounter <3 && playCounter < 5)
 			return "I'm too hungry!";
 		else if (playCounter < 5 ) {
 			playCounter = playCounter + 1;
 			petMood.setPlayMood(playCounter);
-			return "play";
+			return "Yeey! Lots of fun!";
 		}	
 		else{
 			return "I'm tired! I want to rest!";
 		}
-
-
 	}
 
+	
 	/**
 	 * Saves an instance of the class Pet and...
 	 * 
@@ -107,6 +123,7 @@ public class Pet implements Serializable{
 		savedPet.close();
 	}
 
+	
 	/**
 	 * Loads the saved instance of the class Pet and...
 	 * 
@@ -124,12 +141,6 @@ public class Pet implements Serializable{
 		CreatePet.setPet(pet);
 	}
 
-	}
-
-	
-	
-	
-	
-
+}
 
 
