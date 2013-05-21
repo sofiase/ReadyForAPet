@@ -1,11 +1,8 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
-
-
-
 import java.io.IOException;
 import java.io.Serializable;
-import Model.Dog;
+import Model.Pet;
 import Model.PetMood;
 import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
@@ -13,6 +10,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,14 +21,13 @@ import android.widget.TextView;
 
 public class PetActivity extends Activity implements Serializable{ 
 
-
 	private static final long serialVersionUID = 1L;
+	private static final String LOG_test = null;
 	private TextView petResponse; 
 	private Handler uiHandler = new Handler();
 	private ImageView dogBiscuit;//kolla  TODO
 	private ProgressBar moodBar;
-	private PetMood petMood = new PetMood();
-	private Dog dog = (Dog) CreatePet.getPet();
+	private Pet dog;
 
 	//Variables for playing music in Pet Activity
 	private MediaPlayer player;
@@ -46,9 +43,9 @@ public class PetActivity extends Activity implements Serializable{
 		public void run(){
 			petResponse.setVisibility(View.GONE);
 			dogBiscuit.setVisibility(View.GONE);
-
 		}
 	};
+
 	/**
 	 * onCreate Method
 	 *
@@ -56,27 +53,25 @@ public class PetActivity extends Activity implements Serializable{
 	 */
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.petactivity);
 
+		petResponse = (TextView) findViewById(R.id.petresponse);
+		petResponse.setVisibility(View.GONE);
 
-		petResponse = (TextView) findViewById(R.id.petresponse);//tror att detta beh�vs, minns inte testa
-		petResponse.setVisibility(View.GONE);//samma
+		dogBiscuit = (ImageView) findViewById(R.id.dogbiscuit);
+		dogBiscuit.setVisibility(View.GONE);
 
-		dogBiscuit = (ImageView) findViewById(R.id.dogbiscuit);//tror att detta beh�vs, minns inte testa
-		dogBiscuit.setVisibility(View.GONE);//samma
-
-		Dog pet = (Dog) CreatePet.getPet();
-		String petName = pet.getName();
+		dog = CreatePet.getPet();
+		String petName = dog.getName(); 
 
 		petResponse.setText("Hello, my name is " + petName + "!");		
 		petResponse.setVisibility(View.VISIBLE);
 		uiHandler.postDelayed(makeTextGone, 2000);	
 
 		moodBar = (ProgressBar) findViewById(R.id.moodbar);
-		moodBar.setProgress(petMood.getSumMood());
-
-		// Making the eat button
+		moodBar.setProgress(PetMood.getSumMood()); 
 		Button eat = (Button) findViewById(R.id.eat);
 		eat.setOnClickListener(new OnClickListener() {
 
@@ -97,11 +92,9 @@ public class PetActivity extends Activity implements Serializable{
 				dogBiscuit.setVisibility(View.VISIBLE);//temporary solution must make picture dissapear when dog is full
 				uiHandler.postDelayed(makeTextGone, 2000);
 
-
-
 				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
-				moodBar.setProgress(petMood.getSumMood());
+				moodBar.setProgress(PetMood.getSumMood());
 			}
 		}
 				);
@@ -126,7 +119,7 @@ public class PetActivity extends Activity implements Serializable{
 
 				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
-				moodBar.setProgress(petMood.getSumMood());
+				moodBar.setProgress(PetMood.getSumMood());
 			}
 		}
 				);			
@@ -151,7 +144,7 @@ public class PetActivity extends Activity implements Serializable{
 
 				// Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
-				moodBar.setProgress(petMood.getSumMood());
+				moodBar.setProgress(PetMood.getSumMood());
 			}
 		}
 				);
@@ -181,12 +174,23 @@ public class PetActivity extends Activity implements Serializable{
 	public void onPause() {
 		super.onPause();
 		player.pause();
+
+		try { //lagt till för att spara dogs mood
+			//Dog savedog = new Dog(dog.getName(),petMood.getFoodMood(), petMood.getWalkMood(),petMood.getPlayMood());
+			dog.save("pet_file.dat",PetActivity.this);
+			Log.i(LOG_test,Integer.toString(PetMood.getFoodMood()));
+			//petMood.save("petmood_file.dat", PetActivity.this); //eventuellt??
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
+
+
 
 	/**
 	 * Method onResume for the activity
 	 * 
-	 * Starts music player when reuming activity
+	 * Starts music player when resuming activity
 	 */
 	public void onResume() {
 		super.onResume();

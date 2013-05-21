@@ -1,27 +1,21 @@
 package Model;
 
-
 import java.io.Serializable;
-
 
 public class PetMood implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
-	private static int foodMood = 2;
-	private static int playMood = 2;
-	private static int walkMood = 2;
-	private long timeInterval = 30;
-
-	public PetMood(){
-	}
-
+	private static int foodMood;
+	private static int playMood;
+	private static int walkMood;
+	private static long timeInterval = 30;
+	
 	/**
 	 * Sets the mood of the pet depending on how much it has eaten.
 	 * 
 	 * @param foodnumber - int
 	 */
-	public void setFoodMood (int foodnumber){
+	public static void setFoodMood (int foodnumber){
 		foodMood = foodnumber;
 	}
 
@@ -30,7 +24,7 @@ public class PetMood implements Serializable {
 	 * 
 	 * @param playnumber - int
 	 */
-	public void setPlayMood (int playnumber){
+	public static void setPlayMood (int playnumber){
 		playMood = playnumber;
 	}
 
@@ -39,16 +33,16 @@ public class PetMood implements Serializable {
 	 * 
 	 * @param playnumber - int
 	 */
-	public void setWalkMood(int walknumber){
+	public static void setWalkMood(int walknumber){
 		walkMood = walknumber;
 	}
-
+	
 	/**
 	 * Makes it possible for the pet to know how much the pet has already eaten.
 	 * 
 	 * @return foodMood - int
 	 */
-	public int getFoodMood (){
+	public static int getFoodMood (){
 		return foodMood;
 	}
 
@@ -57,7 +51,7 @@ public class PetMood implements Serializable {
 	 * 
 	 * @return playMood - int
 	 */
-	public int getPlayMood (){
+	public static int getPlayMood (){
 		return playMood;
 	}
 
@@ -66,7 +60,7 @@ public class PetMood implements Serializable {
 	 * 
 	 * @return foodMood - int
 	 */
-	public int getWalkMood (){
+	public static int getWalkMood (){
 		return walkMood;
 	}
 
@@ -78,7 +72,7 @@ public class PetMood implements Serializable {
 	 * 
 	 * @return the total mood of the pet
 	 */
-	public int getSumMood (){
+	public static int getSumMood (){
 		return foodMood + playMood + walkMood;
 	}
 	
@@ -87,7 +81,7 @@ public class PetMood implements Serializable {
 	 *
 	 * @return time
 	 */
-	public long getCurrentTime (){
+	public static long getCurrentTime (){
 		return System.currentTimeMillis()/3600000L;
 	}
 
@@ -123,5 +117,6 @@ public class PetMood implements Serializable {
 			return 0;
 		}
 	}
-
 }
+	
+
