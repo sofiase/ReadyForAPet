@@ -4,7 +4,10 @@ import java.io.Serializable;
 import Model.Pet;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -16,9 +19,11 @@ import android.widget.TextView;
 public class CreatePet extends Activity implements OnClickListener, Serializable {
 
 
+
 	private static final long serialVersionUID = 1L;
+
 	private String petName; 
-	private static Pet dog; 
+	private static Pet dog; //dog innan
 	private TextView chooseAnotherName;
 
 	Runnable makeTextGone = new Runnable(){
@@ -43,6 +48,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
 		setContentView(R.layout.createpet);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		chooseAnotherName = (TextView) findViewById(R.id.chooseanothername);
 		chooseAnotherName.setTextColor(-1);
@@ -88,6 +94,24 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 	public static Pet getPet(){
 		return dog;
 	}
+	
+	
+	/**
+	 * Configurates the navigate Up button in this activity
+	 *
+	 * @param item - MenuItem
+	 */
+	@Override
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			NavUtils.navigateUpFromSameTask(this);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
 
 	/**
 	 * setPet Method

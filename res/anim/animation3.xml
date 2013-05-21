@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <item android:drawable="@drawable/footprint7" android:duration="1000"/>
+    <item android:drawable="@drawable/footprint6" android:duration="1000"/>
+     <item android:drawable="@drawable/footprint5" android:duration="1000"/>
+      <item android:drawable="@drawable/footprint4" android:duration="1000"/>
+       <item android:drawable="@drawable/footprint3" android:duration="1000"/>
+       <item android:drawable="@drawable/footprint2" android:duration="1000"/>
+        <item android:drawable="@drawable/footprint1" android:duration="1000"/>
+         
+</animation-list>
+    

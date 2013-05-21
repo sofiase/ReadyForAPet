@@ -46,10 +46,12 @@ public class Pet implements Serializable{
 			PetMood.setFoodMood(hungerCounter);
 			return "Yummie!";
 		}	
+
 		else{
 			return "I am full";
 		}
 	}
+	
 
 	/**
 	 * Method that increases mood bar while walking
@@ -57,18 +59,40 @@ public class Pet implements Serializable{
 	 *
 	 * @return String with the pet's reaction 
 	 */
-	public String walk() {
+
+	public String walk(int distance) {
+
 		walkCounter = PetMood.getWalkMood();
 		hungerCounter = PetMood.getFoodMood();
 		playCounter = PetMood.getPlayMood();
+
 		if (hungerCounter < 3 && walkCounter < 5)
 			return "I'm too hungry!";
-		else if (playCounter + walkCounter > 6)
-			return "I'm tired! I want to rest!";
 		else if (walkCounter < 5) {
-			walkCounter = walkCounter + 1;
-			PetMood.setWalkMood(walkCounter);
-			return "Yeey! Great exercise!";
+
+			if(distance < 50){
+				return "I want to walk more!";
+			}
+			if(distance > 50 && distance < 100){
+				walkCounter = walkCounter + 1;
+				PetMood.setWalkMood(walkCounter);
+				return "Yeey! Great exercise!";
+			}
+			else if (distance < 200){
+				walkCounter = walkCounter + 2; //Om den var 4 fr�n b�rjan blir det f�r mycket nu...
+				PetMood.setWalkMood(walkCounter);
+				return "Yeey! Great exercise!";
+			}
+			else if (distance < 300){
+				walkCounter = walkCounter + 3;
+				PetMood.setWalkMood(walkCounter);
+				return "Yeey! Great exercise!";
+			}
+			else{
+				walkCounter = walkCounter + 4;
+				PetMood.setWalkMood(walkCounter);
+				return "Yeey! Great exercise!";
+			}
 		}	
 		else{
 			return "I'm tired! I want to rest!";
@@ -100,6 +124,7 @@ public class Pet implements Serializable{
 		}
 	}
 
+	
 	/**
 	 * Saves an instance of the class Pet and...
 	 * 
@@ -115,6 +140,7 @@ public class Pet implements Serializable{
 		savedPet.close();
 	}
 
+	
 	/**
 	 * Loads the saved instance of the class Pet and...
 	 * 
@@ -133,14 +159,7 @@ public class Pet implements Serializable{
 		PetMood.setFoodMood(pet.hungerCounter);
 		PetMood.setWalkMood(pet.walkCounter);
 		PetMood.setPlayMood(pet.playCounter);
-		
 	}
 }
-
-
-
-
-
-
 
 

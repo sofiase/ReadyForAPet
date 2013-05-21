@@ -8,8 +8,12 @@ public class PetMood implements Serializable {
 	private static int foodMood;
 	private static int playMood;
 	private static int walkMood;
-	private static long timeInterval = 30;
-	
+	private long timeInterval = 2;
+
+
+	public PetMood(){
+	}
+
 	/**
 	 * Sets the mood of the pet depending on how much it has eaten.
 	 * 

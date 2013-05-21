@@ -1,11 +1,28 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
 
+import java.io.Serializable;
 import android.app.Activity;
-import android.os.Bundle;
 
-public class Settings extends Activity {
-	
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.view.MenuItem;
+
+/**
+ * 
+ */
+public class Settings extends Activity implements Serializable{
+
+
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * onCreate method
@@ -16,7 +33,23 @@ public class Settings extends Activity {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
 		setContentView(R.layout.settings);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+	}		
+
+	/**
+	 * Configurates the navigate Up button in this activity
+	 *
+	 * @param item - MenuItem
+     */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			NavUtils.navigateUpFromSameTask(this);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
-
+	 
 }

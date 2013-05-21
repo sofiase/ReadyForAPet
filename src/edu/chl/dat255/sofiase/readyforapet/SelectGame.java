@@ -7,8 +7,11 @@ import Model.Pet;
 import Model.PetMood;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.support.v4.app.NavUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -45,6 +48,7 @@ public class SelectGame extends Activity implements Serializable {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
 		setContentView(R.layout.selectgame);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		Button yes = (Button) findViewById(R.id.yes);
 		yes.setVisibility(View.GONE);
@@ -139,4 +143,20 @@ public class SelectGame extends Activity implements Serializable {
 		}
 				);
 	}
-}
+
+		/**
+		 * Configurates the navigate Up button in this activity
+		 *
+		 * @param item - MenuItem
+		 */
+		@Override
+		public boolean onOptionsItemSelected(MenuItem item) {
+			switch (item.getItemId()) {
+			case android.R.id.home:
+				NavUtils.navigateUpFromSameTask(this);
+				return true;
+			}
+			return super.onOptionsItemSelected(item);
+		}
+		
+	}

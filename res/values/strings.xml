@@ -6,6 +6,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="write_here">Write here</string>
     <string name="pet_name">Petname</string>
+    <string name="start_walking">Start walking!</string>
+    <string name="stop_walking">Stop walking!</string>
     <string name="title_activity_quit">Quit</string>
 
 </resources>
