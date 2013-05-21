@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NavUtils;
@@ -14,19 +15,38 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class WalkActivity extends Activity{
 
 	private TextView displayDistance;
+	private ImageView dogPrints;
+	private Handler uiHandler = new Handler();
 	private int delay = 0;
 	private int period = 5000;
 	private Timer timer;
+
 	private Handler handler = new Handler();
 	private static int distance = 0;
 
+
 	private LocationHelper location;
+	
+	Runnable makeViewGone = new Runnable(){
+
+		/**
+		 * run method
+		 * 
+		 */
+		@Override
+		public void run(){
+			dogPrints.setVisibility(View.GONE);
+	
+
+		}
+	};
 
 	/**
 	 * On Create method
@@ -38,6 +58,8 @@ public class WalkActivity extends Activity{
 		super.onCreate (savedInstanceState);
 		setContentView(R.layout.walkactivity);
 		location = new LocationHelper(this);
+		
+		dogPrints = (ImageView) findViewById(R.id.dogprints);
 
 		//Checking if the GPS is enabled, else let the user start GPS if wanted.
 		if (location.gpsEnabled()){
@@ -48,6 +70,7 @@ public class WalkActivity extends Activity{
 		}
 
 		Button startWalking = (Button) findViewById(R.id.startwalking);
+	
 		startWalking.setOnClickListener(new OnClickListener() {
 
 			/**
@@ -56,7 +79,13 @@ public class WalkActivity extends Activity{
 			 * @param v - View
 			 */
 			public void onClick (View v){
-
+				
+				dogPrints.setVisibility(View.VISIBLE);
+				dogPrints.setBackgroundResource(R.anim.animation3);
+				AnimationDrawable anim = (AnimationDrawable) dogPrints.getBackground(); 
+				anim.start();
+				uiHandler.postDelayed(makeViewGone, 7000);//stängs även animationen iom att vi stänger bilden?
+				
 				try{
 					timer = new Timer();
 					timer.schedule(myTimerTask, delay, period);

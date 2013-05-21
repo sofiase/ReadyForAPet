@@ -9,6 +9,7 @@ import Model.PetMood;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +17,8 @@ import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -27,7 +30,7 @@ public class PetActivity extends Activity implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private TextView petResponse; 
 	private Handler uiHandler = new Handler();
-	private ImageView dogBiscuit;//kolla  TODO
+	private ImageView dogBiscuit, dogPicture;
 	private ProgressBar moodBar;
 	private PetMood petMood = new PetMood();
 	private Dog dog = (Dog) CreatePet.getPet();
@@ -60,15 +63,19 @@ public class PetActivity extends Activity implements Serializable{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.petactivity);
 
+		dogBiscuit = (ImageView) findViewById(R.id.dogbiscuit);
+		dogBiscuit.setVisibility(View.GONE);
 
-		petResponse = (TextView) findViewById(R.id.petresponse);//tror att detta behï¿½vs, minns inte testa
-		petResponse.setVisibility(View.GONE);//samma
 
-		dogBiscuit = (ImageView) findViewById(R.id.dogbiscuit);//tror att detta behï¿½vs, minns inte testa
-		dogBiscuit.setVisibility(View.GONE);//samma
+		dogPicture = (ImageView) findViewById(R.id.dogpicture);//kolla om detta behšvs
+		dogPicture.setVisibility(View.VISIBLE);
+
 
 		Dog pet = (Dog) CreatePet.getPet();
 		String petName = pet.getName();
+
+		//Making welcome message
+		petResponse = (TextView) findViewById(R.id.petresponse);
 
 		petResponse.setText("Hello, my name is " + petName + "!");		
 		petResponse.setVisibility(View.VISIBLE);
@@ -92,11 +99,23 @@ public class PetActivity extends Activity implements Serializable{
 			public void onClick (View v){
 
 				petResponse = (TextView) findViewById(R.id.petresponse);
-				petResponse.setText(dog.eat());
-				petResponse.setVisibility(View.VISIBLE);
-				uiHandler.postDelayed(makeTextGone, 2000);
-				dogBiscuit.setVisibility(View.VISIBLE);//temporary solution must make picture dissapear when dog is full
-				uiHandler.postDelayed(makeTextGone, 2000);
+				
+				if(dog.eat()=="eat"){
+					petResponse.setText("Yummie!");
+					petResponse.setVisibility(View.VISIBLE);
+					uiHandler.postDelayed(makeTextGone, 10000);
+					dogBiscuit.setVisibility(View.VISIBLE);
+					dogBiscuit.setBackgroundResource(R.anim.animation);
+					AnimationDrawable anim = (AnimationDrawable) dogBiscuit.getBackground(); 
+					anim.start();	//varfšr funkar det inte andra gg man trycker?
+					uiHandler.postDelayed(makeTextGone, 10000);
+
+				}
+				else{
+					petResponse.setText("I'm full!");
+					petResponse.setVisibility(View.VISIBLE);
+					uiHandler.postDelayed(makeTextGone, 5000);
+				}
 
 
 
@@ -119,15 +138,25 @@ public class PetActivity extends Activity implements Serializable{
 			 */
 			@Override
 			public void onClick (View v){
+				if(dog.play()=="play"){
 
-				petResponse = (TextView) findViewById(R.id.petresponse);
-				petResponse.setText(dog.play());
-				petResponse.setVisibility(View.VISIBLE);
-				uiHandler.postDelayed(makeTextGone, 2000);
 
-				//Updating the moodbar
-				moodBar = (ProgressBar) findViewById(R.id.moodbar);
-				moodBar.setProgress(petMood.getSumMood());
+					petResponse = (TextView) findViewById(R.id.petresponse);
+					petResponse.setText("Yeey! Lots of fun!");
+					petResponse.setVisibility(View.VISIBLE);
+					uiHandler.postDelayed(makeTextGone, 2000);
+					Animation anim = AnimationUtils.loadAnimation(PetActivity.this, R.anim.animation1);
+					dogPicture.startAnimation(anim);
+					//Updating the moodbar
+					moodBar = (ProgressBar) findViewById(R.id.moodbar);
+					moodBar.setProgress(petMood.getSumMood());
+				}
+				else{
+					petResponse = (TextView) findViewById(R.id.petresponse);
+					petResponse.setText("I'm tired! I want to rest!");
+					petResponse.setVisibility(View.VISIBLE);
+					uiHandler.postDelayed(makeTextGone, 2000);
+				}
 			}
 		}
 				);

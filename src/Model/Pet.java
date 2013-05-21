@@ -36,6 +36,7 @@ public class Pet implements Serializable{
 			return "I am full";
 		}
 	}
+	
 
 	/**
 	 * Method that increases mood bar while walking
