@@ -49,7 +49,7 @@ public class Settings extends Activity implements Serializable{
 	 * Configurates the navigate Up button in this activity
 	 *
 	 * @param item - MenuItem
-
+     */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -60,5 +60,5 @@ public class Settings extends Activity implements Serializable{
 		return super.onOptionsItemSelected(item);
 	}
 
-	 */
+	 
 }

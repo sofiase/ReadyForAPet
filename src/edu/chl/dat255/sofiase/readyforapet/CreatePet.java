@@ -116,7 +116,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 	 * Configurates the navigate Up button in this activity
 	 *
 	 * @param item - MenuItem
-	 
+	 */
 	@Override
 
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -127,7 +127,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	*/
+	
 
 	/**
 	 * setPet Method

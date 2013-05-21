@@ -23,12 +23,26 @@ public class WalkActivity extends Activity{
 
 	private TextView displayDistance;
 	private ImageView dogPrints;
+	private Handler uiHandler = new Handler();
 	private int delay = 0;
 	private int period = 5000;
 	private Timer timer;
 	Handler handler = new Handler();
-
 	private LocationHelper location;
+	
+	Runnable makeViewGone = new Runnable(){
+
+		/**
+		 * run method
+		 * 
+		 */
+		@Override
+		public void run(){
+			dogPrints.setVisibility(View.GONE);
+	
+
+		}
+	};
 
 	/**
 	 * On Create method
@@ -52,6 +66,7 @@ public class WalkActivity extends Activity{
 		}
 
 		Button startWalking = (Button) findViewById(R.id.startwalking);
+	
 		startWalking.setOnClickListener(new OnClickListener() {
 
 			/**
@@ -60,9 +75,12 @@ public class WalkActivity extends Activity{
 			 * @param v - View
 			 */
 			public void onClick (View v){
+				
+				dogPrints.setVisibility(View.VISIBLE);
 				dogPrints.setBackgroundResource(R.anim.animation3);
 				AnimationDrawable anim = (AnimationDrawable) dogPrints.getBackground(); 
 				anim.start();
+				uiHandler.postDelayed(makeViewGone, 7000);//stängs även animationen iom att vi stänger bilden?
 				
 				try{
 					timer = new Timer();
@@ -141,7 +159,7 @@ public class WalkActivity extends Activity{
 	 * Configurates the navigate Up button in this activity
 	 *
 	 * @param item - MenuItem
-	 
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -151,5 +169,5 @@ public class WalkActivity extends Activity{
 		}
 		return super.onOptionsItemSelected(item);
 	}
-*/
+
 }

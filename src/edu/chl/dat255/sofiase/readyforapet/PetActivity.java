@@ -247,7 +247,7 @@ public class PetActivity extends Activity implements Serializable{
 	 * 
 	 * How the app navigates when clicking the backward button (OBS Vet ej om helt korrekt)
 	 * @param item - MenuItem
-	
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -257,5 +257,5 @@ public class PetActivity extends Activity implements Serializable{
 		}
 		return super.onOptionsItemSelected(item);
 	}
- */
+
 }
