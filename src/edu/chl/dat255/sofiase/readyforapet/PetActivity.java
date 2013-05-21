@@ -7,9 +7,12 @@ import java.io.Serializable;
 import Model.Dog;
 import Model.PetMood;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,6 +39,8 @@ public class PetActivity extends Activity implements Serializable{
 	private Dog dog = (Dog) CreatePet.getPet();
 
 
+
+
 	//Variables for playing music in Pet Activity
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;
@@ -51,6 +56,7 @@ public class PetActivity extends Activity implements Serializable{
 			petResponse.setVisibility(View.GONE);
 			dogBiscuit.setVisibility(View.GONE);
 
+
 		}
 	};
 	/**
@@ -62,6 +68,7 @@ public class PetActivity extends Activity implements Serializable{
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.petactivity);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		dogBiscuit = (ImageView) findViewById(R.id.dogbiscuit);
 		dogBiscuit.setVisibility(View.GONE);
@@ -69,10 +76,12 @@ public class PetActivity extends Activity implements Serializable{
 
 		dogPicture = (ImageView) findViewById(R.id.dogpicture);//kolla om detta behšvs
 		dogPicture.setVisibility(View.VISIBLE);
-
+		changePicture();
 
 		Dog pet = (Dog) CreatePet.getPet();
 		String petName = pet.getName();
+
+
 
 		//Making welcome message
 		petResponse = (TextView) findViewById(R.id.petresponse);
@@ -97,10 +106,14 @@ public class PetActivity extends Activity implements Serializable{
 			 */
 			@Override
 			public void onClick (View v){
-
-				petResponse = (TextView) findViewById(R.id.petresponse);
 				
+				
+				
+				
+				petResponse = (TextView) findViewById(R.id.petresponse);
+
 				if(dog.eat()=="eat"){
+
 					petResponse.setText("Yummie!");
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 10000);
@@ -116,6 +129,7 @@ public class PetActivity extends Activity implements Serializable{
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 5000);
 				}
+				changePicture();
 
 
 
@@ -140,7 +154,7 @@ public class PetActivity extends Activity implements Serializable{
 			public void onClick (View v){
 				if(dog.play()=="play"){
 
-
+					
 					petResponse = (TextView) findViewById(R.id.petresponse);
 					petResponse.setText("Yeey! Lots of fun!");
 					petResponse.setVisibility(View.VISIBLE);
@@ -157,6 +171,7 @@ public class PetActivity extends Activity implements Serializable{
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 2000);
 				}
+				changePicture();
 			}
 		}
 				);			
@@ -175,7 +190,7 @@ public class PetActivity extends Activity implements Serializable{
 			public void onClick (View v){
 
 				int startMood = petMood.getSumMood();
-
+				
 				petResponse = (TextView) findViewById(R.id.petresponse);
 				petResponse.setText(dog.walk());
 				petResponse.setVisibility(View.VISIBLE);
@@ -183,15 +198,18 @@ public class PetActivity extends Activity implements Serializable{
 
 				// Moving to the WalkActivity class if foodmood is high enough
 				if(startMood < petMood.getSumMood()){
-				startActivity(new Intent(PetActivity.this, WalkActivity.class));
+					startActivity(new Intent(PetActivity.this, WalkActivity.class));
 				}
-				
+				changePicture();
 				// Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
 				moodBar.setProgress(petMood.getSumMood());
 			}
 		}
 				);
+		
+		
+		
 
 		//Music
 		try {
@@ -257,5 +275,21 @@ public class PetActivity extends Activity implements Serializable{
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+
+	private void changePicture(){
+		if(petMood.getWalkMood()<5 && petMood.getFoodMood() > 3){
+			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogpoop));
+		}
+		else if(petMood.getSumMood() < 10){
+			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogsad));
+		}
+		else{
+			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.doghappy));
+		}
+
+	}
+
+
 
 }

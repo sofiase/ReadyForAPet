@@ -13,33 +13,5 @@
         android:layout_marginTop="30dp"
         android:text="Settings"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <ImageView
-        android:id="@+id/phototaken"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/photo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-         
-        android:src="@drawable/background" />
-
-    <Button
-        android:id="@+id/takeyourownphoto"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/petsettings"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="86dp"
-        android:text="Take your own background picture" />
-
-    <Button
-        android:id="@+id/usestandardbackground"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/takeyourownphoto"
-        android:layout_centerHorizontal="true"
-        android:text="Use standard background" />
     
 </RelativeLayout>

@@ -13,6 +13,7 @@ import Model.Pet;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 
 import android.graphics.Bitmap;
@@ -42,7 +43,7 @@ public class Settings extends Activity implements Serializable{
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
 		setContentView(R.layout.settings);
-
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	}		
 
 	/**

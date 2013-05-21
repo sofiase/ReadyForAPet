@@ -9,6 +9,7 @@ import java.io.Serializable;
 import Model.Pet;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
@@ -54,6 +55,7 @@ public class SelectGame extends Activity implements Serializable {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
 		setContentView(R.layout.selectgame);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		Button yes = (Button) findViewById(R.id.yes);
 		yes.setVisibility(View.GONE);

@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -54,6 +55,7 @@ public class WalkActivity extends Activity{
 		super.onCreate (savedInstanceState);
 		setContentView(R.layout.walkactivity);
 		location = new LocationHelper(this);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		
 		dogPrints = (ImageView) findViewById(R.id.dogprints);
 
