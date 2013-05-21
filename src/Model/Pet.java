@@ -1,6 +1,5 @@
 package Model;
 
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -10,7 +9,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import edu.chl.dat255.sofiase.readyforapet.CreatePet;
 import android.content.Context;
-
 
 
 public class Pet implements Serializable{
@@ -33,8 +31,7 @@ public class Pet implements Serializable{
 			hungerCounter = hungerCounter + 1;
 			petMood.setFoodMood(hungerCounter);
 			return "Yummie!";
-		}	
-
+		}
 		else{
 			return "I am full";
 		}
@@ -46,18 +43,38 @@ public class Pet implements Serializable{
 	 *
 	 * @return String with the pet's reaction 
 	 */
-	public String walk() {
+	public String walk(int distance) {
+
 		walkCounter = petMood.getWalkMood();
 		hungerCounter = petMood.getFoodMood();
 		playCounter = petMood.getPlayMood();
+
 		if (hungerCounter < 3 && walkCounter < 5)
 			return "I'm too hungry!";
-		else if (playCounter + walkCounter > 6)
-			return "I'm tired! I want to rest!";
 		else if (walkCounter < 5) {
-			walkCounter = walkCounter + 1;
-			petMood.setWalkMood(walkCounter);
-			return "Yeey! Great exercise!";
+			if(distance < 50){
+				return "I want to walk more!";
+			}
+			if(distance > 50 && distance < 100){
+				walkCounter = walkCounter + 1;
+				petMood.setWalkMood(walkCounter);
+				return "Yeey! Great exercise!";
+			}
+			else if (distance < 200){
+				walkCounter = walkCounter + 2; //Om den var 4 frŒn bšrjan blir det fšr mycket nu...
+				petMood.setWalkMood(walkCounter);
+				return "Yeey! Great exercise!";
+			}
+			else if (distance < 300){
+				walkCounter = walkCounter + 3;
+				petMood.setWalkMood(walkCounter);
+				return "Yeey! Great exercise!";
+			}
+			else{
+				walkCounter = walkCounter + 4;
+				petMood.setWalkMood(walkCounter);
+				return "Yeey! Great exercise!";
+			}
 		}	
 		else{
 			return "I'm tired! I want to rest!";
@@ -87,10 +104,9 @@ public class Pet implements Serializable{
 		else{
 			return "I'm tired! I want to rest!";
 		}
-
-
 	}
 
+	
 	/**
 	 * Saves an instance of the class Pet and...
 	 * 
@@ -106,6 +122,7 @@ public class Pet implements Serializable{
 		savedPet.close();
 	}
 
+	
 	/**
 	 * Loads the saved instance of the class Pet and...
 	 * 
@@ -123,12 +140,6 @@ public class Pet implements Serializable{
 		CreatePet.setPet(pet);
 	}
 
-	}
-
-	
-	
-	
-	
-
+}
 
 

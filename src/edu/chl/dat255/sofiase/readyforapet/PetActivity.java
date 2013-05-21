@@ -130,7 +130,7 @@ public class PetActivity extends Activity implements Serializable{
 				moodBar.setProgress(petMood.getSumMood());
 			}
 		}
-				);			
+				);
 
 
 		// Making the walk button
@@ -145,32 +145,28 @@ public class PetActivity extends Activity implements Serializable{
 			@Override
 			public void onClick (View v){
 
-				int startMood = petMood.getSumMood();
 
-				petResponse = (TextView) findViewById(R.id.petresponse);
-				petResponse.setText(dog.walk());
-				petResponse.setVisibility(View.VISIBLE);
-				uiHandler.postDelayed(makeTextGone, 2000);
+				// Moving to the WalkActivity class if foodmood is high enough and petmood is below 5.
+				if((petMood.getFoodMood() < 3 && petMood.getWalkMood() < 5) || petMood.getFoodMood() > 5){
 
-				// Moving to the WalkActivity class if foodmood is high enough
-				if(startMood < petMood.getSumMood()){
-				startActivity(new Intent(PetActivity.this, WalkActivity.class));
+					petResponse = (TextView) findViewById(R.id.petresponse);
+					petResponse.setText(dog.walk(0));
+					petResponse.setVisibility(View.VISIBLE);
+					uiHandler.postDelayed(makeTextGone, 2000);
 				}
-				
-				// Updating the moodbar
-				moodBar = (ProgressBar) findViewById(R.id.moodbar);
-				moodBar.setProgress(petMood.getSumMood());
+				else{
+					PetActivity.this.startActivityForResult(new Intent(PetActivity.this, WalkActivity.class), 1);
+				}
 			}
 		}
 				);
 
+		
 		//Music
 		try {
 			afd = getAssets().openFd("readyforapetsong4.m4v");
 			player = new MediaPlayer();
-
 			player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),afd.getLength());
-
 			player.setLooping(true);
 			player.prepare();
 			player.start();
@@ -179,6 +175,22 @@ public class PetActivity extends Activity implements Serializable{
 			e.printStackTrace();
 		}
 
+	}
+
+	/**
+	 * Recieves a resultCode that includes the distance a person has walked when quitting WalkActivity and resuming PetActivity.
+	 */
+	public void onActivityResult(int requestCode, int resultCode, Intent data){
+		petResponse = (TextView) findViewById(R.id.petresponse);
+		
+		//Gets the dog's response and sets the value the moodbar should have after taking a walk
+		petResponse.setText(dog.walk(resultCode));
+		petResponse.setVisibility(View.VISIBLE);
+		uiHandler.postDelayed(makeTextGone, 2000);
+
+		// Updating the moodbar after taking a walk
+		moodBar = (ProgressBar) findViewById(R.id.moodbar);
+		moodBar.setProgress(petMood.getSumMood());
 	}
 
 	/**
@@ -198,18 +210,18 @@ public class PetActivity extends Activity implements Serializable{
 	 */
 	public void onResume() {
 		super.onResume();
-		player.start();
+		player.start(); // HŠr kommer eroormeddelandet!!
 	}
 
 	/**
 	 * Method onStop for the activity
 	 * 
-	 * Stops music when exiting activity
+	 * Currently pauses music when exiting activity
 	 */
 	protected void onStop() {
 		super.onStop();
-		player.stop();
-		player = null;
+		player.pause();
+		//player = null;
 	}
 
 	//TODO Add better comments for this method

@@ -50,11 +50,11 @@ public class LocationHelper{
 		 * called when the location service reports a change in location
 		 */
 		public void onLocationChanged(Location location) {
-			
+
 			if (geoPointB == null){
 				geoPointB = new GeoPoint(degreesToMicrodegrees(location.getLatitude()), degreesToMicrodegrees(location.getLongitude()));
 			}
-			
+
 			//Getting the current GeoPoint.
 			geoPointA = new GeoPoint(degreesToMicrodegrees(location.getLatitude()), degreesToMicrodegrees(location.getLongitude()));
 
