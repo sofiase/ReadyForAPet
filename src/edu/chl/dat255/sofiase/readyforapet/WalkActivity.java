@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,7 +32,7 @@ public class WalkActivity extends Activity{
 	private Handler handler = new Handler();
 	private static int distance = 0;
 	private LocationHelper location;
-	
+
 	Runnable makeViewGone = new Runnable(){
 
 		/**
@@ -54,7 +55,8 @@ public class WalkActivity extends Activity{
 		super.onCreate (savedInstanceState);
 		setContentView(R.layout.walkactivity);
 		location = new LocationHelper(this);
-		
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 		dogPrints = (ImageView) findViewById(R.id.dogprints);
 
 		//Checking if the GPS is enabled, else let the user start GPS if wanted.
@@ -66,7 +68,7 @@ public class WalkActivity extends Activity{
 		}
 
 		Button startWalking = (Button) findViewById(R.id.startwalking);
-	
+
 		startWalking.setOnClickListener(new OnClickListener() {
 
 			/**
@@ -75,13 +77,12 @@ public class WalkActivity extends Activity{
 			 * @param v - View
 			 */
 			public void onClick (View v){
-				
 				dogPrints.setVisibility(View.VISIBLE);
 				dogPrints.setBackgroundResource(R.anim.animation3);
 				AnimationDrawable anim = (AnimationDrawable) dogPrints.getBackground(); 
 				anim.start();
-				uiHandler.postDelayed(makeViewGone, 7000);//stŠngs Šven animationen iom att vi stŠnger bilden?
-				
+				uiHandler.postDelayed(makeViewGone, 7000);//stï¿½ngs ï¿½ven animationen iom att vi stï¿½nger bilden?
+
 				try{
 					timer = new Timer();
 					timer.schedule(myTimerTask, delay, period);
@@ -111,7 +112,7 @@ public class WalkActivity extends Activity{
 				WalkActivity.this.setResult(distance);
 				WalkActivity.this.finish();
 
-				
+
 			}
 		}
 				);
@@ -160,7 +161,7 @@ public class WalkActivity extends Activity{
 		AlertDialog alert = alertDialogBuilder.create();
 		alert.show();
 	}
-	
+
 
 	/**
 	 * Fungerar denna?

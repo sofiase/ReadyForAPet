@@ -3,6 +3,7 @@ package edu.chl.dat255.sofiase.readyforapet;
 
 import java.io.Serializable;
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
@@ -24,7 +25,7 @@ public class Settings extends Activity implements Serializable{
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
 		setContentView(R.layout.settings);
-
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	}		
 
 	/**

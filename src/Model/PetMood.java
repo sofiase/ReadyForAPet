@@ -1,17 +1,17 @@
 package Model;
 
-
 import java.io.Serializable;
-
 
 public class PetMood implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
-	private static int foodMood = 2;
-	private static int playMood = 2;
-	private static int walkMood = 2;
-	private long timeInterval = 2;
+	private static int foodMood;
+	private static int playMood;
+	private static int walkMood;
+	private static long lastEatTime;
+	private static long lastWalkTime;
+	private static long lastPlayTime;
+	private static long timeInterval = 2;
 
 
 	public PetMood(){
@@ -22,8 +22,13 @@ public class PetMood implements Serializable {
 	 * 
 	 * @param foodnumber - int
 	 */
-	public void setFoodMood (int foodnumber){
-		foodMood = foodnumber;
+	public static void setFoodMood (int foodnumber){
+		if (foodnumber >= 0){
+			foodMood = foodnumber;
+		}
+		else{
+			foodMood = 0;
+		}
 	}
 
 	/**
@@ -31,8 +36,13 @@ public class PetMood implements Serializable {
 	 * 
 	 * @param playnumber - int
 	 */
-	public void setPlayMood (int playnumber){
-		playMood = playnumber;
+	public static void setPlayMood (int playnumber){
+		if (playnumber >= 0){
+			playMood = playnumber;
+		}
+		else{
+			playMood = 0;
+		}
 	}
 
 	/**
@@ -40,8 +50,13 @@ public class PetMood implements Serializable {
 	 * 
 	 * @param playnumber - int
 	 */
-	public void setWalkMood(int walknumber){
-		walkMood = walknumber;
+	public static void setWalkMood(int walknumber){
+		if (walknumber >= 0){
+			walkMood = walknumber;
+		}
+		else{
+			walkMood = 0;
+		}
 	}
 
 	/**
@@ -49,7 +64,7 @@ public class PetMood implements Serializable {
 	 * 
 	 * @return foodMood - int
 	 */
-	public int getFoodMood (){
+	public static int getFoodMood (){
 		return foodMood;
 	}
 
@@ -58,7 +73,7 @@ public class PetMood implements Serializable {
 	 * 
 	 * @return playMood - int
 	 */
-	public int getPlayMood (){
+	public static int getPlayMood (){
 		return playMood;
 	}
 
@@ -67,7 +82,7 @@ public class PetMood implements Serializable {
 	 * 
 	 * @return foodMood - int
 	 */
-	public int getWalkMood (){
+	public static int getWalkMood (){
 		return walkMood;
 	}
 
@@ -79,31 +94,76 @@ public class PetMood implements Serializable {
 	 * 
 	 * @return the total mood of the pet
 	 */
-	public int getSumMood (){
+	public static int getSumMood (){
 		return foodMood + playMood + walkMood;
 	}
+
+	/**
+	 * 
+	 * @param time - last time the dog has eaten
+	 */
+	public static void setLastEatTime(long time){
+		lastEatTime = time;
+	}
 	
+	/**
+	 * 
+	 * @param time - last time the dog has eaten
+	 */
+	public static void setLastPlayTime(long time){
+		lastPlayTime = time;
+	}
+	
+	/**
+	 * 
+	 * @param time - last time the dog has eaten
+	 */
+	public static void setLastWalkTime(long time){
+		lastWalkTime = time;
+	}
+
+	/**
+	 * 
+	 * @return last time the dog has eaten
+	 */
+	public static long getLastEatTime(){
+		return lastEatTime;
+	}
+	
+	/**
+	 * 
+	 * @return last time the dog has eaten
+	 */
+	public static long getLastPlayTime(){
+		return lastPlayTime;
+	}
+	
+	/**
+	 * 
+	 * @return last time the dog has eaten
+	 */
+	public static long getLastWalkTime(){
+		return lastWalkTime;
+	}
+
 	/**
 	 * Method for getting current unix time
 	 *
 	 * @return time
 	 */
-	public long getCurrentTime (){
-		return System.currentTimeMillis()/3600000L;
+	public static long getCurrentTime (){
+		//return System.currentTimeMillis()/3600000L;
+		return System.currentTimeMillis()/60000L;
 	}
 
 	/**
 	 * Method that calculates how much the bar will decrease
 	 *
-	 * long current = getCurrentTime();
-	 * long previous = Saved time from last game for eat, play, walk and sleep.
-	 * moodBarDecrease (previous, current);
-	 *
 	 * @param previousTime
 	 * @param currentTime
 	 * @return number to decrease the bar with
 	 */
-	public int moodBarDecrease (long previousTime, long currentTime){
+	public static int moodBarDecrease (long previousTime, long currentTime){
 		long difference = currentTime - previousTime;
 		if (difference > timeInterval*5){
 			return -5;
@@ -124,5 +184,5 @@ public class PetMood implements Serializable {
 			return 0;
 		}
 	}
-
 }
+

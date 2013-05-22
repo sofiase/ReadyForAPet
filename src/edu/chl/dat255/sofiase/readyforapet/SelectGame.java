@@ -1,14 +1,12 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
-
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
-
 import Model.Pet;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
@@ -17,8 +15,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-
-
 public class SelectGame extends Activity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -26,7 +22,6 @@ public class SelectGame extends Activity implements Serializable {
 	private Button yes, no;
 
 	Runnable makeTextGone = new Runnable(){
-
 
 		/**
 		 * run Method
@@ -41,10 +36,6 @@ public class SelectGame extends Activity implements Serializable {
 		}
 	};
 
-
-
-
-
 	/**
 	 * onCreate method
 	 * 
@@ -54,6 +45,7 @@ public class SelectGame extends Activity implements Serializable {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
 		setContentView(R.layout.selectgame);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		Button yes = (Button) findViewById(R.id.yes);
 		yes.setVisibility(View.GONE);
@@ -74,7 +66,8 @@ public class SelectGame extends Activity implements Serializable {
 			public void onClick (View v){
 
 				try {
-					Pet.load("pet_file.dat", SelectGame.this);
+					Pet.load("pet_file.dat", SelectGame.this); 
+					//PetMood.load("petmood_file.dat", SelectGame.this); // lagt till för load
 				} catch (FileNotFoundException e) {
 					System.out.print("File not found ");
 					e.printStackTrace();
@@ -89,6 +82,7 @@ public class SelectGame extends Activity implements Serializable {
 				if (CreatePet.getPet() != null){
 					startActivity(new Intent(SelectGame.this, PetActivity.class));		
 				}
+
 				else{
 					warningMessage = (TextView) findViewById(R.id.warningmessage);
 					warningMessage.setText("Create a pet first!");
@@ -102,7 +96,8 @@ public class SelectGame extends Activity implements Serializable {
 
 		//What happens when you button create new pet is pushed
 		Button createNewPet = (Button) findViewById(R.id.createnewpet);
-		createNewPet.setOnClickListener(new OnClickListener() {	
+		createNewPet.setOnClickListener(new OnClickListener() 
+		{	
 			/**
 			 * Method onClick for the create new pet button
 			 * 
@@ -130,6 +125,7 @@ public class SelectGame extends Activity implements Serializable {
 
 						public void onClick (View v){
 							startActivity(new Intent(SelectGame.this, SelectGame.class));//kan man g�ra s�? man kan inte no yes och no annars utan att def knapparna igen?
+							
 						}
 					}
 							);

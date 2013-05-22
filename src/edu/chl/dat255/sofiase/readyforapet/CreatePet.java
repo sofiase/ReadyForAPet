@@ -1,13 +1,10 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.Serializable;
-
-import Model.Dog;
 import Model.Pet;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
@@ -24,8 +21,9 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 
 
 	private static final long serialVersionUID = 1L;
-	private String petName;
-	private static Dog dog;
+
+	private String petName; 
+	private static Pet dog; //dog innan
 	private TextView chooseAnotherName;
 
 	Runnable makeTextGone = new Runnable(){
@@ -43,7 +41,6 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 
 	/**
 	 * onCreate Method
-	 * 
 	 *
 	 * @param savedInstanceState - Bundle
 	 */
@@ -51,14 +48,15 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
 		setContentView(R.layout.createpet);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		chooseAnotherName = (TextView) findViewById(R.id.chooseanothername);
 		chooseAnotherName.setTextColor(-1);
 		chooseAnotherName.setVisibility(View.GONE);
+		
+		
 		Button create = (Button) findViewById(R.id.puppy_settings);
 		create.setOnClickListener(this);
-
-
 	}
 	/**
 	 * onClick Method
@@ -81,24 +79,10 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 			chooseAnotherName.setVisibility(View.VISIBLE);
 		}	
 		else {
-			dog = new Dog(petName);
+			dog = new Pet(petName,0,0,0);
 			startActivity(new Intent(CreatePet.this, PetActivity.class));
-		
-
-
-
-		try {
-			dog.save("pet_file.dat", this);
-		} catch (FileNotFoundException e) {
-			System.out.print("File not found kastad i CreatePet");
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.print("IOException kastad i CreatePet");
-			e.printStackTrace();
-		}
 		}
 	}
-		
 
 	/**
 	 * getPet Method
@@ -135,7 +119,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 	 * sets the pet to a pet
 	 */
 	public static void setPet(Pet pet){
-		dog = (Dog) pet;
+		dog = pet;
 	}
 
 }
