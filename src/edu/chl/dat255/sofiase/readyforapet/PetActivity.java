@@ -159,8 +159,8 @@ public class PetActivity extends Activity implements Serializable{
 			@Override
 			public void onClick (View v){
 
-				if(dog.play()=="play"){
-					petResponse = (TextView) findViewById(R.id.petresponse);
+				if(dog.play() == "play"){
+					//petResponse = (TextView) findViewById(R.id.petresponse);
 					petResponse.setText("Yeey! Lots of fun!");
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 2000);
@@ -170,8 +170,15 @@ public class PetActivity extends Activity implements Serializable{
 					moodBar = (ProgressBar) findViewById(R.id.moodbar);
 					moodBar.setProgress(PetMood.getSumMood());
 				}
+				else if(dog.play() == "toohungry"){
+					petResponse.setText("I'm too hungry!");
+					petResponse.setVisibility(View.VISIBLE);
+					uiHandler.postDelayed(makeTextGone, 2000);
+					petResponse.setVisibility(View.VISIBLE);
+					uiHandler.postDelayed(makeTextGone, 2000);
+				}
 				else{
-					petResponse = (TextView) findViewById(R.id.petresponse);
+					//petResponse = (TextView) findViewById(R.id.petresponse);
 					petResponse.setText("I'm tired! I want to rest!");
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 2000);

@@ -44,11 +44,11 @@ public class Pet implements Serializable{
 		if (hungerCounter < 5) {
 			hungerCounter = hungerCounter + 1;
 			PetMood.setFoodMood(hungerCounter);
-			return "Yummie!";
+			return "eat";
 		}	
 
 		else{
-			return "I am full";
+			return "full";
 		}
 	}
 	
@@ -109,15 +109,12 @@ public class Pet implements Serializable{
 		walkCounter = PetMood.getWalkMood();
 		hungerCounter = PetMood.getFoodMood();
 		playCounter = PetMood.getPlayMood();
-		if (playCounter + walkCounter > 6) {
-			return "I'm tired! I want to rest!";
-		}
-		else if (hungerCounter <3 && playCounter < 5)
-			return "I'm too hungry!";
+		if (hungerCounter < 3 && playCounter < 5)
+			return "toohungry";
 		else if (playCounter < 5 ) {
 			playCounter = playCounter + 1;
 			PetMood.setPlayMood(playCounter);
-			return "Yeey! Lots of fun!";
+			return "play";
 		}	
 		else{
 			return "I'm tired! I want to rest!";
