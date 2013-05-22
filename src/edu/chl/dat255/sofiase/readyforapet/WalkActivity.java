@@ -30,8 +30,6 @@ public class WalkActivity extends Activity{
 
 	private Handler handler = new Handler();
 	private static int distance = 0;
-
-
 	private LocationHelper location;
 	
 	Runnable makeViewGone = new Runnable(){
@@ -43,8 +41,6 @@ public class WalkActivity extends Activity{
 		@Override
 		public void run(){
 			dogPrints.setVisibility(View.GONE);
-	
-
 		}
 	};
 
@@ -115,7 +111,6 @@ public class WalkActivity extends Activity{
 				WalkActivity.this.setResult(distance);
 				WalkActivity.this.finish();
 
-				//startActivity(new Intent(WalkActivity.this, PetActivity.class));
 				
 			}
 		}

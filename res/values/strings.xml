@@ -9,5 +9,8 @@
     <string name="start_walking">Start walking!</string>
     <string name="stop_walking">Stop walking!</string>
     <string name="title_activity_quit">Quit</string>
+    <string name="walk">Walk</string>
+    <string name="eat">Eat</string>
+    <string name="play">Play</string>
 
 </resources>

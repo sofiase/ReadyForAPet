@@ -99,7 +99,7 @@ public class PetActivity extends Activity implements Serializable{
 			public void onClick (View v){
 
 				petResponse = (TextView) findViewById(R.id.petresponse);
-				
+
 				if(dog.eat()=="eat"){
 					petResponse.setText("Yummie!");
 					petResponse.setVisibility(View.VISIBLE);
@@ -116,8 +116,6 @@ public class PetActivity extends Activity implements Serializable{
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 5000);
 				}
-
-
 
 				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
@@ -190,7 +188,7 @@ public class PetActivity extends Activity implements Serializable{
 		}
 				);
 
-		
+
 		//Music
 		try {
 			afd = getAssets().openFd("readyforapetsong4.m4v");
@@ -211,7 +209,7 @@ public class PetActivity extends Activity implements Serializable{
 	 */
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
 		petResponse = (TextView) findViewById(R.id.petresponse);
-		
+
 		//Gets the dog's response and sets the value the moodbar should have after taking a walk
 		petResponse.setText(dog.walk(resultCode));
 		petResponse.setVisibility(View.VISIBLE);
@@ -239,7 +237,7 @@ public class PetActivity extends Activity implements Serializable{
 	 */
 	public void onResume() {
 		super.onResume();
-		player.start(); // HŠr kommer eroormeddelandet!!
+		player.start();
 	}
 
 	/**

@@ -31,7 +31,7 @@
     	     android:layout_alignParentBottom="true"
     	     android:layout_alignParentLeft="true"
     	     android:background="@drawable/buttonshape"
-    	     android:text="Walk" />
+    	     android:text="@string/walk" />
 
     	 <Button
     	     android:id="@+id/eat"
@@ -40,7 +40,7 @@
     	     android:layout_alignParentLeft="true"
     	     android:layout_marginTop="36dp"
     	     android:background="@drawable/buttonshape"
-    	     android:text="Eat" />
+    	     android:text="@string/eat" />
 
     	 <Button
     	     android:id="@+id/play"
@@ -50,7 +50,7 @@
     	     android:layout_alignBottom="@+id/eat"
     	     android:layout_alignParentRight="true"
     	     android:background="@drawable/buttonshape"
-    	     android:text="Play" />
+    	     android:text="@string/play" />
 
     	 <ImageView
     	     android:id="@+id/dogpicture"

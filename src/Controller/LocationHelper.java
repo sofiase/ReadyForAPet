@@ -55,7 +55,7 @@ public class LocationHelper{
 				geoPointB = new GeoPoint(degreesToMicrodegrees(location.getLatitude()), degreesToMicrodegrees(location.getLongitude()));
 			}
 
-			//Getting the current GeoPoint.
+			//Getting the current GeoPoint
 			geoPointA = new GeoPoint(degreesToMicrodegrees(location.getLatitude()), degreesToMicrodegrees(location.getLongitude()));
 
 			//Calculating the distance in meters
