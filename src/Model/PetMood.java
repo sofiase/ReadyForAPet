@@ -149,7 +149,7 @@ public class PetMood implements Serializable {
 	/**
 	 * Method for getting current unix time
 	 *
-	 * @return time
+	 * @return time in hour
 	 */
 	public static long getCurrentTime (){
 		return System.currentTimeMillis()/3600000L;

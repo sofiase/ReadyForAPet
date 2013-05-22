@@ -13,19 +13,22 @@ import android.content.Context;
 public class Pet implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	private String name;
 	private int hungerCounter;
 	private int walkCounter;
 	private int playCounter;
+	private long petBirthTime;
 	private long lastEatTime;
 	private long lastWalkTime;
 	private long lastPlayTime;
-	private String name;
+	
 
-	public Pet (String petName, int hungerCounter, int walkCounter, int playCounter){
+	public Pet (String petName, int hungerCounter, int walkCounter, int playCounter, long petBirthTime){
 		this.name = petName;
 		PetMood.setFoodMood(hungerCounter);
 		PetMood.setWalkMood(walkCounter);
 		PetMood.setPlayMood(playCounter);
+		this.petBirthTime = petBirthTime;
 	}
 
 	/**
@@ -126,6 +129,10 @@ public class Pet implements Serializable{
 		else{
 			return "I'm tired! I want to rest!";
 		}
+	}
+
+	public long getBirthTime(){
+		return petBirthTime;
 	}
 
 

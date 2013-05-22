@@ -94,7 +94,7 @@ public class SelectGame extends Activity implements Serializable {
 				);
 
 
-		//What happens when you button create new pet is pushed
+		//What happens when button create new pet is pushed
 		Button createNewPet = (Button) findViewById(R.id.createnewpet);
 		createNewPet.setOnClickListener(new OnClickListener() 
 		{	
@@ -106,7 +106,7 @@ public class SelectGame extends Activity implements Serializable {
 			public void onClick (View v){
 				if (CreatePet.getPet() != null){
 					showWarningAlert();
-				
+
 				}
 				else{
 					startActivity(new Intent(SelectGame.this,CreatePet.class));
@@ -116,42 +116,47 @@ public class SelectGame extends Activity implements Serializable {
 			}
 		}
 				);
-				
+
 	}
- 
-		/**
-		 * Configurates the navigate Up button in this activity
-		 *
-		 * @param item - MenuItem
-		 */
-		@Override
-		public boolean onOptionsItemSelected(MenuItem item) {
-			switch (item.getItemId()) {
-			case android.R.id.home:
-				NavUtils.navigateUpFromSameTask(this);
-				return true;
+
+	/**
+	 * Configurates the navigate Up button in this activity
+	 *
+	 * @param item - MenuItem
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			NavUtils.navigateUpFromSameTask(this);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	
+	/**
+	 * Shows a warning alert when user tries to create a new pet but already has one
+	 * 
+	 */
+	private void showWarningAlert(){
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+		alertDialogBuilder.setMessage("You already have a pet. Are you sure you want to replace it?")
+		.setCancelable(false)
+		.setPositiveButton("Yes",
+				new DialogInterface.OnClickListener(){
+			public void onClick(DialogInterface dialog, int id){
+				startActivity(new Intent(SelectGame.this, CreatePet.class));
 			}
-			return super.onOptionsItemSelected(item);
-		}
-		
-		private void showWarningAlert(){
-			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-			alertDialogBuilder.setMessage("You already have a pet. Are you sure you want to replace it?")
-			.setCancelable(false)
-			.setPositiveButton("Yes",
-					new DialogInterface.OnClickListener(){
-				public void onClick(DialogInterface dialog, int id){
-					startActivity(new Intent(SelectGame.this, CreatePet.class));
-				}
-			});
-			alertDialogBuilder.setNegativeButton("No",
-					new DialogInterface.OnClickListener(){
-				public void onClick(DialogInterface dialog, int id){
-					dialog.cancel();
-				}
-			});
-			AlertDialog alert = alertDialogBuilder.create();
-			alert.show();
-		}
-		
+		});
+		alertDialogBuilder.setNegativeButton("No",
+				new DialogInterface.OnClickListener(){
+			public void onClick(DialogInterface dialog, int id){
+				dialog.cancel();
+			}
+		});
+		AlertDialog alert = alertDialogBuilder.create();
+		alert.show();
 	}
+
+}

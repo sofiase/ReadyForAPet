@@ -7,8 +7,8 @@ import java.io.Serializable;
 
 public class Dog extends Pet implements Serializable {
 
-	public Dog(String name, int hungerCounter, int walkCounter, int playCounter) {
-		super(name, hungerCounter, walkCounter, playCounter);
+	public Dog(String name, int hungerCounter, int walkCounter, int playCounter, long petBirthTime) {
+		super(name, hungerCounter, walkCounter, playCounter, petBirthTime);
 		// TODO Auto-generated constructor stub
 	}
 
