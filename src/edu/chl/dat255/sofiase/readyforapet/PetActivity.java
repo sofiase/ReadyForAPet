@@ -30,6 +30,7 @@ public class PetActivity extends Activity implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private TextView petResponse; 
 	private Handler uiHandler = new Handler();
+	//private Handler handler = new Handler();
 	private ImageView dogBiscuit, dogPicture;
 	private ProgressBar moodBar;
 	private Pet dog;
@@ -37,6 +38,7 @@ public class PetActivity extends Activity implements Serializable{
 	private static final String LOG_test = "foodmood";
 	private static final String LOG_test1 = "walkmood";
 	private static final String LOG_test2 = "playmood";
+
 
 	//Variables for playing music in Pet Activity
 	private MediaPlayer player;
@@ -52,6 +54,7 @@ public class PetActivity extends Activity implements Serializable{
 		public void run(){
 			petResponse.setVisibility(View.GONE);
 			dogBiscuit.setVisibility(View.GONE);
+
 		}
 	};
 
@@ -60,6 +63,9 @@ public class PetActivity extends Activity implements Serializable{
 	 *
 	 * @param savedInstanceState - Bundle
 	 */
+
+
+
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 
@@ -67,18 +73,22 @@ public class PetActivity extends Activity implements Serializable{
 		setContentView(R.layout.petactivity);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-
 		dog = CreatePet.getPet();
 		String petName = dog.getName(); 
 
 
 		dogBiscuit = (ImageView) findViewById(R.id.dogbiscuit);
 		dogBiscuit.setVisibility(View.GONE);
-		
-		
+
+
 		dogPicture = (ImageView) findViewById(R.id.dogpicture);
-		changePicture();
 		dogPicture.setVisibility(View.VISIBLE);
+		changePicture();
+
+		final Button play = (Button) findViewById(R.id.play);
+		final Button walk = (Button) findViewById(R.id.walk);
+		final Button eat = (Button) findViewById(R.id.eat);
+		
 
 		//Making welcome message
 		petResponse = (TextView) findViewById(R.id.petresponse);
@@ -99,10 +109,8 @@ public class PetActivity extends Activity implements Serializable{
 		Log.i(LOG_test2, Integer.toString(PetMood.getPlayMood()));
 		
 		moodBar = (ProgressBar) findViewById(R.id.moodbar);
-		moodBar.setProgress(PetMood.getSumMood());
+		moodBar.setProgress(PetMood.getSumMood()); 
 
-
-		Button eat = (Button) findViewById(R.id.eat);
 		eat.setOnClickListener(new OnClickListener() {
 
 			/**
@@ -118,16 +126,43 @@ public class PetActivity extends Activity implements Serializable{
 				petResponse = (TextView) findViewById(R.id.petresponse);
 
 				if(dog.eat()=="eat"){
+					play.setEnabled(false);
+					eat.setEnabled(false);
+					walk.setEnabled(false);
+					new Handler().postDelayed(new Runnable() { 
+						@Override
+						public void run() {
+							eat.setEnabled(true);
+							walk.setEnabled(true);
+							play.setEnabled(true);
+						}
+					}, 10000);
 
 					petResponse.setText("Yummie!");
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 10000);
 					dogBiscuit.setVisibility(View.VISIBLE);
 					dogBiscuit.setBackgroundResource(R.anim.animation);
-					AnimationDrawable anim = (AnimationDrawable) dogBiscuit.getBackground(); 
-					anim.start();	//varfï¿½r funkar det inte andra gg man trycker?
+					final AnimationDrawable anim = (AnimationDrawable) dogBiscuit.getBackground(); 
+					anim.start();	
 					uiHandler.postDelayed(makeTextGone, 10000);
 
+					/** is this needed??
+					TimerTask timertask = new TimerTask() {
+						@Override
+						public void run() {
+							anim.stop();
+
+						}
+
+					};
+
+					timer = new Timer();
+					timer.schedule(timertask, 10000);
+
+
+
+					 */
 				}
 				else{
 					petResponse.setText("I'm full!");
@@ -146,7 +181,7 @@ public class PetActivity extends Activity implements Serializable{
 
 
 		// Making the play button
-		Button play = (Button) findViewById(R.id.play);
+		//Button play = (Button) findViewById(R.id.play);
 		play.setOnClickListener(new OnClickListener() {
 
 			/**
@@ -158,12 +193,25 @@ public class PetActivity extends Activity implements Serializable{
 			public void onClick (View v){
 
 				if(dog.play() == "play"){
-					//petResponse = (TextView) findViewById(R.id.petresponse);
+					play.setEnabled(false);
+					eat.setEnabled(false);
+					walk.setEnabled(false);
+					new Handler().postDelayed(new Runnable() { //vafšr kan man inte lŠgga i samma run egentligen?
+						@Override
+						public void run() {
+							eat.setEnabled(true);
+							walk.setEnabled(true);
+							play.setEnabled(true);
+						}
+					}, 5000);
+
 					petResponse.setText("Yeey! Lots of fun!");
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 2000);
-					Animation anim = AnimationUtils.loadAnimation(PetActivity.this, R.anim.animation1);
+					final Animation anim = AnimationUtils.loadAnimation(PetActivity.this, R.anim.animation1);
 					dogPicture.startAnimation(anim);
+
+
 					//Updating the moodbar
 					moodBar = (ProgressBar) findViewById(R.id.moodbar);
 					moodBar.setProgress(PetMood.getSumMood());
@@ -177,7 +225,7 @@ public class PetActivity extends Activity implements Serializable{
 				}
 
 				else{
-					//petResponse = (TextView) findViewById(R.id.petresponse);
+
 					petResponse.setText("I'm tired! I want to rest!");
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 2000);
@@ -190,7 +238,7 @@ public class PetActivity extends Activity implements Serializable{
 
 
 		// Making the walk button
-		Button walk = (Button) findViewById(R.id.walk);
+		//Button walk = (Button) findViewById(R.id.walk);
 		walk.setOnClickListener(new OnClickListener() {
 
 			/**
@@ -319,8 +367,8 @@ public class PetActivity extends Activity implements Serializable{
 			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.doghappy));
 		}
 
-	}
 
+	}
 
 
 }

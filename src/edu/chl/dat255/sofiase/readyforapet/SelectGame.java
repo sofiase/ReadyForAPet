@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import Model.Pet;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -19,7 +21,7 @@ public class SelectGame extends Activity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private TextView warningMessage;
-	private Button yes, no;
+
 
 	Runnable makeTextGone = new Runnable(){
 
@@ -30,8 +32,6 @@ public class SelectGame extends Activity implements Serializable {
 		 */
 		@Override
 		public void run(){
-			yes.setVisibility(View.GONE);
-			no.setVisibility(View.GONE);
 			warningMessage.setVisibility(View.GONE);
 		}
 	};
@@ -105,30 +105,8 @@ public class SelectGame extends Activity implements Serializable {
 			 */
 			public void onClick (View v){
 				if (CreatePet.getPet() != null){
-
-					warningMessage = (TextView) findViewById(R.id.warningmessage);
-					warningMessage.setText("Are you sure you want to create a new pet and delete your old one?");
-
-					Button yes = (Button) findViewById(R.id.yes);
-					yes.setVisibility(View.VISIBLE);
-					yes.setOnClickListener(new OnClickListener() {
-
-						public void onClick (View v){
-							startActivity(new Intent(SelectGame.this, CreatePet.class));
-							//delete old pet from file here later
-						}
-					}
-							);
-					Button no = (Button) findViewById(R.id.no);
-					no.setVisibility(View.VISIBLE);
-					no.setOnClickListener(new OnClickListener() {
-
-						public void onClick (View v){
-							startActivity(new Intent(SelectGame.this, SelectGame.class));//kan man g�ra s�? man kan inte no yes och no annars utan att def knapparna igen?
-							
-						}
-					}
-							);
+					showWarningAlert();
+				
 				}
 				else{
 					startActivity(new Intent(SelectGame.this,CreatePet.class));
@@ -138,8 +116,9 @@ public class SelectGame extends Activity implements Serializable {
 			}
 		}
 				);
+				
 	}
-
+ 
 		/**
 		 * Configurates the navigate Up button in this activity
 		 *
@@ -153,6 +132,26 @@ public class SelectGame extends Activity implements Serializable {
 				return true;
 			}
 			return super.onOptionsItemSelected(item);
+		}
+		
+		private void showWarningAlert(){
+			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+			alertDialogBuilder.setMessage("You already have a pet. Are you sure you want to replace it?")
+			.setCancelable(false)
+			.setPositiveButton("Yes",
+					new DialogInterface.OnClickListener(){
+				public void onClick(DialogInterface dialog, int id){
+					startActivity(new Intent(SelectGame.this, CreatePet.class));
+				}
+			});
+			alertDialogBuilder.setNegativeButton("No",
+					new DialogInterface.OnClickListener(){
+				public void onClick(DialogInterface dialog, int id){
+					dialog.cancel();
+				}
+			});
+			AlertDialog alert = alertDialogBuilder.create();
+			alert.show();
 		}
 		
 	}

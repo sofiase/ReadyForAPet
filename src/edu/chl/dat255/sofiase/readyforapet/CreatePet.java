@@ -3,6 +3,8 @@ package edu.chl.dat255.sofiase.readyforapet;
 import java.io.Serializable;
 import Model.Pet;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class CreatePet extends Activity implements OnClickListener, Serializable {
@@ -24,20 +27,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 
 	private String petName; 
 	private static Pet dog; //dog innan
-	private TextView chooseAnotherName;
 
-	Runnable makeTextGone = new Runnable(){
-
-		/**
-		 * run method
-		 * 
-		 */
-		@Override
-		public void run(){
-			chooseAnotherName.setVisibility(View.GONE);
-
-		}
-	};
 
 	/**
 	 * onCreate Method
@@ -49,12 +39,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		super.onCreate (savedInstanceState);
 		setContentView(R.layout.createpet);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-		chooseAnotherName = (TextView) findViewById(R.id.chooseanothername);
-		chooseAnotherName.setTextColor(-1);
-		chooseAnotherName.setVisibility(View.GONE);
-		
-		
+				
 		Button create = (Button) findViewById(R.id.puppy_settings);
 		create.setOnClickListener(this);
 	}
@@ -70,14 +55,10 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 
 		EditText setName = (EditText) findViewById(R.id.edit_pet_name);
 		petName = setName.getText().toString();
-		if (petName.equalsIgnoreCase("null")){
-			chooseAnotherName.setText("Choose another name!");	
-			chooseAnotherName.setVisibility(View.VISIBLE);
+		if (petName.equals("")){
+			Toast.makeText(this, "Give your pet a name!", Toast.LENGTH_SHORT).show();
 		}
-		else if(petName.equals("")){
-			chooseAnotherName.setText("Give your pet a name!");	
-			chooseAnotherName.setVisibility(View.VISIBLE);
-		}	
+		
 		else {
 			dog = new Pet(petName,0,0,0);
 			startActivity(new Intent(CreatePet.this, PetActivity.class));
@@ -121,6 +102,8 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 	public static void setPet(Pet pet){
 		dog = pet;
 	}
+
+	
 
 }
 
