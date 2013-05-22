@@ -1,10 +1,9 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
 
-
 import java.io.IOException;
 import java.io.Serializable;
-import Model.Dog;
+import Model.Pet;
 import Model.PetMood;
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -17,6 +16,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,14 +29,13 @@ import android.widget.TextView;
 
 public class PetActivity extends Activity implements Serializable{ 
 
-
 	private static final long serialVersionUID = 1L;
+	private static final String LOG_test = null;
 	private TextView petResponse; 
 	private Handler uiHandler = new Handler();
 	private ImageView dogBiscuit, dogPicture;
 	private ProgressBar moodBar;
-	private PetMood petMood = new PetMood();
-	private Dog dog = (Dog) CreatePet.getPet();
+	private Pet dog;
 
 
 
@@ -55,10 +54,9 @@ public class PetActivity extends Activity implements Serializable{
 		public void run(){
 			petResponse.setVisibility(View.GONE);
 			dogBiscuit.setVisibility(View.GONE);
-
-
 		}
 	};
+
 	/**
 	 * onCreate Method
 	 *
@@ -66,20 +64,32 @@ public class PetActivity extends Activity implements Serializable{
 	 */
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.petactivity);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+		//Katrins gamla kod:
+		//petResponse = (TextView) findViewById(R.id.petresponse);
+		//petResponse.setVisibility(View.GONE);
+
+		//dogBiscuit = (ImageView) findViewById(R.id.dogbiscuit);
+		//dogBiscuit.setVisibility(View.GONE);
+
+		dog = CreatePet.getPet();
+		String petName = dog.getName(); 
 
 		dogBiscuit = (ImageView) findViewById(R.id.dogbiscuit);
 		dogBiscuit.setVisibility(View.GONE);
 
 
-		dogPicture = (ImageView) findViewById(R.id.dogpicture);//kolla om detta behšvs
+		dogPicture = (ImageView) findViewById(R.id.dogpicture);//kolla om detta behï¿½vs
 		dogPicture.setVisibility(View.VISIBLE);
 		changePicture();
+		//Sofias kod:
+		//Dog pet = (Dog) CreatePet.getPet();
+		//String petName = pet.getName();
 
-		Dog pet = (Dog) CreatePet.getPet();
-		String petName = pet.getName();
 
 
 
@@ -91,9 +101,7 @@ public class PetActivity extends Activity implements Serializable{
 		uiHandler.postDelayed(makeTextGone, 2000);	
 
 		moodBar = (ProgressBar) findViewById(R.id.moodbar);
-		moodBar.setProgress(petMood.getSumMood());
-
-		// Making the eat button
+		moodBar.setProgress(PetMood.getSumMood()); 
 		Button eat = (Button) findViewById(R.id.eat);
 		eat.setOnClickListener(new OnClickListener() {
 
@@ -117,7 +125,7 @@ public class PetActivity extends Activity implements Serializable{
 					dogBiscuit.setVisibility(View.VISIBLE);
 					dogBiscuit.setBackgroundResource(R.anim.animation);
 					AnimationDrawable anim = (AnimationDrawable) dogBiscuit.getBackground(); 
-					anim.start();	//varfšr funkar det inte andra gg man trycker?
+					anim.start();	//varfï¿½r funkar det inte andra gg man trycker?
 					uiHandler.postDelayed(makeTextGone, 10000);
 
 				}
@@ -128,11 +136,9 @@ public class PetActivity extends Activity implements Serializable{
 				}
 				changePicture();
 
-
-
 				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
-				moodBar.setProgress(petMood.getSumMood());
+				moodBar.setProgress(PetMood.getSumMood());
 			}
 		}
 				);
@@ -149,10 +155,9 @@ public class PetActivity extends Activity implements Serializable{
 			 */
 			@Override
 			public void onClick (View v){
-				if(dog.play()=="play"){
 
-					
-					petResponse = (TextView) findViewById(R.id.petresponse);
+				if(dog.play() == "play"){
+					//petResponse = (TextView) findViewById(R.id.petresponse);
 					petResponse.setText("Yeey! Lots of fun!");
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 2000);
@@ -160,16 +165,24 @@ public class PetActivity extends Activity implements Serializable{
 					dogPicture.startAnimation(anim);
 					//Updating the moodbar
 					moodBar = (ProgressBar) findViewById(R.id.moodbar);
-					moodBar.setProgress(petMood.getSumMood());
+					moodBar.setProgress(PetMood.getSumMood());
+				}
+				else if(dog.play() == "toohungry"){
+					petResponse.setText("I'm too hungry!");
+					petResponse.setVisibility(View.VISIBLE);
+					uiHandler.postDelayed(makeTextGone, 2000);
+					petResponse.setVisibility(View.VISIBLE);
+					uiHandler.postDelayed(makeTextGone, 2000);
 				}
 		
 				else{
-					petResponse = (TextView) findViewById(R.id.petresponse);
+					//petResponse = (TextView) findViewById(R.id.petresponse);
 					petResponse.setText("I'm tired! I want to rest!");
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 2000);
 				}
 				changePicture();
+
 			}
 		}
 				);
@@ -187,9 +200,8 @@ public class PetActivity extends Activity implements Serializable{
 			@Override
 			public void onClick (View v){
 
-
 				// Moving to the WalkActivity class if foodmood is high enough and petmood is below 5.
-				if((petMood.getFoodMood() < 3 && petMood.getWalkMood() < 5) || petMood.getFoodMood() > 5){
+				if((PetMood.getFoodMood() < 3 && PetMood.getWalkMood() < 5) || PetMood.getFoodMood() > 5){
 
 					petResponse = (TextView) findViewById(R.id.petresponse);
 					petResponse.setText(dog.walk(0));
@@ -200,15 +212,10 @@ public class PetActivity extends Activity implements Serializable{
 					PetActivity.this.startActivityForResult(new Intent(PetActivity.this, WalkActivity.class), 1);
 				}
 				changePicture();
-
 			}
 		}
 				);
-		
-		
-		
 
-		
 		//Music
 		try {
 			afd = getAssets().openFd("readyforapetsong4.m4v");
@@ -237,7 +244,7 @@ public class PetActivity extends Activity implements Serializable{
 
 		// Updating the moodbar after taking a walk
 		moodBar = (ProgressBar) findViewById(R.id.moodbar);
-		moodBar.setProgress(petMood.getSumMood());
+		moodBar.setProgress(PetMood.getSumMood());
 	}
 
 	/**
@@ -248,7 +255,18 @@ public class PetActivity extends Activity implements Serializable{
 	public void onPause() {
 		super.onPause();
 		player.pause();
+
+		try { //lagt till fÃ¶r att spara dogs mood
+			//Dog savedog = new Dog(dog.getName(),petMood.getFoodMood(), petMood.getWalkMood(),petMood.getPlayMood());
+			dog.save("pet_file.dat",PetActivity.this);
+			Log.i(LOG_test,Integer.toString(PetMood.getFoodMood()));
+			//petMood.save("petmood_file.dat", PetActivity.this); //eventuellt??
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
+
+
 
 	/**
 	 * Method onResume for the activity
@@ -257,7 +275,7 @@ public class PetActivity extends Activity implements Serializable{
 	 */
 	public void onResume() {
 		super.onResume();
-		player.start(); // HŠr kommer eroormeddelandet!!
+		player.start(); // Hï¿½r kommer eroormeddelandet!!
 	}
 
 	/**
@@ -290,10 +308,10 @@ public class PetActivity extends Activity implements Serializable{
 
 
 	private void changePicture(){
-		if(petMood.getWalkMood()<5 && petMood.getFoodMood() > 3){
+		if(PetMood.getWalkMood()<5 && PetMood.getFoodMood() > 3){
 			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogpoop));
 		}
-		else if(petMood.getSumMood() < 10){
+		else if(PetMood.getSumMood() < 10){
 			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogsad));
 		}
 		else{

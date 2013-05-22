@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 import Model.Dog;
 
 public class DogTest extends TestCase {
-	Dog tdog = new Dog("olle");
+	Dog tdog = new Dog("olle",2,2,2);
 	
 	public DogTest() {
 	} 

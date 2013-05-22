@@ -7,18 +7,13 @@ import java.io.Serializable;
 
 public class Dog extends Pet implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	private String name;
-
-	/**
-	 * Constructor that sets the name of the dog.
-	 *
-	 * @param name - String
-	 */
-	public Dog(String name){
-		this.name = name; 
+	public Dog(String name, int hungerCounter, int walkCounter, int playCounter) {
+		super(name, hungerCounter, walkCounter, playCounter);
+		// TODO Auto-generated constructor stub
 	}
 
+	private static final long serialVersionUID = 1L;
+	private String name;
 
 	/**
 	 * Method that makes the dog name available to all classes.

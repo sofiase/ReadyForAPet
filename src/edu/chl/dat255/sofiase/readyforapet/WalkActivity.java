@@ -81,12 +81,11 @@ public class WalkActivity extends Activity{
 			 * @param v - View
 			 */
 			public void onClick (View v){
-				
 				dogPrints.setVisibility(View.VISIBLE);
 				dogPrints.setBackgroundResource(R.anim.animation3);
 				AnimationDrawable anim = (AnimationDrawable) dogPrints.getBackground(); 
 				anim.start();
-				uiHandler.postDelayed(makeViewGone, 7000);//stŠngs Šven animationen iom att vi stŠnger bilden?
+				uiHandler.postDelayed(makeViewGone, 7000);//stï¿½ngs ï¿½ven animationen iom att vi stï¿½nger bilden?
 				
 				try{
 					timer = new Timer();
