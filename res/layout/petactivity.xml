@@ -67,7 +67,7 @@
     	     android:layout_height="100dp"
     	     android:layout_above="@+id/walk"
     	     android:layout_centerHorizontal="true"
-    	     android:src="@drawable/dogbiscuit" />
+    	     android:src="@drawable/dogbiscuit5" />
 
 
 </RelativeLayout>

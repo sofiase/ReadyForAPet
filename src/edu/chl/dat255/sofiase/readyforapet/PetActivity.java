@@ -106,12 +106,9 @@ public class PetActivity extends Activity implements Serializable{
 			 */
 			@Override
 			public void onClick (View v){
-				
-				
-				
-				
+			
 				petResponse = (TextView) findViewById(R.id.petresponse);
-
+				
 				if(dog.eat()=="eat"){
 
 					petResponse.setText("Yummie!");
@@ -165,6 +162,7 @@ public class PetActivity extends Activity implements Serializable{
 					moodBar = (ProgressBar) findViewById(R.id.moodbar);
 					moodBar.setProgress(petMood.getSumMood());
 				}
+		
 				else{
 					petResponse = (TextView) findViewById(R.id.petresponse);
 					petResponse.setText("I'm tired! I want to rest!");
