@@ -3,8 +3,6 @@ package edu.chl.dat255.sofiase.readyforapet;
 import java.io.Serializable;
 import Model.Pet;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -12,10 +10,8 @@ import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -26,7 +22,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 	private static final long serialVersionUID = 1L;
 
 	private String petName; 
-	private static Pet dog; //dog innan
+	private static Pet dog;
 
 
 	/**
