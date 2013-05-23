@@ -95,6 +95,17 @@ public class PetActivity extends Activity implements Serializable{
 		petResponse.setText("Hello, my name is " + petName + "!");		
 		petResponse.setVisibility(View.VISIBLE);
 		uiHandler.postDelayed(makeTextGone, 2000);	
+		play.setEnabled(false);
+		eat.setEnabled(false);
+		walk.setEnabled(false);
+		new Handler().postDelayed(new Runnable() { 
+			@Override
+			public void run() {
+				eat.setEnabled(true);
+				walk.setEnabled(true);
+				play.setEnabled(true);
+			}
+		}, 2000);
 
 
 		//Decreasing the FoodMood depending on how much time has passed since last eat
@@ -204,13 +215,15 @@ public class PetActivity extends Activity implements Serializable{
 							play.setEnabled(true);
 						}
 					}, 5000);
-
+					startActivity(new Intent(PetActivity.this, PlayActivity.class));
 					petResponse.setText("Yeey! Lots of fun!");
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 2000);
 					final Animation anim = AnimationUtils.loadAnimation(PetActivity.this, R.anim.animation1);
 					dogPicture.startAnimation(anim);
 
+					//fšr att bbyta aktivitet
+					
 
 					//Updating the moodbar
 					moodBar = (ProgressBar) findViewById(R.id.moodbar);
