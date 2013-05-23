@@ -1,9 +1,11 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import Model.Pet;
+import Model.PetMood;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -11,6 +13,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,7 +23,9 @@ import android.widget.TextView;
 public class SelectGame extends Activity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	protected static final String LOG_load = "Gets saved foodmood";
 	private TextView warningMessage;
+	private static final String LOG_TAG = "File status after method load";
 
 
 	Runnable makeTextGone = new Runnable(){
@@ -67,7 +72,7 @@ public class SelectGame extends Activity implements Serializable {
 
 				try {
 					Pet.load("pet_file.dat", SelectGame.this); 
-					//PetMood.load("petmood_file.dat", SelectGame.this); // lagt till för load
+					Log.i(LOG_load,Integer.toString(PetMood.getFoodMood()));					
 				} catch (FileNotFoundException e) {
 					System.out.print("File not found ");
 					e.printStackTrace();
@@ -80,8 +85,18 @@ public class SelectGame extends Activity implements Serializable {
 				} 
 
 				if (CreatePet.getPet() != null){
-					startActivity(new Intent(SelectGame.this, PetActivity.class));		
-				}
+					startActivity(new Intent(SelectGame.this, PetActivity.class));	
+				
+						String fname = "pet_file.dat";
+						File file = getBaseContext().getFileStreamPath(fname);
+						if(file.exists()){
+							Log.i(LOG_TAG,"is saved on internal memory");
+						}
+						else{
+							 Log.i(LOG_TAG,"is not saved on internal memory");
+						}  
+						}  
+				
 
 				else{
 					warningMessage = (TextView) findViewById(R.id.warningmessage);
@@ -118,6 +133,9 @@ public class SelectGame extends Activity implements Serializable {
 				);
 
 	}
+	
+	
+
 
 	/**
 	 * Configurates the navigate Up button in this activity
@@ -185,5 +203,6 @@ public class SelectGame extends Activity implements Serializable {
 	        // The activity is about to be destroyed.
 	    }
 
-
 }
+
+

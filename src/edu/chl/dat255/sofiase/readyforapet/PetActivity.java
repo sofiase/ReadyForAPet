@@ -1,6 +1,7 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import Model.Pet;
@@ -30,6 +31,7 @@ public class PetActivity extends Activity implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private TextView petResponse;
 	private TextView showPetAge;
+	private static final String LOG_TAG = "File status after method save";
 	private Handler uiHandler = new Handler();
 	//private Handler handler = new Handler();
 	private ImageView dogBiscuit, dogPicture;
@@ -216,7 +218,7 @@ public class PetActivity extends Activity implements Serializable{
 					play.setEnabled(false);
 					eat.setEnabled(false);
 					walk.setEnabled(false);
-					new Handler().postDelayed(new Runnable() { //vafšr kan man inte lŠgga i samma run egentligen?
+					new Handler().postDelayed(new Runnable() { //vafï¿½r kan man inte lï¿½gga i samma run egentligen?
 						@Override
 						public void run() {
 							eat.setEnabled(true);
@@ -231,7 +233,7 @@ public class PetActivity extends Activity implements Serializable{
 					final Animation anim = AnimationUtils.loadAnimation(PetActivity.this, R.anim.animation1);
 					dogPicture.startAnimation(anim);
 
-					//fšr att bbyta aktivitet
+					//fï¿½r att bbyta aktivitet
 					
 
 					//Updating the moodbar
@@ -328,9 +330,17 @@ public class PetActivity extends Activity implements Serializable{
 		super.onPause();
 		player.pause();
 
-		try {
-			dog.save("pet_file.dat", PetActivity.this);
-			//petMood.save("petmood_file.dat", PetActivity.this);
+
+		try { 
+			dog.save("pet_file.dat",PetActivity.this);
+			File file = getBaseContext().getFileStreamPath("pet_file.dat");
+			if(file.exists()){
+				Log.i(LOG_TAG,"is saved on internal memory");
+			}
+			else{
+				 Log.i(LOG_TAG,"is not saved on internal memory");
+			}  
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

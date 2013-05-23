@@ -82,6 +82,7 @@
              <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.chl.dat255.sofiase.readyforapet.PetActivity" />
+
         </activity>
     </application>
 
