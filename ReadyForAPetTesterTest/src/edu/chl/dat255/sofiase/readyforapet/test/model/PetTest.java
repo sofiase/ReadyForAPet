@@ -19,9 +19,10 @@ public class PetTest extends TestCase {
 	}
 
 	/**
-	 * testMethodgetName Method 
+	 * test for getName Method 
 	 *  	
-	 *  Test for the method getName in the class Dog 
+	 *  Test for the method getName in the class Pet
+	 *  
 	 */
 	public void testMethodgetName () {
 		assertEquals("olle",pet.getName());

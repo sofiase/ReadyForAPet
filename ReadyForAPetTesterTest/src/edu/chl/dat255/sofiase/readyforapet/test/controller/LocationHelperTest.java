@@ -20,7 +20,13 @@ public class LocationHelperTest extends TestCase {
 	protected void tearDown() throws Exception {
 		super.tearDown();
 	}
-	
+	/**
+	 * Method for testing the distance that is counted in class Geodetics, which is imported as a library
+	 * in the android project. The test compares the distance from Geodetics with 
+	 * distance and coordinates from two different maps, Google Maps and Eniro. 
+	 * More about which distances that is used can be found in documentation for testing.
+	 * 
+	 */
 	public void testDistance () {
 		GeoPoint geoA = new GeoPoint(LocationHelper.degreesToMicrodegrees(57.689442),LocationHelper.degreesToMicrodegrees(11.980654));
 		GeoPoint geoB = new GeoPoint(LocationHelper.degreesToMicrodegrees(57.687596),LocationHelper.degreesToMicrodegrees(11.982285));
