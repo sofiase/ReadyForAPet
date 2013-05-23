@@ -1,8 +1,10 @@
-package edu.chl.dat255.sofiase.readyforapet;
+package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import Controller.LocationHelper;
+
+import edu.chl.dat255.sofiase.readyforapet.R;
+import edu.chl.dat255.sofiase.readyforapet.util.LocationHelper;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;

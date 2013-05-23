@@ -1,4 +1,4 @@
-package Model;
+package edu.chl.dat255.sofiase.readyforapet.model;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package Model;
+package edu.chl.dat255.sofiase.readyforapet.model;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import edu.chl.dat255.sofiase.readyforapet.CreatePet;
+
+import edu.chl.dat255.sofiase.readyforapet.viewcontroller.CreatePet;
 import android.content.Context;
 import android.util.Log;
 

@@ -1,8 +1,10 @@
-package edu.chl.dat255.sofiase.readyforapet;
+package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 
 import java.io.Serializable;
-import Model.Pet;
-import Model.PetMood;
+
+import edu.chl.dat255.sofiase.readyforapet.R;
+import edu.chl.dat255.sofiase.readyforapet.model.Pet;
+import edu.chl.dat255.sofiase.readyforapet.model.PetMood;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
