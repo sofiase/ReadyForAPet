@@ -337,7 +337,12 @@ public class PetActivity extends Activity implements Serializable{
 	}
 
 
-
+	@Override
+    protected void onStart() {
+        super.onStart();
+        // The activity is about to become visible.
+    }
+	
 	/**
 	 * Method onResume for the activity
 	 * 
@@ -348,6 +353,11 @@ public class PetActivity extends Activity implements Serializable{
 		player.start();
 	}
 
+	
+	
+	
+    
+	
 	/**
 	 * Method onStop for the activity
 	 * 
@@ -358,6 +368,11 @@ public class PetActivity extends Activity implements Serializable{
 		player.pause();
 		//player = null;
 	}
+	@Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // The activity is about to be destroyed.
+    }
 
 	//TODO Add better comments for this method
 	/**
