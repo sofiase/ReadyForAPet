@@ -74,6 +74,17 @@
         </activity>
 
         <uses-library android:name="com.google.android.maps" />
+
+        <activity
+            android:name="edu.chl.dat255.sofiase.readyforapet.PlayActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name" 
+             android:parentActivityName="edu.chl.dat255.sofiase.readyforapet.PetActivity" 
+            >
+             <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.chl.dat255.sofiase.readyforapet.PetActivity" />
+        </activity>
     </application>
 
 </manifest>

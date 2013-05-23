@@ -27,7 +27,7 @@
     	 <Button
     	     android:id="@+id/walk"
     	     android:layout_width="wrap_content"
-    	     android:layout_height="wrap_content"
+    	      android:layout_height="45dp"
     	     android:layout_alignParentBottom="true"
     	     android:layout_alignParentLeft="true"
     	     android:background="@drawable/buttonshape"
@@ -36,7 +36,7 @@
     	 <Button
     	     android:id="@+id/eat"
     	     android:layout_width="wrap_content"
-    	     android:layout_height="wrap_content"
+    	      android:layout_height="45dp"
     	     android:layout_alignParentLeft="true"
     	     android:layout_marginTop="36dp"
     	     android:background="@drawable/buttonshape"
@@ -45,7 +45,7 @@
     	 <Button
     	     android:id="@+id/play"
     	     android:layout_width="wrap_content"
-    	     android:layout_height="wrap_content"
+    	      android:layout_height="45dp"
     	     android:layout_alignBaseline="@+id/eat"
     	     android:layout_alignBottom="@+id/eat"
     	     android:layout_alignParentRight="true"
@@ -58,6 +58,7 @@
     	     android:layout_height="400dp"
     	     android:layout_alignParentBottom="true"
     	     android:layout_alignParentLeft="true"
+    	     
     	      />
 
 

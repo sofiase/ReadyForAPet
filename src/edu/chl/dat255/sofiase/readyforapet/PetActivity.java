@@ -94,7 +94,19 @@ public class PetActivity extends Activity implements Serializable{
 		//Setting textview with welcome message
 		petResponse.setText("Hello, my name is " + petName + "!");
 		petResponse.setVisibility(View.VISIBLE);
-		uiHandler.postDelayed(makeTextGone, 2000);
+		uiHandler.postDelayed(makeTextGone, 2000);	
+		play.setEnabled(false);
+		eat.setEnabled(false);
+		walk.setEnabled(false);
+		new Handler().postDelayed(new Runnable() { 
+			@Override
+			public void run() {
+				eat.setEnabled(true);
+				walk.setEnabled(true);
+				play.setEnabled(true);
+			}
+		}, 2000);
+
 
 		//Setting textview with current age of the pet
 		showPetAge.setText(petName + " is " + petAge + " days old.");
@@ -203,13 +215,15 @@ public class PetActivity extends Activity implements Serializable{
 							play.setEnabled(true);
 						}
 					}, 5000);
-
+					startActivity(new Intent(PetActivity.this, PlayActivity.class));
 					petResponse.setText("Yeey! Lots of fun!");
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 2000);
 					final Animation anim = AnimationUtils.loadAnimation(PetActivity.this, R.anim.animation1);
 					dogPicture.startAnimation(anim);
 
+					//fšr att bbyta aktivitet
+					
 
 					//Updating the moodbar
 					moodBar = (ProgressBar) findViewById(R.id.moodbar);
@@ -312,6 +326,14 @@ public class PetActivity extends Activity implements Serializable{
 	}
 
 
+
+	@Override
+    protected void onStart() {
+        super.onStart();
+        // The activity is about to become visible.
+    }
+	
+
 	/**
 	 * Method onResume for the activity
 	 * 
@@ -339,7 +361,13 @@ public class PetActivity extends Activity implements Serializable{
 			e.printStackTrace();
 		}
 	}
-	
+
+	@Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // The activity is about to be destroyed.
+    }
+
 
 	//TODO Add better comments for this method
 	/**
