@@ -159,11 +159,6 @@ public class SelectGame extends Activity implements Serializable {
 		alert.show();
 	}
 
-	   @Override
-	    protected void onStart() {
-	        super.onStart();
-	        // The activity is about to become visible.
-	    }
 	    @Override
 	    protected void onResume() {
 	        super.onResume();

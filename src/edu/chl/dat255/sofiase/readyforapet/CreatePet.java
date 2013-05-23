@@ -37,7 +37,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		setContentView(R.layout.createpet);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 				
-		Button create = (Button) findViewById(R.id.puppy_settings);
+	Button create = (Button) findViewById(R.id.puppy_settings);
 		create.setOnClickListener(this);
 	}
 	
@@ -101,11 +101,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		dog = pet;
 	}
 
-	@Override
-    protected void onStart() {
-        super.onStart();
-        // The activity is about to become visible.
-    }
+
     @Override
     protected void onResume() {
         super.onResume();

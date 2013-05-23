@@ -90,11 +90,7 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	@Override
-    protected void onStart() {
-        super.onStart();
-        // The activity is about to become visible.
-    }
+
     @Override
     protected void onResume() {
         super.onResume();

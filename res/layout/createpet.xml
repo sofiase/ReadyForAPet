@@ -4,21 +4,12 @@
     android:layout_height="match_parent"
     android:background="@drawable/background" >
 
-    <TextView
-        android:id="@+id/petsettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:text="Pet settings"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+ 
 
     <EditText
         android:id="@+id/edit_pet_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/petsettings"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="116dp"
         android:ems="10"
@@ -30,7 +21,7 @@
     <Button
         android:id="@+id/puppy_settings"
         android:layout_width="200dp"
-        android:layout_height="45dp"
+       android:layout_height="50dp"
         android:layout_below="@+id/edit_pet_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="64dp"
@@ -42,7 +33,6 @@
         android:id="@+id/nameyourpet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/petsettings"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="58dp"
         android:text="Name your pet"

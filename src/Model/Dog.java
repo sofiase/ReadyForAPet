@@ -15,13 +15,10 @@ public class Dog extends Pet implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String name;
 
-	/**
-	 * Method that makes the dog name available to all classes.
-	 * 
-	 * @return name - String
-	 */
+	
+	@Override
 	public String getName() {
-		return name;
+		return super.getName();
 	}
 	
 	/**

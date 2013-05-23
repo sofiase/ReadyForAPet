@@ -1,14 +1,17 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
@@ -27,6 +30,9 @@ public class PlayActivity extends Activity {
 	private ImageView dogFace, dogBody, welcomeDog;
 	private Timer timer;
 	private Bitmap bm;
+	//Variables for playing music in Pet Activity
+	private MediaPlayer player;
+	private AssetFileDescriptor afd;
 
 	Runnable makeTextGone = new Runnable(){
 
@@ -45,6 +51,19 @@ public class PlayActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_play);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		
+		//Music
+				try {
+					afd = getAssets().openFd("readyforapetsong4.m4v");
+					player = new MediaPlayer();
+					player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),afd.getLength());
+					player.setLooping(true);
+					player.prepare();
+					player.start();
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 
 		
 		dogFace = (ImageView) findViewById(R.id.dogface);
@@ -197,24 +216,22 @@ public class PlayActivity extends Activity {
 		return true;
 	}
 	
-	   @Override
-	    protected void onStart() {
-	        super.onStart();
-	        // The activity is about to become visible.
-	    }
 	    @Override
 	    protected void onResume() {
 	        super.onResume();
+	        player.start();
 	        // The activity has become visible (it is now "resumed").
 	    }
 	    @Override
 	    protected void onPause() {
 	        super.onPause();
+	        player.pause();
 	        // Another activity is taking focus (this activity is about to be "paused").
 	    }
 	    @Override
 	    protected void onStop() {
 	        super.onStop();
+	        player.pause();
 	        // The activity is no longer visible (it is now "stopped")
 	    }
 	    @Override
