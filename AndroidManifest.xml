@@ -72,6 +72,11 @@
         </activity>
 
         <uses-library android:name="com.google.android.maps" />
+
+        <activity
+            android:name="edu.chl.dat255.sofiase.readyforapet.Test"
+            android:label="@string/title_activity_test" >
+        </activity>
     </application>
 
 </manifest>

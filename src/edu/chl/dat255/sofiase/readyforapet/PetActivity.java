@@ -1,17 +1,16 @@
 package edu.chl.dat255.sofiase.readyforapet;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import Model.Pet;
 import Model.PetMood;
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,6 +30,7 @@ public class PetActivity extends Activity implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private static final String LOG_test = null;
+	private static final String LOG_TAG = "File status after method save";
 	private TextView petResponse; 
 	private Handler uiHandler = new Handler();
 	private ImageView dogBiscuit, dogPicture;
@@ -258,11 +258,16 @@ public class PetActivity extends Activity implements Serializable{
 		super.onPause();
 		player.pause();
 
-		try { //lagt till för att spara dogs mood
-			//Dog savedog = new Dog(dog.getName(),petMood.getFoodMood(), petMood.getWalkMood(),petMood.getPlayMood());
+		try { 
 			dog.save("pet_file.dat",PetActivity.this);
 			Log.i(LOG_test,Integer.toString(PetMood.getFoodMood()));
-			//petMood.save("petmood_file.dat", PetActivity.this); //eventuellt??
+			File file = getBaseContext().getFileStreamPath("pet_file.dat");
+			if(file.exists()){
+				Log.i(LOG_TAG,"is saved on internal memory");
+			}
+			else{
+				 Log.i(LOG_TAG,"is not saved on internal memory");
+			}  
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
