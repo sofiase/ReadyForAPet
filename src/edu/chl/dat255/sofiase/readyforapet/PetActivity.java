@@ -28,16 +28,19 @@ import android.widget.TextView;
 public class PetActivity extends Activity implements Serializable{ 
 
 	private static final long serialVersionUID = 1L;
-	private TextView petResponse; 
+	private TextView petResponse;
+	private TextView showPetAge;
 	private Handler uiHandler = new Handler();
 	//private Handler handler = new Handler();
 	private ImageView dogBiscuit, dogPicture;
 	private ProgressBar moodBar;
 	private Pet dog;
+	private String petName;
+	private int petAge;
 
-	private static final String LOG_test = "foodmood";
-	private static final String LOG_test1 = "walkmood";
-	private static final String LOG_test2 = "playmood";
+	//private static final String LOG_test = "currenttime";
+	//private static final String LOG_test1 = "birthtime";
+	//private static final String LOG_test2 = "playmood";
 
 
 	//Variables for playing music in Pet Activity
@@ -63,9 +66,6 @@ public class PetActivity extends Activity implements Serializable{
 	 *
 	 * @param savedInstanceState - Bundle
 	 */
-
-
-
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 
@@ -73,9 +73,14 @@ public class PetActivity extends Activity implements Serializable{
 		setContentView(R.layout.petactivity);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+		//Recieving the new or saved pet
 		dog = CreatePet.getPet();
-		String petName = dog.getName(); 
-
+		//Getting the pet name
+		petName = dog.getName();
+		//Getting the age of the pet
+		petAge = (int) (PetMood.getCurrentTime() - dog.getBirthTime()) / 24;
+		//Log.i(LOG_test, Long.toString(PetMood.getCurrentTime()));
+		//Log.i(LOG_test1, Long.toString(dog.getBirthTime()));
 
 		dogBiscuit = (ImageView) findViewById(R.id.dogbiscuit);
 		dogBiscuit.setVisibility(View.GONE);
@@ -90,7 +95,7 @@ public class PetActivity extends Activity implements Serializable{
 		final Button eat = (Button) findViewById(R.id.eat);
 		
 
-		//Making welcome message
+		//Setting textview with welcome message
 		petResponse = (TextView) findViewById(R.id.petresponse);
 		petResponse.setText("Hello, my name is " + petName + "!");		
 		petResponse.setVisibility(View.VISIBLE);
@@ -107,6 +112,10 @@ public class PetActivity extends Activity implements Serializable{
 			}
 		}, 2000);
 
+		//Setting textview with current age of the pet
+		showPetAge = (TextView) findViewById(R.id.petage);
+		showPetAge.setText(petName + " is " + petAge + " days old.");
+		petResponse.setVisibility(View.VISIBLE);
 
 		//Decreasing the FoodMood depending on how much time has passed since last eat
 		PetMood.setFoodMood(PetMood.getFoodMood() + PetMood.moodBarDecrease(PetMood.getLastEatTime(), PetMood.getCurrentTime()));
@@ -115,9 +124,9 @@ public class PetActivity extends Activity implements Serializable{
 		//Decreasing the FoodMood depending on how much time has passed since last play
 		PetMood.setPlayMood(PetMood.getPlayMood() + PetMood.moodBarDecrease(PetMood.getLastPlayTime(), PetMood.getCurrentTime()));
 
-		Log.i(LOG_test, Integer.toString(PetMood.getFoodMood()));
-		Log.i(LOG_test1, Integer.toString(PetMood.getWalkMood()));
-		Log.i(LOG_test2, Integer.toString(PetMood.getPlayMood()));
+		//Log.i(LOG_test, Integer.toString(PetMood.getFoodMood()));
+		//Log.i(LOG_test1, Integer.toString(PetMood.getWalkMood()));
+		//Log.i(LOG_test2, Integer.toString(PetMood.getPlayMood()));
 		
 		moodBar = (ProgressBar) findViewById(R.id.moodbar);
 		moodBar.setProgress(PetMood.getSumMood()); 
@@ -321,7 +330,6 @@ public class PetActivity extends Activity implements Serializable{
 
 		try {
 			dog.save("pet_file.dat", PetActivity.this);
-			//Log.i(LOG_test, Integer.toString(PetMood.getFoodMood()));
 			//petMood.save("petmood_file.dat", PetActivity.this);
 		} catch (IOException e) {
 			e.printStackTrace();

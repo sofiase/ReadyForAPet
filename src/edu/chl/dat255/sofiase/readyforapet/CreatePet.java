@@ -2,6 +2,7 @@ package edu.chl.dat255.sofiase.readyforapet;
 
 import java.io.Serializable;
 import Model.Pet;
+import Model.PetMood;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -39,6 +40,8 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		Button create = (Button) findViewById(R.id.puppy_settings);
 		create.setOnClickListener(this);
 	}
+	
+	
 	/**
 	 * onClick Method
 	 * 
@@ -56,7 +59,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		}
 		
 		else {
-			dog = new Pet(petName,0,0,0);
+			dog = new Pet(petName, 0, 0, 0, PetMood.getCurrentTime());
 			startActivity(new Intent(CreatePet.this, PetActivity.class));
 		}
 	}
@@ -79,7 +82,6 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 	 * @param item - MenuItem
 	 */
 	@Override
-
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
@@ -98,8 +100,6 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 	public static void setPet(Pet pet){
 		dog = pet;
 	}
-
 	
-
 }
 
