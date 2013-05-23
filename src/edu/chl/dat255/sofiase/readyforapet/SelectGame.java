@@ -158,6 +158,7 @@ public class SelectGame extends Activity implements Serializable {
 		AlertDialog alert = alertDialogBuilder.create();
 		alert.show();
 	}
+
 	   @Override
 	    protected void onStart() {
 	        super.onStart();
@@ -183,5 +184,6 @@ public class SelectGame extends Activity implements Serializable {
 	        super.onDestroy();
 	        // The activity is about to be destroyed.
 	    }
+
 
 }

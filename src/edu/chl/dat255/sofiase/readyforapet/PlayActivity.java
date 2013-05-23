@@ -127,10 +127,11 @@ public class PlayActivity extends Activity {
 					public void run() {
 						anim.stop();
 						PlayActivity.this.finish();
-						bm.recycle();
-						
-
-
+						//If there a picture was taken the memory is reclaimed as soon right after it's finished displaying
+						if (bm!=null) {
+								bm.recycle();
+						}
+		
 					}
 
 				};

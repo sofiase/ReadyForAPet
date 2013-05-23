@@ -100,6 +100,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 	public static void setPet(Pet pet){
 		dog = pet;
 	}
+
 	@Override
     protected void onStart() {
         super.onStart();
@@ -125,6 +126,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
         super.onDestroy();
         // The activity is about to be destroyed.
     }
+
 	
 }
 
