@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import edu.chl.dat255.sofiase.readyforapet.CreatePet;
 import android.content.Context;
+import android.util.Log;
 
 public class Pet implements Serializable{
 
@@ -17,18 +18,27 @@ public class Pet implements Serializable{
 	private int hungerCounter;
 	private int walkCounter;
 	private int playCounter;
-	private long petBirthTime;
-	private long lastEatTime;
-	private long lastWalkTime;
-	private long lastPlayTime;
+	private long petBirthHour;
+	private long lastEatHour;
+	private long lastWalkHour;
+	private long lastPlayHour;
 	
+	private static final String LOG_test = "last food";
+	private static final String LOG_test1 = "last eathour";
+	private static final String LOG_test2 = "last play";
 
-	public Pet (String petName, int hungerCounter, int walkCounter, int playCounter, long petBirthTime){
+	public Pet (String petName, int hungerCounter, int walkCounter, int playCounter, long petBirthHour){
 		this.name = petName;
 		PetMood.setFoodMood(hungerCounter);
 		PetMood.setWalkMood(walkCounter);
 		PetMood.setPlayMood(playCounter);
-		this.petBirthTime = petBirthTime;
+		this.petBirthHour = petBirthHour;
+		this.lastEatHour = petBirthHour;
+		this.lastWalkHour = petBirthHour;
+		this.lastPlayHour = petBirthHour;
+		PetMood.setLastEatHour(petBirthHour);
+		PetMood.setLastWalkHour(petBirthHour);
+		PetMood.setLastPlayHour(petBirthHour);
 	}
 
 	/**
@@ -51,7 +61,7 @@ public class Pet implements Serializable{
 			hungerCounter = hungerCounter + 1;
 			PetMood.setFoodMood(hungerCounter);
 			//Save the last time the pet has eaten
-			lastEatTime = PetMood.getCurrentTime();
+			lastEatHour = PetMood.getCurrentHour();
 			return "eat";
 		}	
 		else{
@@ -82,22 +92,22 @@ public class Pet implements Serializable{
 			if(distance > 5 && distance < 10){
 				walkCounter = walkCounter + 1;
 				//Save the last time the pet has walked
-				lastWalkTime = PetMood.getCurrentTime();
+				lastWalkHour = PetMood.getCurrentHour();
 			}
 			else if (distance < 20){
 				walkCounter = walkCounter + 2;
 				//Save the last time the pet has walked
-				lastWalkTime = PetMood.getCurrentTime();
+				lastWalkHour = PetMood.getCurrentHour();
 			}
 			else if (distance < 30){
 				walkCounter = walkCounter + 3;
 				//Save the last time the pet has walked
-				lastWalkTime = PetMood.getCurrentTime();
+				lastWalkHour = PetMood.getCurrentHour();
 			}
 			else{
 				walkCounter = walkCounter + 4;
 				//Save the last time the pet has walked
-				lastWalkTime = PetMood.getCurrentTime();
+				lastWalkHour = PetMood.getCurrentHour();
 			}
 			PetMood.setWalkMood(walkCounter);
 			return "Yeey! Great exercise!";
@@ -123,7 +133,7 @@ public class Pet implements Serializable{
 			playCounter = playCounter + 1;
 			PetMood.setPlayMood(playCounter);
 			//Save the last time the pet has played
-			lastPlayTime = PetMood.getCurrentTime();
+			lastPlayHour = PetMood.getCurrentHour();
 			return "play";
 		}	
 		else{
@@ -131,8 +141,8 @@ public class Pet implements Serializable{
 		}
 	}
 
-	public long getBirthTime(){
-		return petBirthTime;
+	public long getBirthHour(){
+		return petBirthHour;
 	}
 
 
@@ -170,9 +180,12 @@ public class Pet implements Serializable{
 		PetMood.setFoodMood(pet.hungerCounter);
 		PetMood.setWalkMood(pet.walkCounter);
 		PetMood.setPlayMood(pet.playCounter);
-		PetMood.setLastEatTime(pet.lastEatTime);
-		PetMood.setLastWalkTime(pet.lastWalkTime);
-		PetMood.setLastPlayTime(pet.lastPlayTime);
+		PetMood.setLastEatHour(pet.lastEatHour);
+		PetMood.setLastWalkHour(pet.lastWalkHour);
+		PetMood.setLastPlayHour(pet.lastPlayHour);
+		Log.i(LOG_test, Long.toString(pet.lastEatHour));
+		Log.i(LOG_test1, Long.toString(pet.lastWalkHour));
+		Log.i(LOG_test2, Long.toString(pet.lastPlayHour));
 	}
 }
 

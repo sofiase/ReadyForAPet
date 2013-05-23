@@ -9,7 +9,6 @@ public class Dog extends Pet implements Serializable {
 
 	public Dog(String name, int hungerCounter, int walkCounter, int playCounter, long petBirthTime) {
 		super(name, hungerCounter, walkCounter, playCounter, petBirthTime);
-		// TODO Auto-generated constructor stub
 	}
 
 	private static final long serialVersionUID = 1L;

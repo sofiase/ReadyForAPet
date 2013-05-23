@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SelectGame extends Activity implements Serializable {
 
@@ -47,12 +48,6 @@ public class SelectGame extends Activity implements Serializable {
 		setContentView(R.layout.selectgame);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-		Button yes = (Button) findViewById(R.id.yes);
-		yes.setVisibility(View.GONE);
-
-		Button no = (Button) findViewById(R.id.no);
-		no.setVisibility(View.GONE);
-
 
 		//The continue button reacts to a click and starts PetActivity
 		Button continuePreviousGame = (Button) findViewById(R.id.continuegame);
@@ -66,8 +61,7 @@ public class SelectGame extends Activity implements Serializable {
 			public void onClick (View v){
 
 				try {
-					Pet.load("pet_file.dat", SelectGame.this); 
-					//PetMood.load("petmood_file.dat", SelectGame.this); // lagt till för load
+					Pet.load("pet_file.dat", SelectGame.this);
 				} catch (FileNotFoundException e) {
 					System.out.print("File not found ");
 					e.printStackTrace();
@@ -84,8 +78,7 @@ public class SelectGame extends Activity implements Serializable {
 				}
 
 				else{
-					warningMessage = (TextView) findViewById(R.id.warningmessage);
-					warningMessage.setText("Create a pet first!");
+					Toast.makeText(SelectGame.this, "Create a pet first!", Toast.LENGTH_SHORT).show();
 
 				}
 			}

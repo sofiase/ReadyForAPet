@@ -105,9 +105,15 @@ public class WalkActivity extends Activity{
 			 */
 			public void onClick (View v){
 				distance = (int) Math.round(location.getDistance());
-				timer.cancel();
+				
+				//Turn of GPS
 				location.killLocationServices();
-
+				
+				//If timer is not initiated, the timer should not be stopped
+				if (timer != null){
+				timer.cancel();
+				}
+				
 				//setting a resultCode with the distance walked that is sent to PetActivity
 				WalkActivity.this.setResult(distance);
 				WalkActivity.this.finish();

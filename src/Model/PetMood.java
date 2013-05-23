@@ -8,9 +8,9 @@ public class PetMood implements Serializable {
 	private static int foodMood;
 	private static int playMood;
 	private static int walkMood;
-	private static long lastEatTime;
-	private static long lastWalkTime;
-	private static long lastPlayTime;
+	private static long lastEatHour;
+	private static long lastWalkHour;
+	private static long lastPlayHour;
 	private static long timeInterval = 2;
 
 
@@ -102,48 +102,48 @@ public class PetMood implements Serializable {
 	 * 
 	 * @param time - last time the dog has eaten
 	 */
-	public static void setLastEatTime(long time){
-		lastEatTime = time;
+	public static void setLastEatHour(long time){
+		lastEatHour = time;
 	}
 	
 	/**
 	 * 
 	 * @param time - last time the dog has eaten
 	 */
-	public static void setLastPlayTime(long time){
-		lastPlayTime = time;
+	public static void setLastPlayHour(long time){
+		lastPlayHour = time;
 	}
 	
 	/**
 	 * 
 	 * @param time - last time the dog has eaten
 	 */
-	public static void setLastWalkTime(long time){
-		lastWalkTime = time;
+	public static void setLastWalkHour(long time){
+		lastWalkHour = time;
 	}
 
 	/**
 	 * 
 	 * @return last time the dog has eaten
 	 */
-	public static long getLastEatTime(){
-		return lastEatTime;
+	public static long getLastEatHour(){
+		return lastEatHour;
 	}
 	
 	/**
 	 * 
 	 * @return last time the dog has eaten
 	 */
-	public static long getLastPlayTime(){
-		return lastPlayTime;
+	public static long getLastPlayHour(){
+		return lastPlayHour;
 	}
 	
 	/**
 	 * 
 	 * @return last time the dog has eaten
 	 */
-	public static long getLastWalkTime(){
-		return lastWalkTime;
+	public static long getLastWalkHour(){
+		return lastWalkHour;
 	}
 
 	/**
@@ -151,7 +151,7 @@ public class PetMood implements Serializable {
 	 *
 	 * @return time in hour
 	 */
-	public static long getCurrentTime (){
+	public static long getCurrentHour(){
 		return System.currentTimeMillis()/3600000L;
 	}
 

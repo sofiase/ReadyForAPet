@@ -26,33 +26,4 @@
         android:background="@drawable/buttonshape"
          />
 
-    <Button
-        android:id="@+id/no"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/continuegame"
-        android:layout_alignLeft="@+id/continuegame"
-        android:layout_marginBottom="50dp"
-        android:text="No" />
-
-    <Button
-        android:id="@+id/yes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/no"
-        android:layout_alignBottom="@+id/no"
-        android:layout_alignRight="@+id/continuegame"
-        android:text="Yes" />
-
-    <TextView
-        android:id="@+id/warningmessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/no"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="19dp"
-        android:textColor="#000000"
-        android:textSize="20dp"
-        android:textStyle="bold" />
-
 </RelativeLayout>

@@ -21,8 +21,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 
 
 	private static final long serialVersionUID = 1L;
-
-	private String petName; 
+	private String petName;
 	private static Pet dog;
 
 
@@ -59,7 +58,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		}
 		
 		else {
-			dog = new Pet(petName, 0, 0, 0, PetMood.getCurrentTime());
+			dog = new Pet(petName, 0, 0, 0, PetMood.getCurrentHour());
 			startActivity(new Intent(CreatePet.this, PetActivity.class));
 		}
 	}
