@@ -1,9 +1,10 @@
 package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.lang.reflect.Array;
+
 
 import edu.chl.dat255.sofiase.readyforapet.R;
 import edu.chl.dat255.sofiase.readyforapet.model.Pet;
@@ -35,12 +36,13 @@ public class PetActivity extends Activity implements Serializable{
 	private TextView petResponse;
 	private TextView showPetAge;
 	private Handler uiHandler = new Handler();
-	//private Handler handler = new Handler();
 	private ImageView dogBiscuit, dogPicture;
 	private ProgressBar moodBar;
 	private Pet dog;
 	private String petName;
 	private int petAge;
+	private final String LOG_TAG1 = "Information about the file when saving";
+	private final String LOG_TAG2 = "Information about the file when deleting";
 
 
 	//Variables for playing music in Pet Activity
@@ -90,7 +92,8 @@ public class PetActivity extends Activity implements Serializable{
 		dogPicture.setVisibility(View.VISIBLE);
 
 		//Getting the age of the pet if it has not already died
-		petAge = (int) (PetMood.getCurrentHour() - dog.getBirthHour()) / 24;
+		//petAge = (int) (PetMood.getCurrentHour() - dog.getBirthHour()) / 24;
+		petAge = (int) (PetMood.getCurrentHour() - dog.getBirthHour());
 
 
 		//Setting textview with welcome message
@@ -209,7 +212,7 @@ public class PetActivity extends Activity implements Serializable{
 					play.setEnabled(false);
 					eat.setEnabled(false);
 					walk.setEnabled(false);
-					new Handler().postDelayed(new Runnable() { //vafšr kan man inte lŠgga i samma run egentligen?
+					new Handler().postDelayed(new Runnable() { //vafï¿½r kan man inte lï¿½gga i samma run egentligen?
 						@Override
 						public void run() {
 							eat.setEnabled(true);
@@ -224,8 +227,8 @@ public class PetActivity extends Activity implements Serializable{
 					final Animation anim = AnimationUtils.loadAnimation(PetActivity.this, R.anim.animation1);
 					dogPicture.startAnimation(anim);
 
-					//fšr att bbyta aktivitet
-					
+					//fï¿½r att bbyta aktivitet
+
 
 					//Updating the moodbar
 					moodBar = (ProgressBar) findViewById(R.id.moodbar);
@@ -320,8 +323,18 @@ public class PetActivity extends Activity implements Serializable{
 		super.onPause();
 		player.pause();
 
-		try {
-			dog.save("pet_file.dat", PetActivity.this);
+
+		try { 
+			dog.save("pet_file.dat",PetActivity.this);
+			//Test to see if the file is saved
+			File file = getBaseContext().getFileStreamPath("pet_file.dat");
+			if(file.exists()){
+				Log.i(LOG_TAG1,"is saved on internal memory");
+			}
+			else{
+				Log.i(LOG_TAG1,"is not saved on internal memory");
+			}  
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -330,11 +343,11 @@ public class PetActivity extends Activity implements Serializable{
 
 
 	@Override
-    protected void onStart() {
-        super.onStart();
-        // The activity is about to become visible.
-    }
-	
+	protected void onStart() {
+		super.onStart();
+		// The activity is about to become visible.
+	}
+
 
 	/**
 	 * Method onResume for the activity
@@ -365,10 +378,10 @@ public class PetActivity extends Activity implements Serializable{
 	}
 
 	@Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // The activity is about to be destroyed.
-    }
+	protected void onDestroy() {
+		super.onDestroy();
+		// The activity is about to be destroyed.
+	}
 
 
 	//TODO Add better comments for this method
@@ -387,7 +400,7 @@ public class PetActivity extends Activity implements Serializable{
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 
 	/**
 	 * Method called to change image depeding on the pet's mood.
@@ -402,6 +415,15 @@ public class PetActivity extends Activity implements Serializable{
 			final Animation anim = AnimationUtils.loadAnimation(PetActivity.this, R.anim.animation1);
 			dogPicture.startAnimation(anim);
 			killPet(play, eat, walk);
+			//Test to see if the file is deleted
+			File file = getBaseContext().getFileStreamPath("pet_file.dat");
+			if(file.exists()){
+				Log.i(LOG_TAG2,"is still saved on internal memory");
+			}
+			else{
+				Log.i(LOG_TAG2,"is deleted from on internal memory");
+			}  
+			
 		}
 		else if(PetMood.getWalkMood()<5 && PetMood.getFoodMood() > 3){
 			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogpoop));

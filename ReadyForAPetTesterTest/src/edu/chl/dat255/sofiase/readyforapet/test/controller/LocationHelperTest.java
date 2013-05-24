@@ -1,6 +1,6 @@
 package edu.chl.dat255.sofiase.readyforapet.test.controller;
 
-import Controller.LocationHelper;
+import edu.chl.dat255.sofiase.readyforapet.util.LocationHelper;
 import junit.framework.TestCase;
 import android.util.Log;
 
