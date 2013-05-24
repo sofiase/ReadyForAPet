@@ -15,5 +15,6 @@
     <string name="how_to_play">How to play?</string>
     <string name="quit">Quit</string>
     <string name="instructions"></string>
+    <string name="sound">Sound on/off</string>
 
 </resources>

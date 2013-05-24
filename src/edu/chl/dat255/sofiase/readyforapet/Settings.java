@@ -42,11 +42,7 @@ public class Settings extends Activity implements Serializable{
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	   @Override
-	    protected void onStart() {
-	        super.onStart();
-	        // The activity is about to become visible.
-	    }
+
 	    @Override
 	    protected void onResume() {
 	        super.onResume();
