@@ -26,6 +26,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import android.content.pm.PackageManager;
+
+
+
 public class PlayActivity extends Activity {
 
 	private Button useStandard, takePhoto, dogPlay;
@@ -35,6 +39,7 @@ public class PlayActivity extends Activity {
 	//Variables for playing music in Pet Activity
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;
+	private PackageManager pm ;//test om kamera
 
 	Runnable makeTextGone = new Runnable(){
 
@@ -53,21 +58,7 @@ public class PlayActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_play);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		
-		//Music
-		try {
-			afd = getAssets().openFd("readyforapetsong4.m4v");
-			player = new MediaPlayer();
-			player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),afd.getLength());
-			player.setLooping(true);
-			player.prepare();
-			player.start();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		
+				
 		dogFace = (ImageView) findViewById(R.id.dogface);
 		takePhoto = (Button) findViewById(R.id.takephoto);
 		useStandard = (Button) findViewById(R.id.usestandard);
@@ -75,13 +66,26 @@ public class PlayActivity extends Activity {
 		dogBody = (ImageView) findViewById(R.id.dogbody);
 		welcomeDog = (ImageView) findViewById(R.id.welcomedog);
 		
-		if(isIntentAvailable(PlayActivity.this, android.provider.MediaStore.ACTION_IMAGE_CAPTURE )==true){
+		pm = PlayActivity.this.getPackageManager();
+
+		if (pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+			dogPlay.setVisibility(View.GONE);
+			dogFace.setVisibility(View.GONE);
+			takePhoto.setVisibility(View.VISIBLE);	
+			useStandard.setVisibility(View.VISIBLE);
+			welcomeDog.setVisibility(View.VISIBLE);
+			}
+		
+		
+			/**
+			if(isIntentAvailable(PlayActivity.this, android.provider.MediaStore.ACTION_IMAGE_CAPTURE )==true){
 		dogPlay.setVisibility(View.GONE);
 		dogFace.setVisibility(View.GONE);
 		takePhoto.setVisibility(View.VISIBLE);	
 		useStandard.setVisibility(View.VISIBLE);
 		welcomeDog.setVisibility(View.VISIBLE);
 		}
+		*/
 		
 		else{
 			dogPlay.setVisibility(View.VISIBLE);
@@ -135,7 +139,20 @@ public class PlayActivity extends Activity {
 			 */
 			@Override
 			public void onClick (View v){
-				
+		
+				//Dance music starts when dog starts playing
+				try {
+					afd = getAssets().openFd("dancemusic.m4a");
+					player = new MediaPlayer();
+					player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),afd.getLength());
+					player.setLooping(true);
+					player.prepare();
+					player.start();
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 				takePhoto.setVisibility(View.GONE);	
 				useStandard.setVisibility(View.GONE);
 				dogPlay.setVisibility(View.GONE);
@@ -221,19 +238,27 @@ public class PlayActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        player.start();
+       if(player!=null){
+    	   player.start();  
+       }
         // The activity has become visible (it is now "resumed").
     }
     @Override
     protected void onPause() {
         super.onPause();
-        player.pause();
+        if(player!=null){
+     	   player.pause();
+        }
+       
         // Another activity is taking focus (this activity is about to be "paused").
     }
     @Override
     protected void onStop() {
         super.onStop();
-        player.pause();
+        if(player!=null){
+     	 player.pause(); 
+        }
+       
         // The activity is no longer visible (it is now "stopped")
     }
     @Override

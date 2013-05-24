@@ -4,6 +4,8 @@ package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.Array;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import edu.chl.dat255.sofiase.readyforapet.R;
 import edu.chl.dat255.sofiase.readyforapet.model.Pet;
@@ -42,6 +44,7 @@ public class PetActivity extends Activity implements Serializable{
 	private String petName;
 	private int petAge;
 	private CheckBox musicCheckBox;
+	private Timer timer;
 
 
 	//Variables for playing music in Pet Activity
@@ -120,19 +123,7 @@ public class PetActivity extends Activity implements Serializable{
 		//Setting textview with welcome message
 		petResponse.setText("Hello, my name is " + petName + "!");
 		petResponse.setVisibility(View.VISIBLE);
-		uiHandler.postDelayed(makeTextGone, 1000);	//2000
-		/**play.setEnabled(false);
-		eat.setEnabled(false);
-		walk.setEnabled(false);
-		new Handler().postDelayed(new Runnable() { 
-			@Override
-			public void run() {
-				eat.setEnabled(true);
-				walk.setEnabled(true);
-				play.setEnabled(true);
-			}
-		}, 2000);
-		 */
+		uiHandler.postDelayed(makeTextGone, 1000);
 
 
 		//Setting textview with current age of the pet
@@ -188,7 +179,8 @@ public class PetActivity extends Activity implements Serializable{
 					anim.start();	
 					uiHandler.postDelayed(makeTextGone, 10000);
 
-					/** is this needed??
+					/**
+					//is this needed??
 					TimerTask timertask = new TimerTask() {
 						@Override
 						public void run() {
@@ -201,9 +193,9 @@ public class PetActivity extends Activity implements Serializable{
 					timer = new Timer();
 					timer.schedule(timertask, 10000);
 
+*/
 
-
-					 */
+				
 				}
 				else{
 					petResponse.setText("I'm full!");
