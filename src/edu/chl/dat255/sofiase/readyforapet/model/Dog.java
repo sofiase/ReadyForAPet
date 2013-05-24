@@ -1,4 +1,4 @@
-package Model;
+package edu.chl.dat255.sofiase.readyforapet.model;
 
 import java.io.Serializable;
 
@@ -12,12 +12,15 @@ public class Dog extends Pet implements Serializable {
 	}
 
 	private static final long serialVersionUID = 1L;
-	//private String name;
+	private String name;
 
-	
-	@Override
+	/**
+	 * Method that makes the dog name available to all classes.
+	 * 
+	 * @return name - String
+	 */
 	public String getName() {
-		return super.getName();
+		return name;
 	}
 	
 	/**
@@ -25,8 +28,8 @@ public class Dog extends Pet implements Serializable {
 	 * 
 	 * @return name - String
 	 */
-	//public void setName(String name) {
-		//super.setName(name);
-//	}	
+	public void setName(String name) {
+		this.name = name;
+	}	
 
 }

@@ -1,8 +1,10 @@
-package edu.chl.dat255.sofiase.readyforapet;
+package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 
 import java.io.Serializable;
-import Model.Pet;
-import Model.PetMood;
+
+import edu.chl.dat255.sofiase.readyforapet.R;
+import edu.chl.dat255.sofiase.readyforapet.model.Pet;
+import edu.chl.dat255.sofiase.readyforapet.model.PetMood;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -36,7 +38,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		setContentView(R.layout.createpet);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 				
-	Button create = (Button) findViewById(R.id.puppy_settings);
+		Button create = (Button) findViewById(R.id.puppy_settings);
 		create.setOnClickListener(this);
 	}
 	
@@ -100,7 +102,11 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		dog = pet;
 	}
 
-
+	@Override
+    protected void onStart() {
+        super.onStart();
+        // The activity is about to become visible.
+    }
     @Override
     protected void onResume() {
         super.onResume();
