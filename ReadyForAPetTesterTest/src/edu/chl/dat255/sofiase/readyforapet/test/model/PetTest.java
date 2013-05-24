@@ -1,6 +1,6 @@
 package edu.chl.dat255.sofiase.readyforapet.test.model;
 
-import Model.Pet;
+import edu.chl.dat255.sofiase.readyforapet.model.*;
 import junit.framework.TestCase;
 
 
