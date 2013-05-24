@@ -35,7 +35,7 @@
                 android:value="edu.chl.dat255.sofiase.readyforapet.MainActivity" />
         </activity>
         <activity
-            android:name="edu.chl.dat255.sofiase.readyforapet.viewcontroller.Settings"
+            android:name="edu.chl.dat255.sofiase.readyforapet.viewcontroller.HowToPlayActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:parentActivityName="edu.chl.dat255.sofiase.readyforapet.viewcontroller.MainActivity" >

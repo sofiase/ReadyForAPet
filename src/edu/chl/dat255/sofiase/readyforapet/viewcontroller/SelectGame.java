@@ -50,6 +50,18 @@ public class SelectGame extends Activity implements Serializable {
 		setContentView(R.layout.selectgame);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+		try {
+			Pet.load("pet_file.dat", SelectGame.this);
+		} catch (FileNotFoundException e) {
+			System.out.print("File not found ");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.print("IO Exception ");
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			System.out.print("Class not found exception ");
+			e.printStackTrace();
+		} 
 
 		//The continue button reacts to a click and starts PetActivity
 		Button continuePreviousGame = (Button) findViewById(R.id.continuegame);
@@ -61,19 +73,6 @@ public class SelectGame extends Activity implements Serializable {
 			 * @param v - View
 			 */
 			public void onClick (View v){
-
-				try {
-					Pet.load("pet_file.dat", SelectGame.this);
-				} catch (FileNotFoundException e) {
-					System.out.print("File not found ");
-					e.printStackTrace();
-				} catch (IOException e) {
-					System.out.print("IO Exception ");
-					e.printStackTrace();
-				} catch (ClassNotFoundException e) {
-					System.out.print("Class not found exception ");
-					e.printStackTrace();
-				} 
 
 				if (CreatePet.getPet() != null){
 					startActivity(new Intent(SelectGame.this, PetActivity.class));		

@@ -3,12 +3,9 @@ package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.lang.reflect.Array;
-
 import edu.chl.dat255.sofiase.readyforapet.R;
 import edu.chl.dat255.sofiase.readyforapet.model.Pet;
 import edu.chl.dat255.sofiase.readyforapet.model.PetMood;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -18,7 +15,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NavUtils;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -224,8 +220,6 @@ public class PetActivity extends Activity implements Serializable{
 					final Animation anim = AnimationUtils.loadAnimation(PetActivity.this, R.anim.animation1);
 					dogPicture.startAnimation(anim);
 
-					//fšr att bbyta aktivitet
-					
 
 					//Updating the moodbar
 					moodBar = (ProgressBar) findViewById(R.id.moodbar);
@@ -367,6 +361,7 @@ public class PetActivity extends Activity implements Serializable{
 	@Override
     protected void onDestroy() {
         super.onDestroy();
+        player.stop();
         // The activity is about to be destroyed.
     }
 

@@ -12,5 +12,8 @@
     <string name="play">Play</string>
     <string name="title_activity_play">PlayActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="how_to_play">How to play?</string>
+    <string name="quit">Quit</string>
+    <string name="instructions"></string>
 
 </resources>

@@ -43,8 +43,9 @@ public class Pet implements Serializable{
 	}
 
 	/**
+	 * Method that makes the dog name available to all classes.
 	 * 
-	 * @return
+	 * @return name - String
 	 */
 	public String getName(){
 		return name;
