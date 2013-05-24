@@ -3,7 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/background" >
-  
+
     <TextView
         android:id="@+id/petresponse"
         android:layout_width="wrap_content"
@@ -12,69 +12,88 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         android:textColor="#000000"
-        android:textStyle="bold" android:textSize="20sp"
-        />
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <ProgressBar
         android:id="@+id/moodbar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
         android:max="15" />
 
-    	 <Button
-    	     android:id="@+id/walk"
-    	     android:layout_width="wrap_content"
-    	      android:layout_height="45dp"
-    	     android:layout_alignParentBottom="true"
-    	     android:layout_alignParentLeft="true"
-    	     android:background="@drawable/buttonshape"
-    	     android:text="@string/walk" />
+    <Button
+        android:id="@+id/walk"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/buttonshape"
+        android:text="@string/walk" />
 
-    	 <Button
-    	     android:id="@+id/eat"
-    	     android:layout_width="wrap_content"
-    	      android:layout_height="45dp"
-    	     android:layout_alignParentLeft="true"
-    	     android:layout_marginTop="36dp"
-    	     android:background="@drawable/buttonshape"
-    	     android:text="@string/eat" />
+    <Button
+        android:id="@+id/eat"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/buttonshape"
+        android:text="@string/eat" />
 
-    	 <Button
-    	     android:id="@+id/play"
-    	     android:layout_width="wrap_content"
-    	      android:layout_height="45dp"
-    	     android:layout_alignBaseline="@+id/eat"
-    	     android:layout_alignBottom="@+id/eat"
-    	     android:layout_alignParentRight="true"
-    	     android:background="@drawable/buttonshape"
-    	     android:text="@string/play" />
+    <Button
+        android:id="@+id/play"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_alignBaseline="@+id/eat"
+        android:layout_alignBottom="@+id/eat"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/buttonshape"
+        android:text="@string/play" />
 
-    	 <ImageView
-    	     android:id="@+id/dogpicture"
-    	     android:layout_width="400dp"
-    	     android:layout_height="400dp"
-    	     android:layout_alignParentBottom="true"
-    	     android:layout_alignParentLeft="true"
-    	     
-    	      />
-
+    <ImageView
+        android:id="@+id/dogpicture"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="70dp" />
 
     	 <ImageView
     	     android:id="@+id/dogbiscuit"
-    	     android:layout_width="100dp"
-    	     android:layout_height="100dp"
-    	     android:layout_above="@+id/walk"
+    	     android:layout_width="80dp"
+    	     android:layout_height="40dp"
+    	     android:layout_marginTop="380dp"
     	     android:layout_centerHorizontal="true"
     	     android:src="@drawable/dogbiscuit5" />
 
-    	 <TextView
-    	     android:id="@+id/petage"
-    	     android:layout_width="wrap_content"
-    	     android:layout_height="wrap_content"
-    	     android:layout_marginBottom="100dp"
-    	     android:layout_centerHorizontal="true" />
+    <TextView
+        android:id="@+id/petage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/musicchoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/walk"
+        android:layout_alignParentRight="true"
+        android:text="@string/sound"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <CheckBox
+        android:id="@+id/checkbox1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/play"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/buttonshape"
+        android:focusable="false"
+        android:focusableInTouchMode="true" />
 
 </RelativeLayout>

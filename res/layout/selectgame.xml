@@ -7,10 +7,10 @@
     <Button
         android:id="@+id/continuegame"
         android:layout_width="200dp"
-        android:layout_height="45dp"
+       android:layout_height="50dp"
         android:layout_above="@+id/createnewpet"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="34dp"
+        android:layout_marginBottom="30dp"
         android:text="Continue game"
         android:background="@drawable/buttonshape"
           />
@@ -18,12 +18,21 @@
     <Button
         android:id="@+id/createnewpet"
         android:layout_width="200dp"
-        android:layout_height="45dp"
+     android:layout_height="50dp"
         android:layout_alignLeft="@+id/continuegame"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="119dp"
+        android:layout_marginBottom="150dp"
         android:text="Create new pet" 
         android:background="@drawable/buttonshape"
          />
+
+        <ImageView
+        android:id="@+id/dogpicture"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_above="@+id/continuegame"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="36dp"
+        android:src="@drawable/doghappy" />
 
 </RelativeLayout>

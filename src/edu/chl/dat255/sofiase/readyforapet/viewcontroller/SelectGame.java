@@ -53,6 +53,18 @@ public class SelectGame extends Activity implements Serializable {
 		setContentView(R.layout.selectgame);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+		try {
+			Pet.load("pet_file.dat", SelectGame.this);
+		} catch (FileNotFoundException e) {
+			System.out.print("File not found ");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.print("IO Exception ");
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			System.out.print("Class not found exception ");
+			e.printStackTrace();
+		} 
 
 		//The continue button reacts to a click and starts PetActivity
 		Button continuePreviousGame = (Button) findViewById(R.id.continuegame);
@@ -64,19 +76,6 @@ public class SelectGame extends Activity implements Serializable {
 			 * @param v - View
 			 */
 			public void onClick (View v){
-
-				try {
-					Pet.load("pet_file.dat", SelectGame.this);
-				} catch (FileNotFoundException e) {
-					System.out.print("File not found ");
-					e.printStackTrace();
-				} catch (IOException e) {
-					System.out.print("IO Exception ");
-					e.printStackTrace();
-				} catch (ClassNotFoundException e) {
-					System.out.print("Class not found exception ");
-					e.printStackTrace();
-				} 
 
 				if (CreatePet.getPet() != null){
 					startActivity(new Intent(SelectGame.this, PetActivity.class));    
@@ -165,31 +164,28 @@ public class SelectGame extends Activity implements Serializable {
 		alert.show();
 	}
 
-	@Override
-	protected void onStart() {
-		super.onStart();
-		// The activity is about to become visible.
-	}
-	@Override
-	protected void onResume() {
-		super.onResume();
-		// The activity has become visible (it is now "resumed").
-	}
-	@Override
-	protected void onPause() {
-		super.onPause();
-		// Another activity is taking focus (this activity is about to be "paused").
-	}
-	@Override
-	protected void onStop() {
-		super.onStop();
-		// The activity is no longer visible (it is now "stopped")
-	}
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		// The activity is about to be destroyed.
-	}
+
+	    @Override
+	    protected void onResume() {
+	        super.onResume();
+	        // The activity has become visible (it is now "resumed").
+	    }
+	    @Override
+	    protected void onPause() {
+	        super.onPause();
+	        // Another activity is taking focus (this activity is about to be "paused").
+	    }
+	    @Override
+	    protected void onStop() {
+	        super.onStop();
+	        // The activity is no longer visible (it is now "stopped")
+	    }
+	    @Override
+	    protected void onDestroy() {
+	        super.onDestroy();
+	        // The activity is about to be destroyed.
+	    }
+
 
 
 }

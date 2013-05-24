@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
 		);
 
 
-		Button settings = (Button) findViewById(R.id.settings);
+		Button settings = (Button) findViewById(R.id.howtoplay);
 		settings.setOnClickListener(new OnClickListener() {
 			/**
 			 * Method onClick for the settings button
@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
 			 * @param v - View
 			 */
 			public void onClick (View v){
-				startActivity(new Intent(MainActivity.this, Settings.class));
+				startActivity(new Intent(MainActivity.this, HowToPlayActivity.class));
 			}
 		}
 				);
