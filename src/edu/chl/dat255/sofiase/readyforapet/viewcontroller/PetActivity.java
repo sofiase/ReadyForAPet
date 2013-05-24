@@ -3,14 +3,9 @@ package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.lang.reflect.Array;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import edu.chl.dat255.sofiase.readyforapet.R;
 import edu.chl.dat255.sofiase.readyforapet.model.Pet;
 import edu.chl.dat255.sofiase.readyforapet.model.PetMood;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -20,7 +15,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NavUtils;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -44,7 +38,7 @@ public class PetActivity extends Activity implements Serializable{
 	private String petName;
 	private int petAge;
 	private CheckBox musicCheckBox;
-	private Timer timer;
+
 
 
 	//Variables for playing music in Pet Activity
@@ -94,8 +88,7 @@ public class PetActivity extends Activity implements Serializable{
 		dogPicture.setVisibility(View.VISIBLE);
 
 
-
-		musicChoice= (TextView) findViewById(R.id.musicchoice);
+		musicChoice = (TextView) findViewById(R.id.musicchoice);
 
 
 		//Music
@@ -225,35 +218,35 @@ public class PetActivity extends Activity implements Serializable{
 			 */
 			@Override
 			public void onClick (View v){
-				
+
 				if(dog.play() == "play"){
-				startActivity(new Intent(PetActivity.this, PlayActivity.class));
-				petResponse.setText("Yeey! Lots of fun!");
-				petResponse.setVisibility(View.VISIBLE);
-				uiHandler.postDelayed(makeTextGone, 2000);
-	
-				//Updating the moodbar
-				moodBar = (ProgressBar) findViewById(R.id.moodbar);
-				moodBar.setProgress(PetMood.getSumMood());
-			}
-			else if(dog.play() == "toohungry"){
-				petResponse.setText("I'm too hungry!");
-				petResponse.setVisibility(View.VISIBLE);
-				uiHandler.postDelayed(makeTextGone, 2000);
-				petResponse.setVisibility(View.VISIBLE);
-				uiHandler.postDelayed(makeTextGone, 2000);
-			}
+					startActivity(new Intent(PetActivity.this, PlayActivity.class));
+					petResponse.setText("Yeey! Lots of fun!");
+					petResponse.setVisibility(View.VISIBLE);
+					uiHandler.postDelayed(makeTextGone, 2000);
 
-			else{
+					//Updating the moodbar
+					moodBar = (ProgressBar) findViewById(R.id.moodbar);
+					moodBar.setProgress(PetMood.getSumMood());
+				}
+				else if(dog.play() == "toohungry"){
+					petResponse.setText("I'm too hungry!");
+					petResponse.setVisibility(View.VISIBLE);
+					uiHandler.postDelayed(makeTextGone, 2000);
+					petResponse.setVisibility(View.VISIBLE);
+					uiHandler.postDelayed(makeTextGone, 2000);
+				}
 
-				petResponse.setText("I'm tired! I want to rest!");
-				petResponse.setVisibility(View.VISIBLE);
-				uiHandler.postDelayed(makeTextGone, 2000);
+				else{
+
+					petResponse.setText("I'm tired! I want to rest!");
+					petResponse.setVisibility(View.VISIBLE);
+					uiHandler.postDelayed(makeTextGone, 2000);
+				}
+				changePicture(play, eat, walk);
+
 			}
-			changePicture(play, eat, walk);
-
 		}
-	}
 				);
 
 
@@ -288,175 +281,169 @@ public class PetActivity extends Activity implements Serializable{
 				);
 
 
-}
+	}
 
-/**
- * Recieves a resultCode that includes the distance a person has walked when quitting WalkActivity and resuming PetActivity.
- */
-public void onActivityResult(int requestCode, int resultCode, Intent data){
-	petResponse = (TextView) findViewById(R.id.petresponse);
-
-
-	//Gets the dog's response and sets the value the moodbar should have after taking a walk
-	petResponse.setText(dog.walk(resultCode));
-	petResponse.setVisibility(View.VISIBLE);
-	uiHandler.postDelayed(makeTextGone, 2000);
-
-	// Updating the moodbar after taking a walk
-	moodBar = (ProgressBar) findViewById(R.id.moodbar);
-	moodBar.setProgress(PetMood.getSumMood());
-
-}
+	/**
+	 * Recieves a resultCode that includes the distance a person has walked when quitting WalkActivity and resuming PetActivity.
+	 */
+	public void onActivityResult(int requestCode, int resultCode, Intent data){
+		petResponse = (TextView) findViewById(R.id.petresponse);
 
 
+		//Gets the dog's response and sets the value the moodbar should have after taking a walk
+		petResponse.setText(dog.walk(resultCode));
+		petResponse.setVisibility(View.VISIBLE);
+		uiHandler.postDelayed(makeTextGone, 2000);
+
+		// Updating the moodbar after taking a walk
+		moodBar = (ProgressBar) findViewById(R.id.moodbar);
+		moodBar.setProgress(PetMood.getSumMood());
+
+	}
 
 
 
-public void addListenerOnMusic() {
-	musicCheckBox = (CheckBox) findViewById(R.id.checkbox1);
-	musicCheckBox.setOnClickListener(new OnClickListener() {
-		@Override
 
-		public void onClick(View v) {
-			if (((CheckBox) v).isChecked()) {
-				player.start();	
-			}
-			else {
-				player.pause();
+
+	public void addListenerOnMusic() {
+		musicCheckBox = (CheckBox) findViewById(R.id.checkbox1);
+		musicCheckBox.setOnClickListener(new OnClickListener() {
+			@Override
+
+			public void onClick(View v) {
+				if (((CheckBox) v).isChecked()) {
+					player.start();	
+				}
+				else {
+					player.pause();
+				}
 			}
 		}
+				);
 	}
-			);
-}
 
 
 
 
 
-/**
- * Method onPause for the activity
- * 
- * Pauses music player and saves the pet when pausing activity
- */
-public void onPause() {
-	super.onPause();
-	player.pause();
+	/**
+	 * Method onPause for the activity
+	 * 
+	 * Pauses music player and saves the pet when pausing activity
+	 */
+	public void onPause() {
+		super.onPause();
+		player.pause();
 
-	try {
-		dog.save("pet_file.dat", PetActivity.this);
-	} catch (IOException e) {
-		e.printStackTrace();
+		try {
+			dog.save("pet_file.dat", PetActivity.this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-}
 
 
-
-@Override
-protected void onStart() {
-	super.onStart();
-	// The activity is about to become visible.
-}
-
-
-/**
- * Method onResume for the activity
- * 
- * Starts music player when resuming activity
- */
-public void onResume() {
-	super.onResume();
-	player.start();
-	musicCheckBox.setChecked(true);
-}
-
-
-/**
- * Method onStop for the activity
- * 
- * Pauses the music when exiting activity
- */
-protected void onStop() {
-	super.onStop();
-	player.stop();
-	try {
-		player.prepare();
-	} catch (IllegalStateException e) {
-		e.printStackTrace();
-	} catch (IOException e) {
-		e.printStackTrace();
+	/**
+	 * Method onResume for the activity
+	 * 
+	 * Starts music player when resuming activity
+	 */
+	public void onResume() {
+		super.onResume();
+		player.start();
+		musicCheckBox.setChecked(true);
 	}
-}
-
-@Override
-protected void onDestroy() {
-	super.onDestroy();
-	// The activity is about to be destroyed.
-}
 
 
-//TODO Add better comments for this method
-/**
- * Method onOptionsItemSelected 
- * 
- * How the app navigates when clicking the backward button
- * @param item - MenuItem
- */
-@Override
-public boolean onOptionsItemSelected(MenuItem item) {
-	switch (item.getItemId()) {
-	case android.R.id.home:
-		NavUtils.navigateUpFromSameTask(this);
-		return true;
+	/**
+	 * Method onStop for the activity
+	 * 
+	 * Pauses the music when exiting activity
+	 */
+	protected void onStop() {
+		super.onStop();
+		player.stop();
+		try {
+			player.prepare();
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	return super.onOptionsItemSelected(item);
-}
 
 
-/**
- * Method called to change image depeding on the pet's mood.
- * 
- * @param play - Button
- * @param eat - Button
- * @param walk - Button
- */
-private void changePicture(Button play, Button eat, Button walk){
-	if ((PetMood.getCurrentHour() - PetMood.getLastEatHour() > 48) || PetMood.getCurrentHour() - PetMood.getLastWalkHour() > 48){
-		dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogdead));
-		final Animation anim = AnimationUtils.loadAnimation(PetActivity.this, R.anim.animation1);
-		dogPicture.startAnimation(anim);
-		killPet(play, eat, walk);
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		player.stop();
+		// The activity is about to be destroyed.
 	}
-	else if(PetMood.getWalkMood()<5 && PetMood.getFoodMood() > 3){
-		dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogpoop));
+
+
+	//TODO Add better comments for this method
+	/**
+	 * Method onOptionsItemSelected 
+	 * 
+	 * How the app navigates when clicking the backward button
+	 * @param item - MenuItem
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			NavUtils.navigateUpFromSameTask(this);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
-	else if(PetMood.getSumMood() < 10){
-		dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogsad));
+
+
+	/**
+	 * Method called to change image depeding on the pet's mood.
+	 * 
+	 * @param play - Button
+	 * @param eat - Button
+	 * @param walk - Button
+	 */
+	private void changePicture(Button play, Button eat, Button walk){
+		if ((PetMood.getCurrentHour() - PetMood.getLastEatHour() > 48) || PetMood.getCurrentHour() - PetMood.getLastWalkHour() > 48){
+			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogdead));
+			final Animation anim = AnimationUtils.loadAnimation(PetActivity.this, R.anim.animation1);
+			dogPicture.startAnimation(anim);
+			killPet(play, eat, walk);
+		}
+		else if(PetMood.getWalkMood()<5 && PetMood.getFoodMood() > 3){
+			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogpoop));
+		}
+		else if(PetMood.getSumMood() < 10){
+			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogsad));
+		}
+		else{
+			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.doghappy));
+		}
 	}
-	else{
-		dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.doghappy));
+
+
+	/**
+	 * Method called when dog dies.  Sets text, disables buttons and deletes saved file.
+	 * 
+	 * @param play - Button
+	 * @param eat - Button
+	 * @param walk - Button
+	 */
+	private void killPet(Button play, Button eat, Button walk){
+		petResponse.setText(petName + " has unfortunately died!");
+		showPetAge.setVisibility(View.GONE);
+
+		//Disabling buttons
+		play.setEnabled(false);
+		eat.setEnabled(false);
+		walk.setEnabled(false);
+
+		//Deleting the existing saved dog
+		deleteFile("pet_file.dat");
 	}
-}
-
-
-/**
- * Method called when dog dies.  Sets text, disables buttons and deletes saved file.
- * 
- * @param play - Button
- * @param eat - Button
- * @param walk - Button
- */
-private void killPet(Button play, Button eat, Button walk){
-	petResponse.setText(petName + " has unfortunately died!");
-	showPetAge.setVisibility(View.GONE);
-
-	//Disabling buttons
-	play.setEnabled(false);
-	eat.setEnabled(false);
-	walk.setEnabled(false);
-
-	//Deleting the existing saved dog
-	deleteFile("pet_file.dat");
-}
 
 }
 
