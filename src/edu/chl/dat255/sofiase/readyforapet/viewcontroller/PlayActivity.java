@@ -5,7 +5,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import edu.chl.dat255.sofiase.readyforapet.R;
-
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
@@ -39,7 +38,8 @@ public class PlayActivity extends Activity {
 	//Variables for playing music in Pet Activity
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;
-	private PackageManager pm ;//test om kamera
+	private PackageManager pm;
+
 
 	Runnable makeTextGone = new Runnable(){
 
@@ -58,15 +58,16 @@ public class PlayActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_play);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-				
+
 		dogFace = (ImageView) findViewById(R.id.dogface);
 		takePhoto = (Button) findViewById(R.id.takephoto);
 		useStandard = (Button) findViewById(R.id.usestandard);
 		dogPlay = (Button) findViewById(R.id.dogplay);
 		dogBody = (ImageView) findViewById(R.id.dogbody);
 		welcomeDog = (ImageView) findViewById(R.id.welcomedog);
-		
+
 		pm = PlayActivity.this.getPackageManager();
+
 
 		if (pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
 			dogPlay.setVisibility(View.GONE);
@@ -74,10 +75,10 @@ public class PlayActivity extends Activity {
 			takePhoto.setVisibility(View.VISIBLE);	
 			useStandard.setVisibility(View.VISIBLE);
 			welcomeDog.setVisibility(View.VISIBLE);
-			}
-		
-		
-			/**
+		}
+
+
+		/**
 			if(isIntentAvailable(PlayActivity.this, android.provider.MediaStore.ACTION_IMAGE_CAPTURE )==true){
 		dogPlay.setVisibility(View.GONE);
 		dogFace.setVisibility(View.GONE);
@@ -85,8 +86,8 @@ public class PlayActivity extends Activity {
 		useStandard.setVisibility(View.VISIBLE);
 		welcomeDog.setVisibility(View.VISIBLE);
 		}
-		*/
-		
+		 */
+
 		else{
 			dogPlay.setVisibility(View.VISIBLE);
 			welcomeDog.setVisibility(View.VISIBLE);
@@ -103,7 +104,7 @@ public class PlayActivity extends Activity {
 			 */
 			@Override
 			public void onClick (View v){
-				
+
 				Intent pictureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 				startActivityForResult(pictureIntent, 0);
 
@@ -111,7 +112,7 @@ public class PlayActivity extends Activity {
 			}
 		}
 				);
-		
+
 		useStandard.setOnClickListener(new OnClickListener() {
 			/**
 			 * Making it able to take your own background picture
@@ -127,11 +128,11 @@ public class PlayActivity extends Activity {
 			}
 		}
 				);
-	
-		
-		
+
+
+
 		dogPlay.setOnClickListener(new OnClickListener() {
-			
+
 			/**
 			 * Making it able to take your own background picture
 			 *
@@ -139,7 +140,7 @@ public class PlayActivity extends Activity {
 			 */
 			@Override
 			public void onClick (View v){
-		
+
 				//Dance music starts when dog starts playing
 				try {
 					afd = getAssets().openFd("dancemusic.m4a");
@@ -152,7 +153,7 @@ public class PlayActivity extends Activity {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			
+
 				takePhoto.setVisibility(View.GONE);	
 				useStandard.setVisibility(View.GONE);
 				dogPlay.setVisibility(View.GONE);
@@ -164,25 +165,29 @@ public class PlayActivity extends Activity {
 					@Override
 					public void run() {
 						anim.stop();
+
+						//SKICKA MED ETT RESULT TILL PETACTIVITY
+						PlayActivity.this.setResult(1);
 						PlayActivity.this.finish();
+
 						//If there a picture was taken the memory is reclaimed as soon right after it's finished displaying
 						if (bm!=null) {
-								bm.recycle();
+							bm.recycle();
 						}
-		
+
 					}
 
 				};
 
 				timer = new Timer();
 				timer.schedule(timertask, 20000);
-				
+
 			}
 		}
 				);
 
 	}
-	
+
 	/**
 	 * Method for that checks if the advice has a camera
 	 */
@@ -198,14 +203,14 @@ public class PlayActivity extends Activity {
 	 * Method for making the image a circle
 	 */
 	public static Bitmap makeCircle (Bitmap bitmap) {
-		
+
 		Bitmap circleBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
 		BitmapShader shader = new BitmapShader (bitmap,  TileMode.CLAMP, TileMode.CLAMP);
 		Paint paint = new Paint();
-		        paint.setShader(shader);
-		        Canvas c = new Canvas(circleBitmap);
-		        c.drawCircle(bitmap.getWidth()/2, bitmap.getHeight()/2, bitmap.getWidth()/2, paint);
-		        return circleBitmap;
+		paint.setShader(shader);
+		Canvas c = new Canvas(circleBitmap);
+		c.drawCircle(bitmap.getWidth()/2, bitmap.getHeight()/2, bitmap.getWidth()/2, paint);
+		return circleBitmap;
 	}
 
 	/**
@@ -216,15 +221,15 @@ public class PlayActivity extends Activity {
 		takePhoto.setVisibility(View.GONE);	
 		useStandard.setVisibility(View.GONE);
 		dogPlay.setVisibility(View.VISIBLE);
-		
-		
+
+
 		super.onActivityResult(requestCode, resultCode, data);
 		dogFace.setVisibility(View.VISIBLE);
 		// Making the picture circle
 		bm = (Bitmap) data.getExtras().get("data");
 		dogFace.setImageBitmap(makeCircle(bm));
 
-		
+
 	}
 
 
@@ -234,38 +239,38 @@ public class PlayActivity extends Activity {
 		getMenuInflater().inflate(R.menu.play, menu);
 		return true;
 	}
-	
-    @Override
-    protected void onResume() {
-        super.onResume();
-       if(player!=null){
-    	   player.start();  
-       }
-        // The activity has become visible (it is now "resumed").
-    }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if(player!=null){
-     	   player.pause();
-        }
-       
-        // Another activity is taking focus (this activity is about to be "paused").
-    }
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(player!=null){
-     	 player.pause(); 
-        }
-       
-        // The activity is no longer visible (it is now "stopped")
-    }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // The activity is about to be destroyed.
-    }
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(player!=null){
+			player.start();  
+		}
+		// The activity has become visible (it is now "resumed").
+	}
+	@Override
+	protected void onPause() {
+		super.onPause();
+		if(player!=null){
+			player.pause();
+		}
+
+		// Another activity is taking focus (this activity is about to be "paused").
+	}
+	@Override
+	protected void onStop() {
+		super.onStop();
+		if(player!=null){
+			player.pause(); 
+		}
+
+		// The activity is no longer visible (it is now "stopped")
+	}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		// The activity is about to be destroyed.
+	}
 
 }
 

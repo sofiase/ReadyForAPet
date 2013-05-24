@@ -1,6 +1,7 @@
 package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import edu.chl.dat255.sofiase.readyforapet.R;
@@ -15,6 +16,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,17 +31,17 @@ import android.widget.TextView;
 public class PetActivity extends Activity implements Serializable{ 
 
 	private static final long serialVersionUID = 1L;
-	private TextView petResponse, showPetAge, musicChoice;
+	private TextView petResponse, showPetAge;
+	//musicChoice;
 	private Handler uiHandler = new Handler();
-	//private Handler handler = new Handler();
 	private ImageView dogBiscuit, dogPicture;
 	private ProgressBar moodBar;
 	private Pet dog;
 	private String petName;
 	private int petAge;
+	private final String LOG_TAG1 = "Information about the file when saving";
+	private final String LOG_TAG2 = "Information about the file when deleting";
 	private CheckBox musicCheckBox;
-
-
 
 	//Variables for playing music in Pet Activity
 	private MediaPlayer player;
@@ -88,8 +90,7 @@ public class PetActivity extends Activity implements Serializable{
 		dogPicture.setVisibility(View.VISIBLE);
 
 
-		musicChoice = (TextView) findViewById(R.id.musicchoice);
-
+		//musicChoice = (TextView) findViewById(R.id.musicchoice);
 
 		//Music
 		try {
@@ -178,24 +179,19 @@ public class PetActivity extends Activity implements Serializable{
 						@Override
 						public void run() {
 							anim.stop();
-
 						}
-
 					};
 
 					timer = new Timer();
 					timer.schedule(timertask, 10000);
 
-*/
-
-				
+*/			
 				}
 				else{
 					petResponse.setText("I'm full!");
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 5000);
 				}
-
 
 				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
@@ -219,27 +215,21 @@ public class PetActivity extends Activity implements Serializable{
 			@Override
 			public void onClick (View v){
 
-				if(dog.play() == "play"){
-					startActivity(new Intent(PetActivity.this, PlayActivity.class));
-					petResponse.setText("Yeey! Lots of fun!");
-					petResponse.setVisibility(View.VISIBLE);
-					uiHandler.postDelayed(makeTextGone, 2000);
 
-					//Updating the moodbar
-					moodBar = (ProgressBar) findViewById(R.id.moodbar);
-					moodBar.setProgress(PetMood.getSumMood());
+				if(PetMood.getPlayMood() < 5){
+					//Opening PlayActivity
+					PetActivity.this.startActivityForResult(new Intent(PetActivity.this, PlayActivity.class), 0);
+
 				}
-				else if(dog.play() == "toohungry"){
-					petResponse.setText("I'm too hungry!");
-					petResponse.setVisibility(View.VISIBLE);
-					uiHandler.postDelayed(makeTextGone, 2000);
+
+				else if(PetMood.getPlayMood() < 5 && PetMood.getFoodMood() > 3){
+					petResponse.setText(dog.play());
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 2000);
 				}
 
 				else{
-
-					petResponse.setText("I'm tired! I want to rest!");
+					petResponse.setText(dog.play());
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 2000);
 				}
@@ -284,20 +274,34 @@ public class PetActivity extends Activity implements Serializable{
 	}
 
 	/**
-	 * Recieves a resultCode that includes the distance a person has walked when quitting WalkActivity and resuming PetActivity.
+	 * Recieves a requestCode when resuming PetActivity from either PlayActivity or WalkActivity.
 	 */
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
 		petResponse = (TextView) findViewById(R.id.petresponse);
 
+		//When coming from the PlayActivity and the dog is done playing.
+		if(requestCode == 0 && resultCode == 1){
+			//Gets the dog's response and sets the value the moodbar should have after playing
+			petResponse.setText(dog.play());
+			petResponse.setVisibility(View.VISIBLE);
+			uiHandler.postDelayed(makeTextGone, 2000);
+			
+			//Updating the moodbar after playing
+			moodBar = (ProgressBar) findViewById(R.id.moodbar);
+			moodBar.setProgress(PetMood.getSumMood());
+		}
 
-		//Gets the dog's response and sets the value the moodbar should have after taking a walk
-		petResponse.setText(dog.walk(resultCode));
-		petResponse.setVisibility(View.VISIBLE);
-		uiHandler.postDelayed(makeTextGone, 2000);
+		//When coming from the WalkActivity
+		else if (requestCode == 1){
+			//Gets the dog's response and sets the value the moodbar should have after taking a walk
+			petResponse.setText(dog.walk(resultCode));
+			petResponse.setVisibility(View.VISIBLE);
+			uiHandler.postDelayed(makeTextGone, 2000);
 
-		// Updating the moodbar after taking a walk
-		moodBar = (ProgressBar) findViewById(R.id.moodbar);
-		moodBar.setProgress(PetMood.getSumMood());
+			// Updating the moodbar after taking a walk
+			moodBar = (ProgressBar) findViewById(R.id.moodbar);
+			moodBar.setProgress(PetMood.getSumMood());
+		}
 
 	}
 
@@ -335,12 +339,23 @@ public class PetActivity extends Activity implements Serializable{
 		super.onPause();
 		player.pause();
 
-		try {
-			dog.save("pet_file.dat", PetActivity.this);
+
+		try { 
+			dog.save("pet_file.dat",PetActivity.this);
+			//Test to see if the file is saved
+			File file = getBaseContext().getFileStreamPath("pet_file.dat");
+			if(file.exists()){
+				Log.i(LOG_TAG1,"is saved on internal memory");
+			}
+			else{
+				Log.i(LOG_TAG1,"is not saved on internal memory");
+			}  
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
 
 
 	/**
@@ -377,6 +392,7 @@ public class PetActivity extends Activity implements Serializable{
 	protected void onDestroy() {
 		super.onDestroy();
 		player.stop();
+
 		// The activity is about to be destroyed.
 	}
 
@@ -412,6 +428,15 @@ public class PetActivity extends Activity implements Serializable{
 			final Animation anim = AnimationUtils.loadAnimation(PetActivity.this, R.anim.animation1);
 			dogPicture.startAnimation(anim);
 			killPet(play, eat, walk);
+			//Test to see if the file is deleted
+			File file = getBaseContext().getFileStreamPath("pet_file.dat");
+			if(file.exists()){
+				Log.i(LOG_TAG2,"is still saved on internal memory");
+			}
+			else{
+				Log.i(LOG_TAG2,"is deleted from on internal memory");
+			}  
+			
 		}
 		else if(PetMood.getWalkMood()<5 && PetMood.getFoodMood() > 3){
 			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogpoop));

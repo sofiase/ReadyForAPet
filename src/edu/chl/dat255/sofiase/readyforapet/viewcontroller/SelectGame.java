@@ -1,5 +1,6 @@
 package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,6 +26,7 @@ public class SelectGame extends Activity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private TextView warningMessage;
+	private final String LOG_TAG = "Information about the file when loading";
 
 
 	Runnable makeTextGone = new Runnable(){
@@ -75,10 +78,18 @@ public class SelectGame extends Activity implements Serializable {
 			public void onClick (View v){
 
 				if (CreatePet.getPet() != null){
-					startActivity(new Intent(SelectGame.this, PetActivity.class));		
-				}
+					startActivity(new Intent(SelectGame.this, PetActivity.class));    
+					//Test to see if the file exist on internal memory when loading
+					File file = getBaseContext().getFileStreamPath("pet_file.dat");
+					if(file.exists()){
+						Log.i(LOG_TAG,"is saved on internal memory");
+					}
+					else{
+						Log.i(LOG_TAG,"is not saved on internal memory");
+					}  
+				} 
 
-				else{
+				else {
 					Toast.makeText(SelectGame.this, "Create a pet first!", Toast.LENGTH_SHORT).show();
 
 				}
@@ -128,7 +139,7 @@ public class SelectGame extends Activity implements Serializable {
 		return super.onOptionsItemSelected(item);
 	}
 
-	
+
 	/**
 	 * Shows a warning alert when user tries to create a new pet but already has one
 	 * 
@@ -153,6 +164,7 @@ public class SelectGame extends Activity implements Serializable {
 		alert.show();
 	}
 
+
 	    @Override
 	    protected void onResume() {
 	        super.onResume();
@@ -173,6 +185,7 @@ public class SelectGame extends Activity implements Serializable {
 	        super.onDestroy();
 	        // The activity is about to be destroyed.
 	    }
+
 
 
 }

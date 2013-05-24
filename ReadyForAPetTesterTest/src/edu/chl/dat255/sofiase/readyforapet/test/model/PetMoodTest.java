@@ -1,7 +1,7 @@
 package edu.chl.dat255.sofiase.readyforapet.test.model;
 
 import junit.framework.TestCase;
-import Model.PetMood;
+import edu.chl.dat255.sofiase.readyforapet.model.*;
 
 public class PetMoodTest extends TestCase {
 PetMood petmood = new PetMood();

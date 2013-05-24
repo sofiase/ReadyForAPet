@@ -35,9 +35,9 @@ public class HowToPlayActivity extends Activity implements Serializable{
 		instructions = (TextView) findViewById(R.id.howtoplay);
 		instructions.setVisibility(View.VISIBLE);
 		
-		instructions.setText("Create a pet and name it by selecting play in the main menu. " +
-				"Take care of your pet by feeding, walking and playing with it. " + 
-				"When walking you need to actually take a walk - all to prove that you are ready to take care of a real pet. " + 
+		instructions.setText("Create a pet and name it by selecting play in the main menu. \t" +
+				"Take care of your pet and make it happier by feeding, walking and playing with it every day. " + 
+				"When walking the pet you need to actually take a walk - all to prove that you are ready to take care of a real pet. \n" + 
 				"But watch out! If you leave it unattended for more than two days it is going to die!");
 		
 	}		

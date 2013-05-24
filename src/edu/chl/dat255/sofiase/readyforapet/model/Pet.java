@@ -130,13 +130,13 @@ public class Pet implements Serializable{
 		hungerCounter = PetMood.getFoodMood();
 		playCounter = PetMood.getPlayMood();
 		if (hungerCounter < 3 && playCounter < 5)
-			return "toohungry";
-		else if (playCounter < 5 ) {
+			return "I'm too hungry!";
+		else if (playCounter < 5) {
 			playCounter = playCounter + 1;
 			PetMood.setPlayMood(playCounter);
 			//Save the last time the pet has played
 			lastPlayHour = PetMood.getCurrentHour();
-			return "play";
+			return "Yeey! Lots of fun!";
 		}	
 		else{
 			return "I'm tired! I want to rest!";
@@ -185,9 +185,11 @@ public class Pet implements Serializable{
 		PetMood.setLastEatHour(pet.lastEatHour);
 		PetMood.setLastWalkHour(pet.lastWalkHour);
 		PetMood.setLastPlayHour(pet.lastPlayHour);
-		Log.i(LOG_test, Long.toString(pet.lastEatHour));
-		Log.i(LOG_test1, Long.toString(pet.lastWalkHour));
-		Log.i(LOG_test2, Long.toString(pet.lastPlayHour));
+		
+		//Test
+		//Log.i(LOG_test, Long.toString(pet.lastEatHour));
+		//Log.i(LOG_test1, Long.toString(pet.lastWalkHour));
+		//Log.i(LOG_test2, Long.toString(pet.lastPlayHour));
 	}
 }
 
