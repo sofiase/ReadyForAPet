@@ -79,8 +79,7 @@
             android:name="edu.chl.dat255.sofiase.readyforapet.viewcontroller.PlayActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name" 
-             android:parentActivityName="edu.chl.dat255.sofiase.readyforapet.viewcontroller.PetActivity" 
-            >
+             android:parentActivityName="edu.chl.dat255.sofiase.readyforapet.viewcontroller.PetActivity" >
              <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.chl.dat255.sofiase.readyforapet.PetActivity" />

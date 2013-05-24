@@ -64,10 +64,11 @@ public class Pet implements Serializable{
 			PetMood.setFoodMood(hungerCounter);
 			//Save the last time the pet has eaten
 			lastEatHour = PetMood.getCurrentHour();
-			return "eat";
+			PetMood.setLastEatHour(lastEatHour);
+			return "Yummie!";
 		}	
 		else{
-			return "full";
+			return "I'm full!";
 		}
 	}
 
@@ -95,21 +96,25 @@ public class Pet implements Serializable{
 				walkCounter = walkCounter + 1;
 				//Save the last time the pet has walked
 				lastWalkHour = PetMood.getCurrentHour();
+				PetMood.setLastWalkHour(lastWalkHour);
 			}
 			else if (distance < 20){
 				walkCounter = walkCounter + 2;
 				//Save the last time the pet has walked
 				lastWalkHour = PetMood.getCurrentHour();
+				PetMood.setLastWalkHour(lastWalkHour);
 			}
 			else if (distance < 30){
 				walkCounter = walkCounter + 3;
 				//Save the last time the pet has walked
 				lastWalkHour = PetMood.getCurrentHour();
+				PetMood.setLastWalkHour(lastWalkHour);
 			}
 			else{
 				walkCounter = walkCounter + 4;
 				//Save the last time the pet has walked
 				lastWalkHour = PetMood.getCurrentHour();
+				PetMood.setLastWalkHour(lastWalkHour);
 			}
 			PetMood.setWalkMood(walkCounter);
 			return "Yeey! Great exercise!";
@@ -136,6 +141,7 @@ public class Pet implements Serializable{
 			PetMood.setPlayMood(playCounter);
 			//Save the last time the pet has played
 			lastPlayHour = PetMood.getCurrentHour();
+			PetMood.setLastPlayHour(lastPlayHour);
 			return "Yeey! Lots of fun!";
 		}	
 		else{
