@@ -5,7 +5,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import edu.chl.dat255.sofiase.readyforapet.R;
-
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
@@ -35,6 +34,7 @@ public class PlayActivity extends Activity {
 	//Variables for playing music in Pet Activity
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;
+	private PackageManager pm;
 
 	Runnable makeTextGone = new Runnable(){
 
@@ -75,7 +75,9 @@ public class PlayActivity extends Activity {
 		dogBody = (ImageView) findViewById(R.id.dogbody);
 		welcomeDog = (ImageView) findViewById(R.id.welcomedog);
 		
-		if(isIntentAvailable(PlayActivity.this, android.provider.MediaStore.ACTION_IMAGE_CAPTURE )==true){
+		pm = PlayActivity.this.getPackageManager();
+		
+		if(pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)){
 		dogPlay.setVisibility(View.GONE);
 		dogFace.setVisibility(View.GONE);
 		takePhoto.setVisibility(View.VISIBLE);	
@@ -147,7 +149,11 @@ public class PlayActivity extends Activity {
 					@Override
 					public void run() {
 						anim.stop();
+						
+						//SKICKA MED ETT RESULT TILL PETACTIVITY
+						PlayActivity.this.setResult(1);
 						PlayActivity.this.finish();
+						
 						//If there a picture was taken the memory is reclaimed as soon right after it's finished displaying
 						if (bm!=null) {
 								bm.recycle();

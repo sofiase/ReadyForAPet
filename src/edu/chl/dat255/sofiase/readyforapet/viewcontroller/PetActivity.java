@@ -29,7 +29,8 @@ import android.widget.TextView;
 public class PetActivity extends Activity implements Serializable{ 
 
 	private static final long serialVersionUID = 1L;
-	private TextView petResponse, showPetAge, musicChoice;
+	private TextView petResponse, showPetAge;
+	//musicChoice;
 	private Handler uiHandler = new Handler();
 	//private Handler handler = new Handler();
 	private ImageView dogBiscuit, dogPicture;
@@ -87,7 +88,7 @@ public class PetActivity extends Activity implements Serializable{
 		dogPicture.setVisibility(View.VISIBLE);
 
 
-		musicChoice = (TextView) findViewById(R.id.musicchoice);
+		//musicChoice = (TextView) findViewById(R.id.musicchoice);
 
 
 		//Music
@@ -108,8 +109,7 @@ public class PetActivity extends Activity implements Serializable{
 		musicCheckBox.setChecked(true);
 
 		//Getting the age of the pet if it has not already died
-		//petAge = (int) (PetMood.getCurrentHour() - dog.getBirthHour()) / 24;
-		petAge = (int) (PetMood.getCurrentHour() - dog.getBirthHour());
+		petAge = (int) (PetMood.getCurrentHour() - dog.getBirthHour()) / 24;
 
 
 		//Setting textview with welcome message
@@ -229,27 +229,19 @@ public class PetActivity extends Activity implements Serializable{
 			@Override
 			public void onClick (View v){
 
-				if(dog.play() == "play"){
-					startActivity(new Intent(PetActivity.this, PlayActivity.class));
-					petResponse.setText("Yeey! Lots of fun!");
-					petResponse.setVisibility(View.VISIBLE);
-					uiHandler.postDelayed(makeTextGone, 2000);
-
-					//Updating the moodbar
-					moodBar = (ProgressBar) findViewById(R.id.moodbar);
-					moodBar.setProgress(PetMood.getSumMood());
+				if(PetMood.getPlayMood() < 5){
+					//Opening PlayActivity
+					PetActivity.this.startActivityForResult(new Intent(PetActivity.this, PlayActivity.class), 0);
 				}
-				else if(dog.play() == "toohungry"){
-					petResponse.setText("I'm too hungry!");
-					petResponse.setVisibility(View.VISIBLE);
-					uiHandler.postDelayed(makeTextGone, 2000);
+
+				else if(PetMood.getPlayMood() < 5 && PetMood.getFoodMood() > 3){
+					petResponse.setText(dog.play());
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 2000);
 				}
 
 				else{
-
-					petResponse.setText("I'm tired! I want to rest!");
+					petResponse.setText(dog.play());
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 2000);
 				}
@@ -294,20 +286,34 @@ public class PetActivity extends Activity implements Serializable{
 	}
 
 	/**
-	 * Recieves a resultCode that includes the distance a person has walked when quitting WalkActivity and resuming PetActivity.
+	 * Recieves a requestCode when resuming PetActivity from either PlayActivity or WalkActivity.
 	 */
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
 		petResponse = (TextView) findViewById(R.id.petresponse);
 
+		//When coming from the PlayActivity and the dog is done playing.
+		if(requestCode == 0 && resultCode == 1){
+			//Gets the dog's response and sets the value the moodbar should have after playing
+			petResponse.setText(dog.play());
+			petResponse.setVisibility(View.VISIBLE);
+			uiHandler.postDelayed(makeTextGone, 2000);
+			
+			//Updating the moodbar after playing
+			moodBar = (ProgressBar) findViewById(R.id.moodbar);
+			moodBar.setProgress(PetMood.getSumMood());
+		}
 
-		//Gets the dog's response and sets the value the moodbar should have after taking a walk
-		petResponse.setText(dog.walk(resultCode));
-		petResponse.setVisibility(View.VISIBLE);
-		uiHandler.postDelayed(makeTextGone, 2000);
+		//When coming from the WalkActivity
+		else if (requestCode == 1){
+			//Gets the dog's response and sets the value the moodbar should have after taking a walk
+			petResponse.setText(dog.walk(resultCode));
+			petResponse.setVisibility(View.VISIBLE);
+			uiHandler.postDelayed(makeTextGone, 2000);
 
-		// Updating the moodbar after taking a walk
-		moodBar = (ProgressBar) findViewById(R.id.moodbar);
-		moodBar.setProgress(PetMood.getSumMood());
+			// Updating the moodbar after taking a walk
+			moodBar = (ProgressBar) findViewById(R.id.moodbar);
+			moodBar.setProgress(PetMood.getSumMood());
+		}
 
 	}
 
