@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import edu.chl.dat255.sofiase.readyforapet.R;
 import edu.chl.dat255.sofiase.readyforapet.model.Pet;
-import edu.chl.dat255.sofiase.readyforapet.model.PetMood;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -20,8 +19,6 @@ import android.widget.Toast;
 
 
 public class CreatePet extends Activity implements OnClickListener, Serializable {
-
-
 
 	private static final long serialVersionUID = 1L;
 	private String petName;
@@ -42,29 +39,12 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		Button create = (Button) findViewById(R.id.puppy_settings);
 		create.setOnClickListener(this);
 	}
-	/**
-	@Override
-	public void onBackPressed(){
-		super.onBackPressed();
-		overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-	}
-	*/
-	
-	private void slideBetweenActivities(Context context, Class<?> activity){
-		try { 
-		Intent newIntent = new Intent(context, activity); 
-		startActivityForResult(newIntent, 0);
-		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left ); 
-		} catch(Exception ex) {
-		}
-	}
+
 	
 	/**
 	 * onClick Method
 	 * 
-	 * When pressing the button create it checks whether the user 
-	 * has typed something in and that the name isn't null.
-	 * It also calls the method save in the class Pet
+	 * When pressing the button create it checks whether the user has typed a name, and then creates an instance of the Pet class.
 	 * 
 	 */
 	public void onClick (View v){
@@ -76,9 +56,8 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		}
 		
 		else {
-			dog = new Pet(petName, 0, 0, 0, PetMood.getCurrentHour());
-			slideBetweenActivities(CreatePet.this, PetActivity.class);
-			//startActivity(new Intent(CreatePet.this, PetActivity.class));
+			dog = new Pet(petName, 0, 0, 0);
+			startActivity(new Intent(CreatePet.this, PetActivity.class));
 		}
 	}
 
@@ -109,21 +88,6 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		return super.onOptionsItemSelected(item);
 	}
 	
-
-	/**
-	 * setPet Method
-	 * 
-	 * sets the pet to a pet
-	 */
-	public static void setPet(Pet pet){
-		dog = pet;
-	}
-
-	@Override
-    protected void onStart() {
-        super.onStart();
-        // The activity is about to become visible.
-    }
     @Override
     protected void onResume() {
         super.onResume();
