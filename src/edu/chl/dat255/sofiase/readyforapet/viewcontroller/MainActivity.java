@@ -6,12 +6,15 @@ package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 import edu.chl.dat255.sofiase.readyforapet.R;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 public class MainActivity extends Activity {
@@ -40,8 +43,9 @@ public class MainActivity extends Activity {
 		Button play = (Button) findViewById(R.id.play);
 		play.setOnClickListener(new OnClickListener() {
 
-			public void onClick (View v){
-				startActivity(new Intent(MainActivity.this, SelectGame.class));
+			
+			public void onClick (View v){ 
+				slideBetweenActivities(MainActivity.this, SelectGame.class);
 			}
 		}
 		);
@@ -55,7 +59,7 @@ public class MainActivity extends Activity {
 			 * @param v - View
 			 */
 			public void onClick (View v){
-				startActivity(new Intent(MainActivity.this, HowToPlayActivity.class));
+				slideBetweenActivities(MainActivity.this, HowToPlayActivity.class);
 			}
 		}
 				);
@@ -79,6 +83,16 @@ public class MainActivity extends Activity {
 
 
 	}	
+	
+	private void slideBetweenActivities(Context context, Class<?> activity){
+		try { 
+		Intent newIntent = new Intent(context, activity); 
+		startActivityForResult(newIntent, 0);
+		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left ); 
+		} catch(Exception ex) {
+		}
+	}
+	
 
 
 	/**

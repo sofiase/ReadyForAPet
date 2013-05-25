@@ -142,6 +142,7 @@ public class Pet implements Serializable{
 			//Save the last time the pet has played
 			lastPlayHour = PetMood.getCurrentHour();
 			PetMood.setLastPlayHour(lastPlayHour);
+
 			return "Yeey! Lots of fun!";
 		}	
 		else{

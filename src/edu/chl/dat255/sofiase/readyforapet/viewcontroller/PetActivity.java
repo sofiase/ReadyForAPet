@@ -95,7 +95,6 @@ public class PetActivity extends Activity implements Serializable{
 		dogPicture.setVisibility(View.VISIBLE);
 
 
-
 		//Music
 		try {
 			afd = getAssets().openFd("readyforapetsong4.m4v");
@@ -182,16 +181,14 @@ public class PetActivity extends Activity implements Serializable{
 						@Override
 						public void run() {
 							anim.stop();
-
 						}
-
 					};
 
 					timer = new Timer();
 					timer.schedule(timertask, 10000);
 
-					 */
 
+*/			
 
 				}
 				else{
@@ -199,7 +196,6 @@ public class PetActivity extends Activity implements Serializable{
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 5000);
 				}
-
 
 				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
@@ -222,11 +218,13 @@ public class PetActivity extends Activity implements Serializable{
 			 */
 			@Override
 			public void onClick (View v){
+
 				//Contnuing to playActivity only of the dog has not died
 				//!(PetMood.getCurrentHour() - PetMood.getLastEatHour() > 48 || PetMood.getCurrentHour() - PetMood.getLastWalkHour() > 48)
 				if((PetMood.getPlayMood() < 5 && PetMood.getFoodMood() >= 3) && PetMood.isAlive()){
 					//Opening PlayActivity and recieves a requestCode when resuming this activity
 					PetActivity.this.startActivityForResult(new Intent(PetActivity.this, PlayActivity.class), 0);
+
 				}
 
 				else{
