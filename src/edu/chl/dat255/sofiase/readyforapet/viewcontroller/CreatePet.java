@@ -1,11 +1,10 @@
 package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 
 import java.io.Serializable;
-
 import edu.chl.dat255.sofiase.readyforapet.R;
+import edu.chl.dat255.sofiase.readyforapet.model.Dog;
 import edu.chl.dat255.sofiase.readyforapet.model.Pet;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -22,7 +21,8 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 
 	private static final long serialVersionUID = 1L;
 	private String petName;
-	private static Pet dog;
+	//private static Pet dog;
+	private static Dog dog;
 
 
 	/**
@@ -56,7 +56,8 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		}
 		
 		else {
-			dog = new Pet(petName, 0, 0, 0);
+			dog = new Dog(petName, 0, 0, 0);
+			//dog = new Pet(petName, 0, 0, 0);
 			startActivity(new Intent(CreatePet.this, PetActivity.class));
 		}
 	}

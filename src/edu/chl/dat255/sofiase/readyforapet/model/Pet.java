@@ -62,15 +62,15 @@ public class Pet implements Serializable{
 
 
 	/**
-	 * Method that increases mood bar while walking
-	 * and decides that the dog can't walk when it is too hungry or too tired
+	 * Method that increases mood bar while walking and decides that the dog can't walk if it is too hungry or too tired
 	 *
 	 * @return String with the pet's reaction 
 	 */
 
 	public String walk(int distance) {
-		if (petMood.getFoodMood() < 3 && petMood.getWalkMood() < 5) //€NDRA FOODMOOD 3 inte 0
+		if (petMood.getFoodMood() < 3 && petMood.getWalkMood() < 5){
 			return "I'm too hungry!";
+		}
 		else if (petMood.getWalkMood() < 5) {
 			if(distance < 10){
 				return "I want to walk more!";
@@ -101,7 +101,7 @@ public class Pet implements Serializable{
 			}
 			else{
 				//Increase the walkmood
-				petMood.setWalkMood(petMood.getWalkMood() + 10); // €NDRA TILL 5
+				petMood.setWalkMood(petMood.getWalkMood() + 5);
 				//Save the last time the pet has walked
 				petMood.setLastWalkHour(petMood.getCurrentHour());
 			}
@@ -163,7 +163,7 @@ public class Pet implements Serializable{
 		Log.i(LOG_test, Long.toString(petMood.getCurrentHour()));
 		Log.i(LOG_test1, Long.toString(petMood.getLastEatHour()));
 		Log.i(LOG_test2, Long.toString(petMood.getLastWalkHour()));
-		return !((petMood.getCurrentHour() - petMood.getLastEatHour() > 600) || (petMood.getCurrentHour() - petMood.getLastWalkHour() > 600));
+		return !((petMood.getCurrentHour() - petMood.getLastEatHour() > 48) || (petMood.getCurrentHour() - petMood.getLastWalkHour() > 48));
 	}
 
 

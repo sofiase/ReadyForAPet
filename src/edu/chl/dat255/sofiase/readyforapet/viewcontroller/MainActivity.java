@@ -1,8 +1,6 @@
 package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 
 
-
-
 import edu.chl.dat255.sofiase.readyforapet.R;
 import android.os.Bundle;
 import android.app.Activity;
@@ -13,8 +11,6 @@ import android.content.res.Configuration;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 public class MainActivity extends Activity {
@@ -88,7 +84,7 @@ public class MainActivity extends Activity {
 		try { 
 		Intent newIntent = new Intent(context, activity); 
 		startActivityForResult(newIntent, 0);
-		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left ); 
+		//overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left ); 
 		} catch(Exception ex) {
 		}
 	}

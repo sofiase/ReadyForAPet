@@ -1,7 +1,6 @@
 package edu.chl.dat255.sofiase.readyforapet.model;
 
 import java.io.Serializable;
-import android.util.Log;
 
 public class PetMood implements Serializable {
 
@@ -13,10 +12,6 @@ public class PetMood implements Serializable {
 	private long lastWalkHour;
 	private long lastPlayHour;
 	private long timeInterval;
-	
-	private final String LOG_test = "curr";
-	private final String LOG_test1 = "last eathour";
-	private final String LOG_test2 = "last walk";
 
 
 	public PetMood(int foodMood, int playMood, int walkMood, long timeInterval){

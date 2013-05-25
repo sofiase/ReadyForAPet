@@ -23,8 +23,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.content.pm.PackageManager;
-
 
 
 public class PlayActivity extends Activity {

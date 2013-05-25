@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import edu.chl.dat255.sofiase.readyforapet.R;
+import edu.chl.dat255.sofiase.readyforapet.model.Dog;
 import edu.chl.dat255.sofiase.readyforapet.model.Pet;
 import edu.chl.dat255.sofiase.readyforapet.model.PetMood;
 import android.app.Activity;
@@ -36,11 +37,15 @@ public class PetActivity extends Activity implements Serializable{
 	private Handler uiHandler = new Handler();
 	private ImageView dogBiscuit, dogPicture;
 	private ProgressBar moodBar;
-	private Pet dog;
+	//private Pet dog;
+	private Dog dog;
 	private String petName;
 	private int petAge;
 	private CheckBox musicCheckBox;
 	private PetMood petMood;
+	private Button play;
+	private Button walk;
+	private Button eat;
 
 	//Variables for LogCat outputs
 	private static final String LOG_test = "pet last walk";
@@ -54,20 +59,7 @@ public class PetActivity extends Activity implements Serializable{
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;
 
-	Runnable makeTextGone = new Runnable(){
-
-		/**
-		 * run method
-		 * 
-		 */
-		@Override
-		public void run(){
-			petResponse.setVisibility(View.GONE);
-			dogBiscuit.setVisibility(View.GONE);
-
-		}
-	};
-
+	
 	/**
 	 * onCreate Method
 	 *
@@ -83,11 +75,11 @@ public class PetActivity extends Activity implements Serializable{
 		//Receiving the new or saved pet
 		//dog = CreatePet.getPet();
 		if (CreatePet.getPet() != null){
-			dog = CreatePet.getPet();
+			dog = (Dog) CreatePet.getPet();
 		}
 		else{
 			try {
-				dog = Pet.load("pet_file.dat", PetActivity.this);
+				dog = (Dog) Pet.load("pet_file.dat", PetActivity.this);
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -99,16 +91,20 @@ public class PetActivity extends Activity implements Serializable{
 				e.printStackTrace();
 			}
 		}
-		
+
 		//Getting the petMood
 		petMood = dog.getPetMood();
-		
+
 		//Getting the pet name
 		petName = dog.getName();
 
-		final Button play = (Button) findViewById(R.id.play);
-		final Button walk = (Button) findViewById(R.id.walk);
-		final Button eat = (Button) findViewById(R.id.eat);
+		//final Button play = (Button) findViewById(R.id.play);
+		//final Button walk = (Button) findViewById(R.id.walk);
+		//final Button eat = (Button) findViewById(R.id.eat);
+		
+		play = (Button) findViewById(R.id.play);
+		walk = (Button) findViewById(R.id.walk);
+		eat = (Button) findViewById(R.id.eat);
 
 		showPetAge = (TextView) findViewById(R.id.petage);
 		petResponse = (TextView) findViewById(R.id.petresponse);
@@ -120,7 +116,7 @@ public class PetActivity extends Activity implements Serializable{
 
 		//Music
 		try {
-			afd = getAssets().openFd("readyforapetsong4.m4v");
+			afd = getAssets().openFd("readyforapetsong5.mov");
 			player = new MediaPlayer();
 			player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
 			player.setLooping(true);
@@ -150,7 +146,7 @@ public class PetActivity extends Activity implements Serializable{
 		petResponse.setVisibility(View.VISIBLE);
 
 		//Changing the picture and enabling/disabling buttons depending on mood
-		changePicture(play, eat, walk);
+		changePicture();
 
 		//Decreasing the FoodMood depending on how much time has passed since last eat, walk and play
 		petMood.setFoodMood(petMood.getFoodMood() + petMood.moodBarDecrease(petMood.getLastEatHour(), petMood.getCurrentHour()));
@@ -185,7 +181,7 @@ public class PetActivity extends Activity implements Serializable{
 							eat.setEnabled(true);
 							walk.setEnabled(true);
 							play.setEnabled(true);
-							changePicture(play, eat, walk);
+							changePicture();
 						}
 					}, 10000);
 
@@ -208,10 +204,8 @@ public class PetActivity extends Activity implements Serializable{
 					};
 
 					timer = new Timer();
-					timer.schedule(timertask, 10000);
+					timer.schedule(timertask, 10000);*/
 
-
-*/			
 
 				}
 				else{
@@ -243,7 +237,6 @@ public class PetActivity extends Activity implements Serializable{
 			public void onClick (View v){
 
 				//Contnuing to playActivity only of the dog has not died
-				//!(petMood.getCurrentHour() - petMood.getLastEatHour() > 48 || petMood.getCurrentHour() - petMood.getLastWalkHour() > 48)
 				if((petMood.getPlayMood() < 5 && petMood.getFoodMood() >= 3) && dog.isAlive()){
 					//Opening PlayActivity and recieves a requestCode when resuming this activity
 					PetActivity.this.startActivityForResult(new Intent(PetActivity.this, PlayActivity.class), 0);
@@ -255,7 +248,7 @@ public class PetActivity extends Activity implements Serializable{
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 2000);
 				}
-				changePicture(play, eat, walk);
+				changePicture();
 
 			}
 		}
@@ -292,13 +285,27 @@ public class PetActivity extends Activity implements Serializable{
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 2000);
 				}
-				changePicture(play,eat,walk);
+				changePicture();
 			}
 		}
 				);
 
 
 	}
+	
+	Runnable makeTextGone = new Runnable(){
+
+		/**
+		 * run method
+		 * 
+		 */
+		@Override
+		public void run(){
+			petResponse.setVisibility(View.GONE);
+			dogBiscuit.setVisibility(View.GONE);
+
+		}
+	};
 
 	/**
 	 * Recieves a requestCode when resuming PetActivity from either PlayActivity or WalkActivity.
@@ -445,17 +452,17 @@ public class PetActivity extends Activity implements Serializable{
 	 * @param eat - Button
 	 * @param walk - Button
 	 */
-	private void changePicture(Button play, Button eat, Button walk){
+	//private void changePicture(Button play, Button eat, Button walk){
+	private void changePicture(){
 		Log.i(LOG_test, Long.toString(petMood.getLastWalkHour()));
 		Log.i(LOG_test1, Long.toString(petMood.getCurrentHour()));
 		Log.i(LOG_test2, Long.toString(petMood.getLastEatHour()));
-		//(petMood.getCurrentHour() - petMood.getLastEatHour() > 48) || (petMood.getCurrentHour() - petMood.getLastWalkHour() > 48)
 		//Kills the pet if it has died
 		if (!dog.isAlive()){
 			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogdead));
 			final Animation anim = AnimationUtils.loadAnimation(PetActivity.this, R.anim.animation1);
 			dogPicture.startAnimation(anim);
-			killPet(play, eat, walk);
+			killPet();
 
 			//Test to see if the file is deleted
 			File file = getBaseContext().getFileStreamPath("pet_file.dat");
@@ -487,7 +494,7 @@ public class PetActivity extends Activity implements Serializable{
 	 * @param eat - Button
 	 * @param walk - Button
 	 */
-	private void killPet(Button play, Button eat, Button walk){
+	private void killPet(){
 		petResponse.setText(petName + " has unfortunately died!");
 		showPetAge.setVisibility(View.GONE);
 

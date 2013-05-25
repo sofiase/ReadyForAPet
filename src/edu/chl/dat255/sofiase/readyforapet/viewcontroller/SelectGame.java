@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import edu.chl.dat255.sofiase.readyforapet.R;
+import edu.chl.dat255.sofiase.readyforapet.model.Dog;
 import edu.chl.dat255.sofiase.readyforapet.model.Pet;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -25,7 +26,8 @@ public class SelectGame extends Activity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private TextView warningMessage;
-	private Pet pet;
+	//private Pet pet;
+	private Dog dog;
 	
 	//Variables for tests
 	private final String LOG_TAG = "Information about the file when loading";
@@ -55,7 +57,8 @@ public class SelectGame extends Activity implements Serializable {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		try {
-			pet = Pet.load("pet_file.dat", SelectGame.this);
+			//pet = Pet.load("pet_file.dat", SelectGame.this);
+			dog = (Dog) Pet.load("pet_file.dat", SelectGame.this);
 		} catch (FileNotFoundException e) {
 			System.out.print("File not found ");
 			e.printStackTrace();
@@ -78,7 +81,7 @@ public class SelectGame extends Activity implements Serializable {
 			 */
 			public void onClick (View v){
 
-				if (pet != null){
+				if(dog != null){
 					startActivity(new Intent(SelectGame.this, PetActivity.class));
 					
 					//Test to see if the file exist on internal memory when loading
@@ -111,7 +114,7 @@ public class SelectGame extends Activity implements Serializable {
 			 * @param v - View
 			 */
 			public void onClick (View v){
-				if (pet != null){
+				if (dog != null){
 					showWarningAlert();
 				}
 				else{
@@ -169,9 +172,9 @@ public class SelectGame extends Activity implements Serializable {
 	    @Override
 	    protected void onResume() {
 	        super.onResume();
-	        if (pet == null){
+	        if (dog == null){
 	    		try {
-	    			pet = Pet.load("pet_file.dat", SelectGame.this);
+	    			dog = (Dog) Pet.load("pet_file.dat", SelectGame.this);
 	    		} catch (FileNotFoundException e) {
 	    			System.out.print("File not found ");
 	    			e.printStackTrace();
