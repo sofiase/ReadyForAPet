@@ -68,11 +68,12 @@ public class Pet implements Serializable{
 	 */
 
 	public String walk(int distance) {
-		if (petMood.getFoodMood() < 3 && petMood.getWalkMood() < 5){
+		if (petMood.getFoodMood() < 3 && petMood.getWalkMood() < 5) {
 			return "I'm too hungry!";
-		}
+			}
 		else if (petMood.getWalkMood() < 5) {
 			if(distance < 10){
+
 				return "I want to walk more!";
 			}
 			if(distance > 10 && distance < 30){

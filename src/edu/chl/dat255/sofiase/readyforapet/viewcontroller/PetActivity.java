@@ -5,11 +5,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import edu.chl.dat255.sofiase.readyforapet.R;
 import edu.chl.dat255.sofiase.readyforapet.model.Dog;
 import edu.chl.dat255.sofiase.readyforapet.model.Pet;
 import edu.chl.dat255.sofiase.readyforapet.model.PetMood;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.AssetFileDescriptor;
@@ -54,12 +58,11 @@ public class PetActivity extends Activity implements Serializable{
 	private final String LOG_TAG1 = "Information about the file when saving";
 	private final String LOG_TAG2 = "Information about the file when deleting";
 
-
 	//Variables for playing music in Pet Activity
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;
 
-	
+
 	/**
 	 * onCreate Method
 	 *
@@ -67,7 +70,6 @@ public class PetActivity extends Activity implements Serializable{
 	 */
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.petactivity);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -98,13 +100,12 @@ public class PetActivity extends Activity implements Serializable{
 		//Getting the pet name
 		petName = dog.getName();
 
-		//final Button play = (Button) findViewById(R.id.play);
-		//final Button walk = (Button) findViewById(R.id.walk);
-		//final Button eat = (Button) findViewById(R.id.eat);
+
 		
 		play = (Button) findViewById(R.id.play);
 		walk = (Button) findViewById(R.id.walk);
 		eat = (Button) findViewById(R.id.eat);
+
 
 		showPetAge = (TextView) findViewById(R.id.petage);
 		petResponse = (TextView) findViewById(R.id.petresponse);
@@ -112,7 +113,6 @@ public class PetActivity extends Activity implements Serializable{
 		dogPicture = (ImageView) findViewById(R.id.dogpicture);
 		dogBiscuit.setVisibility(View.GONE);
 		dogPicture.setVisibility(View.VISIBLE);
-
 
 		//Music
 		try {
@@ -134,12 +134,10 @@ public class PetActivity extends Activity implements Serializable{
 		//petAge = (int) (petMood.getCurrentHour() - dog.getBirthHour()) / 24;
 		petAge = (int) (petMood.getCurrentHour() - dog.getBirthHour());
 
-
 		//Setting textview with welcome message
 		petResponse.setText("Hello, my name is " + petName + "!");
 		petResponse.setVisibility(View.VISIBLE);
 		uiHandler.postDelayed(makeTextGone, 1000);
-
 
 		//Setting textview with current age of the pet
 		showPetAge.setText(petName + " is " + petAge + " days old.");
@@ -194,7 +192,7 @@ public class PetActivity extends Activity implements Serializable{
 					anim.start();	
 					uiHandler.postDelayed(makeTextGone, 10000);
 
-					/**
+				/**
 					//is this needed??
 					TimerTask timertask = new TimerTask() {
 						@Override
@@ -205,28 +203,25 @@ public class PetActivity extends Activity implements Serializable{
 
 					timer = new Timer();
 					timer.schedule(timertask, 10000);*/
-
-
 				}
+				
+				
+					
 				else{
 					petResponse.setText(dog.eat());
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 5000);
 				}
-
 				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
 				moodBar.setProgress(petMood.getSumMood());
 
 				//changePicture(play, eat, walk);
 			}
-		}
-				);
-
+		});
 
 		// What happens when pushing the play button
 		play.setOnClickListener(new OnClickListener() {
-
 
 			/**
 			 * Making the dog feel happier when it plays
@@ -235,14 +230,11 @@ public class PetActivity extends Activity implements Serializable{
 			 */
 			@Override
 			public void onClick (View v){
-
 				//Contnuing to playActivity only of the dog has not died
 				if((petMood.getPlayMood() < 5 && petMood.getFoodMood() >= 3) && dog.isAlive()){
 					//Opening PlayActivity and recieves a requestCode when resuming this activity
 					PetActivity.this.startActivityForResult(new Intent(PetActivity.this, PlayActivity.class), 0);
-
 				}
-
 				else{
 					petResponse.setText(dog.play());
 					petResponse.setVisibility(View.VISIBLE);
@@ -251,10 +243,7 @@ public class PetActivity extends Activity implements Serializable{
 				changePicture();
 
 			}
-		}
-				);
-
-
+		});
 
 		//What happens when pushing the walk button
 		walk.setOnClickListener(new OnClickListener() {
@@ -287,10 +276,7 @@ public class PetActivity extends Activity implements Serializable{
 				}
 				changePicture();
 			}
-		}
-				);
-
-
+		});
 	}
 	
 	Runnable makeTextGone = new Runnable(){
@@ -339,8 +325,6 @@ public class PetActivity extends Activity implements Serializable{
 
 	}
 
-
-
 	public void addListenerOnMusic() {
 		musicCheckBox = (CheckBox) findViewById(R.id.checkbox1);
 		musicCheckBox.setOnClickListener(new OnClickListener() {
@@ -354,11 +338,8 @@ public class PetActivity extends Activity implements Serializable{
 					player.pause();
 				}
 			}
-		}
-				);
+		});
 	}
-
-
 
 	/**
 	 * Method onPause for the activity
@@ -368,8 +349,6 @@ public class PetActivity extends Activity implements Serializable{
 	public void onPause() {
 		super.onPause();
 		player.pause();
-
-
 		try { 
 			dog.save("pet_file.dat",PetActivity.this);
 			//Test to see if the file is saved
@@ -385,9 +364,7 @@ public class PetActivity extends Activity implements Serializable{
 			e.printStackTrace();
 		}
 	}
-
-
-
+	
 	/**
 	 * Method onResume for the activity
 	 * 
@@ -398,7 +375,6 @@ public class PetActivity extends Activity implements Serializable{
 		player.start();
 		musicCheckBox.setChecked(true);
 	}
-
 
 	/**
 	 * Method onStop for the activity
@@ -417,7 +393,6 @@ public class PetActivity extends Activity implements Serializable{
 		}
 	}
 
-
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
@@ -425,7 +400,6 @@ public class PetActivity extends Activity implements Serializable{
 
 		// The activity is about to be destroyed.
 	}
-
 
 	//TODO Add better comments for this method
 	/**
@@ -443,7 +417,6 @@ public class PetActivity extends Activity implements Serializable{
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
 
 	/**
 	 * Method called to change image depeding on the pet's mood.
@@ -485,8 +458,7 @@ public class PetActivity extends Activity implements Serializable{
 			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.doghappy));
 		}
 	}
-
-
+	
 	/**
 	 * Method called when dog dies.  Sets text, disables buttons and deletes saved file.
 	 * 

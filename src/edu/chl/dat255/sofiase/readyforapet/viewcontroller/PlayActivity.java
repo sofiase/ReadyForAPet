@@ -74,17 +74,6 @@ public class PlayActivity extends Activity {
 			welcomeDog.setVisibility(View.VISIBLE);
 		}
 
-
-		/**
-			if(isIntentAvailable(PlayActivity.this, android.provider.MediaStore.ACTION_IMAGE_CAPTURE )==true){
-		dogPlay.setVisibility(View.GONE);
-		dogFace.setVisibility(View.GONE);
-		takePhoto.setVisibility(View.VISIBLE);	
-		useStandard.setVisibility(View.VISIBLE);
-		welcomeDog.setVisibility(View.VISIBLE);
-		}
-		 */
-
 		else{
 			dogPlay.setVisibility(View.VISIBLE);
 			welcomeDog.setVisibility(View.VISIBLE);

@@ -16,14 +16,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 public class CreatePet extends Activity implements OnClickListener, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String petName;
 	//private static Pet dog;
 	private static Dog dog;
-
 
 	/**
 	 * onCreate Method
@@ -40,7 +38,6 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		create.setOnClickListener(this);
 	}
 
-	
 	/**
 	 * onClick Method
 	 * 
@@ -48,7 +45,6 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 	 * 
 	 */
 	public void onClick (View v){
-
 		EditText setName = (EditText) findViewById(R.id.edit_pet_name);
 		petName = setName.getText().toString();
 		if (petName.equals("")){
@@ -92,6 +88,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
     @Override
     protected void onResume() {
         super.onResume();
+       
         // The activity has become visible (it is now "resumed").
     }
     @Override

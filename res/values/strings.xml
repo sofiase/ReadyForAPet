@@ -16,5 +16,6 @@
     <string name="quit">Quit</string>
     <string name="instructions"></string>
     <string name="sound">Sound on/off</string>
+    <string name="title_activity_slide">SlideActivity</string>
 
 </resources>
