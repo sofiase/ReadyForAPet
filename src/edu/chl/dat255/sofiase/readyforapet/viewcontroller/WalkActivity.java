@@ -2,7 +2,6 @@ package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
 import edu.chl.dat255.sofiase.readyforapet.R;
 import edu.chl.dat255.sofiase.readyforapet.util.LocationHelper;
 import android.app.Activity;
@@ -26,21 +25,15 @@ public class WalkActivity extends Activity{
 
 	private TextView displayDistance;
 	private ImageView dogPrints;
-	private Handler uiHandler = new Handler();
 	private int delay = 0;
-	private int period = 5000;
+	private int period = 30000;
+	private int distance = 0;
 	private Timer timer;
-
 	private Handler handler = new Handler();
-	private static int distance = 0;
+	private Handler uiHandler = new Handler();
 	private LocationHelper location;
 
 	Runnable makeViewGone = new Runnable(){
-
-		/**
-		 * run method
-		 * 
-		 */
 		@Override
 		public void run(){
 			dogPrints.setVisibility(View.GONE);
@@ -79,12 +72,6 @@ public class WalkActivity extends Activity{
 			 * @param v - View
 			 */
 			public void onClick (View v){
-				dogPrints.setVisibility(View.VISIBLE);
-				dogPrints.setBackgroundResource(R.anim.animation3);
-				AnimationDrawable anim = (AnimationDrawable) dogPrints.getBackground(); 
-				anim.start();
-				uiHandler.postDelayed(makeViewGone, 7000);//st�ngs �ven animationen iom att vi st�nger bilden?
-
 				try{
 					timer = new Timer();
 					timer.schedule(myTimerTask, delay, period);
@@ -92,6 +79,11 @@ public class WalkActivity extends Activity{
 				catch (Exception e){
 					e.printStackTrace();
 				}
+				dogPrints.setVisibility(View.VISIBLE);
+				dogPrints.setBackgroundResource(R.anim.animation3);
+				AnimationDrawable anim = (AnimationDrawable) dogPrints.getBackground(); 
+				anim.start();
+				uiHandler.postDelayed(makeViewGone, 7000);
 			}
 		}
 
@@ -108,7 +100,7 @@ public class WalkActivity extends Activity{
 			public void onClick (View v){
 				distance = (int) Math.round(location.getDistance());
 				
-				//Turn of GPS
+				//Turn off GPS
 				location.killLocationServices();
 				
 				//If timer is not initiated, the timer should not be stopped
@@ -172,7 +164,7 @@ public class WalkActivity extends Activity{
 
 
 	/**
-	 * Fungerar denna?
+	 *
 	 * 
 	 */
 	@Override
@@ -197,26 +189,24 @@ public class WalkActivity extends Activity{
 		return super.onOptionsItemSelected(item);
 	}
 	
-	   @Override
-	    protected void onStart() {
-	        super.onStart();
-	        // The activity is about to become visible.
-	    }
 	    @Override
 	    protected void onResume() {
 	        super.onResume();
 	        // The activity has become visible (it is now "resumed").
 	    }
+	    
 	    @Override
 	    protected void onPause() {
 	        super.onPause();
 	        // Another activity is taking focus (this activity is about to be "paused").
 	    }
+	    
 	    @Override
 	    protected void onStop() {
 	        super.onStop();
 	        // The activity is no longer visible (it is now "stopped")
 	    }
+	    
 	    @Override
 	    protected void onDestroy() {
 	        super.onDestroy();

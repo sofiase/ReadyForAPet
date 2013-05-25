@@ -2,6 +2,7 @@ package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Timer;
@@ -42,13 +43,15 @@ public class PetActivity extends Activity implements Serializable{
 	private Pet dog;
 	private String petName;
 	private int petAge;
-	private final String LOG_TAG1 = "Information about the file when saving";
-	private final String LOG_TAG2 = "Information about the file when deleting";
 	private CheckBox musicCheckBox;
-	private Timer timer;
+	private PetMood petMood;
+
+	//Variables for LogCat outputs
 	private static final String LOG_test = "pet last walk";
 	private static final String LOG_test1 = "pet last current";
 	private static final String LOG_test2 = "pet last eat";
+	private final String LOG_TAG1 = "Information about the file when saving";
+	private final String LOG_TAG2 = "Information about the file when deleting";
 
 	//Variables for playing music in Pet Activity
 	private MediaPlayer player;
@@ -79,7 +82,28 @@ public class PetActivity extends Activity implements Serializable{
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		//Receiving the new or saved pet
-		dog = CreatePet.getPet();
+		//dog = CreatePet.getPet();
+		if (CreatePet.getPet() != null){
+			dog = CreatePet.getPet();
+		}
+		else{
+			try {
+				dog = Pet.load("pet_file.dat", PetActivity.this);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		//Getting the petMood
+		petMood = dog.getPetMood();
+		
 		//Getting the pet name
 		petName = dog.getName();
 
@@ -110,8 +134,8 @@ public class PetActivity extends Activity implements Serializable{
 		musicCheckBox.setChecked(true);
 
 		//Getting the age of the pet if it has not already died
-		//petAge = (int) (PetMood.getCurrentHour() - dog.getBirthHour()) / 24;
-		petAge = (int) (PetMood.getCurrentHour() - dog.getBirthHour());
+		//petAge = (int) (petMood.getCurrentHour() - dog.getBirthHour()) / 24;
+		petAge = (int) (petMood.getCurrentHour() - dog.getBirthHour());
 
 		//Setting textview with welcome message
 		petResponse.setText("Hello, my name is " + petName + "!");
@@ -126,12 +150,12 @@ public class PetActivity extends Activity implements Serializable{
 		changePicture(play, eat, walk);
 
 		//Decreasing the FoodMood depending on how much time has passed since last eat, walk and play
-		PetMood.setFoodMood(PetMood.getFoodMood() + PetMood.moodBarDecrease(PetMood.getLastEatHour(), PetMood.getCurrentHour()));
-		PetMood.setWalkMood(PetMood.getWalkMood() + PetMood.moodBarDecrease(PetMood.getLastWalkHour(), PetMood.getCurrentHour()));
-		PetMood.setPlayMood(PetMood.getPlayMood() + PetMood.moodBarDecrease(PetMood.getLastPlayHour(), PetMood.getCurrentHour()));
+		petMood.setFoodMood(petMood.getFoodMood() + petMood.moodBarDecrease(petMood.getLastEatHour(), petMood.getCurrentHour()));
+		petMood.setWalkMood(petMood.getWalkMood() + petMood.moodBarDecrease(petMood.getLastWalkHour(), petMood.getCurrentHour()));
+		petMood.setPlayMood(petMood.getPlayMood() + petMood.moodBarDecrease(petMood.getLastPlayHour(), petMood.getCurrentHour()));
 
 		moodBar = (ProgressBar) findViewById(R.id.moodbar);
-		moodBar.setProgress(PetMood.getSumMood()); 
+		moodBar.setProgress(petMood.getSumMood()); 
 
 
 		eat.setOnClickListener(new OnClickListener() {
@@ -148,7 +172,7 @@ public class PetActivity extends Activity implements Serializable{
 
 				petResponse = (TextView) findViewById(R.id.petresponse);
 
-				if(PetMood.getFoodMood() < 5){
+				if(petMood.getFoodMood() < 5){
 					play.setEnabled(false);
 					eat.setEnabled(false);
 					walk.setEnabled(false);
@@ -160,7 +184,7 @@ public class PetActivity extends Activity implements Serializable{
 							play.setEnabled(true);
 							changePicture(play, eat, walk);
 						}
-					}, 20000);
+					}, 10000);
 
 					petResponse.setText(dog.eat());
 					petResponse.setVisibility(View.VISIBLE);
@@ -171,7 +195,7 @@ public class PetActivity extends Activity implements Serializable{
 					anim.start();	
 					uiHandler.postDelayed(makeTextGone, 10000);
 
-				
+				/**
 					//is this needed??
 					TimerTask timertask = new TimerTask() {
 						@Override
@@ -181,8 +205,11 @@ public class PetActivity extends Activity implements Serializable{
 					};
 
 					timer = new Timer();
-					timer.schedule(timertask, 10000);
+					timer.schedule(timertask, 10000);*/
 				}
+				
+				
+					
 				else{
 					petResponse.setText(dog.eat());
 					petResponse.setVisibility(View.VISIBLE);
@@ -190,7 +217,8 @@ public class PetActivity extends Activity implements Serializable{
 				}
 				//Updating the moodbar
 				moodBar = (ProgressBar) findViewById(R.id.moodbar);
-				moodBar.setProgress(PetMood.getSumMood());
+				moodBar.setProgress(petMood.getSumMood());
+
 				//changePicture(play, eat, walk);
 			}
 		});
@@ -206,8 +234,8 @@ public class PetActivity extends Activity implements Serializable{
 			@Override
 			public void onClick (View v){
 				//Contnuing to playActivity only of the dog has not died
-				//!(PetMood.getCurrentHour() - PetMood.getLastEatHour() > 48 || PetMood.getCurrentHour() - PetMood.getLastWalkHour() > 48)
-				if((PetMood.getPlayMood() < 5 && PetMood.getFoodMood() >= 3) && PetMood.isAlive()){
+				//!(petMood.getCurrentHour() - petMood.getLastEatHour() > 48 || petMood.getCurrentHour() - petMood.getLastWalkHour() > 48)
+				if((petMood.getPlayMood() < 5 && petMood.getFoodMood() >= 3) && dog.isAlive()){
 					//Opening PlayActivity and recieves a requestCode when resuming this activity
 					PetActivity.this.startActivityForResult(new Intent(PetActivity.this, PlayActivity.class), 0);
 				}
@@ -229,21 +257,21 @@ public class PetActivity extends Activity implements Serializable{
 			 */
 			@Override
 			public void onClick (View v){
-				
+
 				petResponse = (TextView) findViewById(R.id.petresponse);
-				
-				// Moving to the WalkActivity class if foodmood is high enough and petmood is below 5.
-				if(((PetMood.getFoodMood() < 3 && PetMood.getWalkMood() < 5) || PetMood.getFoodMood() > 5)){
+
+				// Moving to the WalkActivity class if foodmood is high enough and petMood is below 5.
+				if(((petMood.getFoodMood() < 3 && petMood.getWalkMood() < 5) || petMood.getFoodMood() > 5)){
 					petResponse.setText(dog.walk(0));
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 2000);
 				}
-				
-				else if (PetMood.isAlive()){
+
+				else if (dog.isAlive()){
 					//Opening PlayActivity and recieves a requestCode when resuming this activity
 					PetActivity.this.startActivityForResult(new Intent(PetActivity.this, WalkActivity.class), 1);
 				}
-				
+
 				else{
 					petResponse.setText(dog.walk(0));
 					petResponse.setVisibility(View.VISIBLE);
@@ -269,7 +297,7 @@ public class PetActivity extends Activity implements Serializable{
 
 			//Updating the moodbar after playing
 			moodBar = (ProgressBar) findViewById(R.id.moodbar);
-			moodBar.setProgress(PetMood.getSumMood());
+			moodBar.setProgress(petMood.getSumMood());
 		}
 
 		//When coming from the WalkActivity
@@ -281,7 +309,7 @@ public class PetActivity extends Activity implements Serializable{
 
 			// Updating the moodbar after taking a walk
 			moodBar = (ProgressBar) findViewById(R.id.moodbar);
-			moodBar.setProgress(PetMood.getSumMood());
+			moodBar.setProgress(petMood.getSumMood());
 		}
 
 	}
@@ -387,30 +415,32 @@ public class PetActivity extends Activity implements Serializable{
 	 * @param walk - Button
 	 */
 	private void changePicture(Button play, Button eat, Button walk){
-		Log.i(LOG_test, Long.toString(PetMood.getLastWalkHour()));
-		Log.i(LOG_test1, Long.toString(PetMood.getCurrentHour()));
-		Log.i(LOG_test2, Long.toString(PetMood.getLastEatHour()));
-		//(PetMood.getCurrentHour() - PetMood.getLastEatHour() > 48) || (PetMood.getCurrentHour() - PetMood.getLastWalkHour() > 48)
+		Log.i(LOG_test, Long.toString(petMood.getLastWalkHour()));
+		Log.i(LOG_test1, Long.toString(petMood.getCurrentHour()));
+		Log.i(LOG_test2, Long.toString(petMood.getLastEatHour()));
+		//(petMood.getCurrentHour() - petMood.getLastEatHour() > 48) || (petMood.getCurrentHour() - petMood.getLastWalkHour() > 48)
 		//Kills the pet if it has died
-		if (!PetMood.isAlive()){
+		if (!dog.isAlive()){
 			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogdead));
 			final Animation anim = AnimationUtils.loadAnimation(PetActivity.this, R.anim.animation1);
 			dogPicture.startAnimation(anim);
 			killPet(play, eat, walk);
+
 			//Test to see if the file is deleted
 			File file = getBaseContext().getFileStreamPath("pet_file.dat");
+
 			if(file.exists()){
 				Log.i(LOG_TAG2,"is still saved on internal memory");
 			}
 			else{
 				Log.i(LOG_TAG2,"is deleted from on internal memory");
 			}  
-			
+
 		}
-		else if(PetMood.getWalkMood() < 4 && PetMood.getFoodMood() > 3){
+		else if(petMood.getWalkMood() < 4 && petMood.getFoodMood() > 3){
 			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogpoop));
 		}
-		else if(PetMood.getSumMood() < 7){
+		else if(petMood.getSumMood() < 7){
 			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogsad));
 		}
 		else{

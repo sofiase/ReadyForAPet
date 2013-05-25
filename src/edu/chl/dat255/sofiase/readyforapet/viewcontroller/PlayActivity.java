@@ -3,7 +3,6 @@ package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import edu.chl.dat255.sofiase.readyforapet.R;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -24,7 +23,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-
 import android.content.pm.PackageManager;
 
 
@@ -35,6 +33,7 @@ public class PlayActivity extends Activity {
 	private ImageView dogFace, dogBody, welcomeDog;
 	private Timer timer;
 	private Bitmap bm;
+	
 	//Variables for playing music in Pet Activity
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;
@@ -202,6 +201,7 @@ public class PlayActivity extends Activity {
 		return circleBitmap;
 	}
 
+	
 	/**
 	 * Method for what should happen when you have taken a photo
 	 */
@@ -210,15 +210,11 @@ public class PlayActivity extends Activity {
 		takePhoto.setVisibility(View.GONE);	
 		useStandard.setVisibility(View.GONE);
 		dogPlay.setVisibility(View.VISIBLE);
-
-
 		super.onActivityResult(requestCode, resultCode, data);
 		dogFace.setVisibility(View.VISIBLE);
-		// Making the picture circle
+		// Making the picture circular
 		bm = (Bitmap) data.getExtras().get("data");
 		dogFace.setImageBitmap(makeCircle(bm));
-
-
 	}
 
 
