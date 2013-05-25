@@ -86,9 +86,10 @@ public class Pet implements Serializable{
 		hungerCounter = PetMood.getFoodMood();
 		playCounter = PetMood.getPlayMood();
 
-		if (hungerCounter < 3 && walkCounter < 5)
+		
+		/*if (hungerCounter < 3 && walkCounter < 5)
 			return "I'm too hungry!";
-		else if (walkCounter < 5) {
+		else*/ if (walkCounter < 5) {
 			if(distance < 5){
 				return "I want to walk more!";
 			}

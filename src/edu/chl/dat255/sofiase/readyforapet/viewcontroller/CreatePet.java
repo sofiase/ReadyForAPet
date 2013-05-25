@@ -1,7 +1,6 @@
 package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 
 import java.io.Serializable;
-
 import edu.chl.dat255.sofiase.readyforapet.R;
 import edu.chl.dat255.sofiase.readyforapet.model.Pet;
 import edu.chl.dat255.sofiase.readyforapet.model.PetMood;
@@ -18,15 +17,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 public class CreatePet extends Activity implements OnClickListener, Serializable {
-
-
 
 	private static final long serialVersionUID = 1L;
 	private String petName;
 	private static Pet dog;
-
 
 	/**
 	 * onCreate Method
@@ -42,23 +37,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		Button create = (Button) findViewById(R.id.puppy_settings);
 		create.setOnClickListener(this);
 	}
-	/**
-	@Override
-	public void onBackPressed(){
-		super.onBackPressed();
-		overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-	}
-	*/
-	
-	private void slideBetweenActivities(Context context, Class<?> activity){
-		try { 
-		Intent newIntent = new Intent(context, activity); 
-		startActivityForResult(newIntent, 0);
-		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left ); 
-		} catch(Exception ex) {
-		}
-	}
-	
+		
 	/**
 	 * onClick Method
 	 * 
@@ -68,7 +47,6 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 	 * 
 	 */
 	public void onClick (View v){
-
 		EditText setName = (EditText) findViewById(R.id.edit_pet_name);
 		petName = setName.getText().toString();
 		if (petName.equals("")){
@@ -77,8 +55,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		
 		else {
 			dog = new Pet(petName, 0, 0, 0, PetMood.getCurrentHour());
-			slideBetweenActivities(CreatePet.this, PetActivity.class);
-			//startActivity(new Intent(CreatePet.this, PetActivity.class));
+			startActivity(new Intent(CreatePet.this, PetActivity.class));
 		}
 	}
 
@@ -127,6 +104,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
     @Override
     protected void onResume() {
         super.onResume();
+       
         // The activity has become visible (it is now "resumed").
     }
     @Override

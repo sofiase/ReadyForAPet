@@ -1,8 +1,5 @@
 package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 
-
-
-
 import edu.chl.dat255.sofiase.readyforapet.R;
 import android.os.Bundle;
 import android.app.Activity;
@@ -24,8 +21,7 @@ public class MainActivity extends Activity {
 	 */
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
-	    super.onConfigurationChanged(newConfig);
-	  
+	    super.onConfigurationChanged(newConfig); 
 	}
 	
 
@@ -45,11 +41,10 @@ public class MainActivity extends Activity {
 
 			
 			public void onClick (View v){ 
-				slideBetweenActivities(MainActivity.this, SelectGame.class);
+				startActivity(new Intent(MainActivity.this, SelectGame.class));
 			}
 		}
 		);
-
 
 		Button settings = (Button) findViewById(R.id.howtoplay);
 		settings.setOnClickListener(new OnClickListener() {
@@ -59,11 +54,9 @@ public class MainActivity extends Activity {
 			 * @param v - View
 			 */
 			public void onClick (View v){
-				slideBetweenActivities(MainActivity.this, HowToPlayActivity.class);
+				startActivity(new Intent(MainActivity.this, HowToPlayActivity.class));
 			}
-		}
-				);
-
+		});
 
 		Button quit = (Button) findViewById(R.id.quit);
 		quit.setOnClickListener(new OnClickListener() {
@@ -79,20 +72,7 @@ public class MainActivity extends Activity {
 			}
 		}
 		);
-		
-
-
 	}	
-	
-	private void slideBetweenActivities(Context context, Class<?> activity){
-		try { 
-		Intent newIntent = new Intent(context, activity); 
-		startActivityForResult(newIntent, 0);
-		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left ); 
-		} catch(Exception ex) {
-		}
-	}
-	
 
 
 	/**
@@ -118,6 +98,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
+        
         // Another activity is taking focus (this activity is about to be "paused").
     }
     @Override

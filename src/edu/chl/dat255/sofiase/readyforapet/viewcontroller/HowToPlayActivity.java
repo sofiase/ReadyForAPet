@@ -56,7 +56,9 @@ public class HowToPlayActivity extends Activity implements Serializable{
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	   @Override
+	
+		
+		@Override
 	    protected void onStart() {
 	        super.onStart();
 	        // The activity is about to become visible.

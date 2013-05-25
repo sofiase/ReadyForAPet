@@ -9,6 +9,7 @@ import edu.chl.dat255.sofiase.readyforapet.R;
 import edu.chl.dat255.sofiase.readyforapet.model.Pet;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -27,8 +28,6 @@ public class SelectGame extends Activity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private TextView warningMessage;
 	private final String LOG_TAG = "Information about the file when loading";
-
-
 	Runnable makeTextGone = new Runnable(){
 
 		/**
@@ -91,13 +90,9 @@ public class SelectGame extends Activity implements Serializable {
 
 				else {
 					Toast.makeText(SelectGame.this, "Create a pet first!", Toast.LENGTH_SHORT).show();
-
 				}
 			}
-		}
-
-				);
-
+		});
 
 		//What happens when button create new pet is pushed
 		Button createNewPet = (Button) findViewById(R.id.createnewpet);
@@ -111,17 +106,13 @@ public class SelectGame extends Activity implements Serializable {
 			public void onClick (View v){
 				if (CreatePet.getPet() != null){
 					showWarningAlert();
-
+					
 				}
-				else{
+				else{	
 					startActivity(new Intent(SelectGame.this,CreatePet.class));
 				}
-
-
 			}
-		}
-				);
-
+		});
 	}
 
 	/**
@@ -164,7 +155,7 @@ public class SelectGame extends Activity implements Serializable {
 		alert.show();
 	}
 
-
+	
 	    @Override
 	    protected void onResume() {
 	        super.onResume();
@@ -185,7 +176,4 @@ public class SelectGame extends Activity implements Serializable {
 	        super.onDestroy();
 	        // The activity is about to be destroyed.
 	    }
-
-
-
 }
