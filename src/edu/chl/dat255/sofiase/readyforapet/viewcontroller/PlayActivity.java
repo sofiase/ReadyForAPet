@@ -35,6 +35,7 @@ public class PlayActivity extends Activity {
 	private ImageView dogFace, dogBody, welcomeDog;
 	private Timer timer;
 	private Bitmap bm;
+	
 	//Variables for playing music in Pet Activity
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;

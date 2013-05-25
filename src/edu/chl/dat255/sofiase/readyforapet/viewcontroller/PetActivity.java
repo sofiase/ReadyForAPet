@@ -42,7 +42,7 @@ public class PetActivity extends Activity implements Serializable{
 	private final String LOG_TAG2 = "Information about the file when deleting";
 	private CheckBox musicCheckBox;
 
-	
+
 	private static final String LOG_test = "pet last walk";
 	private static final String LOG_test1 = "pet last current";
 	private static final String LOG_test2 = "pet last eat";
@@ -251,21 +251,21 @@ public class PetActivity extends Activity implements Serializable{
 			 */
 			@Override
 			public void onClick (View v){
-				
+
 				petResponse = (TextView) findViewById(R.id.petresponse);
-				
+
 				// Moving to the WalkActivity class if foodmood is high enough and petmood is below 5.
 				if(((PetMood.getFoodMood() < 3 && PetMood.getWalkMood() < 5) || PetMood.getFoodMood() > 5)){
 					petResponse.setText(dog.walk(0));
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 2000);
 				}
-				
+
 				else if (PetMood.isAlive()){
 					//Opening PlayActivity and recieves a requestCode when resuming this activity
 					PetActivity.this.startActivityForResult(new Intent(PetActivity.this, WalkActivity.class), 1);
 				}
-				
+
 				else{
 					petResponse.setText(dog.walk(0));
 					petResponse.setVisibility(View.VISIBLE);
@@ -313,8 +313,6 @@ public class PetActivity extends Activity implements Serializable{
 
 
 
-
-
 	public void addListenerOnMusic() {
 		musicCheckBox = (CheckBox) findViewById(R.id.checkbox1);
 		musicCheckBox.setOnClickListener(new OnClickListener() {
@@ -331,8 +329,6 @@ public class PetActivity extends Activity implements Serializable{
 		}
 				);
 	}
-
-
 
 
 
@@ -439,15 +435,17 @@ public class PetActivity extends Activity implements Serializable{
 			final Animation anim = AnimationUtils.loadAnimation(PetActivity.this, R.anim.animation1);
 			dogPicture.startAnimation(anim);
 			killPet(play, eat, walk);
+
 			//Test to see if the file is deleted
 			File file = getBaseContext().getFileStreamPath("pet_file.dat");
+
 			if(file.exists()){
 				Log.i(LOG_TAG2,"is still saved on internal memory");
 			}
 			else{
 				Log.i(LOG_TAG2,"is deleted from on internal memory");
 			}  
-			
+
 		}
 		else if(PetMood.getWalkMood() < 4 && PetMood.getFoodMood() > 3){
 			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogpoop));

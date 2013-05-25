@@ -14,14 +14,5 @@ public class Dog extends Pet implements Serializable {
 		super(name, hungerCounter, walkCounter, playCounter, petBirthTime);
 	}
 
-	
-	/**
-	 * Method that makes the dog name available to all classes.
-	 * 
-	 * @return name - String
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
 
 }
