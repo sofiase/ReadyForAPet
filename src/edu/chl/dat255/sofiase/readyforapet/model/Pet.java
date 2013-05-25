@@ -164,7 +164,7 @@ public class Pet implements Serializable{
 		Log.i(LOG_test, Long.toString(petMood.getCurrentHour()));
 		Log.i(LOG_test1, Long.toString(petMood.getLastEatHour()));
 		Log.i(LOG_test2, Long.toString(petMood.getLastWalkHour()));
-		return !((petMood.getCurrentHour() - petMood.getLastEatHour() > 48) || (petMood.getCurrentHour() - petMood.getLastWalkHour() > 48));
+		return !((petMood.getCurrentHour() - petMood.getLastEatHour() > 480) || (petMood.getCurrentHour() - petMood.getLastWalkHour() > 480));
 	}
 
 

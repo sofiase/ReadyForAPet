@@ -116,7 +116,7 @@ public class PetActivity extends Activity implements Serializable{
 
 		//Music
 		try {
-			afd = getAssets().openFd("readyforapetsong5.mov");
+			afd = getAssets().openFd("readyforapetsong6_cay.mov");
 			player = new MediaPlayer();
 			player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
 			player.setLooping(true);
