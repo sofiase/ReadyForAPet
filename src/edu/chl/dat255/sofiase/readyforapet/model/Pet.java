@@ -161,10 +161,12 @@ public class Pet implements Serializable{
 	 * @return true if pet is alive, false if it is dead.
 	 */
 	public boolean isAlive(){
+		//Test
 		Log.i(LOG_test, Long.toString(petMood.getCurrentHour()));
 		Log.i(LOG_test1, Long.toString(petMood.getLastEatHour()));
 		Log.i(LOG_test2, Long.toString(petMood.getLastWalkHour()));
-		return !((petMood.getCurrentHour() - petMood.getLastEatHour() > 480) || (petMood.getCurrentHour() - petMood.getLastWalkHour() > 480));
+		
+		return !((petMood.getCurrentHour() - petMood.getLastEatHour() > 48) || (petMood.getCurrentHour() - petMood.getLastWalkHour() > 48));
 	}
 
 

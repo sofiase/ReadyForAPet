@@ -53,7 +53,6 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		
 		else {
 			dog = new Dog(petName, 2, 2, 2);
-			//dog = new Pet(petName, 0, 0, 0);
 			startActivity(new Intent(CreatePet.this, PetActivity.class));
 		}
 	}

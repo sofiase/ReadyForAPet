@@ -60,7 +60,9 @@ public class PetActivity extends Activity implements Serializable{
 
 	//Variables for playing music in Pet Activity
 	private MediaPlayer player;
+	private MediaPlayer deathplayer;
 	private AssetFileDescriptor afd;
+	private AssetFileDescriptor deathAfd;
 
 
 	/**
@@ -349,6 +351,12 @@ public class PetActivity extends Activity implements Serializable{
 	public void onPause() {
 		super.onPause();
 		player.pause();
+		
+		//Turning off death sound if it is turned on
+		if (deathplayer != null){
+			deathplayer.pause();
+		}
+		
 		try { 
 			dog.save("pet_file.dat",PetActivity.this);
 			//Test to see if the file is saved
@@ -401,7 +409,6 @@ public class PetActivity extends Activity implements Serializable{
 		// The activity is about to be destroyed.
 	}
 
-	//TODO Add better comments for this method
 	/**
 	 * Method onOptionsItemSelected 
 	 * 
@@ -425,12 +432,12 @@ public class PetActivity extends Activity implements Serializable{
 	 * @param eat - Button
 	 * @param walk - Button
 	 */
-	//private void changePicture(Button play, Button eat, Button walk){
 	private void changePicture(){
 		Log.i(LOG_test, Long.toString(petMood.getLastWalkHour()));
 		Log.i(LOG_test1, Long.toString(petMood.getCurrentHour()));
 		Log.i(LOG_test2, Long.toString(petMood.getLastEatHour()));
-		//Kills the pet if it has died
+		
+		//Sets the dead picture and animation and kills the pet if it has died
 		if (!dog.isAlive()){
 			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogdead));
 			final Animation anim = AnimationUtils.loadAnimation(PetActivity.this, R.anim.animation1);
@@ -474,6 +481,21 @@ public class PetActivity extends Activity implements Serializable{
 		play.setEnabled(false);
 		eat.setEnabled(false);
 		walk.setEnabled(false);
+		musicCheckBox.setEnabled(false);
+		
+		//Music that pays when dog dies
+		player.stop();
+		// sätta player = null? Spelar det någon roll?
+		try {
+			deathAfd = getAssets().openFd("deathsound.mov");
+			deathplayer = new MediaPlayer();
+			deathplayer.setDataSource(deathAfd.getFileDescriptor(), deathAfd.getStartOffset(), deathAfd.getLength());
+			deathplayer.prepare();
+			deathplayer.start();
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		//Deleting the existing saved dog
 		deleteFile("pet_file.dat");

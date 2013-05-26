@@ -109,7 +109,8 @@ public class SelectGame extends Activity implements Serializable {
 			 * @param v - View
 			 */
 			public void onClick (View v){
-				if (dog != null){
+				//Show a warning alert for creating a new pet if user already has a pet that is still alive.
+				if (dog != null && dog.isAlive()){
 					showWarningAlert();
 				}
 				else{	
