@@ -31,7 +31,7 @@ public class PlayActivity extends Activity {
 	private ImageView dogFace, dogBody, welcomeDog;
 	private Timer timer;
 	private Bitmap bm;
-	
+
 	//Variables for playing music in Pet Activity
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;
@@ -199,7 +199,7 @@ public class PlayActivity extends Activity {
 		return circleBitmap;
 	}
 
-	
+
 	/**
 	 * Method for what should happen when you have taken a photo
 	 */
@@ -211,8 +211,10 @@ public class PlayActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 		dogFace.setVisibility(View.VISIBLE);
 		// Making the picture circular
-		bm = (Bitmap) data.getExtras().get("data");
-		dogFace.setImageBitmap(makeCircle(bm));
+		if (bm != null){
+			bm = (Bitmap) data.getExtras().get("data");
+			dogFace.setImageBitmap(makeCircle(bm));
+		}
 	}
 
 

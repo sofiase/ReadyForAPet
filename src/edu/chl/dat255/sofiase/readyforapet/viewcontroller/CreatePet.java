@@ -20,14 +20,9 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 
 	private static final long serialVersionUID = 1L;
 	private String petName;
-	//private static Pet dog;
 	private static Dog dog;
 
-	/**
-	 * onCreate Method
-	 *
-	 * @param savedInstanceState - Bundle
-	 */
+
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
@@ -52,7 +47,8 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		}
 		
 		else {
-			dog = new Dog(petName, 2, 2, 2);
+			//Creating a new dog with total startmood 8
+			dog = new Dog(petName, 2, 2, 2, 2);
 			startActivity(new Intent(CreatePet.this, PetActivity.class));
 		}
 	}
@@ -87,7 +83,6 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
     @Override
     protected void onResume() {
         super.onResume();
-       
         // The activity has become visible (it is now "resumed").
     }
     @Override

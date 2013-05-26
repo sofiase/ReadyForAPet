@@ -23,13 +23,14 @@ public class Pet implements Serializable{
 	private static final String LOG_test2 = "save play";
 	private static final String LOG_test3 = "save birth";
 
-	public Pet (String petName, int foodMood, int playMood, int walkMood){
+	public Pet (String petName, int foodMood, int playMood, int walkMood, int sleepMood){
 		this.name = petName;
-		petMood = new PetMood(foodMood, playMood, walkMood, 2);
+		petMood = new PetMood(foodMood, playMood, walkMood, sleepMood, 2);
 		this.petBirthHour = petMood.getCurrentHour();
 		petMood.setLastEatHour(petMood.getCurrentHour());
 		petMood.setLastWalkHour(petMood.getCurrentHour());
 		petMood.setLastPlayHour(petMood.getCurrentHour());
+		petMood.setLastSleepHour(petMood.getCurrentHour());
 	}
 
 	/**
@@ -64,16 +65,16 @@ public class Pet implements Serializable{
 	/**
 	 * Method that increases mood bar while walking and decides that the dog can't walk if it is too hungry or too tired
 	 *
+	 * @param walk - how long the pet has walked
 	 * @return String with the pet's reaction 
 	 */
 
 	public String walk(int distance) {
 		if (petMood.getFoodMood() < 3 && petMood.getWalkMood() < 5) {
 			return "I'm too hungry!";
-			}
+		}
 		else if (petMood.getWalkMood() < 5) {
 			if(distance < 10){
-
 				return "I want to walk more!";
 			}
 			if(distance > 10 && distance < 30){
@@ -123,8 +124,9 @@ public class Pet implements Serializable{
 	 * @return String with the pet's reaction 
 	 */
 	public String play() {
-		if (petMood.getFoodMood() < 3 && petMood.getPlayMood() < 5)
+		if (petMood.getFoodMood() < 3 && petMood.getPlayMood() < 5){
 			return "I'm too hungry!";
+		}
 		else if (petMood.getPlayMood() < 5) {
 			//Increase the playmood
 			petMood.setPlayMood(petMood.getPlayMood() + 1);
@@ -136,6 +138,47 @@ public class Pet implements Serializable{
 			return "I'm tired! I want to rest!";
 		}
 	}
+
+	/**
+	 * Method that increases moodbar depending on how long the pet has sleeped
+	 *
+	 * @param hours - how long the pet has sleeped
+	 * @return String with the pet's reaction 
+	 */
+	public String sleep(long hours) {
+		if (petMood.getSleepMood() < 5){
+			if (hours < 0.5){
+				return "I want to sleep more!";
+			}
+			if (hours < 1){
+				//Increase the sleepmood
+				petMood.setSleepMood(petMood.getSleepMood() + 1);
+				//Save the last time the pet has sleeped
+				petMood.setLastSleepHour(petMood.getCurrentHour());
+			}
+			else if (hours < 2){
+				//Increase the sleepmood
+				petMood.setSleepMood(petMood.getSleepMood() + 3);
+				//Save the last time the pet has sleeped
+				petMood.setLastSleepHour(petMood.getCurrentHour());
+			}
+			else{
+				//Increase the sleepmood
+				petMood.setSleepMood(petMood.getSleepMood() + 5);
+				//Save the last time the pet has sleeped
+				petMood.setLastSleepHour(petMood.getCurrentHour());
+				Log.i(LOG_test, Long.toString(petMood.getSleepMood()));
+			}
+			if (petMood.getSleepMood() > 5){
+				petMood.setSleepMood(5);
+			}
+			return "Good morning!";
+		}
+		else{
+			return "I'm not sleepy!\nI want to do something else";
+		}
+	}
+
 
 	/**
 	 * Makes the hour of birth avaliable to alla classes
@@ -156,16 +199,16 @@ public class Pet implements Serializable{
 	}
 
 	/**
-	 * Method to test if the pet is alive.
+	 * Method that returns the pet's alive status
 	 * 
 	 * @return true if pet is alive, false if it is dead.
 	 */
 	public boolean isAlive(){
 		//Test
-		Log.i(LOG_test, Long.toString(petMood.getCurrentHour()));
+		//Log.i(LOG_test, Long.toString(petMood.getCurrentHour()));
 		Log.i(LOG_test1, Long.toString(petMood.getLastEatHour()));
 		Log.i(LOG_test2, Long.toString(petMood.getLastWalkHour()));
-		
+
 		return !((petMood.getCurrentHour() - petMood.getLastEatHour() > 48) || (petMood.getCurrentHour() - petMood.getLastWalkHour() > 48));
 	}
 

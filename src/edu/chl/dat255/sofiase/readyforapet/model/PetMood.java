@@ -8,16 +8,19 @@ public class PetMood implements Serializable {
 	private int foodMood;
 	private int playMood;
 	private int walkMood;
+	private int sleepMood;
 	private long lastEatHour;
 	private long lastWalkHour;
 	private long lastPlayHour;
+	private long lastSleepHour;
 	private long timeInterval;
 
 
-	public PetMood(int foodMood, int playMood, int walkMood, long timeInterval){
+	public PetMood(int foodMood, int playMood, int walkMood, int sleepMood, long timeInterval){
 		this.foodMood = foodMood;
 		this.playMood = playMood;
 		this.walkMood = walkMood;
+		this.sleepMood = sleepMood;
 		this.timeInterval = timeInterval;
 	}
 
@@ -26,9 +29,9 @@ public class PetMood implements Serializable {
 	 * 
 	 * @param foodnumber - int
 	 */
-	public void setFoodMood (int foodnumber){
-		if (foodnumber >= 0){
-			foodMood = foodnumber;
+	public void setFoodMood (int foodNumber){
+		if (foodNumber >= 0){
+			foodMood = foodNumber;
 		}
 		else{
 			foodMood = 0;
@@ -40,9 +43,9 @@ public class PetMood implements Serializable {
 	 * 
 	 * @param playnumber - int
 	 */
-	public void setPlayMood (int playnumber){
-		if (playnumber >= 0){
-			playMood = playnumber;
+	public void setPlayMood (int playNumber){
+		if (playNumber >= 0){
+			playMood = playNumber;
 		}
 		else{
 			playMood = 0;
@@ -52,14 +55,28 @@ public class PetMood implements Serializable {
 	/**
 	 * Sets the mood of the pet depending on how much it has walked.
 	 * 
-	 * @param playnumber - int
+	 * @param walknumber - int
 	 */
-	public void setWalkMood(int walknumber){
-		if (walknumber >= 0){
-			walkMood = walknumber;
+	public void setWalkMood(int walkNumber){
+		if (walkNumber >= 0){
+			walkMood = walkNumber;
 		}
 		else{
 			walkMood = 0;
+		}
+	}
+	
+	/**
+	 * Sets the mood of the pet depending on how much it has sleeped.
+	 * 
+	 * @param sleepnumber - int
+	 */
+	public void setSleepMood(int sleepNumber){
+		if (sleepNumber >= 0){
+			sleepMood = sleepNumber;
+		}
+		else{
+			sleepMood = 0;
 		}
 	}
 
@@ -89,6 +106,15 @@ public class PetMood implements Serializable {
 	public int getWalkMood (){
 		return walkMood;
 	}
+	
+	/**
+	 * Makes it possible for the pet to know how much the pet has already sleeped.
+	 * 
+	 * @return SleepMood - int
+	 */
+	public int getSleepMood (){
+		return sleepMood;
+	}
 
 	/**
 	 * The sum of the mood of the pet that is shown in a moodbar.
@@ -97,7 +123,7 @@ public class PetMood implements Serializable {
 	 * @return the total mood of the pet
 	 */
 	public int getSumMood (){
-		return foodMood + playMood + walkMood;
+		return foodMood + playMood + walkMood + sleepMood;
 	}
 
 	/**
@@ -123,6 +149,14 @@ public class PetMood implements Serializable {
 	public void setLastWalkHour(long time){
 		lastWalkHour = time;
 	}
+	
+	/**
+	 * 
+	 * @param time - last time the dog has sleeped
+	 */
+	public void setLastSleepHour(long time){
+		lastSleepHour = time;
+	}
 
 	/**
 	 * 
@@ -146,6 +180,14 @@ public class PetMood implements Serializable {
 	 */
 	public long getLastWalkHour(){
 		return lastWalkHour;
+	}
+	
+	/**
+	 * 
+	 * @return last time the dog has eaten
+	 */
+	public long getLastSleepHour(){
+		return lastSleepHour;
 	}
 
 

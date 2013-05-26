@@ -32,13 +32,7 @@ public class WalkActivity extends Activity{
 	private Handler handler = new Handler();
 	private Handler uiHandler = new Handler();
 	private LocationHelper location;
-
-	Runnable makeViewGone = new Runnable(){
-		@Override
-		public void run(){
-			dogPrints.setVisibility(View.GONE);
-		}
-	};
+	AnimationDrawable anim;
 
 	/**
 	 * On Create method
@@ -63,7 +57,6 @@ public class WalkActivity extends Activity{
 		}
 
 		Button startWalking = (Button) findViewById(R.id.startwalking);
-
 		startWalking.setOnClickListener(new OnClickListener() {
 
 			/**
@@ -81,12 +74,11 @@ public class WalkActivity extends Activity{
 				}
 				dogPrints.setVisibility(View.VISIBLE);
 				dogPrints.setBackgroundResource(R.anim.animation3);
-				AnimationDrawable anim = (AnimationDrawable) dogPrints.getBackground(); 
+				anim = (AnimationDrawable) dogPrints.getBackground(); 
 				anim.start();
-				uiHandler.postDelayed(makeViewGone, 7000);
+				uiHandler.postDelayed(makeViewStop, 7000);
 			}
 		}
-
 				);
 
 		Button stopWalking = (Button) findViewById(R.id.stopwalking);
@@ -118,6 +110,13 @@ public class WalkActivity extends Activity{
 				);
 
 	}
+	
+	Runnable makeViewStop = new Runnable(){
+		@Override
+		public void run(){
+			anim.stop();
+		}
+	};
 
 
 	TimerTask myTimerTask = new TimerTask() {
@@ -127,7 +126,7 @@ public class WalkActivity extends Activity{
 				@Override
 				public void run() {
 					displayDistance = (TextView) findViewById(R.id.distance);
-					displayDistance.setText("You have walked " + Math.round(location.getDistance()) + " meters so far.");
+					displayDistance.setText("You have walked\n" + Math.round(location.getDistance()) + "\nmeters so far.");
 				}
 			});
 
