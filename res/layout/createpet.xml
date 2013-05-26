@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/background" >
 
- 
-
     <EditText
         android:id="@+id/edit_pet_name"
         android:layout_width="wrap_content"
@@ -14,7 +12,6 @@
         android:layout_marginTop="116dp"
         android:ems="10"
         android:hint="@string/write_here" >
-
         <requestFocus />
     </EditText>
 

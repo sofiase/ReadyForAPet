@@ -1,11 +1,10 @@
 package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 
 
-
-
 import edu.chl.dat255.sofiase.readyforapet.R;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -21,8 +20,7 @@ public class MainActivity extends Activity {
 	 */
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
-	    super.onConfigurationChanged(newConfig);
-	  
+	    super.onConfigurationChanged(newConfig); 
 	}
 	
 
@@ -40,12 +38,12 @@ public class MainActivity extends Activity {
 		Button play = (Button) findViewById(R.id.play);
 		play.setOnClickListener(new OnClickListener() {
 
-			public void onClick (View v){
+			
+			public void onClick (View v){ 
 				startActivity(new Intent(MainActivity.this, SelectGame.class));
 			}
 		}
 		);
-
 
 		Button settings = (Button) findViewById(R.id.howtoplay);
 		settings.setOnClickListener(new OnClickListener() {
@@ -57,9 +55,7 @@ public class MainActivity extends Activity {
 			public void onClick (View v){
 				startActivity(new Intent(MainActivity.this, HowToPlayActivity.class));
 			}
-		}
-				);
-
+		});
 
 		Button quit = (Button) findViewById(R.id.quit);
 		quit.setOnClickListener(new OnClickListener() {
@@ -75,9 +71,6 @@ public class MainActivity extends Activity {
 			}
 		}
 		);
-		
-
-
 	}	
 
 
@@ -104,6 +97,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
+        
         // Another activity is taking focus (this activity is about to be "paused").
     }
     @Override

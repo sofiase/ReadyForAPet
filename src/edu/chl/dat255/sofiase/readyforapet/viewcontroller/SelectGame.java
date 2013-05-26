@@ -4,11 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
-
 import edu.chl.dat255.sofiase.readyforapet.R;
+import edu.chl.dat255.sofiase.readyforapet.model.Dog;
 import edu.chl.dat255.sofiase.readyforapet.model.Pet;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -26,13 +27,14 @@ public class SelectGame extends Activity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private TextView warningMessage;
+	//private Pet pet;
+	private Dog dog;
+	
+	//Variables for tests
 	private final String LOG_TAG = "Information about the file when loading";
-
-
 	Runnable makeTextGone = new Runnable(){
 
 		/**
-		 * run Method
 		 * 
 		 * TODO:add what the method does
 		 */
@@ -54,7 +56,8 @@ public class SelectGame extends Activity implements Serializable {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		try {
-			Pet.load("pet_file.dat", SelectGame.this);
+			//pet = Pet.load("pet_file.dat", SelectGame.this);
+			dog = (Dog) Pet.load("pet_file.dat", SelectGame.this);
 		} catch (FileNotFoundException e) {
 			System.out.print("File not found ");
 			e.printStackTrace();
@@ -66,7 +69,7 @@ public class SelectGame extends Activity implements Serializable {
 			e.printStackTrace();
 		} 
 
-		//The continue button reacts to a click and starts PetActivity
+		//Continue button starts petActivity if there is an existing pet
 		Button continuePreviousGame = (Button) findViewById(R.id.continuegame);
 		continuePreviousGame.setOnClickListener(new OnClickListener() {
 
@@ -77,8 +80,9 @@ public class SelectGame extends Activity implements Serializable {
 			 */
 			public void onClick (View v){
 
-				if (CreatePet.getPet() != null){
-					startActivity(new Intent(SelectGame.this, PetActivity.class));    
+				if(dog != null){
+					startActivity(new Intent(SelectGame.this, PetActivity.class));
+					
 					//Test to see if the file exist on internal memory when loading
 					File file = getBaseContext().getFileStreamPath("pet_file.dat");
 					if(file.exists()){
@@ -91,13 +95,9 @@ public class SelectGame extends Activity implements Serializable {
 
 				else {
 					Toast.makeText(SelectGame.this, "Create a pet first!", Toast.LENGTH_SHORT).show();
-
 				}
 			}
-		}
-
-				);
-
+		});
 
 		//What happens when button create new pet is pushed
 		Button createNewPet = (Button) findViewById(R.id.createnewpet);
@@ -109,19 +109,15 @@ public class SelectGame extends Activity implements Serializable {
 			 * @param v - View
 			 */
 			public void onClick (View v){
-				if (CreatePet.getPet() != null){
+				//Show a warning alert for creating a new pet if user already has a pet that is still alive.
+				if (dog != null && dog.isAlive()){
 					showWarningAlert();
-
 				}
-				else{
+				else{	
 					startActivity(new Intent(SelectGame.this,CreatePet.class));
 				}
-
-
 			}
-		}
-				);
-
+		});
 	}
 
 	/**
@@ -164,10 +160,24 @@ public class SelectGame extends Activity implements Serializable {
 		alert.show();
 	}
 
-
+	
 	    @Override
 	    protected void onResume() {
 	        super.onResume();
+	        if (dog == null){
+	    		try {
+	    			dog = (Dog) Pet.load("pet_file.dat", SelectGame.this);
+	    		} catch (FileNotFoundException e) {
+	    			System.out.print("File not found ");
+	    			e.printStackTrace();
+	    		} catch (IOException e) {
+	    			System.out.print("IO Exception ");
+	    			e.printStackTrace();
+	    		} catch (ClassNotFoundException e) {
+	    			System.out.print("Class not found exception ");
+	    			e.printStackTrace();
+	    		} 
+	        }
 	        // The activity has become visible (it is now "resumed").
 	    }
 	    @Override
@@ -185,7 +195,4 @@ public class SelectGame extends Activity implements Serializable {
 	        super.onDestroy();
 	        // The activity is about to be destroyed.
 	    }
-
-
-
 }

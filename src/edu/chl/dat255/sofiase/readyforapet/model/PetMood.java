@@ -7,19 +7,20 @@ import android.util.Log;
 public class PetMood implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private static int foodMood;
-	private static int playMood;
-	private static int walkMood;
-	private static long lastEatHour;
-	private static long lastWalkHour;
-	private static long lastPlayHour;
-	private static long timeInterval = 2;
-	
-	private final static String LOG_test1 = "1";
-	private final static String LOG_test2 = "1";
-	private final static String LOG_test3 = "1";
+	private int foodMood;
+	private int playMood;
+	private int walkMood;
+	private long lastEatHour;
+	private long lastWalkHour;
+	private long lastPlayHour;
+	private long timeInterval;
 
-	public PetMood(){
+
+	public PetMood(int foodMood, int playMood, int walkMood, long timeInterval){
+		this.foodMood = foodMood;
+		this.playMood = playMood;
+		this.walkMood = walkMood;
+		this.timeInterval = timeInterval;
 	}
 
 	/**
@@ -27,7 +28,7 @@ public class PetMood implements Serializable {
 	 * 
 	 * @param foodnumber - int
 	 */
-	public static void setFoodMood (int foodnumber){
+	public void setFoodMood (int foodnumber){
 		if (foodnumber >= 0){
 			foodMood = foodnumber;
 		}
@@ -41,7 +42,7 @@ public class PetMood implements Serializable {
 	 * 
 	 * @param playnumber - int
 	 */
-	public static void setPlayMood (int playnumber){
+	public void setPlayMood (int playnumber){
 		if (playnumber >= 0){
 			playMood = playnumber;
 		}
@@ -55,7 +56,7 @@ public class PetMood implements Serializable {
 	 * 
 	 * @param playnumber - int
 	 */
-	public static void setWalkMood(int walknumber){
+	public void setWalkMood(int walknumber){
 		if (walknumber >= 0){
 			walkMood = walknumber;
 		}
@@ -69,7 +70,7 @@ public class PetMood implements Serializable {
 	 * 
 	 * @return foodMood - int
 	 */
-	public static int getFoodMood (){
+	public int getFoodMood (){
 		return foodMood;
 	}
 
@@ -78,7 +79,7 @@ public class PetMood implements Serializable {
 	 * 
 	 * @return playMood - int
 	 */
-	public static int getPlayMood (){
+	public int getPlayMood (){
 		return playMood;
 	}
 
@@ -87,19 +88,17 @@ public class PetMood implements Serializable {
 	 * 
 	 * @return foodMood - int
 	 */
-	public static int getWalkMood (){
+	public int getWalkMood (){
 		return walkMood;
 	}
 
 	/**
 	 * The sum of the mood of the pet that is shown in a moodbar.
-	 * Later, add:
-	 * return foodMood + walkMood + playMood + sleepMood
 	 * Each an int with value between 0 - 5
 	 * 
 	 * @return the total mood of the pet
 	 */
-	public static int getSumMood (){
+	public int getSumMood (){
 		return foodMood + playMood + walkMood;
 	}
 
@@ -107,7 +106,7 @@ public class PetMood implements Serializable {
 	 * 
 	 * @param time - last time the dog has eaten
 	 */
-	public static void setLastEatHour(long time){
+	public void setLastEatHour(long time){
 		lastEatHour = time;
 	}
 	
@@ -115,7 +114,7 @@ public class PetMood implements Serializable {
 	 * 
 	 * @param time - last time the dog has eaten
 	 */
-	public static void setLastPlayHour(long time){
+	public void setLastPlayHour(long time){
 		lastPlayHour = time;
 	}
 	
@@ -123,7 +122,7 @@ public class PetMood implements Serializable {
 	 * 
 	 * @param time - last time the dog has eaten
 	 */
-	public static void setLastWalkHour(long time){
+	public void setLastWalkHour(long time){
 		lastWalkHour = time;
 	}
 
@@ -131,7 +130,7 @@ public class PetMood implements Serializable {
 	 * 
 	 * @return last time the dog has eaten
 	 */
-	public static long getLastEatHour(){
+	public long getLastEatHour(){
 		return lastEatHour;
 	}
 	
@@ -139,7 +138,7 @@ public class PetMood implements Serializable {
 	 * 
 	 * @return last time the dog has eaten
 	 */
-	public static long getLastPlayHour(){
+	public long getLastPlayHour(){
 		return lastPlayHour;
 	}
 	
@@ -147,26 +146,17 @@ public class PetMood implements Serializable {
 	 * 
 	 * @return last time the dog has eaten
 	 */
-	public static long getLastWalkHour(){
+	public long getLastWalkHour(){
 		return lastWalkHour;
 	}
-	/**
-	* Method to test if the pet is alive.
-	* 
-	* @return true if pet is alive, false if it is dead.
-	*/
-	public static boolean isAlive(){
-	Log.i(LOG_test1, Long.toString(getCurrentHour()));
-	Log.i(LOG_test2, Long.toString(lastEatHour));
-	Log.i(LOG_test3, Long.toString(lastWalkHour));
-	return !((getCurrentHour() - lastEatHour > 48) || (getCurrentHour() - lastWalkHour > 48));
-	}
+	
+
 	/**
 	 * Method for getting current unix time
 	 *
 	 * @return time in hour
 	 */
-	public static long getCurrentHour(){
+	public long getCurrentHour(){
 		//return System.currentTimeMillis()/3600000L;
 		return System.currentTimeMillis()/1000L;
 	}
@@ -178,7 +168,7 @@ public class PetMood implements Serializable {
 	 * @param currentTime
 	 * @return number to decrease the bar with
 	 */
-	public static int moodBarDecrease (long previousTime, long currentTime){
+	public int moodBarDecrease (long previousTime, long currentTime){
 		long difference = currentTime - previousTime;
 		if (difference > timeInterval*5){
 			return -5;

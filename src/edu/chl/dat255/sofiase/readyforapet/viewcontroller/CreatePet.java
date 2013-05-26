@@ -1,10 +1,9 @@
 package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 
 import java.io.Serializable;
-
 import edu.chl.dat255.sofiase.readyforapet.R;
+import edu.chl.dat255.sofiase.readyforapet.model.Dog;
 import edu.chl.dat255.sofiase.readyforapet.model.Pet;
-import edu.chl.dat255.sofiase.readyforapet.model.PetMood;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -17,15 +16,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 public class CreatePet extends Activity implements OnClickListener, Serializable {
-
-
 
 	private static final long serialVersionUID = 1L;
 	private String petName;
-	private static Pet dog;
-
+	//private static Pet dog;
+	private static Dog dog;
 
 	/**
 	 * onCreate Method
@@ -41,18 +37,14 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		Button create = (Button) findViewById(R.id.puppy_settings);
 		create.setOnClickListener(this);
 	}
-	
-	
+
 	/**
 	 * onClick Method
 	 * 
-	 * When pressing the button create it checks whether the user 
-	 * has typed something in and that the name isn't null.
-	 * It also calls the method save in the class Pet
+	 * When pressing the button create it checks whether the user has typed a name, and then creates an instance of the Pet class.
 	 * 
 	 */
 	public void onClick (View v){
-
 		EditText setName = (EditText) findViewById(R.id.edit_pet_name);
 		petName = setName.getText().toString();
 		if (petName.equals("")){
@@ -60,7 +52,7 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		}
 		
 		else {
-			dog = new Pet(petName, 0, 0, 0, PetMood.getCurrentHour());
+			dog = new Dog(petName, 2, 2, 2);
 			startActivity(new Intent(CreatePet.this, PetActivity.class));
 		}
 	}
@@ -92,24 +84,10 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 		return super.onOptionsItemSelected(item);
 	}
 	
-
-	/**
-	 * setPet Method
-	 * 
-	 * sets the pet to a pet
-	 */
-	public static void setPet(Pet pet){
-		dog = pet;
-	}
-
-	@Override
-    protected void onStart() {
-        super.onStart();
-        // The activity is about to become visible.
-    }
     @Override
     protected void onResume() {
         super.onResume();
+       
         // The activity has become visible (it is now "resumed").
     }
     @Override
