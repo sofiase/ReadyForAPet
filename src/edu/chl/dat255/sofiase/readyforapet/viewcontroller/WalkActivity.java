@@ -21,6 +21,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Class WalkActivity that creates an instance of LoationHelper and enables the GPS.
+ * Measures how far the user walks with the pet and sends that back to PetActivity.
+ *
+ */
 public class WalkActivity extends Activity{
 
 	private TextView displayDistance;
@@ -36,16 +41,10 @@ public class WalkActivity extends Activity{
 	private Button startWalking;
 	private Button stopWalking;
 
-	/**
-	 * On Create method
-	 * 
-	 * @param savedInstanceState - bundle
-	 */
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
 		setContentView(R.layout.walkactivity);
-		//location = new LocationHelper(this);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		dogPrints = (ImageView) findViewById(R.id.dogprints);
@@ -57,11 +56,10 @@ public class WalkActivity extends Activity{
 		
 		//Start walking button
 		startWalking.setOnClickListener(new OnClickListener() {
-
 			/**
-			 * Method onClick for the start walking button
+			 * Enables GPS when start walking. Starts to measure the distance.
+			 * Checks if the user has GPS turned on, otherwise asks if it wants to turn the GPS on.
 			 * 
-			 * @param v - View
 			 */
 			public void onClick (View v){
 				
@@ -77,7 +75,7 @@ public class WalkActivity extends Activity{
 				else{
 					showGPSDisabledAlert();
 				}
-				
+				 //Timer to update the textview with the distance walked.
 				try{
 					timer = new Timer();
 					timer.schedule(myTimerTask, delay, period);
@@ -86,6 +84,7 @@ public class WalkActivity extends Activity{
 					e.printStackTrace();
 				}
 				
+				//Animated dogprints on the screen
 				dogPrints.setVisibility(View.VISIBLE);
 				dogPrints.setBackgroundResource(R.anim.animation3);
 				anim = (AnimationDrawable) dogPrints.getBackground(); 
@@ -96,11 +95,11 @@ public class WalkActivity extends Activity{
 				);
 
 		
-		//Stop walking button
-		stopWalking.setOnClickListener(new OnClickListener() {
 
+		stopWalking.setOnClickListener(new OnClickListener() {
 			/**
-			 * Method onClick for the stop walking button
+			 * Method onClick for the stop walking button.
+			 * Stops the GPS and sends a result, the distance, to PetActivity.
 			 * 
 			 * @param v - View
 			 */
@@ -126,6 +125,7 @@ public class WalkActivity extends Activity{
 
 	}
 	
+	//Stops the dogprint animation
 	Runnable makeViewStop = new Runnable(){
 		@Override
 		public void run(){
@@ -133,7 +133,7 @@ public class WalkActivity extends Activity{
 		}
 	};
 
-
+	//Updates the textview with how far the user has walked
 	TimerTask myTimerTask = new TimerTask() {
 		@Override
 		public void run() {
@@ -177,10 +177,6 @@ public class WalkActivity extends Activity{
 	}
 
 
-	/**
-	 *
-	 * 
-	 */
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
@@ -202,29 +198,5 @@ public class WalkActivity extends Activity{
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	    @Override
-	    protected void onResume() {
-	        super.onResume();
-	        // The activity has become visible (it is now "resumed").
-	    }
-	    
-	    @Override
-	    protected void onPause() {
-	        super.onPause();
-	        // Another activity is taking focus (this activity is about to be "paused").
-	    }
-	    
-	    @Override
-	    protected void onStop() {
-	        super.onStop();
-	        // The activity is no longer visible (it is now "stopped")
-	    }
-	    
-	    @Override
-	    protected void onDestroy() {
-	        super.onDestroy();
-	        // The activity is about to be destroyed.
-	    }
 
 }

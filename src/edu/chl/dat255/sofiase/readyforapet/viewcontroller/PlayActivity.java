@@ -26,7 +26,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-
+/**
+ * Class PlayActiviy, where the user is able to take a photo of a dogs face or use a standard photo to make the dog dance.
+ * When done dancing the user is sent to PetActivity
+ *
+ */
 public class PlayActivity extends Activity {
 
 	private Button useStandard, takePhoto, dogPlay;
@@ -38,18 +42,6 @@ public class PlayActivity extends Activity {
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;
 	private PackageManager pm;
-
-
-	Runnable makeTextGone = new Runnable(){
-
-		@Override
-		public void run(){
-			takePhoto.setVisibility(View.GONE);	
-			useStandard.setVisibility(View.GONE);
-			welcomeDog.setVisibility(View.VISIBLE);
-
-		}
-	};
 
 
 	@Override
@@ -66,7 +58,6 @@ public class PlayActivity extends Activity {
 		welcomeDog = (ImageView) findViewById(R.id.welcomedog);
 
 		pm = PlayActivity.this.getPackageManager();
-
 
 		if (pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
 			dogPlay.setVisibility(View.GONE);
@@ -95,8 +86,6 @@ public class PlayActivity extends Activity {
 
 				Intent pictureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 				startActivityForResult(pictureIntent, 0);
-
-
 			}
 		}
 				);
@@ -154,7 +143,7 @@ public class PlayActivity extends Activity {
 					public void run() {
 						anim.stop();
 
-						//SKICKA MED ETT RESULT TILL PETACTIVITY
+						//Sending a result to PetActivity
 						PlayActivity.this.setResult(1);
 						PlayActivity.this.finish();
 
@@ -162,7 +151,7 @@ public class PlayActivity extends Activity {
 						if (bm!=null) {
 							bm.recycle();
 							bm = null;
-					        System.gc(); 
+							System.gc(); 
 						}
 
 					}
@@ -178,6 +167,17 @@ public class PlayActivity extends Activity {
 
 	}
 
+
+	Runnable makeTextGone = new Runnable(){
+		@Override
+		public void run(){
+			takePhoto.setVisibility(View.GONE);	
+			useStandard.setVisibility(View.GONE);
+			welcomeDog.setVisibility(View.VISIBLE);
+
+		}
+	};
+
 	/**
 	 * Method for that checks if the advice has a camera
 	 */
@@ -190,10 +190,9 @@ public class PlayActivity extends Activity {
 	}
 
 	/**
-	 * Method for making the image a circle
+	 * Method for making a bitmap image a circle
 	 */
 	public static Bitmap makeCircle (Bitmap bitmap) {
-
 		Bitmap circleBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
 		BitmapShader shader = new BitmapShader (bitmap,  TileMode.CLAMP, TileMode.CLAMP);
 		Paint paint = new Paint();
@@ -215,10 +214,9 @@ public class PlayActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 		dogFace.setVisibility(View.VISIBLE);
 		// Making the picture circular
-			bm = (Bitmap) data.getExtras().get("data");
-			dogFace.setImageBitmap(makeCircle(bm));
+		bm = (Bitmap) data.getExtras().get("data");
+		dogFace.setImageBitmap(makeCircle(bm));
 	}
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -227,39 +225,40 @@ public class PlayActivity extends Activity {
 		return true;
 	}
 
+	/**
+	 * Starts music player when resuming activity
+	 * 
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
 		if(player!=null){
 			player.start();  
 		}
-		// The activity has become visible (it is now "resumed").
 	}
+
+	/**
+	 * Pauses music player when pausing activity
+	 * 
+	 */
 	@Override
 	protected void onPause() {
 		super.onPause();
 		if(player!=null){
 			player.pause();
 		}
-
-		// Another activity is taking focus (this activity is about to be "paused").
 	}
+
+	/**
+	 * Pauses music player when stopping activity
+	 * 
+	 */
 	@Override
 	protected void onStop() {
 		super.onStop();
 		if(player!=null){
 			player.pause(); 
 		}
-
-		// The activity is no longer visible (it is now "stopped")
 	}
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		// The activity is about to be destroyed.
-		
-    }
 
 }
-
-

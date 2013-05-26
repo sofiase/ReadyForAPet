@@ -22,27 +22,21 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Class SelectGame, makes it possible to continue playing with the current pet or create a new one.
+ * Loads the pet from internal memory if an existing pet exists.
+ * Prompts the user if it tries to create a new pet when it already has one.
+ *
+ */
 public class SelectGame extends Activity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private TextView warningMessage;
 	private Dog dog;
-	private static final String LOG_test = "is alive";
-	private static final String LOG_test2 = "null or not";
 
 	//Variables for tests
 	private final String LOG_TAG1 = "Information about the file when loading";
-	Runnable makeTextGone = new Runnable(){
 
-		/**
-		 * 
-		 * TODO:add what the method does
-		 */
-		@Override
-		public void run(){
-			warningMessage.setVisibility(View.GONE);
-		}
-	};
 
 	/**
 	 * onCreate method
@@ -111,7 +105,7 @@ public class SelectGame extends Activity implements Serializable {
 			 */
 			public void onClick (View v){
 				//Show a warning alert for creating a new pet if user already has a pet that is still alive.
-				if (dog != null){
+				if (dog != null && CreatePet.getPet().isAlive()){
 					showWarningAlert();
 				}
 				else{	
@@ -120,6 +114,13 @@ public class SelectGame extends Activity implements Serializable {
 			}
 		});
 	}
+
+	Runnable makeTextGone = new Runnable(){
+		@Override
+		public void run(){
+			warningMessage.setVisibility(View.GONE);
+		}
+	};
 
 	/**
 	 * Configurates the navigate Up button in this activity
@@ -161,7 +162,10 @@ public class SelectGame extends Activity implements Serializable {
 		alert.show();
 	}
 
-
+	/**
+	 * Loads the saved file from the internal memory if dog is not yet defined.
+	 * 
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -179,21 +183,6 @@ public class SelectGame extends Activity implements Serializable {
 				e.printStackTrace();
 			} 
 		}
-		// The activity has become visible (it is now "resumed").
 	}
-	@Override
-	protected void onPause() {
-		super.onPause();
-		// Another activity is taking focus (this activity is about to be "paused").
-	}
-	@Override
-	protected void onStop() {
-		super.onStop();
-		// The activity is no longer visible (it is now "stopped")
-	}
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		// The activity is about to be destroyed.
-	}
+
 }

@@ -13,9 +13,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 
+/**
+ * Class SleepActivity.
+ * Let's the pet sleep and measures how long it has slept and sends that time back to PetActivity.
+ *
+ */
 public class SleepActivity extends Activity {
 
 	private Button startSleeping;
@@ -30,14 +36,14 @@ public class SleepActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sleep);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-		// Show the Up button in the action bar.
+		//Show the Up button in the action bar.
 		setupActionBar();
 
 		startSleeping = (Button) findViewById(R.id.startsleeping);
 		stopSleeping = (Button) findViewById(R.id.stopsleeping);
 		sleepingDog = (ImageView) findViewById(R.id.sleepingdog);
-		
 		stopSleeping.setEnabled(false);
 
 
