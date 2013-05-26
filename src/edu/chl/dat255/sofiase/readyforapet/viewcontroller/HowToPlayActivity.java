@@ -11,10 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-/**
- * 
- */
-public class HowToPlayActivity extends Activity { 
+
+
+public class HowToPlayActivity extends Activity{
 
 	private TextView instructions;
 

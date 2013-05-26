@@ -27,7 +27,6 @@ public class SelectGame extends Activity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private TextView warningMessage;
-	//private Pet pet;
 	private Dog dog;
 	
 	//Variables for tests
@@ -56,7 +55,6 @@ public class SelectGame extends Activity implements Serializable {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		try {
-			//pet = Pet.load("pet_file.dat", SelectGame.this);
 			dog = (Dog) Pet.load("pet_file.dat", SelectGame.this);
 		} catch (FileNotFoundException e) {
 			System.out.print("File not found ");

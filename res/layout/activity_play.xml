@@ -2,30 +2,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".PlayActivity" 
-    android:background="@drawable/background" 
-    android:id="@+id/PlayView" >"
-    
+    tools:context=".PlayActivity" >
+
 
     <ImageView
         android:id="@+id/dogbody"
         android:layout_width="500dp"
         android:layout_height="500dp"
-        android:layout_marginTop="150dp"
         android:layout_marginBottom="150dp"
-         />
+        android:layout_marginTop="150dp" />
+
     <ImageView
         android:id="@+id/welcomedog"
         android:layout_width="500dp"
         android:layout_height="500dp"
-        android:layout_marginTop="150dp"
         android:layout_marginBottom="150dp"
-        android:src="@drawable/dogdance3"
-         />
+        android:layout_marginTop="150dp"
+        android:src="@drawable/dogdance3" />
 
     <Button
         android:id="@+id/dogplay"
@@ -35,9 +33,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="28dp"
+        android:background="@drawable/buttonshape"
         android:text="Play"
-        android:textSize="12sp"
-        android:background="@drawable/buttonshape" />
+        android:textSize="12sp" />
 
     <Button
         android:id="@+id/usestandard"
@@ -45,27 +43,27 @@
         android:layout_height="50dp"
         android:layout_alignLeft="@+id/takephoto"
         android:layout_alignParentTop="true"
-        android:text="Use standard photo!" 
-        android:textSize="12sp"
-        android:background="@drawable/buttonshape"/>
+        android:background="@drawable/buttonshape"
+        android:text="Use standard photo!"
+        android:textSize="12sp" />
 
     <ImageView
         android:id="@+id/dogface"
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:layout_marginLeft="57dp"
-          android:layout_marginTop="110dp"
+        android:layout_marginTop="110dp"
         android:src="@drawable/dogdance3" />
 
     <Button
         android:id="@+id/takephoto"
         android:layout_width="200dp"
-         android:layout_height="50dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/usestandard"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/buttonshape"
-        android:textSize="12sp"
-        android:text="Take a photo of your dogs face!" />
+        android:text="Take a photo of your dogs face!"
+        android:textSize="12sp" />
 
 </RelativeLayout>
