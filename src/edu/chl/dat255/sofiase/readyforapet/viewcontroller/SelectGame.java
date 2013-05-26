@@ -31,7 +31,7 @@ public class SelectGame extends Activity implements Serializable {
 	private Dog dog;
 	
 	//Variables for tests
-	private final String LOG_TAG = "Information about the file when loading";
+	private final String LOG_TAG1 = "Information about the file when loading";
 	Runnable makeTextGone = new Runnable(){
 
 		/**
@@ -82,14 +82,13 @@ public class SelectGame extends Activity implements Serializable {
 
 				if(dog != null){
 					startActivity(new Intent(SelectGame.this, PetActivity.class));
-					
 					//Test to see if the file exist on internal memory when loading
 					File file = getBaseContext().getFileStreamPath("pet_file.dat");
 					if(file.exists()){
-						Log.i(LOG_TAG,"is saved on internal memory");
+						Log.i(LOG_TAG1,"is saved on internal memory");
 					}
 					else{
-						Log.i(LOG_TAG,"is not saved on internal memory");
+						Log.i(LOG_TAG1,"is not saved on internal memory");
 					}  
 				} 
 

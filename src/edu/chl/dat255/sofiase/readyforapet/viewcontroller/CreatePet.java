@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class CreatePet extends Activity implements OnClickListener, Serializable {
+public class CreatePet extends Activity implements OnClickListener,Serializable {  
 
 	private static final long serialVersionUID = 1L;
 	private String petName;

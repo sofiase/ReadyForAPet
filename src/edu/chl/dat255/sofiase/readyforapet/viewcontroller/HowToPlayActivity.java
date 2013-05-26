@@ -1,7 +1,6 @@
 package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 
 
-import java.io.Serializable;
 
 import edu.chl.dat255.sofiase.readyforapet.R;
 import android.app.Activity;
@@ -15,10 +14,8 @@ import android.widget.TextView;
 /**
  * 
  */
-public class HowToPlayActivity extends Activity implements Serializable{
+public class HowToPlayActivity extends Activity { 
 
-
-	private static final long serialVersionUID = 1L;
 	private TextView instructions;
 
 	/**

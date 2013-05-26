@@ -3,6 +3,7 @@ package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import edu.chl.dat255.sofiase.readyforapet.R;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -159,6 +161,8 @@ public class PlayActivity extends Activity {
 						//If there a picture was taken the memory is reclaimed as soon right after it's finished displaying
 						if (bm!=null) {
 							bm.recycle();
+							bm = null;
+					        System.gc(); 
 						}
 
 					}
@@ -253,7 +257,8 @@ public class PlayActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		// The activity is about to be destroyed.
-	}
+		
+    }
 
 }
 
