@@ -1,6 +1,7 @@
 package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 
 
+
 import edu.chl.dat255.sofiase.readyforapet.R;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
@@ -11,10 +12,9 @@ import android.view.View;
 import android.widget.TextView;
 
 
+
 public class HowToPlayActivity extends Activity{
 
-
-	//private static final long serialVersionUID = 1L;
 	private TextView instructions;
 
 	/**

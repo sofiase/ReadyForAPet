@@ -9,6 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".PlayActivity" >
 
+
     <ImageView
         android:id="@+id/dogbody"
         android:layout_width="500dp"

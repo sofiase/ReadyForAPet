@@ -9,7 +9,6 @@ import edu.chl.dat255.sofiase.readyforapet.model.Dog;
 import edu.chl.dat255.sofiase.readyforapet.model.Pet;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -32,7 +31,7 @@ public class SelectGame extends Activity implements Serializable {
 	private static final String LOG_test2 = "null or not";
 
 	//Variables for tests
-	private final String LOG_TAG = "Information about the file when loading";
+	private final String LOG_TAG1 = "Information about the file when loading";
 	Runnable makeTextGone = new Runnable(){
 
 		/**
@@ -88,10 +87,10 @@ public class SelectGame extends Activity implements Serializable {
 					//Test to see if the file exist on internal memory when loading
 					File file = getBaseContext().getFileStreamPath("pet_file.dat");
 					if(file.exists()){
-						Log.i(LOG_TAG,"is saved on internal memory");
+						Log.i(LOG_TAG1,"is saved on internal memory");
 					}
 					else{
-						Log.i(LOG_TAG,"is not saved on internal memory");
+						Log.i(LOG_TAG1,"is not saved on internal memory");
 					}  
 				} 
 

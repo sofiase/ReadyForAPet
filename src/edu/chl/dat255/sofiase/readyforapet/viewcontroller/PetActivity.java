@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -424,7 +425,10 @@ public class PetActivity extends Activity implements Serializable{
 	protected void onDestroy() {
 		super.onDestroy();
 		player.stop();
+
 	}
+
+	
 
 	/**
 	 * Method onOptionsItemSelected 
@@ -455,7 +459,7 @@ public class PetActivity extends Activity implements Serializable{
 		Log.i(LOG_test2, Long.toString(petMood.getLastEatHour()));
 
 		//Sets the dead picture and animation and kills the pet if it has died
-		if (!dog.isAlive()){
+		if (!dog.isAlive()){	
 			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogdead));
 			final Animation anim = AnimationUtils.loadAnimation(PetActivity.this, R.anim.animation1);
 			dogPicture.startAnimation(anim);

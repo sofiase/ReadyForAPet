@@ -2,9 +2,7 @@ package edu.chl.dat255.sofiase.readyforapet.model;
 
 import java.io.Serializable;
 
-import android.util.Log;
-
-public class PetMood implements Serializable {
+public class PetMood implements Serializable { 
 
 	private static final long serialVersionUID = 1L;
 	private int foodMood;
