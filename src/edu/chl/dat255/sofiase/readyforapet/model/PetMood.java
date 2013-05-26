@@ -2,6 +2,8 @@ package edu.chl.dat255.sofiase.readyforapet.model;
 
 import java.io.Serializable;
 
+import android.util.Log;
+
 public class PetMood implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -182,6 +184,7 @@ public class PetMood implements Serializable {
 		return lastWalkHour;
 	}
 	
+
 	/**
 	 * 
 	 * @return last time the dog has eaten

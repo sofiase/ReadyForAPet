@@ -61,14 +61,13 @@ public class Pet implements Serializable{
 		}
 	}
 
-
 	/**
 	 * Method that increases mood bar while walking and decides that the dog can't walk if it is too hungry or too tired
 	 *
 	 * @param walk - how long the pet has walked
 	 * @return String with the pet's reaction 
 	 */
-
+	
 	public String walk(int distance) {
 		if (petMood.getFoodMood() < 3 && petMood.getWalkMood() < 5) {
 			return "I'm too hungry!";
@@ -252,5 +251,4 @@ public class Pet implements Serializable{
 		return pet;
 	}
 }
-
 

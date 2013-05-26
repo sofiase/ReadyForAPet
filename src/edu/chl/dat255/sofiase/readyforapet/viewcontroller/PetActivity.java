@@ -32,6 +32,8 @@ import android.widget.TextView;
 
 public class PetActivity extends Activity implements Serializable{ 
 
+
+
 	private static final long serialVersionUID = 1L;
 	private TextView petResponse, showPetAge;
 	private Handler uiHandler = new Handler();
@@ -500,6 +502,7 @@ public class PetActivity extends Activity implements Serializable{
 		musicCheckBox.setEnabled(false);
 
 		player.stop();
+
 		//Music that plays when dog dies
 		try {
 			deathAfd = getAssets().openFd("deathsound.mov");

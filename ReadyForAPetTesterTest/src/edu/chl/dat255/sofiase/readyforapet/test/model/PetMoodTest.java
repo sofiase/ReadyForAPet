@@ -4,13 +4,13 @@ import junit.framework.TestCase;
 import edu.chl.dat255.sofiase.readyforapet.model.*;
 
 public class PetMoodTest extends TestCase {
-PetMood petmood = new PetMood();
+	PetMood petMood = new PetMood(2,3,0,30);
  
  protected void setUp() throws Exception {
 		super.setUp();
-		PetMood.setFoodMood(2);
-		PetMood.setWalkMood(3);
-		PetMood.setPlayMood(0);
+		petMood.setFoodMood(2);
+		petMood.setWalkMood(3);
+		petMood.setPlayMood(0);
 	}
 
 	protected void tearDown() throws Exception {
@@ -20,26 +20,26 @@ PetMood petmood = new PetMood();
 /**
  * Method for testing the method getfoodMood in PetMood
  */
-public void testInitialFoodMood(){
-	assertEquals(2, PetMood.getFoodMood());
+public void testFoodMood(){
+	assertEquals(2, petMood.getFoodMood());
 	}
 /**
  * Method for testing the method getPlayMood in PetMood
  */
-public void testInitialPlayMood(){
-	assertEquals(0, PetMood.getPlayMood());
+public void testPlayMood(){
+	assertEquals(0, petMood.getPlayMood());
 	}
 /**
  * Method for testing the method getWalkMood in PetMood
  */
-public void testInitialWalkMood(){
-	assertEquals(3, PetMood.getWalkMood());
+public void testWalkMood(){
+	assertEquals(3, petMood.getWalkMood());
 	}
 /**
  * Method for testing the method getSumMood in PetMood
  */
-public void testInitialSumMood(){
-	assertEquals(5, PetMood.getSumMood());
+public void testSumMood(){
+	assertEquals(5, petMood.getSumMood());
 	}
 }
 
