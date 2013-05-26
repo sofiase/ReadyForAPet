@@ -6,7 +6,9 @@ import java.util.TimerTask;
 
 import edu.chl.dat255.sofiase.readyforapet.R;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore.Images;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -159,10 +161,10 @@ public class PlayActivity extends Activity {
 						PlayActivity.this.finish();
 
 						//If there a picture was taken the memory is reclaimed as soon right after it's finished displaying
-						if (bm!=null) {
+						if (bm != null) {
 							bm.recycle();
-							bm = null;
-					        System.gc(); 
+							bm = null; 
+							System.gc(); 
 						}
 
 					}
@@ -215,11 +217,16 @@ public class PlayActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 		dogFace.setVisibility(View.VISIBLE);
 		// Making the picture circular
-		if (bm != null){
+		if(data.getExtras().get("data") == null){
+			dogFace.setVisibility(View.GONE);
+		}
+		else {
 			bm = (Bitmap) data.getExtras().get("data");
 			dogFace.setImageBitmap(makeCircle(bm));
 		}
 	}
+
+
 
 
 	@Override
@@ -259,8 +266,8 @@ public class PlayActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		// The activity is about to be destroyed.
-		
-    }
+
+	}
 
 }
 

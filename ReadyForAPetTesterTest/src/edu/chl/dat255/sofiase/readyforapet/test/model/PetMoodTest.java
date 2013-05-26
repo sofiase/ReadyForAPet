@@ -4,13 +4,14 @@ import junit.framework.TestCase;
 import edu.chl.dat255.sofiase.readyforapet.model.*;
 
 public class PetMoodTest extends TestCase {
-	PetMood petMood = new PetMood(2,3,0,30);
+	PetMood petMood = new PetMood(2,3,0,1,30);
  
  protected void setUp() throws Exception {
 		super.setUp();
 		petMood.setFoodMood(2);
 		petMood.setWalkMood(3);
 		petMood.setPlayMood(0);
+		petMood.setSleepMood(1);
 	}
 
 	protected void tearDown() throws Exception {
@@ -36,10 +37,17 @@ public void testWalkMood(){
 	assertEquals(3, petMood.getWalkMood());
 	}
 /**
+ * Method for testing the method getSleepMood in PetMood
+ */
+public void testSleepMood(){
+	assertEquals(1, petMood.getSleepMood());
+	}
+
+/**
  * Method for testing the method getSumMood in PetMood
  */
 public void testSumMood(){
-	assertEquals(5, petMood.getSumMood());
+	assertEquals(6, petMood.getSumMood());
 	}
 }
 

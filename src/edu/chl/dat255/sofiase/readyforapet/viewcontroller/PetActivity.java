@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.AssetFileDescriptor;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -136,7 +137,7 @@ public class PetActivity extends Activity implements Serializable{
 		//Setting textview with welcome message
 		petResponse.setText("Hello, my name is " + petName + "!");
 		petResponse.setVisibility(View.VISIBLE);
-		uiHandler.postDelayed(makeTextGone, 1000);
+		uiHandler.postDelayed(makeTextGone, 2500);
 
 		//Setting textview with current age of the pet
 		showPetAge.setText(petName + " is " + petAge + " days old.");

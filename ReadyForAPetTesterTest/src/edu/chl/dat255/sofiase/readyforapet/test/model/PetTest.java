@@ -6,7 +6,7 @@ import junit.framework.TestCase;
 
 
 public class PetTest extends TestCase {
-	Pet pet = new Pet("olle",2,2,2);
+	Pet pet = new Pet("olle",2,2,2,2);
 	
 
 	protected void setUp() throws Exception{
