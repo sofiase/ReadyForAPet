@@ -2,6 +2,8 @@ package edu.chl.dat255.sofiase.readyforapet.model;
 
 import java.io.Serializable;
 
+import android.util.Log;
+
 public class PetMood implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -12,7 +14,10 @@ public class PetMood implements Serializable {
 	private static long lastWalkHour;
 	private static long lastPlayHour;
 	private static long timeInterval = 2;
-
+	
+	private final static String LOG_test1 = "1";
+	private final static String LOG_test2 = "1";
+	private final static String LOG_test3 = "1";
 
 	public PetMood(){
 	}
@@ -145,7 +150,17 @@ public class PetMood implements Serializable {
 	public static long getLastWalkHour(){
 		return lastWalkHour;
 	}
-
+	/**
+	* Method to test if the pet is alive.
+	* 
+	* @return true if pet is alive, false if it is dead.
+	*/
+	public static boolean isAlive(){
+	Log.i(LOG_test1, Long.toString(getCurrentHour()));
+	Log.i(LOG_test2, Long.toString(lastEatHour));
+	Log.i(LOG_test3, Long.toString(lastWalkHour));
+	return !((getCurrentHour() - lastEatHour > 48) || (getCurrentHour() - lastWalkHour > 48));
+	}
 	/**
 	 * Method for getting current unix time
 	 *

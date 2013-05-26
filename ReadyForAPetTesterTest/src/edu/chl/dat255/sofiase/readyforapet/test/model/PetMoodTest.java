@@ -20,25 +20,25 @@ PetMood petmood = new PetMood();
 /**
  * Method for testing the method getfoodMood in PetMood
  */
-public void testInitialFoodMood(){
+public void testFoodMood(){
 	assertEquals(2, PetMood.getFoodMood());
 	}
 /**
  * Method for testing the method getPlayMood in PetMood
  */
-public void testInitialPlayMood(){
+public void testPlayMood(){
 	assertEquals(0, PetMood.getPlayMood());
 	}
 /**
  * Method for testing the method getWalkMood in PetMood
  */
-public void testInitialWalkMood(){
+public void testWalkMood(){
 	assertEquals(3, PetMood.getWalkMood());
 	}
 /**
  * Method for testing the method getSumMood in PetMood
  */
-public void testInitialSumMood(){
+public void testSumMood(){
 	assertEquals(5, PetMood.getSumMood());
 	}
 }

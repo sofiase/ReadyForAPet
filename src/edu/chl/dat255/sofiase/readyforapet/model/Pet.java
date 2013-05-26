@@ -7,10 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-
 import edu.chl.dat255.sofiase.readyforapet.viewcontroller.CreatePet;
 import android.content.Context;
-import android.util.Log;
 
 public class Pet implements Serializable{
 
@@ -23,7 +21,6 @@ public class Pet implements Serializable{
 	private long lastEatHour;
 	private long lastWalkHour;
 	private long lastPlayHour;
-	
 	private static final String LOG_test = "last food";
 	private static final String LOG_test1 = "last eathour";
 	private static final String LOG_test2 = "last play";
@@ -64,13 +61,13 @@ public class Pet implements Serializable{
 			PetMood.setFoodMood(hungerCounter);
 			//Save the last time the pet has eaten
 			lastEatHour = PetMood.getCurrentHour();
-			return "eat";
+			PetMood.setLastEatHour(lastEatHour);
+			return "Yummie!";
 		}	
 		else{
-			return "full";
+			return "I'm full!";
 		}
 	}
-
 
 	/**
 	 * Method that increases mood bar while walking
@@ -78,7 +75,7 @@ public class Pet implements Serializable{
 	 *
 	 * @return String with the pet's reaction 
 	 */
-
+	
 	public String walk(int distance) {
 
 		walkCounter = PetMood.getWalkMood();
@@ -95,21 +92,25 @@ public class Pet implements Serializable{
 				walkCounter = walkCounter + 1;
 				//Save the last time the pet has walked
 				lastWalkHour = PetMood.getCurrentHour();
+				PetMood.setLastWalkHour(lastWalkHour);
 			}
 			else if (distance < 20){
 				walkCounter = walkCounter + 2;
 				//Save the last time the pet has walked
 				lastWalkHour = PetMood.getCurrentHour();
+				PetMood.setLastWalkHour(lastWalkHour);
 			}
 			else if (distance < 30){
 				walkCounter = walkCounter + 3;
 				//Save the last time the pet has walked
 				lastWalkHour = PetMood.getCurrentHour();
+				PetMood.setLastWalkHour(lastWalkHour);
 			}
 			else{
 				walkCounter = walkCounter + 4;
 				//Save the last time the pet has walked
 				lastWalkHour = PetMood.getCurrentHour();
+				PetMood.setLastWalkHour(lastWalkHour);
 			}
 			PetMood.setWalkMood(walkCounter);
 			return "Yeey! Great exercise!";
@@ -136,6 +137,7 @@ public class Pet implements Serializable{
 			PetMood.setPlayMood(playCounter);
 			//Save the last time the pet has played
 			lastPlayHour = PetMood.getCurrentHour();
+			PetMood.setLastPlayHour(lastPlayHour);
 			return "Yeey! Lots of fun!";
 		}	
 		else{
@@ -192,5 +194,4 @@ public class Pet implements Serializable{
 		//Log.i(LOG_test2, Long.toString(pet.lastPlayHour));
 	}
 }
-
 

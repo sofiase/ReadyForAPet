@@ -10,7 +10,7 @@ public class LocationHelperTest extends TestCase {
 
 	private double distance1 = 0;
 	private double distance2 = 0;
-	private static final String LOG_TAG = "Differens mellan expected och beräknad";
+	private static final String LOG_TAG = "Difference beetween expected and counted";
 
 	
 	protected void setUp() throws Exception {

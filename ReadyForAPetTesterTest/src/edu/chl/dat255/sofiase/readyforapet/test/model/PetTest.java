@@ -26,4 +26,5 @@ public class PetTest extends TestCase {
 	public void testMethodgetName () {
 		assertEquals("olle",pet.getName());
 	}
+	
 }
