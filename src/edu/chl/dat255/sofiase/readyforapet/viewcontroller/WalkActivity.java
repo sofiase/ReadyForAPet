@@ -32,7 +32,9 @@ public class WalkActivity extends Activity{
 	private Handler handler = new Handler();
 	private Handler uiHandler = new Handler();
 	private LocationHelper location;
-	AnimationDrawable anim;
+	private AnimationDrawable anim;
+	private Button startWalking;
+	private Button stopWalking;
 
 	/**
 	 * On Create method
@@ -43,20 +45,17 @@ public class WalkActivity extends Activity{
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
 		setContentView(R.layout.walkactivity);
-		location = new LocationHelper(this);
+		//location = new LocationHelper(this);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		dogPrints = (ImageView) findViewById(R.id.dogprints);
 
-		//Checking if the GPS is enabled, else let the user start GPS if wanted.
-		if (location.gpsEnabled()){
-			Toast.makeText(this, "GPS is Enabled on your devide", Toast.LENGTH_SHORT).show();
-		}
-		else{
-			showGPSDisabledAlert();
-		}
-
-		Button startWalking = (Button) findViewById(R.id.startwalking);
+		startWalking = (Button) findViewById(R.id.startwalking);
+		stopWalking = (Button) findViewById(R.id.stopwalking);
+		
+		stopWalking.setEnabled(false);
+		
+		//Start walking button
 		startWalking.setOnClickListener(new OnClickListener() {
 
 			/**
@@ -65,6 +64,20 @@ public class WalkActivity extends Activity{
 			 * @param v - View
 			 */
 			public void onClick (View v){
+				
+				stopWalking.setEnabled(true);
+				startWalking.setEnabled(false);
+				
+				location = new LocationHelper(WalkActivity.this);
+				
+				//Checking if the GPS is enabled, else let the user start GPS if wanted.
+				if (location.gpsEnabled()){
+					Toast.makeText(WalkActivity.this, "GPS is Enabled on your devide", Toast.LENGTH_SHORT).show();
+				}
+				else{
+					showGPSDisabledAlert();
+				}
+				
 				try{
 					timer = new Timer();
 					timer.schedule(myTimerTask, delay, period);
@@ -72,6 +85,7 @@ public class WalkActivity extends Activity{
 				catch (Exception e){
 					e.printStackTrace();
 				}
+				
 				dogPrints.setVisibility(View.VISIBLE);
 				dogPrints.setBackgroundResource(R.anim.animation3);
 				anim = (AnimationDrawable) dogPrints.getBackground(); 
@@ -81,7 +95,8 @@ public class WalkActivity extends Activity{
 		}
 				);
 
-		Button stopWalking = (Button) findViewById(R.id.stopwalking);
+		
+		//Stop walking button
 		stopWalking.setOnClickListener(new OnClickListener() {
 
 			/**

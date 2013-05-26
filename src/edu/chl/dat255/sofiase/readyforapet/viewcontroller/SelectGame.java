@@ -28,7 +28,9 @@ public class SelectGame extends Activity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private TextView warningMessage;
 	private Dog dog;
-	
+	private static final String LOG_test = "is alive";
+	private static final String LOG_test2 = "null or not";
+
 	//Variables for tests
 	private final String LOG_TAG = "Information about the file when loading";
 	Runnable makeTextGone = new Runnable(){
@@ -54,18 +56,20 @@ public class SelectGame extends Activity implements Serializable {
 		setContentView(R.layout.selectgame);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-		try {
-			dog = (Dog) Pet.load("pet_file.dat", SelectGame.this);
-		} catch (FileNotFoundException e) {
-			System.out.print("File not found ");
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.print("IO Exception ");
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			System.out.print("Class not found exception ");
-			e.printStackTrace();
-		} 
+		if (dog == null){
+			try {
+				dog = (Dog) Pet.load("pet_file.dat", SelectGame.this);
+			} catch (FileNotFoundException e) {
+				System.out.print("File not found ");
+				e.printStackTrace();
+			} catch (IOException e) {
+				System.out.print("IO Exception ");
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				System.out.print("Class not found exception ");
+				e.printStackTrace();
+			} 
+		}
 
 		//Continue button starts petActivity if there is an existing pet
 		Button continuePreviousGame = (Button) findViewById(R.id.continuegame);
@@ -80,7 +84,7 @@ public class SelectGame extends Activity implements Serializable {
 
 				if(dog != null){
 					startActivity(new Intent(SelectGame.this, PetActivity.class));
-					
+
 					//Test to see if the file exist on internal memory when loading
 					File file = getBaseContext().getFileStreamPath("pet_file.dat");
 					if(file.exists()){
@@ -108,11 +112,11 @@ public class SelectGame extends Activity implements Serializable {
 			 */
 			public void onClick (View v){
 				//Show a warning alert for creating a new pet if user already has a pet that is still alive.
-				if (dog != null && dog.isAlive()){
+				if (dog != null){
 					showWarningAlert();
 				}
 				else{	
-					startActivity(new Intent(SelectGame.this,CreatePet.class));
+					startActivity(new Intent(SelectGame.this, CreatePet.class));
 				}
 			}
 		});
@@ -158,39 +162,39 @@ public class SelectGame extends Activity implements Serializable {
 		alert.show();
 	}
 
-	
-	    @Override
-	    protected void onResume() {
-	        super.onResume();
-	        if (dog == null){
-	    		try {
-	    			dog = (Dog) Pet.load("pet_file.dat", SelectGame.this);
-	    		} catch (FileNotFoundException e) {
-	    			System.out.print("File not found ");
-	    			e.printStackTrace();
-	    		} catch (IOException e) {
-	    			System.out.print("IO Exception ");
-	    			e.printStackTrace();
-	    		} catch (ClassNotFoundException e) {
-	    			System.out.print("Class not found exception ");
-	    			e.printStackTrace();
-	    		} 
-	        }
-	        // The activity has become visible (it is now "resumed").
-	    }
-	    @Override
-	    protected void onPause() {
-	        super.onPause();
-	        // Another activity is taking focus (this activity is about to be "paused").
-	    }
-	    @Override
-	    protected void onStop() {
-	        super.onStop();
-	        // The activity is no longer visible (it is now "stopped")
-	    }
-	    @Override
-	    protected void onDestroy() {
-	        super.onDestroy();
-	        // The activity is about to be destroyed.
-	    }
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (dog == null){
+			try {
+				dog = (Dog) Pet.load("pet_file.dat", SelectGame.this);
+			} catch (FileNotFoundException e) {
+				System.out.print("File not found ");
+				e.printStackTrace();
+			} catch (IOException e) {
+				System.out.print("IO Exception ");
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				System.out.print("Class not found exception ");
+				e.printStackTrace();
+			} 
+		}
+		// The activity has become visible (it is now "resumed").
+	}
+	@Override
+	protected void onPause() {
+		super.onPause();
+		// Another activity is taking focus (this activity is about to be "paused").
+	}
+	@Override
+	protected void onStop() {
+		super.onStop();
+		// The activity is no longer visible (it is now "stopped")
+	}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		// The activity is about to be destroyed.
+	}
 }

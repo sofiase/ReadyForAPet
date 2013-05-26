@@ -211,10 +211,8 @@ public class PlayActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 		dogFace.setVisibility(View.VISIBLE);
 		// Making the picture circular
-		if (bm != null){
 			bm = (Bitmap) data.getExtras().get("data");
 			dogFace.setImageBitmap(makeCircle(bm));
-		}
 	}
 
 

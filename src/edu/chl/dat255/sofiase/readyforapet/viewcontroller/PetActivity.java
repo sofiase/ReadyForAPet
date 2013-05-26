@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.AssetFileDescriptor;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -31,7 +32,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class PetActivity extends Activity implements Serializable{ 
-
 
 
 	private static final long serialVersionUID = 1L;
@@ -475,7 +475,7 @@ public class PetActivity extends Activity implements Serializable{
 		else if(petMood.getWalkMood() < 4 && petMood.getFoodMood() > 3){
 			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogpoop));
 		}
-		else if(petMood.getSumMood() < 7){
+		else if(petMood.getSumMood() < 10){
 			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogsad));
 		}
 		else{

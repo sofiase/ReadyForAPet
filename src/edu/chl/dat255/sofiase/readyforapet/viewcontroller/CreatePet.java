@@ -1,5 +1,6 @@
 package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import edu.chl.dat255.sofiase.readyforapet.R;
 import edu.chl.dat255.sofiase.readyforapet.model.Dog;
@@ -7,6 +8,8 @@ import edu.chl.dat255.sofiase.readyforapet.model.Pet;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
@@ -21,6 +24,8 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 	private static final long serialVersionUID = 1L;
 	private String petName;
 	private static Dog dog;
+	private MediaPlayer player;
+	private AssetFileDescriptor afd;
 
 
 	@Override
@@ -42,6 +47,18 @@ public class CreatePet extends Activity implements OnClickListener, Serializable
 	public void onClick (View v){
 		EditText setName = (EditText) findViewById(R.id.edit_pet_name);
 		petName = setName.getText().toString();
+		
+		try {
+		afd = getAssets().openFd("dogbark.m4a");
+		player = new MediaPlayer();
+		player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),afd.getLength());
+		player.prepare();
+		player.start();
+
+		} catch (IOException e) {
+		e.printStackTrace();
+		}
+		
 		if (petName.equals("")){
 			Toast.makeText(this, "Give your pet a name!", Toast.LENGTH_SHORT).show();
 		}
