@@ -26,6 +26,10 @@ import android.widget.Toast;
  * Class SelectGame, makes it possible to continue playing with the current pet or create a new one.
  * Loads the pet from internal memory if an existing pet exists.
  * Prompts the user if it tries to create a new pet when it already has one.
+ * 
+ * Copyright (C) 2013 Katrin Miettinen, Linnea Pettersson, Sofia Selin, Johanna Ydergard
+ * 
+ * Licensed under the MIT license. This file must only be used in accordance with the license. 
  *
  */
 public class SelectGame extends Activity implements Serializable {

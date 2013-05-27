@@ -27,17 +27,21 @@ import android.widget.ImageView;
  * Class PlayActiviy, where the user is able to take a photo of a dogs face or use a standard photo to make the dog dance.
  * When done dancing the user is sent to PetActivity
  *
+ * Copyright (C) 2013 Katrin Miettinen, Linnea Pettersson, Sofia Selin, Johanna Ydergard
+ * 
+ * Licensed under the MIT license. This file must only be used in accordance with the license. 
+ *
  */
 public class PlayActivity extends Activity {
 	private Button useStandard, takePhoto, dogPlay;
 	private ImageView dogFace, dogBody, welcomeDog;
 	private Timer timer;
-	private Bitmap bm;
-	
+	private Bitmap bm; 
+	private PackageManager pm;
 	//Variables for playing music in Pet Activity
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;
-	private PackageManager pm;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +89,7 @@ public class PlayActivity extends Activity {
 
 		useStandard.setOnClickListener(new OnClickListener() {
 			/**
-			 * Making it able to use the standard picture // kolla så att du ändrat här jojo
+			 * Making it able to use the standard picture 
 			 *
 			 * @param v - View
 			 */
@@ -106,7 +110,7 @@ public class PlayActivity extends Activity {
 			 */
 			@Override
 			public void onClick (View v){
-				
+
 				//Dance music starts when dog starts playing
 				try {
 					afd = getAssets().openFd("dancemusic.m4a");
@@ -135,16 +139,17 @@ public class PlayActivity extends Activity {
 					@Override
 					public void run() {
 						anim.stop();
-						
+
 						//Sending a result to PetActivity
 						PlayActivity.this.setResult(1);
 						PlayActivity.this.finish();
-						
+
 						//If there a picture was taken the memory is reclaimed as soon right after it's finished displaying
 						if (bm != null) {
 							bm.recycle();
 							bm = null;
 							System.gc();
+
 						}
 					}
 				};
@@ -197,13 +202,25 @@ public class PlayActivity extends Activity {
 		takePhoto.setVisibility(View.GONE);
 		useStandard.setVisibility(View.GONE);
 		dogPlay.setVisibility(View.VISIBLE);
-		super.onActivityResult(requestCode, resultCode, data);
-		dogFace.setVisibility(View.VISIBLE);
 		
-		// Making the picture circular
-		bm = (Bitmap) data.getExtras().get("data");
-		dogFace.setImageBitmap(makeCircle(bm));
+		super.onActivityResult(requestCode, resultCode, data);
+
+		 //Checking if the the camera is cancelled before picture is taken
+			if(resultCode != RESULT_CANCELED){
+				dogFace.setVisibility(View.VISIBLE);
+
+				// Making the picture circular
+				bm = (Bitmap) data.getExtras().get("data");
+				dogFace.setImageBitmap(makeCircle(bm));
+				dogFace.setVisibility(View.VISIBLE);
+			}
+			else{
+				dogFace.setVisibility(View.GONE);
+
+		}
+
 	}
+	  
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -248,4 +265,6 @@ public class PlayActivity extends Activity {
 			player.pause();
 		}
 	}
+
 }
+

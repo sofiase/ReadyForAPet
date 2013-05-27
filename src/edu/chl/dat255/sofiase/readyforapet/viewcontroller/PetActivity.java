@@ -12,7 +12,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.AssetFileDescriptor;
-import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -22,7 +21,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -35,6 +33,10 @@ import android.widget.TextView;
  * Class PetActivity is the main play activity.
  * Contains a picture and animations of the pet, a MoodBar, and eat, play, walk and sleep buttons.
  * Sends the user to the other play activities PlayActivity, WalkActivity and SleepActivity.
+ *
+ * Copyright (C) 2013 Katrin Miettinen, Linnea Pettersson, Sofia Selin, Johanna Ydergard
+ * 
+ * Licensed under the MIT license. This file must only be used in accordance with the license. 
  *
  */
 public class PetActivity extends Activity implements Serializable{ 
@@ -128,7 +130,7 @@ public class PetActivity extends Activity implements Serializable{
 		//Setting textview with welcome message
 		petResponse.setText("Hello, my name is " + petName + "!");
 		petResponse.setVisibility(View.VISIBLE);
-		uiHandler.postDelayed(makeTextGone, 1000);
+		uiHandler.postDelayed(makeTextGone, 2500);
 
 		//Setting textview with current age of the pet
 		showPetAge.setText(petName + " is " + petAge + " days old.");
@@ -215,7 +217,7 @@ public class PetActivity extends Activity implements Serializable{
 					PetActivity.this.startActivityForResult(new Intent(PetActivity.this, PlayActivity.class), 0);
 				}
 				else{
-					petResponse.setText(dog.play());
+					petResponse.setText(dog.play(0));
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 2000);
 				}
@@ -304,7 +306,11 @@ public class PetActivity extends Activity implements Serializable{
 		//When coming from the PlayActivity and the dog is done playing.
 		if(requestCode == 0 && resultCode == 1){
 			//Gets the dog's response
-			petResponse.setText(dog.play());
+			petResponse.setText(dog.play(1));
+		}
+		//When coming from PetActivity but is not done plating
+		else if (requestCode == 0){
+			petResponse.setText(dog.play(0));
 		}
 
 		//When coming from the WalkActivity
