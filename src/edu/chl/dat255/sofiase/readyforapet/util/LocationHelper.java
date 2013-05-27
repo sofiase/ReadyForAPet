@@ -34,13 +34,13 @@ public class LocationHelper{
 		//create the location listener
 		locationListener = new MyLocationListener();
 
-		//setup a callback for when the GPS gets a lock and we receive data
+		//setup a callback for when the GPS gets connected and we receive data every 30 seconds or 10 meters
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 30000, 10, locationListener);
 
 	}
 
 	/**
-	 * Receiving notifications from the Location Manager when they are sent.
+	 * MyLocationListener class receiving notifications from the Location Manager when they are sent.
 	 *
 	 */
 	public class MyLocationListener implements LocationListener {
@@ -51,11 +51,10 @@ public class LocationHelper{
 		 */
 		public void onLocationChanged(Location location) {
 
+			//Getting the current and previous GeoPoint
 			if (geoPointB == null){
 				geoPointB = new GeoPoint(degreesToMicrodegrees(location.getLatitude()), degreesToMicrodegrees(location.getLongitude()));
 			}
-
-			//Getting the current GeoPoint
 			geoPointA = new GeoPoint(degreesToMicrodegrees(location.getLatitude()), degreesToMicrodegrees(location.getLongitude()));
 
 			//Calculating the distance in meters
@@ -75,13 +74,13 @@ public class LocationHelper{
 	}
 	
 	/**
-	 * Convert a float point degree value into a microderee value
+	 * Convert a float point degree value into a micro degree value. Needed to make a GeoPoint.
 	 * 
 	 * @param deg
-	 * @return float point in microdegree value
+	 * @return float point in micro degree value
 	 */
 	public static int degreesToMicrodegrees(double deg){
-		return (int)(deg * 1E6);
+		return (int) (deg * 1E6);
 	}
 
 
@@ -93,8 +92,6 @@ public class LocationHelper{
 	}
 
 	/**
-	 * Get Distance 
-	 *
 	 * @return - The current distance walked.
 	 */
 	public double getDistance(){

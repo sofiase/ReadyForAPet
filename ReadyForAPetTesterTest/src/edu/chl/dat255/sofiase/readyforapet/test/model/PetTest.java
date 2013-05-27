@@ -6,7 +6,7 @@ import junit.framework.TestCase;
 
 
 public class PetTest extends TestCase {
-	Pet pet = new Pet("olle",2,2,2,0);
+	Pet pet = new Pet("olle",2,2,2);
 	
 
 	protected void setUp() throws Exception{
@@ -26,4 +26,5 @@ public class PetTest extends TestCase {
 	public void testMethodgetName () {
 		assertEquals("olle",pet.getName());
 	}
+	
 }
