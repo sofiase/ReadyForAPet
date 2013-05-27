@@ -25,6 +25,10 @@ import android.os.Build;
  * Class SleepActivity.
  * Let's the pet sleep and measures how long it has slept and sends that time back to PetActivity.
  *
+ * Copyright (C) 2013 Katrin Miettinen, Linnea Pettersson, Sofia Selin, Johanna Ydergard
+ * 
+ * Licensed under the MIT license. This file must only be used in accordance with the license. 
+ *
  */
 public class SleepActivity extends Activity {
 
@@ -149,13 +153,26 @@ public class SleepActivity extends Activity {
 	}
 
 	/**
+	 * Starts music player when resuming activity
+	 *
+	 */
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(player!=null){
+			player.start();
+		}
+	}
+	
+	
+	/**
 	 * Pauses music player when pausing activity
 	 *
 	 */
 	@Override
 	protected void onPause() {
 		super.onPause();
-		if(player!=null){
+		if(player != null){
 			player.pause();
 		}
 	}
@@ -166,9 +183,18 @@ public class SleepActivity extends Activity {
 	@Override
 	protected void onStop() {
 		super.onStop();
-		if(player!=null){
+		if(player != null){
 			player.pause();
 		}
 
 	}
+	
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		this.finish();
+		
+		
+	}
+	
 }

@@ -6,6 +6,16 @@ import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 
+/**
+ * Class for testing the distance that is measured. 
+ * 
+ * Copyright (C) 2013 Katrin Miettinen, Linnea Pettersson, Sofia Selin, Johanna Ydergard
+ * 
+ * Licensed under the MIT license. This file must only be used in accordance with the license. 
+ * 
+ *
+ */
+
 public class LocationHelperTest extends TestCase {
 
 	private double distance1 = 0;

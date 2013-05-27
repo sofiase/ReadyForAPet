@@ -15,6 +15,10 @@ import android.widget.Button;
 /**
  * MainActivity displays the main menu with options Play, How to play and Quit.
  *
+ * Copyright (C) 2013 Katrin Miettinen, Linnea Pettersson, Sofia Selin, Johanna Ydergard
+ * 
+ * Licensed under the MIT license. This file must only be used in accordance with the license. 
+ *
  */
 public class MainActivity extends Activity {
 

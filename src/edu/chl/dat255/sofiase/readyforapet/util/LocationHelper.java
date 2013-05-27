@@ -10,6 +10,9 @@ import android.os.Bundle;
 /**
  * Location Helper Class that handles creation of the Location Manager and Location Listener.
  * 
+ * Copyright (C) 2013 Katrin Miettinen, Linnea Pettersson, Sofia Selin, Johanna Ydergard
+ * 
+ * Licensed under the MIT license. This file must only be used in accordance with the license. 
  */
 public class LocationHelper{
 

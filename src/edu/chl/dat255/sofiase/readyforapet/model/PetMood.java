@@ -5,7 +5,10 @@ import java.io.Serializable;
 /**
  * Class PetMood keeps track of the Pet's mood.
  * Pet has an instance of PetMood.
- *
+ * 
+ * Copyright (C) 2013 Katrin Miettinen, Linnea Pettersson, Sofia Selin, Johanna Ydergard
+ * 
+ * Licensed under the MIT license. This file must only be used in accordance with the license. 
  */
 public class PetMood implements Serializable { 
 

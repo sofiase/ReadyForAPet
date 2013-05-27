@@ -10,11 +10,15 @@ import java.io.Serializable;
 
 import edu.chl.dat255.sofiase.readyforapet.viewcontroller.CreatePet;
 import android.content.Context;
-import android.util.Log;
+
 
 /**
  * Class Pet implements characteristics that are general to all pets.
  * Should be used as a superclass for other animals in further development.
+ *
+ * Copyright (C) 2013 Katrin Miettinen, Linnea Pettersson, Sofia Selin, Johanna Ydergard
+ * 
+ * Licensed under the MIT license. This file must only be used in accordance with the license. 
  *
  */
 public class Pet implements Serializable{
@@ -30,7 +34,7 @@ public class Pet implements Serializable{
 	private static final String LOG_test2 = "save play";
 	private static final String LOG_test4 = "save sleep";
 	private static final String LOG_test3 = "save birth";*/
-	
+
 	public Pet (String petName, int foodMood, int playMood, int walkMood, int sleepMood){
 		this.name = petName;
 		petMood = new PetMood(foodMood, playMood, walkMood, sleepMood, 2);
@@ -74,7 +78,7 @@ public class Pet implements Serializable{
 	 * @param distance - how long the pet has walked
 	 * @return String with the pet's reaction 
 	 */
-	
+
 	public String walk(int distance) {
 		if (petMood.getFoodMood() < 3 && petMood.getWalkMood() < 5) {
 			return "I'm too hungry!";
@@ -128,19 +132,24 @@ public class Pet implements Serializable{
 	 *
 	 * @return String with the pet's reaction 
 	 */
-	public String play() {
+	public String play(int donePlaying) {
 		if (petMood.getFoodMood() < 3 && petMood.getPlayMood() < 5){
 			return "I'm too hungry!";
 		}
-		else if (petMood.getPlayMood() < 5) {
-			//Increase the playmood
-			petMood.setPlayMood(petMood.getPlayMood() + 1);
-			//Save the last time the pet has played
-			petMood.setLastPlayHour(petMood.getCurrentHour());
-			return "Yeey! Lots of fun!";
-		}	
-		else{
+		else if (donePlaying == 1 && petMood.getPlayMood() < 5){
+			//if () {
+				//Increase the playmood
+				petMood.setPlayMood(petMood.getPlayMood() + 1);
+				//Save the last time the pet has played
+				petMood.setLastPlayHour(petMood.getCurrentHour());
+				return "Yeey! Lots of fun!";
+			//}
+		}
+		else if (petMood.getPlayMood()==5){
 			return "I'm tired! I want to rest!";
+		}
+		else{
+			return "I want to play more!";
 		}
 	}
 

@@ -25,13 +25,17 @@ import android.widget.Toast;
  * Class WalkActivity that creates an instance of LoationHelper and enables the GPS.
  * Measures how far the user walks with the pet and sends that back to PetActivity.
  *
+ * Copyright (C) 2013 Katrin Miettinen, Linnea Pettersson, Sofia Selin, Johanna Ydergard
+ * 
+ * Licensed under the MIT license. This file must only be used in accordance with the license. 
+ *
  */
 public class WalkActivity extends Activity{
 
 	private TextView displayDistance;
 	private ImageView dogPrints;
 	private int delay = 0;
-	private int period = 30000;
+	private int period = 15000;
 	private int distance = 0;
 	private Timer timer;
 	private Handler handler = new Handler();

@@ -2,9 +2,6 @@ package edu.chl.dat255.sofiase.readyforapet.viewcontroller;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import edu.chl.dat255.sofiase.readyforapet.R;
 import edu.chl.dat255.sofiase.readyforapet.model.Dog;
 import edu.chl.dat255.sofiase.readyforapet.model.Pet;
@@ -24,6 +21,10 @@ import android.widget.Toast;
 
 /**
  * Class CreatePet let's the user create a pet with a new name.
+ *
+ * Copyright (C) 2013 Katrin Miettinen, Linnea Pettersson, Sofia Selin, Johanna Ydergard
+ * 
+ * Licensed under the MIT license. This file must only be used in accordance with the license. 
  *
  */
 public class CreatePet extends Activity implements OnClickListener,Serializable {  

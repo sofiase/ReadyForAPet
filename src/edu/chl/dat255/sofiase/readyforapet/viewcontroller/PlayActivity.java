@@ -26,6 +26,10 @@ import android.widget.ImageView;
  * Class PlayActiviy, where the user is able to take a photo of a dogs face or use a standard photo to make the dog dance.
  * When done dancing the user is sent to PetActivity
  *
+ * Copyright (C) 2013 Katrin Miettinen, Linnea Pettersson, Sofia Selin, Johanna Ydergard
+ * 
+ * Licensed under the MIT license. This file must only be used in accordance with the license. 
+ *
  */
 public class PlayActivity extends Activity {
 	private Button useStandard, takePhoto, dogPlay;
@@ -140,10 +144,11 @@ public class PlayActivity extends Activity {
 						PlayActivity.this.finish();
 
 						//If there a picture was taken the memory is reclaimed as soon right after it's finished displaying
-						if (bm!=null) {
+						if (bm != null) {
 							bm.recycle();
 							bm = null;
 							System.gc();
+
 						}
 					}
 				};
@@ -196,17 +201,20 @@ public class PlayActivity extends Activity {
 		takePhoto.setVisibility(View.GONE);
 		useStandard.setVisibility(View.GONE);
 		dogPlay.setVisibility(View.VISIBLE);
+		
 		super.onActivityResult(requestCode, resultCode, data);
-
 		 //Checking if the the camera is cancelled before picture is taken
 			if(resultCode != RESULT_CANCELED){
 				dogFace.setVisibility(View.VISIBLE);
+
 				// Making the picture circular
 				bm = (Bitmap) data.getExtras().get("data");
 				dogFace.setImageBitmap(makeCircle(bm));
+				dogFace.setVisibility(View.VISIBLE);
 			}
 			else{
 				dogFace.setVisibility(View.GONE);
+
 		}
 
 	}
@@ -254,4 +262,6 @@ public class PlayActivity extends Activity {
 			player.pause();
 		}
 	}
+
 }
+
