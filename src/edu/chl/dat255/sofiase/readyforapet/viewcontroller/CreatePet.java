@@ -19,6 +19,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * Class CreatePet let's the user create a pet with a new name.
+ *
+ * Copyright (C) 2013 Katrin Miettinen, Linnea Pettersson, Sofia Selin, Johanna Ydergard
+ * 
+ * Licensed under the MIT license. This file must only be used in accordance with the license. 
+ *
+ */
 public class CreatePet extends Activity implements OnClickListener,Serializable {  
 
 	private static final long serialVersionUID = 1L;
@@ -27,20 +35,17 @@ public class CreatePet extends Activity implements OnClickListener,Serializable 
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;
 
-
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate (savedInstanceState);
 		setContentView(R.layout.createpet);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-				
+		
 		Button create = (Button) findViewById(R.id.puppy_settings);
 		create.setOnClickListener(this);
 	}
 
 	/**
-	 * onClick Method
-	 * 
 	 * When pressing the button create it checks whether the user has typed a name, and then creates an instance of the Pet class.
 	 * 
 	 */
@@ -48,8 +53,9 @@ public class CreatePet extends Activity implements OnClickListener,Serializable 
 		EditText setName = (EditText) findViewById(R.id.edit_pet_name);
 		petName = setName.getText().toString();
 		
+		//Starts a dog barking sound when a new pet is created
 		try {
-		afd = getAssets().openFd("dogbark.m4a");
+		afd = getAssets().openFd("dogbarks.wav");
 		player = new MediaPlayer();
 		player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),afd.getLength());
 		player.prepare();
@@ -59,21 +65,20 @@ public class CreatePet extends Activity implements OnClickListener,Serializable 
 		e.printStackTrace();
 		}
 		
+		//Makes sure the user has typed in a name
 		if (petName.equals("")){
 			Toast.makeText(this, "Give your pet a name!", Toast.LENGTH_SHORT).show();
 		}
 		
 		else {
-			//Creating a new dog with total startmood 8
+			//Creating a new dog with total initial startmood 8
 			dog = new Dog(petName, 2, 2, 2, 2);
 			startActivity(new Intent(CreatePet.this, PetActivity.class));
 		}
 	}
 
 	/**
-	 * getPet Method
-	 * 
-	 * makes the created pet available to other classes
+	 * Makes the created pet available to other classes.
 	 *
 	 * @return dog - an instance of the class Dog
 	 */
@@ -81,9 +86,13 @@ public class CreatePet extends Activity implements OnClickListener,Serializable 
 		return dog;
 	}
 	
+	public static void setPet(Pet pet){
+		dog = (Dog) pet;
+	}
+	
 	
 	/**
-	 * Configurates the navigate Up button in this activity
+	 * Configuring the navigate Up button in this activity.
 	 *
 	 * @param item - MenuItem
 	 */
@@ -96,27 +105,6 @@ public class CreatePet extends Activity implements OnClickListener,Serializable 
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // The activity has become visible (it is now "resumed").
-    }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        // Another activity is taking focus (this activity is about to be "paused").
-    }
-    @Override
-    protected void onStop() {
-        super.onStop();
-        // The activity is no longer visible (it is now "stopped")
-    }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // The activity is about to be destroyed.
-    }
 
 	
 }

@@ -2,6 +2,14 @@ package edu.chl.dat255.sofiase.readyforapet.model;
 
 import java.io.Serializable;
 
+/**
+ * Class PetMood keeps track of the Pet's mood.
+ * Pet has an instance of PetMood.
+ * 
+ * Copyright (C) 2013 Katrin Miettinen, Linnea Pettersson, Sofia Selin, Johanna Ydergard
+ * 
+ * Licensed under the MIT license. This file must only be used in accordance with the license. 
+ */
 public class PetMood implements Serializable { 
 
 	private static final long serialVersionUID = 1L;
@@ -15,7 +23,6 @@ public class PetMood implements Serializable {
 	private long lastSleepHour;
 	private long timeInterval;
 
-
 	public PetMood(int foodMood, int playMood, int walkMood, int sleepMood, long timeInterval){
 		this.foodMood = foodMood;
 		this.playMood = playMood;
@@ -25,7 +32,7 @@ public class PetMood implements Serializable {
 	}
 
 	/**
-	 * Sets the mood of the pet depending on how much it has eaten.
+	 * Sets the mood of the pet depending on how much it has eaten. Mood is always a positive number.
 	 * 
 	 * @param foodnumber - int
 	 */
@@ -39,7 +46,7 @@ public class PetMood implements Serializable {
 	}
 
 	/**
-	 * Sets the mood of the pet depending on how much it has played.
+	 * Sets the mood of the pet depending on how much it has played. Mood is always a positive number.
 	 * 
 	 * @param playnumber - int
 	 */
@@ -53,7 +60,7 @@ public class PetMood implements Serializable {
 	}
 
 	/**
-	 * Sets the mood of the pet depending on how much it has walked.
+	 * Sets the mood of the pet depending on how much it has walked. Mood is always a positive number.
 	 * 
 	 * @param walknumber - int
 	 */
@@ -67,7 +74,7 @@ public class PetMood implements Serializable {
 	}
 	
 	/**
-	 * Sets the mood of the pet depending on how much it has sleeped.
+	 * Sets the mood of the pet depending on how much it has sleeped. Mood is always a positive number.
 	 * 
 	 * @param sleepnumber - int
 	 */
@@ -81,7 +88,7 @@ public class PetMood implements Serializable {
 	}
 
 	/**
-	 * Makes it possible for the pet to know how much the pet has already eaten.
+	 * Makes it possible for the pet to know how much it has already eaten.
 	 * 
 	 * @return foodMood - int
 	 */
@@ -90,7 +97,7 @@ public class PetMood implements Serializable {
 	}
 
 	/**
-	 * Makes it possible for the pet to know how much the pet has already played.
+	 * Makes it possible for the pet to know how much it has already played.
 	 * 
 	 * @return playMood - int
 	 */
@@ -99,7 +106,7 @@ public class PetMood implements Serializable {
 	}
 
 	/**
-	 * Makes it possible for the pet to know how much the pet has already walked.
+	 * Makes it possible for the pet to know how much it has already walked.
 	 * 
 	 * @return foodMood - int
 	 */
@@ -108,7 +115,7 @@ public class PetMood implements Serializable {
 	}
 	
 	/**
-	 * Makes it possible for the pet to know how much the pet has already sleeped.
+	 * Makes it possible for the pet to know how much it has already sleeped.
 	 * 
 	 * @return SleepMood - int
 	 */
@@ -117,8 +124,8 @@ public class PetMood implements Serializable {
 	}
 
 	/**
-	 * The sum of the mood of the pet that is shown in a moodbar.
-	 * Each an int with value between 0 - 5
+	 * The sum of the pet's mood.
+	 * foodMood, playMood, walkMood, sleepMood each an int with value between 0 - 5
 	 * 
 	 * @return the total mood of the pet
 	 */
@@ -127,87 +134,76 @@ public class PetMood implements Serializable {
 	}
 
 	/**
-	 * 
-	 * @param time - last time the dog has eaten
+	 * @param time - last time the pet has eaten
 	 */
 	public void setLastEatHour(long time){
 		lastEatHour = time;
 	}
 	
 	/**
-	 * 
-	 * @param time - last time the dog has eaten
+	 * @param time - last time the pet has played
 	 */
 	public void setLastPlayHour(long time){
 		lastPlayHour = time;
 	}
 	
 	/**
-	 * 
-	 * @param time - last time the dog has eaten
+	 * @param time - last time the pet has walked
 	 */
 	public void setLastWalkHour(long time){
 		lastWalkHour = time;
 	}
 	
 	/**
-	 * 
-	 * @param time - last time the dog has sleeped
+	 * @param time - last time the pet has slept
 	 */
 	public void setLastSleepHour(long time){
 		lastSleepHour = time;
 	}
 
 	/**
-	 * 
-	 * @return last time the dog has eaten
+	 * @return last time the pet has eaten
 	 */
 	public long getLastEatHour(){
 		return lastEatHour;
 	}
 	
 	/**
-	 * 
-	 * @return last time the dog has eaten
+	 * @return last time the pet has eaten
 	 */
 	public long getLastPlayHour(){
 		return lastPlayHour;
 	}
 	
 	/**
-	 * 
-	 * @return last time the dog has eaten
+	 * @return last time the pet has walked
 	 */
 	public long getLastWalkHour(){
 		return lastWalkHour;
 	}
 	
-
 	/**
-	 * 
-	 * @return last time the dog has eaten
+	 * @return last time the pet has slept
 	 */
 	public long getLastSleepHour(){
 		return lastSleepHour;
 	}
 
-
 	/**
-	 * Method for getting current unix time
+	 * Method for getting current unix time.
 	 *
-	 * @return time in hour
+	 * @return time expressed in hours
 	 */
 	public long getCurrentHour(){
-		//return System.currentTimeMillis()/3600000L;
-		return System.currentTimeMillis()/1000L;
+		return System.currentTimeMillis()/3600000L;
 	}
 
 	/**
-	 * Method that calculates how much the bar will decrease
+	 * Method that calculates how much the moodBar will decrease with time.
 	 *
-	 * @param previousTime
-	 * @param currentTime
-	 * @return number to decrease the bar with
+	 * @param previousTime - last time pet has eaten/played/walked/slept
+	 * @param currentTime - the current time when method is called
+	 * @return int number to decrease the moodBar with
 	 */
 	public int moodBarDecrease (long previousTime, long currentTime){
 		long difference = currentTime - previousTime;

@@ -3,6 +3,15 @@ package edu.chl.dat255.sofiase.readyforapet.test.model;
 import junit.framework.TestCase;
 import edu.chl.dat255.sofiase.readyforapet.model.*;
 
+/**
+ * Class for testing methods in class PetMood. 
+ * 
+ * Copyright (C) 2013 Katrin Miettinen, Linnea Pettersson, Sofia Selin, Johanna Ydergard
+ * 
+ * Licensed under the MIT license. This file must only be used in accordance with the license. 
+ *
+ */
+
 public class PetMoodTest extends TestCase {
 	PetMood petMood = new PetMood(2,3,0,1,30);
  
