@@ -36,7 +36,8 @@ public class PlayActivity extends Activity {
 	private ImageView dogFace, dogBody, welcomeDog;
 	private Timer timer;
 	private Bitmap bm;
-	
+	private static final int CAMERA_REQUEST = 1; 
+
 	//Variables for playing music in Pet Activity
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;
@@ -88,7 +89,7 @@ public class PlayActivity extends Activity {
 
 		useStandard.setOnClickListener(new OnClickListener() {
 			/**
-			 * Making it able to use the standard picture // kolla s� att du �ndrat h�r jojo
+			 * Making it able to use the standard picture 
 			 *
 			 * @param v - View
 			 */
@@ -109,7 +110,7 @@ public class PlayActivity extends Activity {
 			 */
 			@Override
 			public void onClick (View v){
-				
+
 				//Dance music starts when dog starts playing
 				try {
 					afd = getAssets().openFd("dancemusic.m4a");
@@ -138,11 +139,11 @@ public class PlayActivity extends Activity {
 					@Override
 					public void run() {
 						anim.stop();
-						
+
 						//Sending a result to PetActivity
 						PlayActivity.this.setResult(1);
 						PlayActivity.this.finish();
-						
+
 						//If there a picture was taken the memory is reclaimed as soon right after it's finished displaying
 						if (bm != null) {
 							bm.recycle();
@@ -201,19 +202,26 @@ public class PlayActivity extends Activity {
 		takePhoto.setVisibility(View.GONE);
 		useStandard.setVisibility(View.GONE);
 		dogPlay.setVisibility(View.VISIBLE);
-		super.onActivityResult(requestCode, resultCode, data);
-		dogFace.setVisibility(View.VISIBLE);
-		// Making the picture circular
 		
-		if (data.getExtras().get("data") == null){
-			dogFace.setVisibility(View.GONE);
-		}
-		else{
-			bm = (Bitmap) data.getExtras().get("data");
-			dogFace.setImageBitmap(makeCircle(bm));
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == CAMERA_REQUEST) {
+			if( data.getExtras().get("data") != null){
+				
+				// Making the picture circular
+				bm = (Bitmap) data.getExtras().get("data");
+				dogFace.setImageBitmap(makeCircle(bm));
+				dogFace.setVisibility(View.VISIBLE);
+			}
+			else{
+				dogFace.setVisibility(View.GONE);
+
 		}
 
 	}
+	  }
+
+ 
+      
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

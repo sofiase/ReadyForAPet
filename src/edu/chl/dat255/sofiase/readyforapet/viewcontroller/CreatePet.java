@@ -31,6 +31,7 @@ public class CreatePet extends Activity implements OnClickListener,Serializable 
 
 	private static final long serialVersionUID = 1L;
 	private String petName;
+
 	private static Dog dog;
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;
@@ -43,6 +44,35 @@ public class CreatePet extends Activity implements OnClickListener,Serializable 
 		
 		Button create = (Button) findViewById(R.id.puppy_settings);
 		create.setOnClickListener(this);
+		//Dog barks when activity is started
+		try {
+			afd = getAssets().openFd("dogbark.m4a");
+			player = new MediaPlayer();
+			player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),afd.getLength());
+			player.setLooping(true);
+			player.prepare();
+			player.start();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		/**
+		 * TimerTask timertask = new TimerTask() {
+					@Override
+					public void run() {
+						player.paus();//eller stop?
+
+					}
+
+				};
+
+				timer = new Timer();
+				timer.schedule(timertask, 2000);
+
+		 */
+		
+		
 	}
 
 	/**
@@ -105,6 +135,7 @@ public class CreatePet extends Activity implements OnClickListener,Serializable 
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
 
 	
 }
