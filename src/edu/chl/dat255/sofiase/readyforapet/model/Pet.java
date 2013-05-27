@@ -8,7 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import edu.chl.dat255.sofiase.readyforapet.viewcontroller.CreatePet;
+import edu.chl.dat255.sofiase.readyforapet.viewcontroller.CreatePetActivity;
 import android.content.Context;
 
 
@@ -27,13 +27,6 @@ public class Pet implements Serializable{
 	private String name;
 	private long petBirthHour;
 	private PetMood petMood;
-
-	/*Test variables
-	private static final String LOG_test = "save food";
-	private static final String LOG_test1 = "save walk";
-	private static final String LOG_test2 = "save play";
-	private static final String LOG_test4 = "save sleep";
-	private static final String LOG_test3 = "save birth";*/
 
 	public Pet (String petName, int foodMood, int playMood, int walkMood, int sleepMood){
 		this.name = petName;
@@ -84,28 +77,28 @@ public class Pet implements Serializable{
 			return "I'm too hungry!";
 		}
 		else if (petMood.getWalkMood() < 5) {
-			if(distance < 10){
+			if(distance < 50){
 				return "I want to walk more!";
 			}
-			if(distance > 10 && distance < 30){
+			if(distance > 50 && distance < 100){
 				//Increase the walkmood
 				petMood.setWalkMood(petMood.getWalkMood() + 1);
 				//Save the last time the pet has walked
 				petMood.setLastWalkHour(petMood.getCurrentHour());
 			}
-			else if (distance < 50){
+			else if (distance < 150){
 				//Increase the walkmood
 				petMood.setWalkMood(petMood.getWalkMood() + 2);
 				//Save the last time the pet has walked
 				petMood.setLastWalkHour(petMood.getCurrentHour());
 			}
-			else if (distance < 70){
+			else if (distance < 200){
 				//Increase the walkmood
 				petMood.setWalkMood(petMood.getWalkMood() + 3);
 				//Save the last time the pet has walked
 				petMood.setLastWalkHour(petMood.getCurrentHour());
 			}
-			else if (distance < 90){
+			else if (distance < 250){
 				//Increase the walkmood
 				petMood.setWalkMood(petMood.getWalkMood() + 4);
 				//Save the last time the pet has walked
@@ -170,7 +163,7 @@ public class Pet implements Serializable{
 				//Save the last time the pet has sleeped
 				petMood.setLastSleepHour(petMood.getCurrentHour());
 			}
-			else if (hours > 1){
+			else if (hours < 1){
 				//Increase the sleepmood
 				petMood.setSleepMood(petMood.getSleepMood() + 3);
 				//Save the last time the pet has sleeped
@@ -217,10 +210,6 @@ public class Pet implements Serializable{
 	 * @return true if pet is alive, false if it is dead
 	 */
 	public boolean isAlive(){
-		//Test
-		//Log.i(LOG_test, Long.toString(petMood.getCurrentHour()));
-		//Log.i(LOG_test1, Long.toString(petMood.getLastEatHour()));
-		//Log.i(LOG_test2, Long.toString(petMood.getLastWalkHour()));
 		return !((petMood.getCurrentHour() - petMood.getLastEatHour() > 48) || (petMood.getCurrentHour() - petMood.getLastWalkHour() > 48));
 	}
 
@@ -255,14 +244,7 @@ public class Pet implements Serializable{
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		Pet pet = (Pet) ois.readObject();
 		ois.close();
-		CreatePet.setPet(pet);
-
-		/*Test
-		Log.i(LOG_test, Long.toString(pet.getPetMood().getLastEatHour()));
-		Log.i(LOG_test1, Long.toString(pet.getPetMood().getLastWalkHour()));
-		Log.i(LOG_test2, Long.toString(pet.getPetMood().getLastPlayHour()));
-		Log.i(LOG_test4, Long.toString(pet.getPetMood().getLastSleepHour()));
-		Log.i(LOG_test3, Long.toString(pet.petBirthHour));*/
+		CreatePetActivity.setPet(pet);
 		return pet;
 	}
 }

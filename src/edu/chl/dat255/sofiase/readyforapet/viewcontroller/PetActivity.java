@@ -66,7 +66,6 @@ public class PetActivity extends Activity implements Serializable{
 	private final String LOG_TAG1 = "Information about the file when saving";
 	private final String LOG_TAG2 = "Information about the file when deleting";
 
-
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -74,8 +73,8 @@ public class PetActivity extends Activity implements Serializable{
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		//Receiving the new or saved pet
-		if (CreatePet.getPet() != null){
-			dog = (Dog) CreatePet.getPet();
+		if (CreatePetActivity.getPet() != null){
+			dog = (Dog) CreatePetActivity.getPet();
 		}
 		else{
 			try {
@@ -303,12 +302,12 @@ public class PetActivity extends Activity implements Serializable{
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
 		petResponse = (TextView) findViewById(R.id.petresponse);
 
-		//When coming from the PlayActivity and the dog is done playing.
+		//When coming from the PlayActivity and the dog is done playing, which is when resultCode is 1.
 		if(requestCode == 0 && resultCode == 1){
 			//Gets the dog's response
 			petResponse.setText(dog.play(1));
 		}
-		//When coming from PetActivity but is not done plating
+		//When coming from PetActivity but is not done playing, there is no resultcode.
 		else if (requestCode == 0){
 			petResponse.setText(dog.play(0));
 		}
@@ -369,7 +368,7 @@ public class PetActivity extends Activity implements Serializable{
 
 		//Saving the pet
 		try { 
-			dog.save("pet_file.dat",PetActivity.this);
+			dog.save("pet_file.dat", PetActivity.this);
 			
 			//Test to see if the file is saved
 			File file = getBaseContext().getFileStreamPath("pet_file.dat");
@@ -414,13 +413,20 @@ public class PetActivity extends Activity implements Serializable{
 	}
 
 	/**
-	 * Stops the music when activity is destroyed
+	 * Stops the music and saves the pet when activity is destroyed
 	 * 
 	 */
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		player.stop();
+		
+		//Saving the pet
+				try { 
+					dog.save("pet_file.dat", PetActivity.this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 	}
 
 	/**

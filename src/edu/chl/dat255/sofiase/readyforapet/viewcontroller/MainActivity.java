@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
 
 			
 			public void onClick (View v){ 
-				startActivity(new Intent(MainActivity.this, SelectGame.class));
+				startActivity(new Intent(MainActivity.this, SelectGameActivity.class));
 			}
 		}
 		);

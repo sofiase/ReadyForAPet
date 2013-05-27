@@ -80,7 +80,7 @@ public class SleepActivity extends Activity {
 				startSleeping.setEnabled(false);
 
 				//Getting the time the pet starts to sleep
-				startHour = CreatePet.getPet().getPetMood().getCurrentHour();
+				startHour = CreatePetActivity.getPet().getPetMood().getCurrentHour();
 
 				sleepingDog.setVisibility(View.VISIBLE);
 				sleepingDog.setBackgroundResource(R.anim.animation5);
@@ -104,7 +104,7 @@ public class SleepActivity extends Activity {
 
 				//Calculating for how long the dog has slept
 				if (startHour != 0){
-					sleepHours = (int) ((CreatePet.getPet().getPetMood().getCurrentHour()) - startHour);
+					sleepHours = (int) ((CreatePetActivity.getPet().getPetMood().getCurrentHour()) - startHour);
 				}
 
 				//Setting a resultCode with the distance walked that is sent to PetActivity

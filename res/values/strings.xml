@@ -20,5 +20,7 @@
     <string name="title_activity_sleep">SleepActivity</string>
     <string name="start_sleeping">Fall asleep</string>
     <string name="stop_sleeping">Wake up!</string>
+    <string name="standard_photo">Use standard photo!</string>
+    <string name="own_photo">Take a photo of your dogs face!</string>
 
 </resources>

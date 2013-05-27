@@ -48,7 +48,6 @@ public class LocationHelper{
 	 */
 	public class MyLocationListener implements LocationListener {
 
-
 		/**
 		 * called when the location service reports a change in location
 		 */

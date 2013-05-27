@@ -38,6 +38,7 @@ public class PlayActivity extends Activity {
 	private Timer timer;
 	private Bitmap bm; 
 	private PackageManager pm;
+	
 	//Variables for playing music in Pet Activity
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;
@@ -170,16 +171,6 @@ public class PlayActivity extends Activity {
 		}
 	};
 
-	/**
-	 * Method for that checks if the advice has a camera
-	 */
-	//public static boolean isIntentAvailable (Context context, String action) {
-	//final PackageManager packageManager = context.getPackageManager();
-	//final Intent intent = new Intent(action);
-	//java.util.List<android.content.pm.ResolveInfo> list =
-	//packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-	//return list.size() > 0;
-	//}
 
 	/**
 	 * Method for making a bitmap image a circle
