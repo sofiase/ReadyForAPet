@@ -107,7 +107,7 @@ public class PetActivity extends Activity implements Serializable{
 
 		//Initializing the background music
 		try {
-			afd = getAssets().openFd("readyforapetsong6_cay.mov");
+			afd = getAssets().openFd("readyforapetsong6.m4v");
 			player = new MediaPlayer();
 			player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
 			player.setLooping(true);
@@ -493,7 +493,7 @@ public class PetActivity extends Activity implements Serializable{
 
 		//Music that plays when dog dies
 		try {
-			deathAfd = getAssets().openFd("deathsound.mov");
+			deathAfd = getAssets().openFd("deathsound.m4v");
 			deathplayer = new MediaPlayer();
 			deathplayer.setDataSource(deathAfd.getFileDescriptor(), deathAfd.getStartOffset(), deathAfd.getLength());
 			deathplayer.prepare();

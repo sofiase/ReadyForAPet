@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+
 /**
  * Class PlayActiviy, where the user is able to take a photo of a dogs face or use a standard photo to make the dog dance.
  * When done dancing the user is sent to PetActivity
@@ -140,7 +141,7 @@ public class PlayActivity extends Activity {
 						PlayActivity.this.finish();
 						
 						//If there a picture was taken the memory is reclaimed as soon right after it's finished displaying
-						if (bm!=null) {
+						if (bm != null) {
 							bm.recycle();
 							bm = null;
 							System.gc();
@@ -198,6 +199,7 @@ public class PlayActivity extends Activity {
 		dogPlay.setVisibility(View.VISIBLE);
 		super.onActivityResult(requestCode, resultCode, data);
 		dogFace.setVisibility(View.VISIBLE);
+		
 		// Making the picture circular
 		bm = (Bitmap) data.getExtras().get("data");
 		dogFace.setImageBitmap(makeCircle(bm));
@@ -205,6 +207,7 @@ public class PlayActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.play, menu);
 		return true;
@@ -217,7 +220,7 @@ public class PlayActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if(player!=null){
+		if(player != null){
 			player.start();
 		}
 	}
@@ -229,7 +232,7 @@ public class PlayActivity extends Activity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		if(player!=null){
+		if(player != null){
 			player.pause();
 		}
 	}
@@ -241,7 +244,7 @@ public class PlayActivity extends Activity {
 	@Override
 	protected void onStop() {
 		super.onStop();
-		if(player!=null){
+		if(player != null){
 			player.pause();
 		}
 	}
