@@ -35,7 +35,6 @@ import android.widget.TextView;
 public class PetActivity extends Activity implements Serializable{ 
 
 
-
 	private static final long serialVersionUID = 1L;
 	private TextView petResponse, showPetAge;
 	private Handler uiHandler = new Handler();
@@ -480,7 +479,7 @@ public class PetActivity extends Activity implements Serializable{
 		else if(petMood.getWalkMood() < 4 && petMood.getFoodMood() > 3){
 			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogpoop));
 		}
-		else if(petMood.getSumMood() < 7){
+		else if(petMood.getSumMood() < 10){
 			dogPicture.setImageDrawable(getResources().getDrawable(R.drawable.dogsad));
 		}
 		else{

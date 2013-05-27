@@ -21,6 +21,7 @@ public class Pet implements Serializable{
 	private static final String LOG_test = "save food";
 	private static final String LOG_test1 = "save walk";
 	private static final String LOG_test2 = "save play";
+	private static final String LOG_test4 = "save sleep";
 	private static final String LOG_test3 = "save birth";
 
 	public Pet (String petName, int foodMood, int playMood, int walkMood, int sleepMood){
@@ -28,8 +29,8 @@ public class Pet implements Serializable{
 		petMood = new PetMood(foodMood, playMood, walkMood, sleepMood, 2);
 		this.petBirthHour = petMood.getCurrentHour();
 		petMood.setLastEatHour(petMood.getCurrentHour());
-		petMood.setLastWalkHour(petMood.getCurrentHour());
 		petMood.setLastPlayHour(petMood.getCurrentHour());
+		petMood.setLastWalkHour(petMood.getCurrentHour());
 		petMood.setLastSleepHour(petMood.getCurrentHour());
 	}
 
@@ -166,7 +167,6 @@ public class Pet implements Serializable{
 				petMood.setSleepMood(petMood.getSleepMood() + 5);
 				//Save the last time the pet has sleeped
 				petMood.setLastSleepHour(petMood.getCurrentHour());
-				Log.i(LOG_test, Long.toString(petMood.getSleepMood()));
 			}
 			if (petMood.getSleepMood() > 5){
 				petMood.setSleepMood(5);
@@ -205,9 +205,8 @@ public class Pet implements Serializable{
 	public boolean isAlive(){
 		//Test
 		//Log.i(LOG_test, Long.toString(petMood.getCurrentHour()));
-		Log.i(LOG_test1, Long.toString(petMood.getLastEatHour()));
-		Log.i(LOG_test2, Long.toString(petMood.getLastWalkHour()));
-
+		//Log.i(LOG_test1, Long.toString(petMood.getLastEatHour()));
+		//Log.i(LOG_test2, Long.toString(petMood.getLastWalkHour()));
 		return !((petMood.getCurrentHour() - petMood.getLastEatHour() > 48) || (petMood.getCurrentHour() - petMood.getLastWalkHour() > 48));
 	}
 
@@ -247,8 +246,8 @@ public class Pet implements Serializable{
 		Log.i(LOG_test, Long.toString(pet.getPetMood().getLastEatHour()));
 		Log.i(LOG_test1, Long.toString(pet.getPetMood().getLastWalkHour()));
 		Log.i(LOG_test2, Long.toString(pet.getPetMood().getLastPlayHour()));
+		Log.i(LOG_test4, Long.toString(pet.getPetMood().getLastSleepHour()));
 		Log.i(LOG_test3, Long.toString(pet.petBirthHour));
 		return pet;
 	}
 }
-
