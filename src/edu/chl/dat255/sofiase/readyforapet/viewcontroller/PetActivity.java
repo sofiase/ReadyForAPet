@@ -217,7 +217,7 @@ public class PetActivity extends Activity implements Serializable{
 					PetActivity.this.startActivityForResult(new Intent(PetActivity.this, PlayActivity.class), 0);
 				}
 				else{
-					petResponse.setText(dog.play());
+					petResponse.setText(dog.play(0));
 					petResponse.setVisibility(View.VISIBLE);
 					uiHandler.postDelayed(makeTextGone, 2000);
 				}
@@ -306,7 +306,11 @@ public class PetActivity extends Activity implements Serializable{
 		//When coming from the PlayActivity and the dog is done playing.
 		if(requestCode == 0 && resultCode == 1){
 			//Gets the dog's response
-			petResponse.setText(dog.play());
+			petResponse.setText(dog.play(1));
+		}
+		//When coming from PetActivity but is not done plating
+		else if (requestCode == 0){
+			petResponse.setText(dog.play(0));
 		}
 
 		//When coming from the WalkActivity

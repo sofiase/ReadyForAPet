@@ -35,13 +35,12 @@ public class PlayActivity extends Activity {
 	private Button useStandard, takePhoto, dogPlay;
 	private ImageView dogFace, dogBody, welcomeDog;
 	private Timer timer;
-	private Bitmap bm;
-	private static final int CAMERA_REQUEST = 1; 
-
+	private Bitmap bm; 
+	private PackageManager pm;
 	//Variables for playing music in Pet Activity
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;
-	private PackageManager pm;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -204,9 +203,10 @@ public class PlayActivity extends Activity {
 		dogPlay.setVisibility(View.VISIBLE);
 		
 		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == CAMERA_REQUEST) {
-			if( data.getExtras().get("data") != null){
-				
+		 //Checking if the the camera is cancelled before picture is taken
+			if(resultCode != RESULT_CANCELED){
+				dogFace.setVisibility(View.VISIBLE);
+
 				// Making the picture circular
 				bm = (Bitmap) data.getExtras().get("data");
 				dogFace.setImageBitmap(makeCircle(bm));
@@ -218,10 +218,7 @@ public class PlayActivity extends Activity {
 		}
 
 	}
-	  }
-
- 
-      
+	  
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

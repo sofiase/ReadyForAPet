@@ -35,7 +35,7 @@ public class WalkActivity extends Activity{
 	private TextView displayDistance;
 	private ImageView dogPrints;
 	private int delay = 0;
-	private int period = 30000;
+	private int period = 15000;
 	private int distance = 0;
 	private Timer timer;
 	private Handler handler = new Handler();
