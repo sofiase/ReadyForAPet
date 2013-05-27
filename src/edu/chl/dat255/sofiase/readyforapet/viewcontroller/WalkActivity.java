@@ -72,14 +72,17 @@ public class WalkActivity extends Activity{
 				if (location.gpsEnabled()){
 					Toast.makeText(WalkActivity.this, "GPS is Enabled on your devide", Toast.LENGTH_SHORT).show();
 				}
+				
 				else{
 					showGPSDisabledAlert();
 				}
+				
 				 //Timer to update the textview with the distance walked.
 				try{
 					timer = new Timer();
 					timer.schedule(myTimerTask, delay, period);
-				} 
+				}
+				
 				catch (Exception e){
 					e.printStackTrace();
 				}
@@ -181,6 +184,11 @@ public class WalkActivity extends Activity{
 	public void onBackPressed() {
 		super.onBackPressed();
 		this.finish();
+		
+		if (location != null){
+			location.killLocationServices();
+		}
+		
 	}
 
 

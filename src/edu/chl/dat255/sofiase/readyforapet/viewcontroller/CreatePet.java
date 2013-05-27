@@ -51,7 +51,7 @@ public class CreatePet extends Activity implements OnClickListener,Serializable 
 		
 		//Starts a dog barking sound when a new pet is created
 		try {
-		afd = getAssets().openFd("dogbark.m4a");
+		afd = getAssets().openFd("dogbarks.wav");
 		player = new MediaPlayer();
 		player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),afd.getLength());
 		player.prepare();
