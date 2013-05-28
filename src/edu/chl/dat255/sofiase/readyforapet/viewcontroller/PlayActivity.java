@@ -56,7 +56,7 @@ public class PlayActivity extends Activity {
 		dogBody = (ImageView) findViewById(R.id.dogbody);
 		welcomeDog = (ImageView) findViewById(R.id.welcomedog);
 
-		//Checks if the device has a camera, and adjust the view after the result
+		//Checks if the device has a camera, and adjusts the view after the result
 		pm = PlayActivity.this.getPackageManager();
 		if (pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
 			dogPlay.setVisibility(View.GONE);
@@ -145,7 +145,7 @@ public class PlayActivity extends Activity {
 						PlayActivity.this.setResult(1);
 						PlayActivity.this.finish();
 
-						//If there a picture was taken the memory is reclaimed as soon right after it's finished displaying
+						//If a picture was taken the memory is reclaimed right after it's finished displaying
 						if (bm != null) {
 							bm.recycle();
 							bm = null;
@@ -171,7 +171,6 @@ public class PlayActivity extends Activity {
 		}
 	};
 
-
 	/**
 	 * Method for making a bitmap image a circle
 	 */
@@ -186,7 +185,7 @@ public class PlayActivity extends Activity {
 	}
 
 	/**
-	 * Method for what should happen when you have taken a photo
+	 * Method for what should happen when a photo is taken
 	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data){
