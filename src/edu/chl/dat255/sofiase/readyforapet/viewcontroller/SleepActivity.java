@@ -159,7 +159,7 @@ public class SleepActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if(player!=null){
+		if(player != null){
 			player.start();
 		}
 	}

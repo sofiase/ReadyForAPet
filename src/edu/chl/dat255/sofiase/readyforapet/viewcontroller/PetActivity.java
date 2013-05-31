@@ -323,6 +323,7 @@ public class PetActivity extends Activity implements Serializable{
 			//Gets the dog's response
 			petResponse.setText(dog.sleep(resultCode));
 		}
+		
 		//Sets the value the moodBar should have after playing, walking or taking a nap
 		petResponse.setVisibility(View.VISIBLE);
 		uiHandler.postDelayed(makeTextGone, 2000);

@@ -39,7 +39,7 @@ public class PlayActivity extends Activity {
 	private Bitmap bm; 
 	private PackageManager pm;
 	
-	//Variables for playing music in Pet Activity
+	//Variables for playing music in Play Activity
 	private MediaPlayer player;
 	private AssetFileDescriptor afd;
 	
